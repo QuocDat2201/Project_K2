@@ -139,9 +139,9 @@ public class JFrameLogin extends JFrame {
 		UsersModel usersModel = new UsersModel() ; 
 		for(Users user : usersModel.findAll()) {
 			System.out.println(user.getUsername());
-		}
+		}//login
 	}
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {//sign up
 		UsersModel usersModel = new UsersModel() ; 
 		for(Users user : usersModel.findAll()) {
 			System.out.println(user.getUsername());
