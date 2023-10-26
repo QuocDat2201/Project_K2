@@ -23,5 +23,5 @@ public class Add_Category extends JPanel {
 		}
 		return result;
 	}
-//tuan da comment
+//bululemsinhvien
 }
