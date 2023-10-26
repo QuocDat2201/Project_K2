@@ -30,6 +30,16 @@ public class Users {
 	public void setRoleID(int roleID) {
 		RoleID = roleID;
 	}
+	public Users(int userID, String username, String password, int roleID) {
+		super();
+		UserID = userID;
+		Username = username;
+		this.password = password;
+		RoleID = roleID;
+	}
+	public Users() {
+		super();
+	}
 	
 	
 }

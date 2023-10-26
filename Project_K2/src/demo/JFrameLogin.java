@@ -6,6 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import entites.Users;
+import models.UsersModel;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
@@ -101,6 +105,11 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(textField_1);
 		
 		JButton btnNewButton = new JButton("LOGIN");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_actionPerformed(e);
+			}
+		});
 		btnNewButton.setForeground(SystemColor.textHighlight);
 		btnNewButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		btnNewButton.setBounds(220, 201, 151, 28);
@@ -127,6 +136,15 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(btnNewButton_1);
 	}
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
-		System.out.println("Huy");
+		UsersModel usersModel = new UsersModel() ; 
+		for(Users user : usersModel.findAll()) {
+			System.out.println(user.getUsername());
+		}
+	}
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		UsersModel usersModel = new UsersModel() ; 
+		for(Users user : usersModel.findAll()) {
+			System.out.println(user.getUsername());
+		}
 	}
 }
