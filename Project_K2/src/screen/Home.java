@@ -76,6 +76,11 @@ public class Home extends JFrame {
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Invoice");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_2_actionPerformed(e);
+			}
+		});
 		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setContentAreaFilled(false);
 		btnNewButton_2.setIcon(new ImageIcon(demo1.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
@@ -123,14 +128,26 @@ public class Home extends JFrame {
 		
 		
 	}
-	public void clear(JPanel A ) {
-		A.removeAll();
-		A.revalidate();
-	}
+	
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
 		 JPsendNotifi jPsendNotifi=new JPsendNotifi();
 			
 			clear(jpanel_2);
 			getContentPane().add(jPsendNotifi, BorderLayout.CENTER);
 	}
+	
+	
+	
+	
+	
+	public void clear(JPanel A ) {
+		A.removeAll();
+		A.revalidate();
+	}
+	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {
+		JPaddAcount jPsendNotif =new JPaddAcount();	
+		clear(jpanel_2);
+		getContentPane().add(jPsendNotif, BorderLayout.CENTER);
+	}
+	
 }
