@@ -1,4 +1,4 @@
-package demo;
+package screen;
 
 import java.awt.EventQueue;
 
@@ -55,7 +55,6 @@ public class JFrameLogin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	//tuan cho dien
 	public JFrameLogin() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,6 +104,7 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(textField_1);
 		
 		JButton btnNewButton = new JButton("LOGIN");
+		btnNewButton.setIcon(new ImageIcon(JFrameLogin.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
@@ -112,7 +112,7 @@ public class JFrameLogin extends JFrame {
 		});
 		btnNewButton.setForeground(SystemColor.textHighlight);
 		btnNewButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
-		btnNewButton.setBounds(220, 201, 151, 28);
+		btnNewButton.setBounds(220, 195, 151, 28);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_3 = new JLabel("Don't have an account ?");
