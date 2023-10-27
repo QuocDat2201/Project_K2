@@ -14,10 +14,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 
 public class Home extends JFrame {
-
+	private  Map<String,Object> dataMap=new HashMap<String, Object>();
 	private JPanel contentPane;
 	private JPanel jpanel_2;
 
@@ -118,10 +120,11 @@ public class Home extends JFrame {
 	}
 	public Home(Object ob) {
 		this();
+		dataMap=(Map<String, Object>) ob;
 	}
 	
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-        JPhome jPhome=new JPhome();
+        JPhome jPhome=new JPhome(dataMap);
 		
 		clear(jpanel_2);
 		getContentPane().add(jPhome, BorderLayout.CENTER);

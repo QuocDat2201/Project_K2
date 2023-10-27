@@ -22,6 +22,8 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 
 public class JFrameLogin extends JFrame {
@@ -29,7 +31,7 @@ public class JFrameLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-
+  private  Map<String,Object> dataMap=new HashMap<String, Object>();
 	/**
 	 * Launch the application.
 	 */
@@ -118,7 +120,7 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(btnNewButton);
 	}
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {//Login
-		Home home =new Home();
+		Home home =new Home(dataMap);
 		home.setVisible(true);
 		frame.setVisible(false);
 //		UsersModel usersModel = new UsersModel() ; 

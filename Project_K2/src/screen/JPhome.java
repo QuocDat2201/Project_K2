@@ -2,10 +2,13 @@ package screen;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JLabel;
 
 public class JPhome extends JPanel {
-
+	private  Map<String,Object> dataMap=new HashMap<String, Object>();
 	/**
 	 * Create the panel.
 	 */
@@ -21,5 +24,6 @@ public class JPhome extends JPanel {
 		panel.add(lblNewLabel);
 
 	}
+	
 
 }

@@ -4,9 +4,11 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JPsendNotifi extends JPanel {
-
+	private  Map<String,Object> dataMap=new HashMap<String, Object>();
 	/**
 	 * Create the panel.
 	 */
