@@ -29,9 +29,9 @@ import java.awt.event.ActionEvent;
 public class JFrameLogin extends JFrame {
 	private static JFrameLogin frame ;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-  private  Map<String,Object> dataMap=new HashMap<String, Object>();
+	private JTextField juser;
+	private JTextField jpass;
+    private  Map<String,Object> dataMap=new HashMap<String, Object>();
 	/**
 	 * Launch the application.
 	 */
@@ -90,10 +90,10 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2.setBounds(100, 120, 121, 30);
 		contentPane.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setBounds(220, 121, 151, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		juser = new JTextField();
+		juser.setBounds(220, 121, 151, 28);
+		contentPane.add(juser);
+		juser.setColumns(10);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Password");
 		lblNewLabel_2_1.setIcon(new ImageIcon(JFrameLogin.class.getResource("/Icon/211855_locked_icon.png")));
@@ -102,10 +102,10 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2_1.setBounds(100, 162, 121, 27);
 		contentPane.add(lblNewLabel_2_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(220, 161, 151, 28);
-		contentPane.add(textField_1);
+		jpass = new JTextField();
+		jpass.setColumns(10);
+		jpass.setBounds(220, 161, 151, 28);
+		contentPane.add(jpass);
 		
 		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.setIcon(new ImageIcon(JFrameLogin.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
@@ -120,7 +120,10 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(btnNewButton);
 	}
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {//Login
-		Home home =new Home(dataMap);
+		
+		dataMap.put("key",juser.getText());//dong luu du lieu thong tin ac dang nhap
+		
+		Home home =new Home(dataMap);		
 		home.setVisible(true);
 		frame.setVisible(false);
 //		UsersModel usersModel = new UsersModel() ; 

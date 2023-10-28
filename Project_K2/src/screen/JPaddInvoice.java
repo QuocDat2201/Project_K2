@@ -16,6 +16,7 @@ public class JPaddInvoice extends JPanel {
 	public JPaddInvoice(Object ob) {
 		
 		this();
+		dataMap=(Map<String, Object>) ob;	
 	}
 
 }
