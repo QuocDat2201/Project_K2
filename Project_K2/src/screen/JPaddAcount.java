@@ -27,6 +27,7 @@ public class JPaddAcount extends JPanel {
 	}
 	public JPaddAcount(Object ob) {
 		this();
+		dataMap=(Map<String, Object>) ob;	
 	}
 	
 

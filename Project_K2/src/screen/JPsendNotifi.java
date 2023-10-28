@@ -25,5 +25,10 @@ public class JPsendNotifi extends JPanel {
 		panel.add(lblNewLabel);
 
 	}
+	public JPsendNotifi(Object ob) {
+		this();
+		dataMap=(Map<String, Object>) ob;	
+	}
+	
 
 }
