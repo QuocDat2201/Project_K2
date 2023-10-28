@@ -16,6 +16,7 @@ public class JPlistProduct extends JPanel {
 	public JPlistProduct(Object ob) {
      this();
      dataMap=(Map<String, Object>) ob;
+     //hello
 	}
 
 }
