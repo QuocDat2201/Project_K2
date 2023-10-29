@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import entites.Users;
 
 public class UsersModel {
@@ -32,7 +34,8 @@ public class UsersModel {
 	public Users login(String username, String password) {
 		UsersModel usersModel = new UsersModel();
 		for (Users user : usersModel.findAll()) {
-			if (user.getUsername().equalsIgnoreCase(username) && user.getPassword().equalsIgnoreCase(password)) {
+			boolean hashpass = BCrypt.checkpw(password, user.getPassword());
+			if (user.getUsername().equalsIgnoreCase(username) && hashpass == true) {
 				return user;
 			}
 		}

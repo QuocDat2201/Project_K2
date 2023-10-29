@@ -96,17 +96,17 @@ public class JPaccount extends JPanel {
 		menuBar.setBackground(new Color(128, 255, 0));
 		add(menuBar, BorderLayout.NORTH);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Password");
-		mntmNewMenuItem.setBackground(new Color(255, 255, 128));
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		JMenuItem jmenuitem_password = new JMenuItem("Password");
+		jmenuitem_password.setBackground(new Color(255, 255, 128));
+		jmenuitem_password.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mntmNewMenuItem_actionPerformed(e);
 			}
 		});
-		mntmNewMenuItem.setIcon(new ImageIcon(JPaccount.class.getResource("/Icon/211855_locked_icon.png")));
-		menuBar.add(mntmNewMenuItem);
+		jmenuitem_password.setIcon(new ImageIcon(JPaccount.class.getResource("/Icon/211855_locked_icon.png")));
+		menuBar.add(jmenuitem_password);
 		
-		jmenuAddAccount = new JMenuItem("add account");
+		jmenuAddAccount = new JMenuItem("Register");
 		jmenuAddAccount.setBackground(new Color(255, 255, 128));
 		jmenuAddAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,10 +132,10 @@ public class JPaccount extends JPanel {
 		dataMap=(Map<String, Object>) ob;
 	}
 	protected void do_jmenuAddAccount_actionPerformed(ActionEvent e) {
-		JPaddAcount jPaccount=new JPaddAcount(dataMap);
+		JPaddAcount jPaddaccount = new JPaddAcount(dataMap);
 		panel.removeAll();
 		panel.revalidate();
-		panel.add(jPaccount);
+		panel.add(jPaddaccount);
 		panel.setVisible(true);
 	}
 	

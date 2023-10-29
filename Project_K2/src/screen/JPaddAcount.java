@@ -14,100 +14,152 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.SwingConstants;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import entites.Role;
+import entites.Users;
 import models.Role_model;
+import models.UsersModel;
 
 import javax.swing.JComboBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPaddAcount extends JPanel {
-	private  Map<String,Object> dataMap=new HashMap<String, Object>();
+	private Map<String, Object> dataMap = new HashMap<String, Object>();
 	private JPanel panel;
-	private JTextField jpass;
-	private JTextField jnewPassword;
-	private JTextField jConfimNewPassword;
-	private JComboBox comboBox;
+	private JTextField jusername;
+	private JComboBox jcomboBox;
+	private JPasswordField Jpassword;
+	private JPasswordField JConfirm_passwordField;
+
 	/**
 	 * Create the panel.
 	 */
 	public JPaddAcount() {
-         setLayout(new BorderLayout(0, 0));
-		
+		setLayout(new BorderLayout(0, 0));
+
 		panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Username");
-		lblNewLabel.setBounds(34, 76, 145, 25);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(123, 76, 162, 25);
 		panel.add(lblNewLabel);
-		
-		jpass = new JTextField();
-		jpass.setBounds(204, 76, 176, 28);
-		panel.add(jpass);
-		jpass.setColumns(10);
-		
+
+		jusername = new JTextField();
+		jusername.setBounds(295, 75, 176, 28);
+		panel.add(jusername);
+		jusername.setColumns(10);
+
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(34, 112, 160, 32);
+		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPassword.setBounds(123, 111, 160, 25);
 		panel.add(lblPassword);
-		
-		jnewPassword = new JPasswordField();
-		jnewPassword.setColumns(10);
-		jnewPassword.setBounds(204, 122, 176, 25);
-		panel.add(jnewPassword);
-		
+
 		JLabel lblConfirmNewPassword = new JLabel("Confirm Password");
-		lblConfirmNewPassword.setBounds(34, 155, 145, 39);
+		lblConfirmNewPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConfirmNewPassword.setBounds(123, 149, 162, 25);
 		panel.add(lblConfirmNewPassword);
-		
-		jConfimNewPassword = new JPasswordField();
-		jConfimNewPassword.setColumns(10);
-		jConfimNewPassword.setBounds(204, 169, 176, 28);
-		panel.add(jConfimNewPassword);
-		
-		JLabel lblNewLabel_1 = new JLabel("ADD Account");
+
+		JLabel lblNewLabel_1 = new JLabel("Register");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(80, 23, 269, 32);
+		lblNewLabel_1.setBounds(0, 21, 564, 32);
 		panel.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Role");
-		lblNewLabel_2.setBounds(37, 218, 109, 25);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(123, 181, 162, 25);
 		panel.add(lblNewLabel_2);
-		
-		comboBox = new JComboBox();
-		comboBox.setBounds(204, 219, 176, 25);
-		panel.add(comboBox);
+
+		jcomboBox = new JComboBox();
+		jcomboBox.setBounds(295, 181, 176, 28);
+		panel.add(jcomboBox);
+
+		JButton Jbutton_register = new JButton("Register");
+		Jbutton_register.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Jbutton_register_actionPerformed(e);
+			}
+		});
+		Jbutton_register.setBounds(243, 229, 85, 21);
+		panel.add(Jbutton_register);
+
+		Jpassword = new JPasswordField();
+		Jpassword.setBounds(295, 110, 176, 28);
+		panel.add(Jpassword);
+
+		JConfirm_passwordField = new JPasswordField();
+		JConfirm_passwordField.setBounds(295, 148, 176, 28);
+		panel.add(JConfirm_passwordField);
 //		panel.setLayout(new BorderLayout(0, 0));
 
 	}
+
 	public JPaddAcount(Object ob) {
 		this();
-		dataMap=(Map<String, Object>) ob;	
+		this.dataMap = (Map<String, Object>) ob;
 		intiJfame();
 	}
+
 	private void intiJfame() {
-		DefaultComboBoxModel<Role> model= new DefaultComboBoxModel<Role>();
+		DefaultComboBoxModel<Role> model = new DefaultComboBoxModel<Role>();
 		Role_model role_model = new Role_model();
-		System.out.println("hjh");
+
 		for (Role role : role_model.findAll()) {
 			model.addElement(role);
-			System.out.println("hjh");
 		}
-		comboBox.setModel(model);
-		comboBox.setRenderer(new rederCombobox());
+		jcomboBox.setModel(model);
+		jcomboBox.setRenderer(new rederCombobox());
 	}
+
 	class rederCombobox extends DefaultListCellRenderer {
 
 		@Override
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
-			Role role=(Role) value;
+			Role role = (Role) value;
 			return super.getListCellRendererComponent(list, role.getRole_Name(), index, isSelected, cellHasFocus);
 		}
+
+	}
+
+	protected void Jbutton_register_actionPerformed(ActionEvent e) {
+		Users users = new Users();
+		UsersModel usersModel = new UsersModel();
+
+		users.setUsername(jusername.getText().trim());
+		String password = new String(Jpassword.getPassword());
+		String confirm = new String(JConfirm_passwordField.getPassword());
+		Role role = (Role) jcomboBox.getSelectedItem();
+		users.setRoleID(role.getRole_id());
 		
+		for (Users users2 : usersModel.findAll()) {
+			if (users2.getUsername().equalsIgnoreCase(jusername.getText().trim())) {
+				JOptionPane.showMessageDialog(null, "Username already exists !");
+			} else {
+				if (password.equals(confirm)) {
+					users.setPassword(BCrypt.hashpw(confirm, BCrypt.gensalt()));
+					if (usersModel.register(users)) {
+						JOptionPane.showMessageDialog(null, "Register Success !");
+					} else {
+						JOptionPane.showMessageDialog(null, "Register Fail !");
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Password do not match");
+				}
+			}
+		}
 	}
 }

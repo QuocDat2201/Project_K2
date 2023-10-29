@@ -104,7 +104,7 @@ public class Home extends JFrame {
 		jbtinvoice.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
 		panel.add(jbtinvoice);
 
-		jbtlistproduct = new JButton("ListProduct");
+		jbtlistproduct = new JButton("Storage");
 		jbtlistproduct.setMinimumSize(new Dimension(59, 20));
 		jbtlistproduct.setMaximumSize(new Dimension(190, 50));
 		jbtlistproduct.setBackground(new Color(128, 128, 0));
@@ -114,10 +114,9 @@ public class Home extends JFrame {
 				do_jbtlistproduct_actionPerformed(e);
 			}
 		});
-		jbtlistproduct.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtlistproduct.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 100));
 		jbtlistproduct
-				.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
+				.setIcon(new ImageIcon(Home.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
 		panel.add(jbtlistproduct);
 
 		jbtwarehouse = new JButton("Warehouse");
@@ -161,11 +160,10 @@ public class Home extends JFrame {
 				do_jbtaccount_actionPerformed(e);
 			}
 		});
-		jbtaccount.setHorizontalAlignment(SwingConstants.LEFT);
-		jbtaccount.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
+		jbtaccount.setIcon(new ImageIcon(Home.class.getResource("/Icon/172626_user_male_icon.png")));
 		panel.add(jbtaccount);
 
-		btnNewButton = new JButton("Out");
+		btnNewButton = new JButton("Sign out");
 		btnNewButton.setHorizontalTextPosition(SwingConstants.RIGHT);
 		btnNewButton.setMinimumSize(new Dimension(59, 20));
 		btnNewButton.setMaximumSize(new Dimension(190, 50));
@@ -230,7 +228,9 @@ public class Home extends JFrame {
 		jpanel_2.setVisible(true);
 	}
 
-	protected void do_jbtlistproduct_actionPerformed(ActionEvent e) {// ListProduct
+	protected void do_jbtlistproduct_actionPerformed(ActionEvent e) {// Storage
+		JPstorage jPstorage = new JPstorage(dataMap);
+		
 	}
 
 	protected void do_jbtwarehouse_actionPerformed(ActionEvent e) {// ware

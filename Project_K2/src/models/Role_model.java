@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entites.Role;
-import entites.Role;
-
 
 public class Role_model {
 	public List<Role> findAll() {
@@ -22,12 +20,13 @@ public class Role_model {
 				roles.add(role);
 			}
 		} catch (Exception e) {
-			roles = null;
+			e.printStackTrace();
 		} finally {
 			ConnectDB.disconnect();
 		}
 		return roles;
 	}
+
 	public boolean Create(Role role) {
 		boolean result = true;
 		try {
