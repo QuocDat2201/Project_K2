@@ -17,6 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.SwingConstants;
@@ -46,10 +47,10 @@ public class JPaddAcount extends JPanel {
 	 */
 	public JPaddAcount() {
 		setLayout(new BorderLayout(0, 0));
-
 		panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		
 
 		JLabel lblNewLabel = new JLabel("Username");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -102,8 +103,7 @@ public class JPaddAcount extends JPanel {
 		JConfirm_passwordField = new JPasswordField();
 		JConfirm_passwordField.setBounds(295, 148, 176, 28);
 		panel.add(JConfirm_passwordField);
-//		panel.setLayout(new BorderLayout(0, 0));
-
+		panel.setLayout(new BorderLayout(0, 0));
 	}
 
 	public JPaddAcount(Object ob) {

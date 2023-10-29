@@ -136,24 +136,26 @@ public class JFrameLogin extends JFrame {
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Login
-		String username = juser.getText().trim();
-		String password = new String(jpass.getPassword());
-
-		UsersModel usersModel = new UsersModel();
-		Users users = usersModel.login(username, password);
-
-		if (users == null) {
-			JOptionPane.showMessageDialog(null, "Account Invalid");
-		} else {
-			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap
-
-			Home home = new Home(dataMap);
-			home.setVisible(true);
-			frame.setVisible(false);
-//			UsersModel usersModel = new UsersModel() ; 
-//			for(Users user : usersModel.findAll()) {
-//				System.out.println(user.getUsername());
-//			}
-		}
+//		String username = juser.getText().trim();
+//		String password = new String(jpass.getPassword());
+//
+//		UsersModel usersModel = new UsersModel();
+//		Users users = usersModel.login(username, password);
+		Home home = new Home(dataMap);
+		home.setVisible(true);
+		frame.setVisible(false);
+//		if (users == null) {
+//			JOptionPane.showMessageDialog(null, "Account Invalid");
+//		} else {
+//			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap
+//
+//			Home home = new Home(dataMap);
+//			home.setVisible(true);
+//			frame.setVisible(false);
+////			UsersModel usersModel = new UsersModel() ; 
+////			for(Users user : usersModel.findAll()) {
+////				System.out.println(user.getUsername());
+////			}
+//		}
 	}
 }
