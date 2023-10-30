@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import entites.Products ;
+import models.Category_model;
 import models.Product_model; 
 
 public class JPstorage extends JPanel {
@@ -113,21 +114,20 @@ public class JPstorage extends JPanel {
 	}
 	
 	public void fillDatatoJTable(List<Products> products) {
+		Category_model category_model = new Category_model();
 		DefaultTableModel models = new DefaultTableModel() ; 
-		models.addColumn("ProductID");
-		models.addColumn("ProductName");
-		models.addColumn("Category_ID");
+		models.addColumn("Product's Name");
+		models.addColumn("Category");
 		models.addColumn("Price");
 		models.addColumn("Quantily");
-		models.addColumn("Trạng Thái");
+		models.addColumn("Status");
 		for(Products product : products) {
 			models.addRow(new Object[] {
-					product.getProductID(),
 					product.getProductName(),
-					product.getCategory_id(),
+					category_model.find(product.getCategory_id()).getCategoryName(),
 					product.getPrice(),
 					product.getQuantity(),
-					product.getQuantity()>5 ? "Con  hang" : "Het hang"
+					product.getQuantity()>5 ? "Stocking" : "Out of stock"
 			});
 		}
 		jtableProduct.setModel(models);
