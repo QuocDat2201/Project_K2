@@ -61,4 +61,24 @@ public class UsersModel {
 		
 		return result;
 	}
+	
+	public boolean update(Users users, int id) {
+		boolean result = true;
+		
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("update users set Password = ? where UserID = ?");
+			preparedStatement.setString(1, users.getPassword());
+			preparedStatement.setInt(2, id);
+			
+			result = preparedStatement.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		
+		return result;
+	}
 }

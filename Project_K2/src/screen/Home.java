@@ -24,6 +24,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 
@@ -33,7 +34,6 @@ public class Home extends JFrame {
 	private JPanel jpanel_2;
 	private String title = "Maneger";
 	private static Home frame;
-	private JButton jbtwarehouse;
 	private JButton jbtlistproduct;
 	private JButton jbtinvoice;
 	private JButton jbthome;
@@ -47,6 +47,12 @@ public class Home extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		} 
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -119,21 +125,6 @@ public class Home extends JFrame {
 				.setIcon(new ImageIcon(Home.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
 		panel.add(jbtlistproduct);
 
-		jbtwarehouse = new JButton("Warehouse");
-		jbtwarehouse.setMinimumSize(new Dimension(59, 20));
-		jbtwarehouse.setMaximumSize(new Dimension(190, 50));
-		jbtwarehouse.setBackground(new Color(128, 128, 0));
-		jbtwarehouse.setBorder(new LineBorder(new Color(255, 255, 255), 4));
-		jbtwarehouse.setHorizontalAlignment(SwingConstants.LEFT);
-		jbtwarehouse.setHorizontalTextPosition(SwingConstants.RIGHT);
-		jbtwarehouse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_jbtwarehouse_actionPerformed(e);
-			}
-		});
-		jbtwarehouse.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
-		panel.add(jbtwarehouse);
-
 		JButton jbtsend = new JButton("Send");
 		jbtsend.setMinimumSize(new Dimension(59, 20));
 		jbtsend.setMaximumSize(new Dimension(190, 50));
@@ -164,6 +155,11 @@ public class Home extends JFrame {
 		panel.add(jbtaccount);
 
 		btnNewButton = new JButton("Sign out");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnNewButton_actionPerformed(e);
+			}
+		});
 		btnNewButton.setHorizontalTextPosition(SwingConstants.RIGHT);
 		btnNewButton.setMinimumSize(new Dimension(59, 20));
 		btnNewButton.setMaximumSize(new Dimension(190, 50));
@@ -230,16 +226,20 @@ public class Home extends JFrame {
 
 	protected void do_jbtlistproduct_actionPerformed(ActionEvent e) {// Storage
 		JPstorage jPstorage = new JPstorage(dataMap);
-		
-	}
-
-	protected void do_jbtwarehouse_actionPerformed(ActionEvent e) {// ware
+		clear(jpanel_2);
+		jpanel_2.add(jPstorage);
+		jpanel_2.setVisible(true);
 	}
 
 	protected void do_jbtaccount_actionPerformed(ActionEvent e) {// account
-		JPaccount jPaccount=new JPaccount();
+		JPaccount jPaccount=new JPaccount(dataMap);
 		clear(jpanel_2);
 		jpanel_2.add(jPaccount);
 		jpanel_2.setVisible(true);
+	}
+	protected void btnNewButton_actionPerformed(ActionEvent e) {
+		JFrameLogin jFrameLogin = new JFrameLogin();
+		jFrameLogin.setVisible(true);
+		this.setVisible(false);
 	}
 }

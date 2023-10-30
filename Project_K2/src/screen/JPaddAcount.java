@@ -33,6 +33,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class JPaddAcount extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -104,6 +105,31 @@ public class JPaddAcount extends JPanel {
 		JConfirm_passwordField.setBounds(295, 148, 176, 28);
 		panel.add(JConfirm_passwordField);
 		panel.setLayout(new BorderLayout(0, 0));
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(128, 255, 0));
+		add(menuBar, BorderLayout.NORTH);
+		
+		JMenuItem jmenuitem_password = new JMenuItem("Change Password");
+		jmenuitem_password.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jmenuitem_password_actionPerformed(e);
+			}
+		});
+		jmenuitem_password.setIcon(new ImageIcon(JPaddAcount.class.getResource("/Icon/211855_locked_icon.png")));
+		jmenuitem_password.setBackground(new Color(255, 255, 128));
+		menuBar.add(jmenuitem_password);
+		
+		JMenuItem jmenuAddAccount = new JMenuItem("Register");
+		jmenuAddAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jmenuAddAccount_actionPerformed(e);
+			}
+		});
+		jmenuAddAccount.setIcon(new ImageIcon(JPaddAcount.class.getResource("/Icon/39039_gtk_add_icon.png")));
+		jmenuAddAccount.setHorizontalAlignment(SwingConstants.LEFT);
+		jmenuAddAccount.setBackground(new Color(255, 255, 128));
+		menuBar.add(jmenuAddAccount);
 	}
 
 	public JPaddAcount(Object ob) {
@@ -157,9 +183,23 @@ public class JPaddAcount extends JPanel {
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Password do not match");
+					JOptionPane.showMessageDialog(null, "Password do not match !");
 				}
 			}
 		}
+	}
+	protected void jmenuitem_password_actionPerformed(ActionEvent e) {
+		JPaccount jPaccount=new JPaccount();
+		this.removeAll();
+		this.revalidate();
+		this.add(jPaccount);
+		this.setVisible(true);
+	}
+	protected void jmenuAddAccount_actionPerformed(ActionEvent e) {
+		JPaddAcount jPaddaccount = new JPaddAcount(dataMap);
+		this.removeAll();
+		this.revalidate();
+		this.add(jPaddaccount);
+		this.setVisible(true);
 	}
 }

@@ -8,6 +8,7 @@ public class Products {
 	private int Category_id;
 	private BigDecimal Price;
 	private int Quantity;
+	private boolean Status;
 	
 	public int getProductID() {
 		return ProductID;
@@ -38,6 +39,12 @@ public class Products {
 	}
 	public void setQuantity(int quantity) {
 		Quantity = quantity;
+	}
+	public boolean isStatus() {
+		return Status;
+	}
+	public void setStatus(boolean status) {
+		Status = status;
 	}
 	
 	
