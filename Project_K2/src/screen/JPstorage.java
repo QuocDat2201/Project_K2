@@ -1,6 +1,7 @@
 package screen;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -14,13 +15,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import entites.Products ;
+import models.Product_model; 
 
 public class JPstorage extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
-	private JTable table;
+	private JTable jtableProduct;
 	private JTextField jtextField_Search;
 
 	/**
@@ -37,9 +41,9 @@ public class JPstorage extends JPanel {
 		scrollPane.setBounds(10, 139, 594, 266);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
+		jtableProduct = new JTable();
+		jtableProduct.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(jtableProduct);
 		
 		JPanel panel_searchname = new JPanel();
 		panel_searchname.setBorder(new TitledBorder(null, "Search By Name", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -103,6 +107,30 @@ public class JPstorage extends JPanel {
 	}
 	
 	public void initJFrame() {
+		Product_model product_model = new Product_model() ; 
+		fillDatatoJTable(product_model.findAll());
 		
+	}
+	
+	public void fillDatatoJTable(List<Products> products) {
+		DefaultTableModel models = new DefaultTableModel() ; 
+		models.addColumn("ProductID");
+		models.addColumn("ProductName");
+		models.addColumn("Category_ID");
+		models.addColumn("Price");
+		models.addColumn("Quantily");
+		models.addColumn("Trạng Thái");
+		for(Products product : products) {
+			models.addRow(new Object[] {
+					product.getProductID(),
+					product.getProductName(),
+					product.getCategory_id(),
+					product.getPrice(),
+					product.getQuantity(),
+					product.getQuantity()>5 ? "Con  hang" : "Het hang"
+			});
+		}
+		jtableProduct.setModel(models);
+		jtableProduct.getTableHeader().setReorderingAllowed(false);
 	}
 }

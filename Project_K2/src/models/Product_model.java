@@ -1,8 +1,12 @@
 package models;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import entites.Products;
+
 
 
 public class Product_model {
@@ -24,4 +28,27 @@ public class Product_model {
 		}
 		return result;
 	}
+	public List<Products> findAll(){
+		List<Products> products = new ArrayList<Products>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from products");//java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();//java.sql
+			while(resultSet.next()) {//.next la kiem tra xem co con dong hay ko
+			Products product = new Products();
+				product.setProductID(resultSet.getInt("ProductID"));
+				product.setProductName(resultSet.getString("ProductName"));
+				product.setCategory_id(resultSet.getInt("Category_id"));
+				product.setPrice(resultSet.getBigDecimal("Price"));
+				product.setQuantity(resultSet.getInt("Quantity"));
+				products.add(product);
+			}
+		} catch (Exception e) {
+			products = null ; 
+		}finally {
+			ConnectDB.disconnect();
+		}return products ; 
+	}
 }
+
+
+
