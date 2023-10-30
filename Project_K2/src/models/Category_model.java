@@ -66,4 +66,24 @@ public class Category_model {
 
 		return categories;
 	}
+	public Category find2(int id) {
+		Category category = new Category() ;		 
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("select * from category where CategoryID = ?");// java.sql
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				category = new Category() ;
+				category.setCategoryID(resultSet.getInt("CategoryID"));
+				category.setCategoryName(resultSet.getString("CategoryName"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			category = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return category;
+	}
 }
