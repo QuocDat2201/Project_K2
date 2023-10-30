@@ -49,9 +49,9 @@ public class JPaddAcount extends JPanel {
 	public JPaddAcount() {
 		setLayout(new BorderLayout(0, 0));
 		panel = new JPanel();
+		panel.setBackground(new Color(240, 240, 240));
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
 
 		JLabel lblNewLabel = new JLabel("Username");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,11 +105,11 @@ public class JPaddAcount extends JPanel {
 		JConfirm_passwordField.setBounds(295, 148, 176, 28);
 		panel.add(JConfirm_passwordField);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(128, 255, 0));
 		add(menuBar, BorderLayout.NORTH);
-		
+
 		JMenuItem jmenuitem_password = new JMenuItem("Change Password");
 		jmenuitem_password.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -119,7 +119,7 @@ public class JPaddAcount extends JPanel {
 		jmenuitem_password.setIcon(new ImageIcon(JPaddAcount.class.getResource("/Icon/211855_locked_icon.png")));
 		jmenuitem_password.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_password);
-		
+
 		JMenuItem jmenuAddAccount = new JMenuItem("Register");
 		jmenuAddAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,32 +169,38 @@ public class JPaddAcount extends JPanel {
 		String confirm = new String(JConfirm_passwordField.getPassword());
 		Role role = (Role) jcomboBox.getSelectedItem();
 		users.setRoleID(role.getRole_id());
-		
+		boolean username = true;
+
 		for (Users users2 : usersModel.findAll()) {
 			if (users2.getUsername().equalsIgnoreCase(jusername.getText().trim())) {
-				JOptionPane.showMessageDialog(null, "Username already exists !");
-			} else {
-				if (password.equals(confirm)) {
-					users.setPassword(BCrypt.hashpw(confirm, BCrypt.gensalt()));
-					if (usersModel.register(users)) {
-						JOptionPane.showMessageDialog(null, "Register Success !");
-					} else {
-						JOptionPane.showMessageDialog(null, "Register Fail !");
-					}
-
+				username = false;
+			}
+		}
+		
+		if (username == false) {
+			JOptionPane.showMessageDialog(null, "Username already exists !");
+		} else {
+			if (password.equals(confirm)) {
+				users.setPassword(BCrypt.hashpw(confirm, BCrypt.gensalt()));
+				if (usersModel.register(users)) {
+					JOptionPane.showMessageDialog(null, "Register Success !");
 				} else {
-					JOptionPane.showMessageDialog(null, "Password do not match !");
+					JOptionPane.showMessageDialog(null, "Register Fail !");
 				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Password do not match !");
 			}
 		}
 	}
+
 	protected void jmenuitem_password_actionPerformed(ActionEvent e) {
-		JPaccount jPaccount=new JPaccount();
+		JPaccount jPaccount = new JPaccount(dataMap);
 		this.removeAll();
 		this.revalidate();
 		this.add(jPaccount);
 		this.setVisible(true);
 	}
+
 	protected void jmenuAddAccount_actionPerformed(ActionEvent e) {
 		JPaddAcount jPaddaccount = new JPaddAcount(dataMap);
 		this.removeAll();
