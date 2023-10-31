@@ -53,9 +53,9 @@ public class Category_model {
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
 			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
-				Category category = new Category();
-				category.setCategoryID(resultSet.getInt("CategoryID"));
-				category.setCategoryName(resultSet.getString("CategoryName"));
+				categories = new Category();
+				categories.setCategoryID(resultSet.getInt("CategoryID"));
+				categories.setCategoryName(resultSet.getString("CategoryName"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

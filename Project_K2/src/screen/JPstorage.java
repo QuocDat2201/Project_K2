@@ -21,7 +21,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import entites.Products ;
 import models.Category_model;
-import models.Product_model; 
+import models.Product_model;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent; 
 
 public class JPstorage extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -115,7 +119,13 @@ public class JPstorage extends JPanel {
 	
 	public void fillDatatoJTable(List<Products> products) {
 		Category_model category_model = new Category_model();
-		DefaultTableModel models = new DefaultTableModel() ; 
+		DefaultTableModel models = new DefaultTableModel() {
+			
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		} ; 
 		models.addColumn("Product's Name");
 		models.addColumn("Category");
 		models.addColumn("Price");
@@ -127,7 +137,7 @@ public class JPstorage extends JPanel {
 					category_model.find(product.getCategory_id()).getCategoryName(),
 					product.getPrice(),
 					product.getQuantity(),
-					product.getQuantity()>5 ? "Stocking" : "Out of stock"
+					product.isStatus() == true ? "Stocking" : "Out of stock"
 			});
 		}
 		jtableProduct.setModel(models);

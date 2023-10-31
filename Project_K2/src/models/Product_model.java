@@ -41,6 +41,7 @@ public class Product_model {
 				product.setCategory_id(resultSet.getInt("Category_id"));
 				product.setPrice(resultSet.getBigDecimal("Price"));
 				product.setQuantity(resultSet.getInt("Quantity"));
+				product.setStatus(resultSet.getBoolean("Status"));		
 				products.add(product);
 			}
 		} catch (Exception e) {
