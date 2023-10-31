@@ -218,7 +218,7 @@ public class Home extends JFrame {
 	}
 
 	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {// invoice
-		JPaddAcount jPsendNotif = new JPaddAcount(dataMap);
+		JPaddInvoice jPsendNotif = new JPaddInvoice(dataMap);
 		clear(jpanel_2);
 		jpanel_2.add(jPsendNotif);
 		jpanel_2.setVisible(true);
