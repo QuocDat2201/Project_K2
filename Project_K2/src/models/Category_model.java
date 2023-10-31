@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entites.Category;
+import entites.Products;
 
 public class Category_model {
 	public boolean Create(Category category) {
@@ -86,4 +87,5 @@ public class Category_model {
 		}
 		return category;
 	}
+	
 }

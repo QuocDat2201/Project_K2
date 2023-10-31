@@ -175,7 +175,7 @@ public class JPaccount extends JPanel {
 		jmenuitem_password.setIcon(new ImageIcon(JPaccount.class.getResource("/Icon/211855_locked_icon.png")));
 		menuBar.add(jmenuitem_password);
 
-		jmenuAddAccount = new JMenuItem("Register");
+		jmenuAddAccount = new JMenuItem("Create Account");
 		jmenuAddAccount.setBackground(new Color(255, 255, 128));
 		jmenuAddAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,7 +183,7 @@ public class JPaccount extends JPanel {
 			}
 		});
 		jmenuAddAccount.setHorizontalAlignment(SwingConstants.LEFT);
-		jmenuAddAccount.setIcon(new ImageIcon(JPaccount.class.getResource("/Icon/39039_gtk_add_icon.png")));
+		jmenuAddAccount.setIcon(new ImageIcon(JPaccount.class.getResource("/Small_Icon/add.png")));
 		menuBar.add(jmenuAddAccount);
 
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");

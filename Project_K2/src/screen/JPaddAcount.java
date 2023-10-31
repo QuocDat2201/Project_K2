@@ -119,17 +119,6 @@ public class JPaddAcount extends JPanel {
 		jmenuitem_password.setIcon(new ImageIcon(JPaddAcount.class.getResource("/Icon/211855_locked_icon.png")));
 		jmenuitem_password.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_password);
-
-		JMenuItem jmenuAddAccount = new JMenuItem("Register");
-		jmenuAddAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jmenuAddAccount_actionPerformed(e);
-			}
-		});
-		jmenuAddAccount.setIcon(new ImageIcon(JPaddAcount.class.getResource("/Icon/39039_gtk_add_icon.png")));
-		jmenuAddAccount.setHorizontalAlignment(SwingConstants.LEFT);
-		jmenuAddAccount.setBackground(new Color(255, 255, 128));
-		menuBar.add(jmenuAddAccount);
 	}
 
 	public JPaddAcount(Object ob) {
@@ -198,14 +187,6 @@ public class JPaddAcount extends JPanel {
 		this.removeAll();
 		this.revalidate();
 		this.add(jPaccount);
-		this.setVisible(true);
-	}
-
-	protected void jmenuAddAccount_actionPerformed(ActionEvent e) {
-		JPaddAcount jPaddaccount = new JPaddAcount(dataMap);
-		this.removeAll();
-		this.revalidate();
-		this.add(jPaddaccount);
 		this.setVisible(true);
 	}
 }
