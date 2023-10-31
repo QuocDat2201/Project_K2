@@ -31,6 +31,7 @@ public class JPstorage extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 	private JTable jtableProduct;
 	private JTextField jtextField_Search;
+	private JPopupMenu popupMenu;
 
 	/**
 	 * Create the panel.
@@ -45,6 +46,17 @@ public class JPstorage extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 139, 594, 266);
 		panel.add(scrollPane);
+		
+		popupMenu = new JPopupMenu();
+		addPopup(scrollPane, popupMenu);
+		
+		JMenuItem JMenuItem_Edit = new JMenuItem("Edit");
+		JMenuItem_Edit.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/edit.png")));
+		popupMenu.add(JMenuItem_Edit);
+		
+		JMenuItem JMenuItem_Delete = new JMenuItem("Delete");
+		JMenuItem_Delete.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/bin (1).png")));
+		popupMenu.add(JMenuItem_Delete);
 		
 		jtableProduct = new JTable();
 		jtableProduct.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -96,6 +108,8 @@ public class JPstorage extends JPanel {
 		menuBar.add(jmenuitem_storage);
 		
 		JMenuItem jmenuitem_password_1 = new JMenuItem("Change Password");
+		jmenuitem_password_1.setHorizontalAlignment(SwingConstants.CENTER);
+		jmenuitem_password_1.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/211855_locked_icon.png")));
 		jmenuitem_password_1.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_password_1);
 		
@@ -114,7 +128,7 @@ public class JPstorage extends JPanel {
 	public void initJFrame() {
 		Product_model product_model = new Product_model() ; 
 		fillDatatoJTable(product_model.findAll());
-		
+		jtableProduct.setComponentPopupMenu(popupMenu);
 	}
 	
 	public void fillDatatoJTable(List<Products> products) {
@@ -142,5 +156,22 @@ public class JPstorage extends JPanel {
 		}
 		jtableProduct.setModel(models);
 		jtableProduct.getTableHeader().setReorderingAllowed(false);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
