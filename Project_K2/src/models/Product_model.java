@@ -51,6 +51,30 @@ public class Product_model {
 		return products;
 	}
 
+	public Products find(int id) {
+		Products product = new Products();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from products where ProductID = ? ");// java.sql
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				
+				product.setProductID(resultSet.getInt("ProductID"));
+				product.setProductName(resultSet.getString("ProductName"));
+				product.setCategory_id(resultSet.getInt("Category_id"));
+				product.setPrice(resultSet.getBigDecimal("Price"));
+				product.setQuantity(resultSet.getInt("Quantity"));
+				product.setStatus(resultSet.getBoolean("Status"));
+				
+			}
+		} catch (Exception e) {
+			product = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return product;
+	}
+	
 	public List<Products> Search(String name) {
 		List<Products> products = new ArrayList<Products>();
 		try {

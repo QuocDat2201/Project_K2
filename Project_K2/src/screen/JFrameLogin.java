@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.DropMode;
 
 public class JFrameLogin extends JFrame {
 	private static JFrameLogin frame;
@@ -97,6 +98,8 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(lblNewLabel_2);
 
 		juser = new JTextField();
+		juser.setText("a");
+		juser.setToolTipText("aaaaa");
 		juser.setBounds(468, 120, 151, 28);
 		contentPane.add(juser);
 		juser.setColumns(10);
