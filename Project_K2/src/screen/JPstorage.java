@@ -122,6 +122,12 @@ public class JPstorage extends JPanel {
 		panel_category.setLayout(null);
 
 		jcomboBox_category = new JComboBox();
+		jcomboBox_category.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				jcomboBox_category_mouseMoved(e);
+			}
+		});
 		jcomboBox_category.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jcomboBox_category_actionPerformed(e);
@@ -357,5 +363,7 @@ public class JPstorage extends JPanel {
 			break;
 		}
 		
+	}
+	protected void jcomboBox_category_mouseMoved(MouseEvent e) {
 	}
 }
