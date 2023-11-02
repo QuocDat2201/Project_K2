@@ -2,8 +2,12 @@ package models;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import entites.Invoices;
+import entites.Products;
 
 
 public class Invoice_model {
@@ -24,5 +28,27 @@ public class Invoice_model {
 			ConnectDB.disconnect();
 		}
 		return result;
+	}
+	
+	public List<Invoices> findAll() {
+		List<Invoices> invoices = new ArrayList<Invoices>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from invoices");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Invoices invoice = new Invoices();
+				invoice.setInvoiceID(resultSet.getInt("InvoiceID"));
+				invoice.setSaleID(resultSet.getInt("SaleID"));
+				invoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
+				invoice.setCustomerName(resultSet.getString("CustomerName"));
+				invoice.setStatus(resultSet.getBoolean("Status"));
+				invoices.add(invoice);
+			}
+		} catch (Exception e) {
+			invoices = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return invoices;
 	}
 }
