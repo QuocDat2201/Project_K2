@@ -42,6 +42,8 @@ public class Home extends JFrame {
 	private JButton btnNewButton;
 	private 
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
+	private JButton jbcusstomer;
+	private JButton jbtaccount_2;
 
 	/**
 	 * Launch the application.
@@ -81,56 +83,89 @@ public class Home extends JFrame {
 		getContentPane().add(panel, BorderLayout.WEST);
 
 		jbthome = new JButton("Home");
+		jbthome.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbthome.setForeground(new Color(0, 0, 0));
 		jbthome.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbthome.setHorizontalAlignment(SwingConstants.LEFT);
 		jbthome.setMinimumSize(new Dimension(59, 20));
 		jbthome.setMaximumSize(new Dimension(190, 50));
-		jbthome.setBackground(new Color(128, 128, 0));
-		jbthome.setBorder(new LineBorder(new Color(255, 191, 226), 4));
+		jbthome.setBackground(new Color(0, 255, 0));
+		jbthome.setBorder(new LineBorder(new Color(255, 128, 255), 3));
 		jbthome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		jbthome.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
+		jbthome.setIcon(new ImageIcon(Home.class.getResource("/Icon/299061_house_icon (1).png")));
 		panel.add(jbthome);
 
 		jbtinvoice = new JButton("Invoice");
+		jbtinvoice.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtinvoice.setForeground(new Color(0, 0, 0));
 		jbtinvoice.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbtinvoice.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtinvoice.setMinimumSize(new Dimension(59, 20));
 		jbtinvoice.setMaximumSize(new Dimension(190, 50));
-		jbtinvoice.setBackground(new Color(128, 128, 0));
-		jbtinvoice.setBorder(new LineBorder(new Color(255, 191, 226), 4));
+		jbtinvoice.setBackground(new Color(255, 0, 0));
+		jbtinvoice.setBorder(new LineBorder(new Color(255, 128, 255), 3));
 		jbtinvoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_2_actionPerformed(e);
 			}
 		});
-		jbtinvoice.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
+		jbtinvoice.setIcon(new ImageIcon(Home.class.getResource("/Icon/Modify.png")));
 		panel.add(jbtinvoice);
 
 		jbtlistproduct = new JButton("Storage");
+		jbtlistproduct.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtlistproduct.setForeground(new Color(0, 0, 0));
+		jbtlistproduct.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtlistproduct.setMinimumSize(new Dimension(59, 20));
 		jbtlistproduct.setMaximumSize(new Dimension(190, 50));
-		jbtlistproduct.setBackground(new Color(128, 128, 0));
-		jbtlistproduct.setBorder(new LineBorder(new Color(255, 191, 226), 4));
+		jbtlistproduct.setBackground(new Color(0, 255, 0));
+		jbtlistproduct.setBorder(new LineBorder(new Color(255, 128, 255), 3));
 		jbtlistproduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_jbtlistproduct_actionPerformed(e);
 			}
 		});
+		
+		jbcusstomer = new JButton("Cusstomer");
+		jbcusstomer.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbcusstomer.setForeground(new Color(0, 0, 0));
+		jbcusstomer.setHorizontalAlignment(SwingConstants.LEFT);
+		jbcusstomer.setIcon(new ImageIcon(Home.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
+		jbcusstomer.setMinimumSize(new Dimension(59, 20));
+		jbcusstomer.setMaximumSize(new Dimension(190, 50));
+		jbcusstomer.setHorizontalTextPosition(SwingConstants.RIGHT);
+		jbcusstomer.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbcusstomer.setBackground(new Color(0, 255, 0));
+		panel.add(jbcusstomer);
+		
+		jbtaccount_2 = new JButton("Account");
+		jbtaccount_2.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtaccount_2.setForeground(new Color(0, 0, 0));
+		jbtaccount_2.setIcon(new ImageIcon(Home.class.getResource("/Icon/1298747_instagram_brand_logo_social media_icon.png")));
+		jbtaccount_2.setHorizontalAlignment(SwingConstants.LEFT);
+		jbtaccount_2.setMinimumSize(new Dimension(59, 20));
+		jbtaccount_2.setMaximumSize(new Dimension(190, 50));
+		jbtaccount_2.setHorizontalTextPosition(SwingConstants.RIGHT);
+		jbtaccount_2.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbtaccount_2.setBackground(new Color(255, 0, 0));
+		panel.add(jbtaccount_2);
 		jbtlistproduct.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 100));
 		jbtlistproduct
 				.setIcon(new ImageIcon(Home.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
 		panel.add(jbtlistproduct);
 
 		JButton jbtsend = new JButton("Send");
+		jbtsend.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtsend.setForeground(new Color(0, 0, 0));
 		jbtsend.setMinimumSize(new Dimension(59, 20));
 		jbtsend.setMaximumSize(new Dimension(190, 50));
-		jbtsend.setBackground(new Color(128, 128, 0));
-		jbtsend.setBorder(new LineBorder(new Color(255, 255, 255), 4));
+		jbtsend.setBackground(new Color(255, 0, 0));
+		jbtsend.setBorder(new LineBorder(new Color(255, 128, 255), 3));
 		jbtsend.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbtsend.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtsend.addActionListener(new ActionListener() {
@@ -138,15 +173,18 @@ public class Home extends JFrame {
 				do_btnNewButton_1_actionPerformed(e);
 			}
 		});
-		jbtsend.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
+		jbtsend.setIcon(new ImageIcon(Home.class.getResource("/Icon/Comment.png")));
 		panel.add(jbtsend);
 
 		jbtaccount = new JButton("Account");
+		jbtaccount.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtaccount.setForeground(new Color(0, 0, 0));
+		jbtaccount.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtaccount.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbtaccount .setMinimumSize(new Dimension(59, 20));
 		jbtaccount .setMaximumSize(new Dimension(190, 50));
-		jbtaccount .setBackground(new Color(128, 128, 0));
-		jbtaccount .setBorder(new LineBorder(new Color(255, 255, 255), 4));
+		jbtaccount .setBackground(new Color(0, 255, 0));
+		jbtaccount .setBorder(new LineBorder(new Color(255, 128, 255), 3));
 		jbtaccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_jbtaccount_actionPerformed(e);
@@ -156,6 +194,8 @@ public class Home extends JFrame {
 		panel.add(jbtaccount);
 
 		btnNewButton = new JButton("Sign out");
+		btnNewButton.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnNewButton_actionPerformed(e);
@@ -164,10 +204,10 @@ public class Home extends JFrame {
 		btnNewButton.setHorizontalTextPosition(SwingConstants.RIGHT);
 		btnNewButton.setMinimumSize(new Dimension(59, 20));
 		btnNewButton.setMaximumSize(new Dimension(190, 50));
-		btnNewButton.setBackground(new Color(128, 128, 0));
-		btnNewButton.setBorder(new LineBorder(new Color(255, 255, 255), 4));
+		btnNewButton.setBackground(new Color(255, 0, 0));
+		btnNewButton.setBorder(new LineBorder(new Color(255, 128, 255), 3));
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setIcon(new ImageIcon(Home.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
+		btnNewButton.setIcon(new ImageIcon(Home.class.getResource("/Icon/Back.png")));
 		panel.add(btnNewButton);
 
 		JPanel panel_1 = new JPanel();
@@ -179,6 +219,7 @@ public class Home extends JFrame {
 		panel_1.add(lblNewLabel);
 
 		jpanel_2 = new JPanel();
+		jpanel_2.setBackground(new Color(192, 192, 192));
 		getContentPane().add(jpanel_2, BorderLayout.CENTER);
 		jpanel_2.setLayout(new BorderLayout(0, 0));
 	}
