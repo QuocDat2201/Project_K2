@@ -35,11 +35,17 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPaddInvoice extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 	private JTable jtableProduct;
 	private JTextField jtextField_Search;
+	private JPopupMenu popupMenu;
 
 	/**
 	 * Create the panel.
@@ -52,8 +58,17 @@ public class JPaddInvoice extends JPanel {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 139, 594, 266);
+		scrollPane.setBounds(10, 139, 594, 272);
 		panel.add(scrollPane);
+		
+		popupMenu = new JPopupMenu();
+		addPopup(scrollPane, popupMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Edit");
+		popupMenu.add(mntmNewMenuItem);
+		
+		JMenu mnNewMenu = new JMenu("Delete");
+		popupMenu.add(mnNewMenu);
 		
 		jtableProduct = new JTable();
 		jtableProduct.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -98,13 +113,18 @@ public class JPaddInvoice extends JPanel {
 		menuBar.setBackground(new Color(128, 255, 0));
 		add(menuBar, BorderLayout.NORTH);
 		
-		JMenuItem jmenuitem_storage = new JMenuItem("Storage");
+		JMenuItem jmenuitem_storage = new JMenuItem("Product");
 		jmenuitem_storage.setHorizontalAlignment(SwingConstants.CENTER);
 		jmenuitem_storage.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/boxes.png")));
 		jmenuitem_storage.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_storage);
 		
-		JMenuItem jmenuitem_password_1 = new JMenuItem("Change Password");
+		JMenuItem jmenuitem_password_1 = new JMenuItem("List Invoice");
+		jmenuitem_password_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_jmenuitem_password_1_actionPerformed(e);
+			}
+		});
 		jmenuitem_password_1.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_password_1);
 		
@@ -123,6 +143,7 @@ public class JPaddInvoice extends JPanel {
 	public void initJFrame() {
 		Product_model product_model = new Product_model() ; 
 		fillDatatoJTable(product_model.findAll());
+		jtableProduct.setComponentPopupMenu(popupMenu);
 	}
 	
 	private class CategoryCellRender extends DefaultTableColumnModel{
@@ -148,11 +169,40 @@ public class JPaddInvoice extends JPanel {
 					category.getCategoryName(),
 					product.getPrice(),
 					product.getQuantity(),
-					product.getQuantity()>5 ? "Stocking" : "Out of stock",
-						
+					product.isStatus() == true ? "0" : "1"	
 			});
 		}
 		jtableProduct.setModel(models);
 		jtableProduct.getTableHeader().setReorderingAllowed(false);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+	
+	public void clear(JPanel A) {
+		A.removeAll();
+		A.revalidate();
+	}
+	
+	protected void do_jmenuitem_password_1_actionPerformed(ActionEvent e) {
+		JPListInvoice jpListInvoice = new JPListInvoice();
+		this.removeAll();
+		this.revalidate();
+		this.add(jpListInvoice);
+		this.setVisible(true);
 	}
 }
