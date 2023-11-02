@@ -40,7 +40,6 @@ public class Home extends JFrame {
 	private JPanel panel;
 	private JButton jbtaccount;
 	private JButton btnNewButton;
-	private 
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
 	private JButton jbcusstomer;
 	private JButton jbtaccount_2;

@@ -31,7 +31,6 @@ import javax.swing.JPasswordField;
 import javax.swing.DropMode;
 
 public class JFrameLogin extends JFrame {
-	private static JFrameLogin frame;
 	private JPanel contentPane;
 	private JTextField juser;
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -50,7 +49,7 @@ public class JFrameLogin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new JFrameLogin();
+					JFrameLogin frame = new JFrameLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -97,9 +96,8 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2.setBounds(348, 119, 121, 30);
 		contentPane.add(lblNewLabel_2);
 
-		juser = new JTextField();
-		juser.setText("a");
-		juser.setToolTipText("aaaaa");
+		juser = new JTextField("abc");
+		juser.setToolTipText("");
 		juser.setBounds(468, 120, 151, 28);
 		contentPane.add(juser);
 		juser.setColumns(10);

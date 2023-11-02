@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.*;
-
 public class ConnectDB {
 
 	private static Connection connection;
