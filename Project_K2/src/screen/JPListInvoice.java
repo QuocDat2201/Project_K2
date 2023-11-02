@@ -184,7 +184,7 @@ public class JPListInvoice extends JPanel {
 		popupMenu.add(mntmNewMenuItem_1);
 		
 		jtableListInvoice = new JTable();
-		jtableListInvoice.setFont(new Font("Stencil", Font.PLAIN, 10));
+		jtableListInvoice.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		scrollPane.setViewportView(jtableListInvoice);
 		initJFrame();
 	}
