@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="Project_K2/src/libs/mysql-connector-java-8.0.29.jar"/>
 	<classpathentry kind="lib" path="Project_K2/src/libs/mysql-connector-java-8.0.30.jar"/>
 	<classpathentry kind="lib" path="Project_K2/src/libs/jbcrypt-0.4.jar"/>
-	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="Project_K2/bin"/>
 </classpath>
