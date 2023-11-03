@@ -40,6 +40,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class JPaddInvoice extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -81,11 +83,23 @@ public class JPaddInvoice extends JPanel {
 		panel_searchname.setLayout(null);
 		
 		jtextField_Search = new JTextField();
+		jtextField_Search.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				do_jtextField_Search_keyReleased(e);
+			}
+		});
+		
 		jtextField_Search.setBounds(10, 28, 273, 25);
 		panel_searchname.add(jtextField_Search);
 		jtextField_Search.setColumns(10);
 		
 		JButton jButton_Search = new JButton("Search");
+		jButton_Search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_jButton_Search_actionPerformed(e);
+			}
+		});
 		jButton_Search.setBounds(96, 63, 85, 25);
 		panel_searchname.add(jButton_Search);
 		
@@ -204,5 +218,18 @@ public class JPaddInvoice extends JPanel {
 		this.revalidate();
 		this.add(jpListInvoice);
 		this.setVisible(true);
+	}
+	
+	protected void do_jtextField_Search_keyReleased(KeyEvent e) {
+		Product_model product_model = new Product_model();
+		String name = jtextField_Search.getText().trim();
+
+		fillDatatoJTable(product_model.Search(name));
+	}
+	protected void do_jButton_Search_actionPerformed(ActionEvent e) {
+		Product_model product_model = new Product_model();
+		String name = jtextField_Search.getText().trim();
+
+		fillDatatoJTable(product_model.Search(name));
 	}
 }

@@ -48,6 +48,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
+import java.awt.ComponentOrientation;
 
 public class JPListInvoice extends JPanel {
 	private JTextField jCustomerName;
@@ -173,10 +176,13 @@ public class JPListInvoice extends JPanel {
 		panel_2.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new LineBorder(new Color(255, 192, 203), 3));
 		scrollPane.setBounds(29, 21, 538, 162);
 		panel_2.add(scrollPane);
 
 		jtableListInvoice = new JTable();
+		jtableListInvoice.setBorder(new LineBorder(new Color(255, 240, 245), 2));
+		jtableListInvoice.setBackground(new Color(255, 240, 245));
 		jtableListInvoice.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		scrollPane.setViewportView(jtableListInvoice);
 		
