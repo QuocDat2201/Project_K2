@@ -51,4 +51,19 @@ public class Invoice_model {
 		}
 		return invoices;
 	}
+	
+	public boolean delete(int id){
+		boolean result = true  ; 
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement
+					("delete from invoices where SaleID = ?");//java.sql
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate()>0 ; //tu hieu luon :)) la neu them dc thi so dong se tang 
+		} catch (Exception e) {
+			e.printStackTrace();
+			 result = false ; 
+		}finally {
+			ConnectDB.disconnect();
+		} return result; 
+	}
 }
