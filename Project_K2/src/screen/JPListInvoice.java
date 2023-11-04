@@ -1,5 +1,14 @@
 package screen;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import java.awt.EventQueue;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -18,6 +27,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.PlainDocument;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -59,7 +69,6 @@ public class JPListInvoice extends JPanel {
 	private JTextField jtextQuantily;
 	private JTextField jtotal;
 	private JComboBox jcomboBoxProductID;
-	private JTextField jProductName;
 	private JTextField jProductPrice;
 	private JTable jtableListInvoice;
 
@@ -80,23 +89,27 @@ public class JPListInvoice extends JPanel {
 		panel_1.setLayout(null);
 
 		JLabel lblInvoiceDate = new JLabel("Invoice Date");
-		lblInvoiceDate.setBounds(24, 67, 98, 26);
+		lblInvoiceDate.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
+		lblInvoiceDate.setBounds(330, 32, 98, 26);
 		panel_1.add(lblInvoiceDate);
 
 		JLabel lblNewLabel_2 = new JLabel("Customer Name");
-		lblNewLabel_2.setBounds(24, 103, 98, 26);
+		lblNewLabel_2.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
+		lblNewLabel_2.setBounds(330, 64, 98, 26);
 		panel_1.add(lblNewLabel_2);
 
 		jCustomerName = new JTextField();
 		jCustomerName.setColumns(10);
-		jCustomerName.setBounds(132, 106, 124, 22);
+		jCustomerName.setBounds(438, 67, 124, 22);
 		panel_1.add(jCustomerName);
 
 		JLabel lblNewLabel_3 = new JLabel("Status");
-		lblNewLabel_3.setBounds(24, 139, 98, 26);
+		lblNewLabel_3.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
+		lblNewLabel_3.setBounds(330, 100, 98, 26);
 		panel_1.add(lblNewLabel_3);
 
-		JButton btnNewButton = new JButton("Create2");
+		JButton btnNewButton = new JButton("Create");
+		btnNewButton.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD | Font.ITALIC, 10));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
@@ -106,12 +119,12 @@ public class JPListInvoice extends JPanel {
 		panel_1.add(btnNewButton);
 
 		jdateChooser = new JDateChooser();
-		jdateChooser.setBounds(132, 71, 124, 22);
+		jdateChooser.setBounds(438, 32, 124, 22);
 		jdateChooser.setDateFormatString("dd/MM/yyyy");
 		panel_1.add(jdateChooser);
 
 		jcomboBox = new JComboBox();
-		jcomboBox.setBounds(132, 142, 43, 23);
+		jcomboBox.setBounds(438, 105, 43, 23);
 		panel_1.add(jcomboBox);
 
 		jtextQuantily = new JTextField();
@@ -122,24 +135,30 @@ public class JPListInvoice extends JPanel {
 			}
 		});
 		jtextQuantily.setColumns(10);
-		jtextQuantily.setBounds(438, 144, 124, 22);
+		jtextQuantily.setBounds(132, 106, 124, 22);
 		panel_1.add(jtextQuantily);
 
+		((AbstractDocument) jtextQuantily.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+
 		JLabel lblQuantily = new JLabel("Quantily");
-		lblQuantily.setBounds(330, 141, 98, 26);
+		lblQuantily.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
+		lblQuantily.setBounds(24, 103, 98, 26);
 		panel_1.add(lblQuantily);
 
 		jtotal = new JTextField();
+		jtotal.setEditable(false);
 		jtotal.setColumns(10);
-		jtotal.setBounds(438, 180, 124, 22);
+		jtotal.setBounds(132, 138, 124, 22);
 		panel_1.add(jtotal);
 
 		JLabel lblTotal = new JLabel("Total");
-		lblTotal.setBounds(330, 177, 98, 26);
+		lblTotal.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
+		lblTotal.setBounds(24, 140, 98, 26);
 		panel_1.add(lblTotal);
 
-		JLabel ProductID = new JLabel("ProductID");
-		ProductID.setBounds(330, 31, 98, 26);
+		JLabel ProductID = new JLabel("Product Name");
+		ProductID.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
+		ProductID.setBounds(24, 32, 98, 26);
 		panel_1.add(ProductID);
 
 		jcomboBoxProductID = new JComboBox();
@@ -148,25 +167,18 @@ public class JPListInvoice extends JPanel {
 				do_jcomboBoxProductID_actionPerformed(e);
 			}
 		});
-		jcomboBoxProductID.setBounds(438, 34, 43, 23);
+		jcomboBoxProductID.setBounds(132, 34, 124, 23);
 		panel_1.add(jcomboBoxProductID);
 
-		jProductName = new JTextField();
-		jProductName.setColumns(10);
-		jProductName.setBounds(438, 70, 124, 23);
-		panel_1.add(jProductName);
-
-		JLabel lblNewLabel_1 = new JLabel("ProductName");
-		lblNewLabel_1.setBounds(330, 67, 98, 26);
-		panel_1.add(lblNewLabel_1);
-
 		jProductPrice = new JTextField();
+		jProductPrice.setEditable(false);
 		jProductPrice.setColumns(10);
-		jProductPrice.setBounds(438, 106, 124, 22);
+		jProductPrice.setBounds(132, 67, 124, 22);
 		panel_1.add(jProductPrice);
 
 		JLabel lblPrice = new JLabel("Price");
-		lblPrice.setBounds(330, 103, 98, 26);
+		lblPrice.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
+		lblPrice.setBounds(24, 68, 98, 26);
 		panel_1.add(lblPrice);
 
 		JPanel panel_2 = new JPanel();
@@ -185,7 +197,7 @@ public class JPListInvoice extends JPanel {
 		jtableListInvoice.setBackground(new Color(255, 240, 245));
 		jtableListInvoice.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		scrollPane.setViewportView(jtableListInvoice);
-		
+
 		JButton btnNewButton_1 = new JButton("Delete");
 		btnNewButton_1.setForeground(new Color(0, 0, 0));
 		btnNewButton_1.setBackground(new Color(255, 240, 245));
@@ -197,10 +209,20 @@ public class JPListInvoice extends JPanel {
 		});
 		btnNewButton_1.setBounds(483, 182, 85, 21);
 		panel_2.add(btnNewButton_1);
+
+		JButton btnNewButton_2 = new JButton("Update");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_2_actionPerformed(e);
+			}
+		});
+		btnNewButton_2.setBounds(385, 181, 85, 21);
+		panel_2.add(btnNewButton_2);
 		initJFrame();
 	}
 
 	public void initJFrame() {
+
 		Calendar calendar = Calendar.getInstance(); // Lấy ngày tháng năm hiện tại
 		Date currentDate = calendar.getTime(); // Chuyển Calendar sang Date
 		jdateChooser.setDate(currentDate);
@@ -228,49 +250,52 @@ public class JPListInvoice extends JPanel {
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			Products products = (Products) value;
-			return super.getListCellRendererComponent(list, products.getProductID(), index, isSelected, cellHasFocus);
+			return super.getListCellRendererComponent(list, products.getProductName(), index, isSelected, cellHasFocus);
 		}
 
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		try {
-			Object selectedProduct = jcomboBoxProductID.getSelectedItem();
-			Products product = (Products) selectedProduct;
-			int productID = product.getProductID();
-
-			Sales_model sales_model = new Sales_model();
-			Sales sales = new Sales();
-			BigDecimal total = new BigDecimal(jtotal.getText());
-
-			sales.setPrice(total);
-			sales.setProductID(productID);
-			sales.setQuantity(Integer.parseInt(jtextQuantily.getText()));
-
-			int newSalesID = sales_model.getNewlyCreatedSalesID(sales); // Lấy ID của Sales mới tạo
-
-			Invoice_model invoice_model = new Invoice_model();
-			Invoices invoices = new Invoices();
-			invoices.setSaleID(newSalesID);
-			invoices.setCustomerName(jCustomerName.getText());
-			invoices.setInvoiceDate(jdateChooser.getDate());
-			if (Integer.parseInt(jcomboBox.getSelectedItem().toString()) == 1) {
-				invoices.setStatus(true);
+			if (jCustomerName.getText().equalsIgnoreCase("")) {
+				JOptionPane.showMessageDialog(null, "Faildroi");
 			} else {
-				invoices.setStatus(false);
+				Object selectedProduct = jcomboBoxProductID.getSelectedItem();
+				Products product = (Products) selectedProduct;
+				int productID = product.getProductID();
+
+				Sales_model sales_model = new Sales_model();
+				Sales sales = new Sales();
+				BigDecimal total = new BigDecimal(jtotal.getText());
+
+				sales.setPrice(total);
+				sales.setProductID(productID);
+				sales.setQuantity(Integer.parseInt(jtextQuantily.getText()));
+
+				int newSalesID = sales_model.getNewlyCreatedSalesID(sales); // Lấy ID của Sales mới tạo
+
+				Invoice_model invoice_model = new Invoice_model();
+				Invoices invoices = new Invoices();
+				invoices.setSaleID(newSalesID);
+				invoices.setCustomerName(jCustomerName.getText());
+				invoices.setInvoiceDate(jdateChooser.getDate());
+				if (Integer.parseInt(jcomboBox.getSelectedItem().toString()) == 1) {
+					invoices.setStatus(true);
+				} else {
+					invoices.setStatus(false);
+				}
+
+				if (invoice_model.Create(invoices)) {
+
+					JOptionPane.showMessageDialog(null, "SuccesInvoices");
+				} else {
+					JOptionPane.showMessageDialog(null, "FaildInvoice");
+				}
+
+				fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
 			}
-
-			if (invoice_model.Create(invoices)) {
-
-				JOptionPane.showMessageDialog(null, "Succes");
-			} else {
-				JOptionPane.showMessageDialog(null, "Faild");
-			}
-
-			fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
-
 		} catch (Exception e2) {
-			// TODO: handle exception
+
 		}
 
 	}
@@ -278,15 +303,18 @@ public class JPListInvoice extends JPanel {
 	protected void do_jcomboBoxProductID_actionPerformed(ActionEvent e) {
 		Object selectedProduct = jcomboBoxProductID.getSelectedItem();
 		Products product = (Products) selectedProduct;
-		jProductName.setText(product.getProductName());
 		jProductPrice.setText(product.getPrice().toString());
 
 	}
 
 	protected void do_jtextQuantily_keyReleased(KeyEvent e) {
-		double quantily = Double.parseDouble(jtextQuantily.getText());
-		double total = quantily * Double.parseDouble(jProductPrice.getText());
-		jtotal.setText(String.valueOf(total));
+		try {
+			double quantily = Double.parseDouble(jtextQuantily.getText());
+			double total = quantily * Double.parseDouble(jProductPrice.getText());
+			jtotal.setText(String.valueOf(total));
+		} catch (Exception e2) {
+
+		}
 	}
 
 	public void fillDataToJTable(List<Sales> sales, List<Invoices> invoices) {
@@ -297,7 +325,7 @@ public class JPListInvoice extends JPanel {
 				// TODO Auto-generated method stub
 				return false;
 			}
-			
+
 		};
 
 		// Thêm cột cho JTable
@@ -307,6 +335,7 @@ public class JPListInvoice extends JPanel {
 		model.addColumn("Product Name");
 		model.addColumn("Quantity");
 		model.addColumn("Total");
+		model.addColumn("Status");
 
 		// Tạo danh sách tạm thời để lưu thông tin sáp nhập từ Sales và Invoices
 		List<CombinedData> combinedDataList = new ArrayList<CombinedData>();
@@ -315,9 +344,8 @@ public class JPListInvoice extends JPanel {
 		for (Sales sale : sales) {
 			CombinedData combinedData = new CombinedData(sale.getSaleID(), null, // Để trống Invoice Date
 					null, // Để trống Customer Name
-					sale.getProductID(),
+					sale.getProductID(), sale.getQuantity(), sale.getPrice());
 
-					sale.getQuantity(), sale.getPrice());
 			combinedDataList.add(combinedData);
 		}
 
@@ -328,6 +356,7 @@ public class JPListInvoice extends JPanel {
 				if (combinedData.getSaleID() == invoice.getSaleID()) {
 					combinedData.setInvoiceDate(invoice.getInvoiceDate());
 					combinedData.setCustomerName(invoice.getCustomerName());
+					combinedData.setStatus(invoice.isStatus());
 					break; // Thoát khỏi vòng lặp khi tìm thấy SaleID tương ứng
 				}
 			}
@@ -339,7 +368,8 @@ public class JPListInvoice extends JPanel {
 					(combinedData.getInvoiceDate() != null) ? simpleDateFormat.format(combinedData.getInvoiceDate())
 							: "",
 					combinedData.getCustomerName(), product_model.find(combinedData.getProductID()).getProductName(),
-					combinedData.getQuantity(), combinedData.getPrice() });
+					combinedData.getQuantity(), combinedData.getPrice(),
+					combinedData.isStatus() ? "Destroy" : "Live" });
 		}
 		jtableListInvoice.getTableHeader().setReorderingAllowed(false);
 		jtableListInvoice.setModel(model);
@@ -377,7 +407,7 @@ public class JPListInvoice extends JPanel {
 			}
 		});
 	}
-	
+
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
 		int result = JOptionPane.showConfirmDialog(null, "Are you sure", "Confirm", JOptionPane.YES_NO_OPTION);
 		int selectedIndex = jtableListInvoice.getSelectedRow();
@@ -386,16 +416,52 @@ public class JPListInvoice extends JPanel {
 		Sales_model sales_model = new Sales_model();
 		if (result == JOptionPane.YES_OPTION) {
 			if (invoice_model.delete(id)) {
-				if(sales_model.delete(id)) {
-					JOptionPane.showMessageDialog(null,"Succes");
+				if (sales_model.delete(id)) {
+					JOptionPane.showMessageDialog(null, "Succes");
 					fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
-				}else {
-					JOptionPane.showMessageDialog(null,"Faild");
+				} else {
+					JOptionPane.showMessageDialog(null, "Faild");
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "Faild");
 			}
 		}
-		
+
+	}
+
+	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {
+		int result = JOptionPane.showConfirmDialog(null, "Are you sure", "Confirm", JOptionPane.YES_NO_OPTION);
+		int selectedIndex = jtableListInvoice.getSelectedRow();
+		int id = Integer.parseInt(jtableListInvoice.getValueAt(selectedIndex, 0).toString());
+		Invoice_model invoice_model = new Invoice_model();
+		Sales_model sales_model = new Sales_model();
+		Invoices invoices = new Invoices();
+		invoices.setSaleID(id);
+		invoices.setStatus(true);
+		if (invoice_model.update(invoices)) {
+			JOptionPane.showMessageDialog(null, "Success");
+			fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
+		}
+
+	}
+
+	class NumberDocumentFilter extends DocumentFilter {
+		@Override
+		public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+				throws BadLocationException {
+			// Kiểm tra xem chuỗi được thêm vào có chứa chỉ số hay không
+			if (string.matches("^[0-9]*$")) {
+				super.insertString(fb, offset, string, attr);
+			}
+		}
+
+		@Override
+		public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+				throws BadLocationException {
+			// Kiểm tra xem chuỗi thay thế có chứa chỉ số hay không
+			if (text.matches("^[0-9]*$")) {
+				super.replace(fb, offset, length, text, attrs);
+			}
+		}
 	}
 }
