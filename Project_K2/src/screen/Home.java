@@ -46,6 +46,10 @@ public class Home extends JFrame {
 	private JButton jbcusstomer;
 	private JButton jbtaccount_2;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 	/**
 	 * Launch the application.
 	 */
