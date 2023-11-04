@@ -1,5 +1,5 @@
 package screen;
-//commitmoi nhat
+//commitmoi nhat 1
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -46,10 +46,6 @@ public class Home extends JFrame {
 	private JButton jbcusstomer;
 	private JButton jbtaccount_2;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 	/**
 	 * Launch the application.
 	 */
@@ -253,9 +249,7 @@ public class Home extends JFrame {
 	}
 
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {// send
-
 		JPsendNotifi jPsendNotifi = new JPsendNotifi(dataMap);
-
 		jpanel_2.removeAll();
 		jpanel_2.revalidate();
 		jpanel_2.add(jPsendNotifi);
