@@ -61,6 +61,7 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
 import java.awt.ComponentOrientation;
+import javax.swing.ImageIcon;
 
 public class JPListInvoice extends JPanel {
 	private JTextField jCustomerName;
@@ -102,7 +103,12 @@ public class JPListInvoice extends JPanel {
 		jCustomerName.setColumns(10);
 		jCustomerName.setBounds(438, 67, 124, 22);
 		panel_1.add(jCustomerName);
-
+		JButton btnaddButton = new JButton("");
+		btnaddButton.setContentAreaFilled(false);
+		btnaddButton.setBorderPainted(false);
+		btnaddButton.setIcon(new ImageIcon(JPListInvoice.class.getResource("/Icon/39039_gtk_add_icon.png")));
+		btnaddButton.setBounds(560, 67, 30, 22);
+		panel_1.add(btnaddButton);
 		JLabel lblNewLabel_3 = new JLabel("Status");
 		lblNewLabel_3.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_3.setBounds(330, 100, 98, 26);

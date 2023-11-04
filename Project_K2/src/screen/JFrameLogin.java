@@ -32,7 +32,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.DropMode;
 import javax.swing.JComboBox;
-
 public class JFrameLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField juser;

@@ -43,7 +43,7 @@ public class Home extends JFrame {
 	private JButton jbtaccount;
 	private JButton btnNewButton;
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
-	private JButton jbcusstomer;
+	static JButton jbcusstomer;
 	private JButton jbtaccount_2;
 
 	/**

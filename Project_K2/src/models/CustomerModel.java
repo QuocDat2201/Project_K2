@@ -20,7 +20,7 @@ public class CustomerModel {
         boolean result = true;
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
-                    .prepareStatement("INSERT INTO customers(name, phone, point, rank) VALUES(?,?,?,?)");
+                    .prepareStatement("INSERT INTO customer(Name, PhoneNumber, Point, Rank) VALUES(?,?,?,?)");
             preparedStatement.setString(1, customer.getNameString());
             preparedStatement.setString(2, customer.getPhoneString());
             preparedStatement.setInt(3, customer.getPoint());
@@ -39,15 +39,15 @@ public class CustomerModel {
     public List<Customer> findAll() {
         List<Customer> customers = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT * FROM customers");
+            PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT * FROM customer");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setId(resultSet.getInt("id"));
-                customer.setNameString(resultSet.getString("name"));
-                customer.setPhoneString(resultSet.getString("phone"));
-                customer.setPoint(resultSet.getInt("point"));
-                customer.setRank(resultSet.getInt("rank"));
+                customer.setId(resultSet.getInt("CustomerId"));
+                customer.setNameString(resultSet.getString("Name"));
+                customer.setPhoneString(resultSet.getString("PhoneNumber"));
+                customer.setPoint(resultSet.getInt("Point"));
+                customer.setRank(resultSet.getInt("Rank"));
                 customers.add(customer);
             }
         } catch (Exception e) {

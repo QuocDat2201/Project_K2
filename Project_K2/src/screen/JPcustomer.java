@@ -24,6 +24,7 @@ public class JPcustomer extends JPanel {
 	private JTable table;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JPanel panel_1;
 
 	/**
 	 * Create the panel.
@@ -35,7 +36,7 @@ public class JPcustomer extends JPanel {
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.NORTH);
 
 		textField = new JTextField();
@@ -85,6 +86,11 @@ public class JPcustomer extends JPanel {
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		JPaddcustomer jPaddcustomer=new JPaddcustomer();
+		panel_1.removeAll();
+		panel_1.revalidate();
+		panel_1.add(jPaddcustomer);
+		panel_1.setVisible(true);
 	}
 
 	private void iniJFrame() {
@@ -104,6 +110,8 @@ public class JPcustomer extends JPanel {
 		}
 		
 		table.setModel(model);
+		int rowHeight = 25; // Đặt chiều cao hàng tùy ý
+		table.setRowHeight(rowHeight);
 
 	}
 }
