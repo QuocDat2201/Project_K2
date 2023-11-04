@@ -33,7 +33,7 @@ public class bieudo extends JPanel {
 
 	private void initJframe() {
 		double[] v = { 1, 2, 3, 1, 2, 3 };
-		SwingChartExample swingChartExample = new SwingChartExample(300, 200, v);
+		SwingChartExample swingChartExample = new SwingChartExample(JFrameLogin.frameWidth-200, JFrameLogin.frameHeight-300, v);
 		jpanel_1.add(swingChartExample);
 	}
 
