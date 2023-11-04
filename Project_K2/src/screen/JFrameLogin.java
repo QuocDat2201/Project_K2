@@ -39,9 +39,7 @@ public class JFrameLogin extends JFrame {
 	private static Map<String, Object> dataMap = new HashMap<String, Object>();
 	private JPasswordField jpass;
 	static  int frameWidth ;
-	static  int frameWidth1 ;
 	static int frameHeight ;
-	static int frameHeight1=1 ;
 	static Home home = new Home(dataMap);
 	/**
 	 * Launch the application.
@@ -63,7 +61,7 @@ public class JFrameLogin extends JFrame {
 			            public void componentResized(ComponentEvent e) {			            	
 			            	frameWidth = home.getWidth();
 			           	    frameHeight = home.getHeight();
-			           	    System.out.println(frameHeight);
+			           	    System.out.println(frameHeight+frameWidth);
 			            }
 			        });
 				} catch (Exception e) {
