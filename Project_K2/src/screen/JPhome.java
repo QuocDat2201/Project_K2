@@ -32,6 +32,11 @@ public class JPhome extends JPanel {
 		add(menuBar, BorderLayout.NORTH);
 		
 		JMenuItem Product = new JMenuItem("Doanh so");
+		Product.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_Product_actionPerformed(e);
+			}
+		});
 		Product.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/897226_balance spendings_budget_money_save money_icon.png")));
 		menuBar.add(Product);
 		
@@ -59,6 +64,13 @@ public class JPhome extends JPanel {
 		jpanel.revalidate();
 		bieudo bieudo1=new bieudo();
 		jpanel.add(bieudo1);
+		jpanel.setVisible(true);
+	}
+	protected void do_Product_actionPerformed(ActionEvent e) {
+		jpanel.removeAll();
+		jpanel.revalidate();
+		jpaneldoanhso jpaneldoanhso=new jpaneldoanhso();
+		jpanel.add(jpaneldoanhso);
 		jpanel.setVisible(true);
 	}
 }
