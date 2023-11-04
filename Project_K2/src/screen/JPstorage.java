@@ -70,10 +70,20 @@ public class JPstorage extends JPanel {
 		addPopup(scrollPane, popupMenu);
 
 		JMenuItem JMenuItem_Edit = new JMenuItem("Edit");
+		JMenuItem_Edit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JMenuItem_Edit_actionPerformed(e);
+			}
+		});
 		JMenuItem_Edit.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/edit.png")));
 		popupMenu.add(JMenuItem_Edit);
 
 		JMenuItem JMenuItem_Delete = new JMenuItem("Delete");
+		JMenuItem_Delete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JMenuItem_Delete_actionPerformed(e);
+			}
+		});
 		JMenuItem_Delete.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/bin (1).png")));
 		popupMenu.add(JMenuItem_Delete);
 
@@ -122,12 +132,7 @@ public class JPstorage extends JPanel {
 		panel_category.setLayout(null);
 
 		jcomboBox_category = new JComboBox();
-		jcomboBox_category.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				jcomboBox_category_mouseMoved(e);
-			}
-		});
+		
 		jcomboBox_category.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jcomboBox_category_actionPerformed(e);
@@ -157,6 +162,11 @@ public class JPstorage extends JPanel {
 		add(menuBar, BorderLayout.NORTH);
 
 		JMenuItem jmenuitem_storage = new JMenuItem("Storage");
+		jmenuitem_storage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jmenuitem_storage_actionPerformed(e);
+			}
+		});
 		jmenuitem_storage.setHorizontalAlignment(SwingConstants.CENTER);
 		jmenuitem_storage.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/boxes.png")));
 		jmenuitem_storage.setBackground(new Color(255, 255, 128));
@@ -219,13 +229,15 @@ public class JPstorage extends JPanel {
 				return false;
 			}
 		};
+		models.addColumn("Product's ID");
 		models.addColumn("Product's Name");
 		models.addColumn("Category");
 		models.addColumn("Price");
 		models.addColumn("Quantily");
 		models.addColumn("Status");
 		for (Products product : products) {
-			models.addRow(new Object[] { 
+			models.addRow(new Object[] {
+					product.getProductID(),
 					product.getProductName(),
 					category_model.find(product.getCategory_id()).getCategoryName(), 
 					product.getPrice(),
@@ -364,6 +376,30 @@ public class JPstorage extends JPanel {
 		}
 		
 	}
-	protected void jcomboBox_category_mouseMoved(MouseEvent e) {
+	
+	protected void jmenuitem_storage_actionPerformed(ActionEvent e) {
+		this.removeAll();
+		this.revalidate();
+		this.setVisible(true);
+	}
+	protected void JMenuItem_Delete_actionPerformed(ActionEvent e) {
+		int result = JOptionPane.showConfirmDialog(null, "Are you sure !", "Confirm", JOptionPane.YES_NO_OPTION);
+		
+		if (result == JOptionPane.YES_OPTION) {
+			Product_model product_model = new Product_model();
+			int selected = jtableProduct.getSelectedRow();
+			int id = Integer.parseInt(jtableProduct.getValueAt(selected, 0).toString());
+			
+			if (product_model.Delete(id)) {
+				JOptionPane.showMessageDialog(null, "Success");
+				fillDatatoJTable(product_model.findAll());
+			} else {
+				JOptionPane.showMessageDialog(null, "Fail");
+			}
+		}
+	}
+	protected void JMenuItem_Edit_actionPerformed(ActionEvent e) {
+		int selected = jtableProduct.getSelectedRow();
+		int id = Integer.parseInt(jtableProduct.getValueAt(selected, 0).toString());
 	}
 }

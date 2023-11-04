@@ -96,7 +96,7 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2.setBounds(348, 119, 121, 30);
 		contentPane.add(lblNewLabel_2);
 
-		juser = new JTextField("abc");
+		juser = new JTextField("");
 		juser.setToolTipText("");
 		juser.setBounds(468, 120, 151, 28);
 		contentPane.add(juser);

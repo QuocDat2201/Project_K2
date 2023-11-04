@@ -389,4 +389,41 @@ public class Product_model {
 		}
 		return products;
 	}
+	
+	public boolean Delete(int id) {
+		boolean result = true;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("delete from products where ProductID = ?");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate() > 0;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}finally {
+			ConnectDB.disconnect();
+		}
+
+		return result;
+	}
+	
+	public boolean Update(Products products) {
+		boolean result = true;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("update product set ProductName = ?, Category_id = ?, Price = ?, Quantity = ? where ProductID = ?");
+			preparedStatement.setString(1, products.getProductName());
+			preparedStatement.setInt(2, products.getCategory_id());
+			preparedStatement.setBigDecimal(3, products.getPrice());
+			preparedStatement.setInt(4, products.getQuantity());
+			result = preparedStatement.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return result;
+	}
 }
