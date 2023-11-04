@@ -45,12 +45,8 @@ public class Home extends JFrame {
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
 	private JButton jbcusstomer;
 	private JButton jbtaccount_2;
-<<<<<<< HEAD
-//commit moi nhat
-=======
-	
 
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
+
 	/**
 	 * Launch the application.
 	 */

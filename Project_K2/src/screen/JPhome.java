@@ -13,7 +13,7 @@ import javax.swing.JMenu;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+//alo
 public class JPhome extends JPanel {
 	private  Map<String,Object> dataMap=new HashMap<String, Object>();
 	private JPanel jpanel;
