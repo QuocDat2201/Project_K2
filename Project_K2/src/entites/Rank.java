@@ -4,6 +4,13 @@ public class Rank {
 private int id;
 private int point;
 private String rank;
+private int discount;
+public int getDiscount() {
+	return discount;
+}
+public void setDiscount(int discount) {
+	this.discount = discount;
+}
 public int getId() {
 	return id;
 }

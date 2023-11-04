@@ -20,9 +20,10 @@ public class RankModel {
         boolean result = true;
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
-                    .prepareStatement("INSERT INTO ranks(point,rank) VALUES(?,?)");
+                    .prepareStatement("INSERT INTO ranks(point,rank,discount) VALUES(?,?,?)");
             preparedStatement.setInt(1,rank.getPoint());
             preparedStatement.setString(2, rank.getRank());
+            preparedStatement.setInt(3, rank.getDiscount());
             result = preparedStatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,6 +45,7 @@ public class RankModel {
                 rank.setId(resultSet.getInt("id"));
                 rank.setRank(resultSet.getString("rank"));
                 rank.setPoint(resultSet.getInt("point"));
+                rank.setDiscount(resultSet.getInt("discount"));
                 ranks.add(rank);
             }
         } catch (Exception e) {
@@ -54,14 +56,16 @@ public class RankModel {
         return ranks;
     }
 
-    // Phương thức để cập nhật thông tin rank
+ // Phương thức để cập nhật thông tin rank
     public boolean update(Rank rank) {
         boolean result = true;
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
-                    .prepareStatement("UPDATE ranks SET rank_name = ? WHERE id = ?");
-            preparedStatement.setString(1, rank.getRank());
-            preparedStatement.setInt(2, rank.getId());
+                    .prepareStatement("UPDATE ranks SET point = ?, rank = ?, discount = ? WHERE id = ?");
+            preparedStatement.setInt(1, rank.getPoint());
+            preparedStatement.setString(2, rank.getRank());
+            preparedStatement.setInt(3, rank.getDiscount());
+            preparedStatement.setInt(4, rank.getId());
             result = preparedStatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,4 +75,5 @@ public class RankModel {
         }
         return result;
     }
+
 }
