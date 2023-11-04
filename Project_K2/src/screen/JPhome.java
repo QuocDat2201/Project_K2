@@ -56,7 +56,12 @@ public class JPhome extends JPanel {
 	}
 	public JPhome(Object ob) {
 		this();
-		dataMap=(Map<String, Object>) ob;		
+		dataMap=(Map<String, Object>) ob;	
+		jpanel.removeAll();
+		jpanel.revalidate();
+		jpaneldoanhso jpaneldoanhso1=new jpaneldoanhso();
+		jpanel.add(jpaneldoanhso1);
+		jpanel.setVisible(true);
 		
 	}
 	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {

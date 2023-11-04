@@ -45,11 +45,8 @@ public class jpaneldoanhso extends JPanel {
 		JPanel panel = new JPanel();
 		
 		panel.setLayout(new BorderLayout(0, 0));
-		Dimension Dimension = new Dimension(panel.getPreferredSize().width, 50);
-		panel.setPreferredSize(Dimension);
 		add(panel, BorderLayout.CENTER);
-		revalidate();
-		repaint();
+		
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 
@@ -64,7 +61,7 @@ public class jpaneldoanhso extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("doanh so 30 ngay gan nhat");
 		panel2.add(lblNewLabel);
-		Dimension newDimension = new Dimension(panel1.getPreferredSize().width, 190);
+		Dimension newDimension = new Dimension(panel1.getPreferredSize().width,JFrameLogin.frameHeight-300);
 		panel1.setPreferredSize(newDimension);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -88,7 +85,7 @@ public class jpaneldoanhso extends JPanel {
 		}
 		model.addColumn("Thu");
 		model.addColumn("Chi");
-		model.addRow(new Object[] { total, total });
+		model.addRow(new Object[] { total+"$", total+"$" });
 
 		jtable.setModel(model); // Set the model to the existing jtable field
 		jtable.setDefaultRenderer(Object.class, new render());
@@ -101,7 +98,7 @@ public class jpaneldoanhso extends JPanel {
 		Invoice_model invoice_model1 = new Invoice_model();
 		fillDataToJTable(sales_model1.findAll(), invoice_model1.findAll());
 	}
-	private class render extends DefaultTableCellRenderer {
+ class render extends DefaultTableCellRenderer {
 		public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 				boolean hasFocus, int row, int column) {
 			java.awt.Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
