@@ -50,7 +50,6 @@ public class UsersModel {
 			preparedStatement.setString(1, users.getUsername());
 			preparedStatement.setString(2, users.getPassword());
 			preparedStatement.setInt(3, users.getRoleID());
-
 			result = preparedStatement.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();

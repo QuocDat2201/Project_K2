@@ -23,19 +23,24 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.DropMode;
+import javax.swing.JComboBox;
 
 public class JFrameLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField juser;
-	private Map<String, Object> dataMap = new HashMap<String, Object>();
+	private static Map<String, Object> dataMap = new HashMap<String, Object>();
 	private JPasswordField jpass;
-
+	static  int frameWidth ;
+	static int frameHeight ;
+	static Home home = new Home(dataMap);
 	/**
 	 * Launch the application.
 	 */
@@ -51,6 +56,14 @@ public class JFrameLogin extends JFrame {
 				try {
 					JFrameLogin frame = new JFrameLogin();
 					frame.setVisible(true);
+					home.addComponentListener(new ComponentAdapter() {
+			            @Override
+			            public void componentResized(ComponentEvent e) {			            	
+			            	frameWidth = home.getWidth();
+			           	    frameHeight = home.getHeight();
+			           	    System.out.println(frameHeight+frameWidth);
+			            }
+			        });
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -96,7 +109,11 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2.setBounds(348, 119, 121, 30);
 		contentPane.add(lblNewLabel_2);
 
+<<<<<<< HEAD
 		juser = new JTextField("");
+=======
+		juser = new JTextField("admin");
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 		juser.setToolTipText("");
 		juser.setBounds(468, 120, 151, 28);
 		contentPane.add(juser);
@@ -134,20 +151,24 @@ public class JFrameLogin extends JFrame {
 		jpass = new JPasswordField();
 		jpass.setBounds(468, 160, 151, 28);
 		contentPane.add(jpass);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(528, 195, 36, 26);
+		contentPane.add(comboBox);
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Login
+		
 		String username = juser.getText().trim();
 		String password = new String(jpass.getPassword());
-
+	
 		UsersModel usersModel = new UsersModel();
 		Users users = usersModel.login(username, password);
-		
+		System.out.println("addd");
 		if (users == null) {
 			JOptionPane.showMessageDialog(null, "Account Invalid");
 		} else {
-			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap 
-			Home home = new Home(dataMap);
+			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap 			
 			home.setVisible(true);
 			this.setVisible(false);
 		}
