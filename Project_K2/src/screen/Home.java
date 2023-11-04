@@ -135,6 +135,11 @@ public class Home extends JFrame {
 		});
 		
 		jbcusstomer = new JButton("Cusstomer");
+		jbcusstomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_jbcusstomer_actionPerformed(e);
+			}
+		});
 		jbcusstomer.setFont(new Font("Segoe Print", Font.BOLD, 15));
 		jbcusstomer.setForeground(new Color(0, 0, 0));
 		jbcusstomer.setHorizontalAlignment(SwingConstants.LEFT);
@@ -286,5 +291,13 @@ public class Home extends JFrame {
 		JFrameLogin jFrameLogin = new JFrameLogin();
 		jFrameLogin.setVisible(true);
 		this.setVisible(false);
+	}
+	protected void do_jbcusstomer_actionPerformed(ActionEvent e) {
+		JPcustomer jcustomer=new JPcustomer();
+		jpanel_2.removeAll();
+		jpanel_2.revalidate();
+		jpanel_2.add(jcustomer);
+		jpanel_2.setVisible(true);
+
 	}
 }

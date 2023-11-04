@@ -9,6 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPcustomer extends JPanel {
 	private JTable table;
@@ -42,6 +47,16 @@ public class JPcustomer extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		panel_1.add(lblNewLabel_1);
 		
+		JButton btnNewButton = new JButton("Add Customer");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_actionPerformed(e);
+			}
+		});
+		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
+		btnNewButton.setIcon(new ImageIcon(JPcustomer.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
+		panel_1.add(btnNewButton);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBackground(new Color(255, 0, 0));
 		panel.add(scrollPane, BorderLayout.CENTER);
@@ -61,5 +76,7 @@ public class JPcustomer extends JPanel {
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
 		menuBar.add(mntmNewMenuItem_2);
 
+	}
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 	}
 }
