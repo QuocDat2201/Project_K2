@@ -185,14 +185,6 @@ public class JPaccount extends JPanel {
 		jmenuAddAccount.setHorizontalAlignment(SwingConstants.LEFT);
 		jmenuAddAccount.setIcon(new ImageIcon(JPaccount.class.getResource("/Small_Icon/add.png")));
 		menuBar.add(jmenuAddAccount);
-
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
-		mntmNewMenuItem_2.setBackground(new Color(255, 255, 128));
-		menuBar.add(mntmNewMenuItem_2);
-
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("New menu item");
-		mntmNewMenuItem_3.setBackground(new Color(255, 255, 128));
-		menuBar.add(mntmNewMenuItem_3);
 	}
 
 	public JPaccount(Object ob) {

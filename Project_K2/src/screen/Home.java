@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.ActionEvent;
@@ -43,6 +45,7 @@ public class Home extends JFrame {
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
 	private JButton jbcusstomer;
 	private JButton jbtaccount_2;
+	
 
 	/**
 	 * Launch the application.
@@ -59,6 +62,8 @@ public class Home extends JFrame {
 				try {
 					frame = new Home();
 					frame.setVisible(true);
+					System.out.println("ok");
+					   
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -221,6 +226,7 @@ public class Home extends JFrame {
 		jpanel_2.setBackground(new Color(192, 192, 192));
 		getContentPane().add(jpanel_2, BorderLayout.CENTER);
 		jpanel_2.setLayout(new BorderLayout(0, 0));
+		
 	}
 
 	public Home(Object ob) {
@@ -231,6 +237,7 @@ public class Home extends JFrame {
 		jpanel_2.revalidate();
 		jpanel_2.add(jPhome);
 		jpanel_2.setVisible(true);
+	
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Home

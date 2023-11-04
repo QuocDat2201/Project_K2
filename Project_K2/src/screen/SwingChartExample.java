@@ -6,53 +6,47 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.Value;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.ui.StrokeSample;
 import org.jfree.chart.ui.PaintSample;
-public class SwingChartExample extends JFrame {
-	/**
-	 * @wbp.nonvisual location=51,169
-	 */
-	private final StrokeSample strokeSample = new StrokeSample((Stroke) null);
-	/**
-	 * @wbp.nonvisual location=44,229
-	 */
-	private final PaintSample paintSample = new PaintSample((Paint) null);
-
-    public SwingChartExample() {
-        super("Biểu đồ Swing Example");
-
+public class SwingChartExample extends JPanel {
+private double[] Value;
+    public SwingChartExample(int x,int y,double[] value) {
+        Value=value;
         // Tạo biểu đồ
         JFreeChart chart = createChart(createDataset());
 
         // Hiển thị biểu đồ trong JPanel
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(100, 80));
+        chartPanel.setPreferredSize(new Dimension(x, y));
         chartPanel.setMouseWheelEnabled(true);
 
         // Thêm JPanel vào JFrame
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(chartPanel, BorderLayout.CENTER);
+        setLayout(new BorderLayout());
+        JPanel panel=new JPanel();
+       add(panel,null);
+       panel.add(chartPanel);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
     }
 
     private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(1.0, "Category 1", "Data 1");
-        dataset.addValue(2.0, "Category 2", "Data 2");
-        dataset.addValue(3.0, "Category 3", "Data 3");
+        dataset.addValue(Value[0], "Category 1", "T1");
+        dataset.addValue(Value[1], "Category 2", "T1");
+        dataset.addValue(Value[2], "Category 1", "T2");
+        dataset.addValue(Value[3], "Category 2", "T2");
+        dataset.addValue(Value[4], "Category 1", "T3");
+        dataset.addValue(Value[5], "Category 2", "T3");
         return dataset;
     }
 
     private JFreeChart createChart(CategoryDataset dataset) {
         return ChartFactory.createBarChart(
-            "Biểu đồ dạng cột",
-            "Category",
-            "Valueadasfsdg",
+            "Biểu đồ doanh so",
+            "Chu thich",
+            "USD $",
             dataset,
             PlotOrientation.VERTICAL,
             true,
@@ -61,11 +55,5 @@ public class SwingChartExample extends JFrame {
         );
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            SwingChartExample example = new SwingChartExample();
-            example.setVisible(true);
-        });
-    }
 }
 

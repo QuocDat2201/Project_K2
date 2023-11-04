@@ -119,6 +119,10 @@ public class JPaddAcount extends JPanel {
 		jmenuitem_password.setIcon(new ImageIcon(JPaddAcount.class.getResource("/Icon/211855_locked_icon.png")));
 		jmenuitem_password.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_password);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Create Account");
+		mntmNewMenuItem.setIcon(new ImageIcon(JPaddAcount.class.getResource("/Small_Icon/add.png")));
+		menuBar.add(mntmNewMenuItem);
 	}
 
 	public JPaddAcount(Object ob) {

@@ -63,9 +63,8 @@ public class JPstorage extends JPanel {
 		panel.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 139, 594, 266);
+		scrollPane.setBounds(10, 139, JFrameLogin.frameWidth-140,JFrameLogin.frameHeight-300);
 		panel.add(scrollPane);
-
 		popupMenu = new JPopupMenu();
 		addPopup(scrollPane, popupMenu);
 
@@ -187,6 +186,7 @@ public class JPstorage extends JPanel {
 		this();
 		this.dataMap = (Map<String, Object>) ob;
 		initJFrame();
+		System.out.println(JFrameLogin.frameHeight+"asdsdd");
 	}
 
 	public void initJFrame() {
@@ -232,6 +232,7 @@ public class JPstorage extends JPanel {
 					product.getQuantity(), 
 					product.isStatus() == true ? "Stocking" : "Out of stock" });
 		}
+		
 		jtableProduct.setModel(models);
 		jtableProduct.getTableHeader().setReorderingAllowed(false);
 	}
