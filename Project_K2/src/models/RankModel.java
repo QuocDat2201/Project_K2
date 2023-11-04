@@ -20,8 +20,9 @@ public class RankModel {
         boolean result = true;
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
-                    .prepareStatement("INSERT INTO ranks(rank_name) VALUES(?)");
-            preparedStatement.setString(1, rank.getRankName());
+                    .prepareStatement("INSERT INTO ranks(point,rank) VALUES(?,?)");
+            preparedStatement.setInt(1,rank.getPoint());
+            preparedStatement.setString(2, rank.getRank());
             result = preparedStatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +42,8 @@ public class RankModel {
             while (resultSet.next()) {
                 Rank rank = new Rank();
                 rank.setId(resultSet.getInt("id"));
-                rank.setRankName(resultSet.getString("rank_name"));
+                rank.setRank(resultSet.getString("rank"));
+                rank.setPoint(resultSet.getInt("point"));
                 ranks.add(rank);
             }
         } catch (Exception e) {
@@ -58,7 +60,7 @@ public class RankModel {
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
                     .prepareStatement("UPDATE ranks SET rank_name = ? WHERE id = ?");
-            preparedStatement.setString(1, rank.getRankName());
+            preparedStatement.setString(1, rank.getRank());
             preparedStatement.setInt(2, rank.getId());
             result = preparedStatement.executeUpdate() > 0;
         } catch (Exception e) {
