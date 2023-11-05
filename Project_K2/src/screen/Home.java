@@ -1,10 +1,4 @@
 package screen;
-<<<<<<< HEAD
-
-//commitmoi nhat
-=======
-//commitmoi nhat 1
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -51,12 +45,6 @@ public class Home extends JFrame {
 	static JButton jbcusstomer;
 	private JButton jbtaccount_2;
 
-<<<<<<< HEAD
-=======
-	/**
-	 * Launch the application.
-	 */
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -69,8 +57,6 @@ public class Home extends JFrame {
 				try {
 					frame = new Home();
 					frame.setVisible(true);
-					System.out.println("ok");
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -251,9 +237,6 @@ public class Home extends JFrame {
 
 	private void initJFrame() {
 		ClearScreen();
-		Home home = new Home();
-		jpanel_2.add(home);
-		home.setVisible(true);
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Home
@@ -265,16 +248,10 @@ public class Home extends JFrame {
 	}
 
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {// send
-<<<<<<< HEAD
 		ClearScreen();
-=======
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 		JPsendNotifi jPsendNotifi = new JPsendNotifi(dataMap);
-<<<<<<< HEAD
-=======
 		jpanel_2.removeAll();
 		jpanel_2.revalidate();
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 		jpanel_2.add(jPsendNotifi);
 		jPsendNotifi.setVisible(true);
 
@@ -306,13 +283,12 @@ public class Home extends JFrame {
 		jFrameLogin.setVisible(true);
 		this.setVisible(false);
 	}
-<<<<<<< HEAD
 
 	private void ClearScreen() {
 		jpanel_2.removeAll();
 		jpanel_2.revalidate();
 		jpanel_2.repaint();
-=======
+	}
 	protected void do_jbcusstomer_actionPerformed(ActionEvent e) {
 		JPcustomer jcustomer=new JPcustomer();
 		jpanel_2.removeAll();
@@ -320,6 +296,5 @@ public class Home extends JFrame {
 		jpanel_2.add(jcustomer);
 		jpanel_2.setVisible(true);
 
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 	}
 }
