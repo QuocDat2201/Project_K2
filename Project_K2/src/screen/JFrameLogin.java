@@ -109,11 +109,7 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2.setBounds(348, 119, 121, 30);
 		contentPane.add(lblNewLabel_2);
 
-<<<<<<< HEAD
-		juser = new JTextField("");
-=======
-		juser = new JTextField("admin");
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
+		juser = new JTextField();
 		juser.setToolTipText("");
 		juser.setBounds(468, 120, 151, 28);
 		contentPane.add(juser);
@@ -164,7 +160,6 @@ public class JFrameLogin extends JFrame {
 	
 		UsersModel usersModel = new UsersModel();
 		Users users = usersModel.login(username, password);
-		System.out.println("addd");
 		if (users == null) {
 			JOptionPane.showMessageDialog(null, "Account Invalid");
 		} else {

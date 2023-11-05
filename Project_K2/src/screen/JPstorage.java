@@ -42,119 +42,39 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseWheelListener;
+import java.math.BigDecimal;
 import java.awt.event.MouseWheelEvent;
+import java.awt.CardLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class JPstorage extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
-	private JTable jtableProduct;
 	private JTextField jtextField_Search;
-	private JPopupMenu popupMenu;
-	private JComboBox jcomboBox_category;
+	private JTable jtableProduct;
 	private JComboBox jcomboBox_status;
+	private JComboBox jcomboBox_category;
+	private JButton jButton_Search;
+	private JMenuItem JMenuItem_Edit;
+	private JMenuItem JMenuItem_Delete;
+	private JPopupMenu popupMenu;
+	private JPanel panel_main;
+	private JPanel panel_storage;
+	private JPanel panel_edit;
+	private JTextField JtextField_name;
+	private JTextField JtextField_price;
+	private JTextField JtextField_quantity;
+	private JTextField JtextField_status;
+	private JButton JButton_Save;
+	private JButton JButton_Cancel;
+	private Products products;
+	private JComboBox JcomboBox_Category;
 
 	/**
 	 * Create the panel.
 	 */
 	public JPstorage() {
 		setLayout(new BorderLayout(0, 0));
-
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 139, JFrameLogin.frameWidth-140,JFrameLogin.frameHeight-300);
-		panel.add(scrollPane);
-		popupMenu = new JPopupMenu();
-		addPopup(scrollPane, popupMenu);
-
-		JMenuItem JMenuItem_Edit = new JMenuItem("Edit");
-		JMenuItem_Edit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JMenuItem_Edit_actionPerformed(e);
-			}
-		});
-		JMenuItem_Edit.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/edit.png")));
-		popupMenu.add(JMenuItem_Edit);
-
-		JMenuItem JMenuItem_Delete = new JMenuItem("Delete");
-		JMenuItem_Delete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JMenuItem_Delete_actionPerformed(e);
-			}
-		});
-		JMenuItem_Delete.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/bin (1).png")));
-		popupMenu.add(JMenuItem_Delete);
-
-		jtableProduct = new JTable();
-		jtableProduct.getTableHeader().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				jtableProduct_mouseClicked(e);
-			}
-		});
-		jtableProduct.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(jtableProduct);
-
-		JPanel panel_searchname = new JPanel();
-		panel_searchname.setBorder(
-				new TitledBorder(null, "Search By Name", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_searchname.setBounds(10, 10, 293, 116);
-		panel.add(panel_searchname);
-		panel_searchname.setLayout(null);
-
-		jtextField_Search = new JTextField();
-		jtextField_Search.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				jtextField_Search_keyReleased(e);
-			}
-		});
-		jtextField_Search.setBounds(10, 28, 273, 31);
-		panel_searchname.add(jtextField_Search);
-		jtextField_Search.setColumns(10);
-
-		JButton jButton_Search = new JButton("Search");
-		jButton_Search.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jButton_Search_actionPerformed(e);
-			}
-		});
-		jButton_Search.setBounds(96, 69, 85, 25);
-		panel_searchname.add(jButton_Search);
-
-		JPanel panel_category = new JPanel();
-		panel_category.setBorder(
-				new TitledBorder(null, "Search By Category", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_category.setBounds(311, 10, 293, 53);
-		panel.add(panel_category);
-		panel_category.setLayout(null);
-
-		jcomboBox_category = new JComboBox();
-		
-		jcomboBox_category.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jcomboBox_category_actionPerformed(e);
-			}
-		});
-		jcomboBox_category.setBounds(10, 22, 273, 21);
-		panel_category.add(jcomboBox_category);
-
-		JPanel panel_status = new JPanel();
-		panel_status.setBorder(
-				new TitledBorder(null, "Search By Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_status.setBounds(311, 73, 293, 53);
-		panel.add(panel_status);
-		panel_status.setLayout(null);
-
-		jcomboBox_status = new JComboBox();
-		jcomboBox_status.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jcomboBox_status_actionPerformed(e);
-			}
-		});
-		jcomboBox_status.setBounds(10, 22, 273, 21);
-		panel_status.add(jcomboBox_status);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(128, 255, 0));
@@ -177,7 +97,7 @@ public class JPstorage extends JPanel {
 		jmenuitem_password_1.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_password_1);
 
-		JMenu jMenu_Create = new JMenu("Create Stuff");
+		JMenu jMenu_Create = new JMenu("New Create");
 		jMenu_Create.setHorizontalAlignment(SwingConstants.CENTER);
 		jMenu_Create.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/add.png")));
 		menuBar.add(jMenu_Create);
@@ -190,15 +110,200 @@ public class JPstorage extends JPanel {
 		jMenuItem_CreateCategory.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/categories.png")));
 		jMenu_Create.add(jMenuItem_CreateCategory);
 
+		panel_main = new JPanel();
+		add(panel_main, BorderLayout.CENTER);
+		panel_main.setLayout(new CardLayout(0, 0));
+
+		panel_storage = new JPanel();
+		panel_storage.setLayout(null);
+		panel_main.add(panel_storage, "name_793040110708900");
+
+		JPanel panel_searchname = new JPanel();
+		panel_searchname.setLayout(null);
+		panel_searchname.setBorder(
+				new TitledBorder(null, "Search By Name", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_searchname.setBounds(10, 10, 293, 116);
+		panel_storage.add(panel_searchname);
+
+		jtextField_Search = new JTextField();
+		jtextField_Search.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				textField_keyReleased(e);
+			}
+		});
+		jtextField_Search.setColumns(10);
+		jtextField_Search.setBounds(10, 28, 273, 31);
+		panel_searchname.add(jtextField_Search);
+
+		jButton_Search = new JButton("Search");
+		jButton_Search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jButton_Search_actionPerformed(e);
+			}
+		});
+		jButton_Search.setBounds(96, 69, 85, 25);
+		panel_searchname.add(jButton_Search);
+
+		JPanel panel_category = new JPanel();
+		panel_category.setLayout(null);
+		panel_category.setBorder(
+				new TitledBorder(null, "Search By Category", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_category.setBounds(311, 10, 293, 53);
+		panel_storage.add(panel_category);
+
+		jcomboBox_category = new JComboBox();
+		jcomboBox_category.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jcomboBox_category_actionPerformed(e);
+			}
+		});
+		jcomboBox_category.setBounds(10, 22, 273, 21);
+		panel_category.add(jcomboBox_category);
+
+		JPanel panel_status = new JPanel();
+		panel_status.setLayout(null);
+		panel_status.setBorder(
+				new TitledBorder(null, "Search By Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_status.setBounds(311, 73, 293, 53);
+		panel_storage.add(panel_status);
+
+		jcomboBox_status = new JComboBox();
+		jcomboBox_status.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jcomboBox_status_actionPerformed(e);
+			}
+		});
+		jcomboBox_status.setBounds(10, 22, 273, 21);
+		panel_status.add(jcomboBox_status);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 136, 594, 265);
+		panel_storage.add(scrollPane);
+
+		jtableProduct = new JTable();
+		jtableProduct.getTableHeader().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				jtableProduct_mouseClicked(e);
+			}
+		});
+		scrollPane.setViewportView(jtableProduct);
+
+		popupMenu = new JPopupMenu();
+		addPopup(jtableProduct, popupMenu);
+
+		JMenuItem_Delete = new JMenuItem("Delete");
+		JMenuItem_Delete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JMenuItem_Delete_actionPerformed(e);
+			}
+		});
+		JMenuItem_Delete.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/bin (1).png")));
+		popupMenu.add(JMenuItem_Delete);
+
+		JMenuItem_Edit = new JMenuItem("Edit");
+		JMenuItem_Edit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JMenuItem_Edit_actionPerformed(e);
+			}
+		});
+		JMenuItem_Edit.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/edit.png")));
+		popupMenu.add(JMenuItem_Edit);
+
+		panel_edit = new JPanel();
+		panel_edit.setBorder(
+				new TitledBorder(null, "Update Product", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_main.add(panel_edit, "name_795440720438400");
+		panel_edit.setLayout(null);
+
+		JLabel JLabel_name = new JLabel("Product's Name");
+		JLabel_name.setFont(new Font("Arial", Font.PLAIN, 15));
+		JLabel_name.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_name.setBounds(20, 69, 277, 24);
+		panel_edit.add(JLabel_name);
+
+		JLabel lblNewLabel = new JLabel("Update Product");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel.setBounds(10, 35, 594, 24);
+		panel_edit.add(lblNewLabel);
+
+		JtextField_name = new JTextField();
+		JtextField_name.setColumns(10);
+		JtextField_name.setBounds(20, 98, 271, 24);
+		panel_edit.add(JtextField_name);
+
+		JLabel JLabel_price = new JLabel("Price");
+		JLabel_price.setFont(new Font("Arial", Font.PLAIN, 15));
+		JLabel_price.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_price.setBounds(317, 69, 271, 24);
+		panel_edit.add(JLabel_price);
+
+		JtextField_price = new JTextField();
+		JtextField_price.setColumns(10);
+		JtextField_price.setBounds(317, 98, 271, 24);
+		panel_edit.add(JtextField_price);
+
+		JLabel JLabel_quantity = new JLabel("Quantity");
+		JLabel_quantity.setFont(new Font("Arial", Font.PLAIN, 15));
+		JLabel_quantity.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_quantity.setBounds(20, 132, 277, 24);
+		panel_edit.add(JLabel_quantity);
+
+		JLabel JLabel_status = new JLabel("Status");
+		JLabel_status.setFont(new Font("Arial", Font.PLAIN, 15));
+		JLabel_status.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_status.setBounds(317, 132, 271, 24);
+		panel_edit.add(JLabel_status);
+
+		JtextField_quantity = new JTextField();
+		JtextField_quantity.setColumns(10);
+		JtextField_quantity.setBounds(20, 166, 271, 24);
+		panel_edit.add(JtextField_quantity);
+
+		JtextField_status = new JTextField();
+		JtextField_status.setEditable(false);
+		JtextField_status.setColumns(10);
+		JtextField_status.setBounds(317, 166, 271, 24);
+		panel_edit.add(JtextField_status);
+
+		JLabel JLabel_category = new JLabel("Category");
+		JLabel_category.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_category.setBounds(20, 200, 277, 24);
+		panel_edit.add(JLabel_category);
+
+		JcomboBox_Category = new JComboBox();
+		JcomboBox_Category.setBounds(20, 234, 271, 24);
+		panel_edit.add(JcomboBox_Category);
+
+		JButton_Cancel = new JButton("Cancel");
+		JButton_Cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_Cancel_actionPerformed(e);
+			}
+		});
+		JButton_Cancel.setBounds(403, 236, 85, 21);
+		panel_edit.add(JButton_Cancel);
+
+		JButton_Save = new JButton("Save");
+		JButton_Save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_Save_actionPerformed(e);
+			}
+		});
+		JButton_Save.setBounds(498, 236, 85, 21);
+		panel_edit.add(JButton_Save);
+
 	}
 
 	public JPstorage(Object ob) {
 		this();
 		this.dataMap = (Map<String, Object>) ob;
 		initJFrame();
-		System.out.println(JFrameLogin.frameHeight+"asdsdd");
 	}
-
+/************************** Begin of Storage JPanel *********************************/
+	
 	public void initJFrame() {
 		Category_model category_model = new Category_model();
 		Product_model product_model = new Product_model();
@@ -236,37 +341,16 @@ public class JPstorage extends JPanel {
 		models.addColumn("Quantily");
 		models.addColumn("Status");
 		for (Products product : products) {
-			models.addRow(new Object[] {
-					product.getProductID(),
-					product.getProductName(),
-					category_model.find(product.getCategory_id()).getCategoryName(), 
-					product.getPrice(),
-					product.getQuantity(), 
-					product.isStatus() == true ? "Stocking" : "Out of stock" });
+			models.addRow(new Object[] { product.getProductID(), product.getProductName(),
+					category_model.find(product.getCategory_id()).getCategoryName(), product.getPrice(),
+					product.getQuantity(), product.isStatus() == true ? "Stocking" : "Out of stock" });
 		}
-		
+
 		jtableProduct.setModel(models);
 		jtableProduct.getTableHeader().setReorderingAllowed(false);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 
 	private class CategoryCellRender extends DefaultListCellRenderer {
@@ -292,14 +376,85 @@ public class JPstorage extends JPanel {
 
 	}
 
-	protected void jButton_Search_actionPerformed(ActionEvent e) {
+	protected void jtableProduct_mouseClicked(MouseEvent e) {
 		Product_model product_model = new Product_model();
-		String name = jtextField_Search.getText().trim();
+		Category_model category_model = new Category_model();
+		JTableHeader header = (JTableHeader) e.getSource();
+		int column = header.columnAtPoint(e.getPoint());
+		int column2 = header.columnAtPoint(e.getPoint());
 
-		fillDatatoJTable(product_model.Search(name));
+		switch (column) {
+		case 0:
+			if (e.getClickCount() % 2 == 0) {
+				fillDatatoJTable(product_model.Sort_ID_desc());
+			} else {
+				fillDatatoJTable(product_model.Sort_ID_asc());
+			}
+			break;
+		case 1:
+			if (e.getClickCount() % 2 == 0) {
+				fillDatatoJTable(product_model.Sort_Name_desc());
+			} else {
+				fillDatatoJTable(product_model.Sort_Name_asc());
+			}
+			break;
+		case 2:
+			if (e.getClickCount() % 2 == 0) {
+				fillDatatoJTable(product_model.Sort_Cateogry_desc());
+			} else {
+				fillDatatoJTable(product_model.Sort_Cateogry_asc());
+			}
+			break;
+		case 3:
+			if (e.getClickCount() % 2 == 0) {
+				fillDatatoJTable(product_model.Sort_Price_desc());
+			} else {
+				fillDatatoJTable(product_model.Sort_Price_asc());
+			}
+			break;
+		case 4:
+			if (e.getClickCount() % 2 == 0) {
+				fillDatatoJTable(product_model.Sort_Quantity_desc());
+			} else {
+				fillDatatoJTable(product_model.Sort_Quantity_asc());
+			}
+			break;
+		case 5:
+			if (e.getClickCount() % 2 == 0) {
+				fillDatatoJTable(product_model.Sort_Status_desc());
+			} else {
+				fillDatatoJTable(product_model.Sort_Status_asc());
+			}
+			break;
+		default:
+			fillDatatoJTable(product_model.findAll());
+			break;
+		}
+
 	}
 
-	protected void jtextField_Search_keyReleased(KeyEvent e) {
+	protected void jmenuitem_storage_actionPerformed(ActionEvent e) {
+		panel_storage.setVisible(true);
+	}
+
+	protected void JMenuItem_Delete_actionPerformed(ActionEvent e) {
+		int result = JOptionPane.showConfirmDialog(null, "Are you sure !", "Confirm", JOptionPane.YES_NO_OPTION);
+
+		if (result == JOptionPane.YES_OPTION) {
+			Product_model product_model = new Product_model();
+			int selected = jtableProduct.getSelectedRow();
+			int id = Integer.parseInt(jtableProduct.getValueAt(selected, 0).toString());
+
+			if (product_model.Delete(id)) {
+				JOptionPane.showMessageDialog(null, "Success");
+				fillDatatoJTable(product_model.findAll());
+			} else {
+				JOptionPane.showMessageDialog(null, "Fail");
+			}
+		}
+	}
+
+	protected void textField_keyReleased(KeyEvent e) {
 		Product_model product_model = new Product_model();
 		String name = jtextField_Search.getText().trim();
 
@@ -328,79 +483,97 @@ public class JPstorage extends JPanel {
 		fillDatatoJTable(product_model.Search_Status(status));
 	}
 
-	protected void jtableProduct_mouseClicked(MouseEvent e) {
+	protected void jButton_Search_actionPerformed(ActionEvent e) {
+		Product_model product_model = new Product_model();
+		String name = jtextField_Search.getText().trim();
+
+		fillDatatoJTable(product_model.Search(name));
+	}
+
+/************************************** End of Storage JPanel ************************************/
+	
+/************************************** Start of Edit JPanel ************************************/
+	protected void JMenuItem_Edit_actionPerformed(ActionEvent e) {
 		Product_model product_model = new Product_model();
 		Category_model category_model = new Category_model();
-		JTableHeader header = (JTableHeader) e.getSource();
-		int column = header.columnAtPoint(e.getPoint());
-		int column2 = header.columnAtPoint(e.getPoint());
-		
-		switch (column) {
-		case 0:
-			if (e.getClickCount() % 2 == 0) {
-				fillDatatoJTable(product_model.Sort_Name_desc());
-			}else {
-				fillDatatoJTable(product_model.Sort_Name_asc());
-			}
-			break;
-		case 1:
-			if (e.getClickCount() % 2 == 0) {
-				fillDatatoJTable(product_model.Sort_Cateogry_desc());
-			}else {
-				fillDatatoJTable(product_model.Sort_Cateogry_asc());
-			}
-			break;
-		case 2:
-			if (e.getClickCount() % 2 == 0) {
-				fillDatatoJTable(product_model.Sort_Price_desc());
-			}else {
-				fillDatatoJTable(product_model.Sort_Price_asc());
-			}
-			break;
-		case 3:
-			if (e.getClickCount() % 2 == 0) {
-				fillDatatoJTable(product_model.Sort_Quantity_desc());
-			}else {
-				fillDatatoJTable(product_model.Sort_Quantity_asc());
-			}
-			break;
-		case 4:
-			if (e.getClickCount() % 2 == 0) {
-				fillDatatoJTable(product_model.Sort_Status_desc());
-			}else {
-				fillDatatoJTable(product_model.Sort_Status_asc());
-			}
-			break;
-		default:
-			fillDatatoJTable(product_model.findAll());
-			break;
-		}
-		
-	}
-	
-	protected void jmenuitem_storage_actionPerformed(ActionEvent e) {
-		this.removeAll();
-		this.revalidate();
-		this.setVisible(true);
-	}
-	protected void JMenuItem_Delete_actionPerformed(ActionEvent e) {
-		int result = JOptionPane.showConfirmDialog(null, "Are you sure !", "Confirm", JOptionPane.YES_NO_OPTION);
-		
-		if (result == JOptionPane.YES_OPTION) {
-			Product_model product_model = new Product_model();
-			int selected = jtableProduct.getSelectedRow();
-			int id = Integer.parseInt(jtableProduct.getValueAt(selected, 0).toString());
-			
-			if (product_model.Delete(id)) {
-				JOptionPane.showMessageDialog(null, "Success");
-				fillDatatoJTable(product_model.findAll());
-			} else {
-				JOptionPane.showMessageDialog(null, "Fail");
-			}
-		}
-	}
-	protected void JMenuItem_Edit_actionPerformed(ActionEvent e) {
 		int selected = jtableProduct.getSelectedRow();
 		int id = Integer.parseInt(jtableProduct.getValueAt(selected, 0).toString());
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("id", id);
+
+		products = product_model.find(Integer.parseInt(data.get("id").toString()));
+		JtextField_name.setText(products.getProductName());
+		JtextField_price.setText(String.valueOf(products.getPrice()));
+		JtextField_quantity.setText(String.valueOf(products.getQuantity()));
+
+		boolean status = products.isStatus();
+		
+		if (status == true) {
+			JtextField_status.setText("Stocking");
+		} else {
+			JtextField_status.setText("Out of Stock");
+		}
+		
+		DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<Category>();
+		for (Category category : category_model.findAll()) {
+			model.addElement(category);
+			model.setSelectedItem(category_model.find(products.getCategory_id()));
+		}
+		
+		JcomboBox_Category.setModel(model);
+		JcomboBox_Category.setRenderer(new CategoryEditCellRender());
+		
+		
+		
+		panel_edit.setVisible(true);
+		panel_storage.setVisible(false);
 	}
+	
+	protected void JButton_Save_actionPerformed(ActionEvent e) {
+		try {
+			Product_model product_model = new Product_model();
+			
+			products.setProductName(JtextField_name.getText());
+			products.setPrice(new BigDecimal(JtextField_price.getText()));
+			products.setQuantity(Integer.parseInt(JtextField_quantity.getText()));
+			Category category = (Category) JcomboBox_Category.getSelectedItem();
+			products.setCategory_id(category.getCategoryID());
+	
+			if (Integer.parseInt(JtextField_quantity.getText()) <= 10) {
+				products.setStatus(false);
+			} else {
+				products.setStatus(true);
+			}
+			
+			if (product_model.Update(products)) {
+				JOptionPane.showMessageDialog(null, "Update Completed !");
+				panel_edit.setVisible(false);
+				panel_storage.setVisible(true);
+
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Update Failed !");
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+	}
+	
+	protected void JButton_Cancel_actionPerformed(ActionEvent e) {
+		panel_edit.setVisible(false);
+		panel_storage.setVisible(true);
+	}
+	
+	private class CategoryEditCellRender extends DefaultListCellRenderer {
+
+		@Override
+		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
+			Category category = (Category) value;
+			return super.getListCellRendererComponent(list, category.getCategoryName(), index, isSelected,
+					cellHasFocus);
+		}
+
+	}
+/************************************** End of Edit JPanel ************************************/
 }

@@ -150,6 +150,54 @@ public class Product_model {
 		return products;
 	}
 	
+	public List<Products> Sort_ID_asc() {
+		List<Products> products = new ArrayList<Products>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("select * from products order by ProductID asc");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Products product = new Products();
+				product.setProductID(resultSet.getInt("ProductID"));
+				product.setProductName(resultSet.getString("ProductName"));
+				product.setCategory_id(resultSet.getInt("Category_id"));
+				product.setPrice(resultSet.getBigDecimal("Price"));
+				product.setQuantity(resultSet.getInt("Quantity"));
+				product.setStatus(resultSet.getBoolean("Status"));
+				products.add(product);
+			}
+		} catch (Exception e) {
+			products = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return products;
+	}
+	
+	public List<Products> Sort_ID_desc() {
+		List<Products> products = new ArrayList<Products>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("select * from products order by ProductID desc");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Products product = new Products();
+				product.setProductID(resultSet.getInt("ProductID"));
+				product.setProductName(resultSet.getString("ProductName"));
+				product.setCategory_id(resultSet.getInt("Category_id"));
+				product.setPrice(resultSet.getBigDecimal("Price"));
+				product.setQuantity(resultSet.getInt("Quantity"));
+				product.setStatus(resultSet.getBoolean("Status"));
+				products.add(product);
+			}
+		} catch (Exception e) {
+			products = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return products;
+	}
+	
 	public List<Products> Sort_Name_asc() {
 		List<Products> products = new ArrayList<Products>();
 		try {
@@ -412,11 +460,13 @@ public class Product_model {
 		boolean result = true;
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("update product set ProductName = ?, Category_id = ?, Price = ?, Quantity = ? where ProductID = ?");
+					.prepareStatement("update products set ProductName = ?, Category_id = ?, Price = ?, Quantity = ?, Status = ? where ProductID = ?");
 			preparedStatement.setString(1, products.getProductName());
 			preparedStatement.setInt(2, products.getCategory_id());
 			preparedStatement.setBigDecimal(3, products.getPrice());
 			preparedStatement.setInt(4, products.getQuantity());
+			preparedStatement.setBoolean(5, products.isStatus());
+			preparedStatement.setInt(6, products.getProductID());
 			result = preparedStatement.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();
