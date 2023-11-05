@@ -10,6 +10,7 @@ public class CombinedData {
     private int productID;
     private int quantity;
     private BigDecimal price;
+    private boolean status ; 
 
     public CombinedData(int saleID, Date invoiceDate, String customerName, int productID, int quantity, BigDecimal price) {
         this.saleID = saleID;
@@ -66,6 +67,14 @@ public class CombinedData {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
     
 }

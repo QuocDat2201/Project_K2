@@ -32,7 +32,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.DropMode;
 import javax.swing.JComboBox;
-
 public class JFrameLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField juser;
@@ -108,8 +107,12 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2.setForeground(SystemColor.menu);
 		lblNewLabel_2.setBounds(348, 119, 121, 30);
 		contentPane.add(lblNewLabel_2);
+<<<<<<< HEAD
 
 		juser = new JTextField();
+=======
+		juser=new JTextField();
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 		juser.setToolTipText("");
 		juser.setBounds(468, 120, 151, 28);
 		contentPane.add(juser);
@@ -152,7 +155,6 @@ public class JFrameLogin extends JFrame {
 		comboBox.setBounds(528, 195, 36, 26);
 		contentPane.add(comboBox);
 	}
-
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Login
 		
 		String username = juser.getText().trim();

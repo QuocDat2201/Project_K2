@@ -1,6 +1,10 @@
 package screen;
+<<<<<<< HEAD
 
 //commitmoi nhat
+=======
+//commitmoi nhat 1
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -44,9 +48,15 @@ public class Home extends JFrame {
 	private JButton jbtaccount;
 	private JButton btnNewButton;
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
-	private JButton jbcusstomer;
+	static JButton jbcusstomer;
 	private JButton jbtaccount_2;
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Launch the application.
+	 */
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -133,6 +143,11 @@ public class Home extends JFrame {
 		});
 
 		jbcusstomer = new JButton("Cusstomer");
+		jbcusstomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_jbcusstomer_actionPerformed(e);
+			}
+		});
 		jbcusstomer.setFont(new Font("Segoe Print", Font.BOLD, 15));
 		jbcusstomer.setForeground(new Color(0, 0, 0));
 		jbcusstomer.setHorizontalAlignment(SwingConstants.LEFT);
@@ -250,8 +265,16 @@ public class Home extends JFrame {
 	}
 
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {// send
+<<<<<<< HEAD
 		ClearScreen();
+=======
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 		JPsendNotifi jPsendNotifi = new JPsendNotifi(dataMap);
+<<<<<<< HEAD
+=======
+		jpanel_2.removeAll();
+		jpanel_2.revalidate();
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 		jpanel_2.add(jPsendNotifi);
 		jPsendNotifi.setVisible(true);
 
@@ -283,10 +306,20 @@ public class Home extends JFrame {
 		jFrameLogin.setVisible(true);
 		this.setVisible(false);
 	}
+<<<<<<< HEAD
 
 	private void ClearScreen() {
 		jpanel_2.removeAll();
 		jpanel_2.revalidate();
 		jpanel_2.repaint();
+=======
+	protected void do_jbcusstomer_actionPerformed(ActionEvent e) {
+		JPcustomer jcustomer=new JPcustomer();
+		jpanel_2.removeAll();
+		jpanel_2.revalidate();
+		jpanel_2.add(jcustomer);
+		jpanel_2.setVisible(true);
+
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 	}
 }

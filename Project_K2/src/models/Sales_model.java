@@ -30,6 +30,7 @@ public class Sales_model {
 		return result;
 	}
 	public int getNewlyCreatedSalesID(Sales sales) {
+		boolean result = true ; 
 	    int newSalesID = -1; // Một giá trị mặc định nếu không tìm thấy ID mới
 
 	    try {
@@ -56,7 +57,8 @@ public class Sales_model {
 	            }
 	        }
 	    } catch (Exception e) {
-	        e.printStackTrace();
+	    	e.printStackTrace();
+	    	result = false;
 	        // Xử lý lỗi nếu có lỗi trong quá trình thêm bản ghi
 	    } finally {
 	        ConnectDB.disconnect();
