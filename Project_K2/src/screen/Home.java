@@ -291,10 +291,9 @@ public class Home extends JFrame {
 	}
 	protected void do_jbcusstomer_actionPerformed(ActionEvent e) {
 		JPcustomer jcustomer=new JPcustomer();
-		jpanel_2.removeAll();
-		jpanel_2.revalidate();
+		ClearScreen();
 		jpanel_2.add(jcustomer);
-		jpanel_2.setVisible(true);
+		jcustomer.setVisible(true);
 
 	}
 }

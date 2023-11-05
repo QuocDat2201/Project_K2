@@ -60,7 +60,6 @@ public class JFrameLogin extends JFrame {
 			            public void componentResized(ComponentEvent e) {			            	
 			            	frameWidth = home.getWidth();
 			           	    frameHeight = home.getHeight();
-			           	    System.out.println(frameHeight+frameWidth);
 			            }
 			        });
 				} catch (Exception e) {
@@ -162,6 +161,7 @@ public class JFrameLogin extends JFrame {
 			JOptionPane.showMessageDialog(null, "Account Invalid");
 		} else {
 			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap 			
+			Home home = new Home(dataMap);
 			home.setVisible(true);
 			this.setVisible(false);
 		}

@@ -546,10 +546,9 @@ public class JPstorage extends JPanel {
 			}
 			
 			if (product_model.Update(products)) {
-				JOptionPane.showMessageDialog(null, "Update Completed !");
+				JOptionPane.showMessageDialog(null, "Update Completed !");		
 				panel_edit.setVisible(false);
 				panel_storage.setVisible(true);
-
 				
 			} else {
 				JOptionPane.showMessageDialog(null, "Update Failed !");
