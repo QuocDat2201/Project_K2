@@ -39,6 +39,7 @@ public class JFrameLogin extends JFrame {
 	private JPasswordField jpass;
 	static  int frameWidth ;
 	static int frameHeight ;
+	static Home home;
 	/**
 	 * Launch the application.
 	 */
@@ -154,7 +155,7 @@ public class JFrameLogin extends JFrame {
 			JOptionPane.showMessageDialog(null, "Account Invalid");
 		} else {
 			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap 			
-			Home home = new Home(dataMap);
+			home = new Home(dataMap);
 			home.setVisible(true);
 			this.setVisible(false);
 			home.addComponentListener(new ComponentAdapter() {

@@ -237,6 +237,9 @@ public class Home extends JFrame {
 
 	private void initJFrame() {
 		ClearScreen();
+		JPhome jPhome = new JPhome(dataMap);
+		jpanel_2.add(jPhome);
+		jPhome.setVisible(true);
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Home
@@ -250,8 +253,6 @@ public class Home extends JFrame {
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {// send
 		ClearScreen();
 		JPsendNotifi jPsendNotifi = new JPsendNotifi(dataMap);
-		jpanel_2.removeAll();
-		jpanel_2.revalidate();
 		jpanel_2.add(jPsendNotifi);
 		jPsendNotifi.setVisible(true);
 
@@ -287,10 +288,10 @@ public class Home extends JFrame {
 	private void ClearScreen() {
 		jpanel_2.removeAll();
 		jpanel_2.revalidate();
-		jpanel_2.repaint();
+//		jpanel_2.repaint();
 	}
 	protected void do_jbcusstomer_actionPerformed(ActionEvent e) {
-		JPcustomer jcustomer=new JPcustomer();
+		JPmenucustomer jcustomer=new JPmenucustomer();
 		ClearScreen();
 		jpanel_2.add(jcustomer);
 		jcustomer.setVisible(true);

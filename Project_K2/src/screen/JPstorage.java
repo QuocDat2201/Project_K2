@@ -37,6 +37,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -348,6 +350,14 @@ public class JPstorage extends JPanel {
 
 		jtableProduct.setModel(models);
 		jtableProduct.getTableHeader().setReorderingAllowed(false);
+		Home home= JFrameLogin.home;
+		home.addComponentListener(new ComponentAdapter() {
+	        @Override			            
+	        public void componentResized(ComponentEvent e) {
+	        	System.out.println("da keo panel");
+	        }
+	        	
+	    });
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -364,7 +374,6 @@ public class JPstorage extends JPanel {
 		}
 
 	}
-
 	private class StatusCellRender extends DefaultListCellRenderer {
 
 		@Override

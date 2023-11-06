@@ -10,6 +10,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import entites.Customer;
+import entites.Rank;
+import models.CustomerModel;
+import models.RankModel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -63,7 +69,9 @@ public class JPrank extends JPanel {
 		popupMenu.add(jdelete);
 
 		table = new JTable();
+		table.setComponentPopupMenu(popupMenu);
 		scrollPane.setViewportView(table);
+		iniJFrame();
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
@@ -85,5 +93,30 @@ public class JPrank extends JPanel {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+	private void iniJFrame() {
+		DefaultTableModel model = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
+		model.addColumn("Point");
+		model.addColumn("RankName");
+		model.addColumn("Discount");
+		RankModel rankModel = new RankModel();try {
+			for (Rank rank : rankModel.findAll()) {
+				model.addRow(new Object[] {rank.getPoint() ,rank.getRank(),rank.getDiscount()});
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		table.setModel(model);
+		int rowHeight = 25; // Đặt chiều cao hàng tùy ý
+		table.setRowHeight(rowHeight);
+		table.getTableHeader().setReorderingAllowed(false);
+
 	}
 }

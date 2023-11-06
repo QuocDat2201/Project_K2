@@ -34,8 +34,8 @@ public class bieudo extends JPanel {
 	}
 
 	private void initJframe() {
-		int w=JFrameLogin.frameWidth-200;
-		int h=JFrameLogin.frameHeight-300;
+		int w=JFrameLogin.frameWidth-160;
+		int h=JFrameLogin.frameHeight-280;
 		double[] b = { 1, 2, 3, 1, 2, 3 };
 		fill(w, h, b);
 	}
