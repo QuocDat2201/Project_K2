@@ -3,6 +3,8 @@ package screen;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
+
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 
@@ -32,9 +34,15 @@ public class bieudo extends JPanel {
 	}
 
 	private void initJframe() {
-		double[] v = { 1, 2, 3, 1, 2, 3 };
-		SwingChartExample swingChartExample = new SwingChartExample(JFrameLogin.frameWidth-200, JFrameLogin.frameHeight-300, v);
+		int w=JFrameLogin.frameWidth-200;
+		int h=JFrameLogin.frameHeight-300;
+		double[] b = { 1, 2, 3, 1, 2, 3 };
+		fill(w, h, b);
+	}
+	private void fill(int w, int h,double[]v) {
+		
+		SwingChartExample swingChartExample = new SwingChartExample(w,h, v);
 		jpanel_1.add(swingChartExample);
 	}
-
+	
 }
