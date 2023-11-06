@@ -70,18 +70,6 @@ public class JPcustomer extends JPanel {
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
-
-		JMenuBar menuBar = new JMenuBar();
-		add(menuBar, BorderLayout.NORTH);
-
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		menuBar.add(mntmNewMenuItem);
-
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		menuBar.add(mntmNewMenuItem_1);
-
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
-		menuBar.add(mntmNewMenuItem_2);
 		iniJFrame();
 	}
 
