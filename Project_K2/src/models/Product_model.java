@@ -476,4 +476,5 @@ public class Product_model {
 		}
 		return result;
 	}
+	
 }

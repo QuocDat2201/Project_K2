@@ -71,8 +71,8 @@ public class JPaddInvoice extends JPanel {
 	private JComboBox jcomboBoxProductID;
 	private JTextField jProductPrice;
 	private JTable jtableListInvoice;
-	private JTextField jcurrentQuantily;
 	private JPanel panel;
+	private JLabel jcurrentQuantity;
 
 	/**
 	 * Create the panel.
@@ -188,10 +188,11 @@ public class JPaddInvoice extends JPanel {
 		lblNewLabel_2_1_1.setBounds(329, 104, 98, 26);
 		panel_1.add(lblNewLabel_2_1_1);
 		
-		jcurrentQuantily = new JTextField();
-		jcurrentQuantily.setColumns(10);
-		jcurrentQuantily.setBounds(437, 107, 124, 22);
-		panel_1.add(jcurrentQuantily);
+		jcurrentQuantity = new JLabel("");
+		jcurrentQuantity.setBorder(new LineBorder(new Color(0, 0, 0)));
+		jcurrentQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		jcurrentQuantity.setBounds(437, 104, 65, 26);
+		panel_1.add(jcurrentQuantity);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 250, 205));
@@ -222,7 +223,7 @@ public class JPaddInvoice extends JPanel {
 		btnNewButton_1.setBounds(483, 182, 85, 21);
 		panel_2.add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton("Update");
+		JButton btnNewButton_2 = new JButton("Huy hoa don");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_2_actionPerformed(e);
@@ -231,7 +232,7 @@ public class JPaddInvoice extends JPanel {
 		btnNewButton_2.setBounds(385, 181, 85, 21);
 		panel_2.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("RECIEVE");
+		JButton btnNewButton_3 = new JButton("Recieve");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_3_actionPerformed(e);
@@ -281,10 +282,15 @@ public class JPaddInvoice extends JPanel {
 			if (jCustomerName.getText().equalsIgnoreCase("")) {
 				JOptionPane.showMessageDialog(null, "Faildroi");
 			} else {
+				Product_model product_model = new Product_model() ; 
 				Object selectedProduct = jcomboBoxProductID.getSelectedItem();
 				Products product = (Products) selectedProduct;
 				int productID = product.getProductID();
-
+				int category_id = product.getCategory_id();
+				BigDecimal price = product.getPrice() ;
+				String name = product.getProductName();
+				boolean status = product.isStatus();
+				
 				Sales_model sales_model = new Sales_model();
 				Sales sales = new Sales();
 				BigDecimal total = new BigDecimal(jtotal.getText());
@@ -292,9 +298,19 @@ public class JPaddInvoice extends JPanel {
 				sales.setPrice(total);
 				sales.setProductID(productID);
 				sales.setQuantity(Integer.parseInt(jtextQuantily.getText()));
+				int quantity = Integer.parseInt(jtextQuantily.getText());
+				
 				if(product.getQuantity()>= Integer.parseInt(jtextQuantily.getText())) {
 					int newSalesID = sales_model.getNewlyCreatedSalesID(sales); // Lấy ID của Sales mới tạo
-
+					
+					int quantitynew = product.getQuantity() - quantity ; 
+					product.setCategory_id(category_id);
+					product.setPrice(price);
+					product.setProductID(productID);
+					product.setProductName(name);
+					product.setQuantity(quantitynew);
+					product.setStatus(status);
+					product_model.Update(product);
 					Invoice_model invoice_model = new Invoice_model();
 					Invoices invoices = new Invoices();
 					invoices.setSaleID(newSalesID);
@@ -309,6 +325,7 @@ public class JPaddInvoice extends JPanel {
 					if (invoice_model.Create(invoices)) {
 
 						JOptionPane.showMessageDialog(null, "SuccesInvoices");
+						jcurrentQuantity.setText(String.valueOf(quantitynew));
 					} else {
 						JOptionPane.showMessageDialog(null, "FaildInvoice");
 					}
@@ -329,7 +346,7 @@ public class JPaddInvoice extends JPanel {
 		Object selectedProduct = jcomboBoxProductID.getSelectedItem();
 		Products product = (Products) selectedProduct;
 		jProductPrice.setText(product.getPrice().toString());
-		jcurrentQuantily.setText(String.valueOf(product.getQuantity()));
+		jcurrentQuantity.setText(String.valueOf(product.getQuantity()));
 
 	}
 
