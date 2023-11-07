@@ -1,4 +1,4 @@
-package screen;
+package scCustomer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

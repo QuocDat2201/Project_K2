@@ -29,6 +29,8 @@ import javax.swing.UIManager;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 
+import scCustomer.JPmenucustomer;
+
 public class Home extends JFrame {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 	private JPanel contentPane;
@@ -42,7 +44,7 @@ public class Home extends JFrame {
 	private JButton jbtaccount;
 	private JButton btnNewButton;
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
-	static JButton jbcusstomer;
+	public static JButton jbcusstomer;
 	private JButton jbtaccount_2;
 
 	public static void main(String[] args) {

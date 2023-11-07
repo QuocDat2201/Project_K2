@@ -37,9 +37,9 @@ public class JFrameLogin extends JFrame {
 	private JTextField juser;
 	private static Map<String, Object> dataMap = new HashMap<String, Object>();
 	private JPasswordField jpass;
-	static  int frameWidth ;
-	static int frameHeight ;
-	static Home home;
+	public static  int frameWidth ;
+	public static int frameHeight ;
+	public static Home home;
 	/**
 	 * Launch the application.
 	 */

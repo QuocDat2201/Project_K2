@@ -1,4 +1,4 @@
-package screen;
+package scCustomer;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -15,14 +15,12 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import entites.Customer;
-import entites.Suppliers;
 import models.CustomerModel;
-import models.Suppliers_model;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class JPsuppliers extends JPanel {
+public class JPcustomer extends JPanel {
 	private JTable table;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -31,7 +29,7 @@ public class JPsuppliers extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JPsuppliers() {
+	public JPcustomer() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -55,7 +53,7 @@ public class JPsuppliers extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		panel_1.add(lblNewLabel_1);
 
-		JButton btnNewButton = new JButton("Add Supplier");
+		JButton btnNewButton = new JButton("Add Customer");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
@@ -76,7 +74,7 @@ public class JPsuppliers extends JPanel {
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		JPaddsuppleir jPaddcustomer=new JPaddsuppleir();
+		JPaddcustomer jPaddcustomer = new JPaddcustomer();
 		panel_1.removeAll();
 		panel_1.revalidate();
 		panel_1.add(jPaddcustomer);
@@ -85,20 +83,18 @@ public class JPsuppliers extends JPanel {
 
 	private void iniJFrame() {
 		DefaultTableModel model = new DefaultTableModel() {
-			public boolean isCellEditable(int row, int column) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		};
-		model.addColumn("SupplierName");
-		model.addColumn("ContactName");
-		model.addColumn("Email");
+				public boolean isCellEditable(int row, int column) {
+			// TODO Auto-generated method stub
+			return false;
+		   }};
+		model.addColumn("Name");
 		model.addColumn("Phone");
-		Suppliers_model suppliers_model=new Suppliers_model();
-		try {
-			for (Suppliers suppliers : suppliers_model.findAll()) {
-				model.addRow(new Object[] { suppliers.getSupplierName(), suppliers.getContactName(), suppliers.getEmail(),
-						suppliers.getPhone()});
+		model.addColumn("Point");
+		model.addColumn("Rank");
+		CustomerModel customerModel = new CustomerModel();try {
+			for (Customer customer : customerModel.findAll()) {
+				model.addRow(new Object[] { customer.getNameString(), customer.getPhoneString(), customer.getPoint(),
+						customer.getRank() });
 
 			}
 		} catch (Exception e) {
@@ -106,9 +102,9 @@ public class JPsuppliers extends JPanel {
 		}
 		
 		table.setModel(model);
-		table.getTableHeader().setReorderingAllowed(false);
 		int rowHeight = 25; // Đặt chiều cao hàng tùy ý
 		table.setRowHeight(rowHeight);
+		table.getTableHeader().setReorderingAllowed(false);
 
 	}
 }

@@ -1,4 +1,4 @@
-package screen;
+package scCustomer;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import entites.Customer;
 import models.CustomerModel;
+import screen.Home;
 
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
