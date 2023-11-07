@@ -3,7 +3,7 @@ package screen;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JTextField;
+import javax.swing.JTextField;//a
 
 public class PlacehoclderTextField extends JTextField {
     private String placeholder;//a
