@@ -88,4 +88,26 @@ public class Category_model {
 		return category;
 	}
 	
+	public List<Category> Search(String name) {
+		List<Category> categories = new ArrayList<Category>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from category where CategoryName like ?");// java.sql
+			preparedStatement.setString(1, name + "%");
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Category category = new Category();
+				category.setCategoryID(resultSet.getInt("CategoryID"));
+				category.setCategoryName(resultSet.getString("CategoryName"));
+				categories.add(category);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			categories = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+
+		return categories;
+	}
+	
 }

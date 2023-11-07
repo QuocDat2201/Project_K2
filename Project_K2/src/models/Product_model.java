@@ -13,11 +13,12 @@ public class Product_model {
 		boolean result = true;
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("insert into product(ProductName, Category_id, Price, Quantity) values(?,?,?,?)");
+					.prepareStatement("insert into products(ProductName, Category_id, Price, Quantity, Status) values(?,?,?,?,?)");
 			preparedStatement.setString(1, products.getProductName());
 			preparedStatement.setInt(2, products.getCategory_id());
 			preparedStatement.setBigDecimal(3, products.getPrice());
 			preparedStatement.setInt(4, products.getQuantity());
+			preparedStatement.setBoolean(5, products.isStatus());
 			result = preparedStatement.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,6 +74,24 @@ public class Product_model {
 			ConnectDB.disconnect();
 		}
 		return product;
+	}
+	
+	public int findCID(int id) {
+		int Product_Number = 0;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select count(*) as productnumber from products where Category_id = ? ");// java.sql
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Product_Number = resultSet.getInt("productnumber");
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return Product_Number;
 	}
 	
 	public List<Products> Search(String name) {
@@ -476,5 +495,4 @@ public class Product_model {
 		}
 		return result;
 	}
-	
 }
