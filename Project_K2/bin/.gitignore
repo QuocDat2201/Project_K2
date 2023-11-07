@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 /scInvoice/
 /entites/
 /models/
 /scCustomer/
 /screen/
+=======
+/scAcount/
+/scCustomer/
+/scHome/
+/scInvoice/
+/scNotifi/
+/scStorage/
+/screen/
+/Icon/
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git

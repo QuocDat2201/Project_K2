@@ -16,15 +16,17 @@ import javax.swing.table.DefaultTableModel;
 
 import entites.Customer;
 import models.CustomerModel;
+import screen.Home;
+import screen.PlacehoclderTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Insets;
 
 public class JPcustomer extends JPanel {
 	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
 	private JPanel panel_1;
+	private JButton jSeacrch;
 
 	/**
 	 * Create the panel.
@@ -39,29 +41,25 @@ public class JPcustomer extends JPanel {
 		panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.NORTH);
 
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		PlacehoclderTextField jsearch = new PlacehoclderTextField("search name or phone");
+		jsearch.setMargin(new Insets(3, 20, 3, 20));
+		panel_1.add(jsearch);
+		jsearch.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("New label");
-		panel_1.add(lblNewLabel);
-
-		textField_1 = new JTextField();
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
-
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panel_1.add(lblNewLabel_1);
-
-		JButton btnNewButton = new JButton("Add Customer");
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setMargin(new Insets(2, 10, 2, 10));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
+		
+		jSeacrch = new JButton("");
+		jSeacrch.setMargin(new Insets(2, 2, 2, 2));
+		jSeacrch.setIcon(new ImageIcon(JPcustomer.class.getResource("/Icon/4781817_brows_browsing_find_search_seo_icon.png")));
+		panel_1.add(jSeacrch);
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setIcon(new ImageIcon(
-				JPcustomer.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
+		btnNewButton.setIcon(new ImageIcon(JPcustomer.class.getResource("/Icon/customer (1).png")));
 		panel_1.add(btnNewButton);
 
 		JScrollPane scrollPane = new JScrollPane();
