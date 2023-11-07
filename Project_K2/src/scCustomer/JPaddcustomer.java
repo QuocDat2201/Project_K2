@@ -71,8 +71,7 @@ public class JPaddcustomer extends JPanel {
 			JPcustomer jcustomer=new JPcustomer();
 			Home.jbcusstomer.doClick();
 		} else {
-			JOptionPane.showMessageDialog(null, "Faild");
-			
+			JOptionPane.showMessageDialog(null, "Faild");			
 		}
 	}
 }
