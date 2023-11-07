@@ -12,8 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -323,4 +325,5 @@ public class Home extends JFrame {
 		jcustomer.setVisible(true);
 
 	}
+	
 }
