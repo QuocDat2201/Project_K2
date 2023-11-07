@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JTextField;//a
-
+//ad
 public class PlacehoclderTextField extends JTextField {
     private String placeholder;//a
 
