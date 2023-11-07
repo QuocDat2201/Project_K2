@@ -1,4 +1,4 @@
-package screen;
+package scAcount;
 
 import java.net.URL;
 import java.util.HashMap;

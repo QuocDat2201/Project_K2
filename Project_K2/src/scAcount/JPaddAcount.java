@@ -1,4 +1,4 @@
-package screen;
+package scAcount;
 
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;

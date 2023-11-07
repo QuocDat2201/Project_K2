@@ -1,4 +1,4 @@
-package screen;
+package scStorage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +31,8 @@ import entites.Category;
 import entites.Products;
 import models.Category_model;
 import models.Product_model;
+import screen.JFrameLogin;
+
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -182,7 +184,7 @@ public class JPstorage extends JPanel {
 		panel_status.add(jcomboBox_status);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 136, 594, 265);
+		scrollPane.setBounds(10, 136, JFrameLogin.frameWidth-140,JFrameLogin.frameHeight-250);
 		panel_storage.add(scrollPane);
 
 		jtableProduct = new JTable();
@@ -353,14 +355,6 @@ public class JPstorage extends JPanel {
 
 		jtableProduct.setModel(models);
 		jtableProduct.getTableHeader().setReorderingAllowed(false);
-		Home home= JFrameLogin.home;
-		home.addComponentListener(new ComponentAdapter() {
-	        @Override			            
-	        public void componentResized(ComponentEvent e) {
-	        	System.out.println("da keo panel");
-	        }
-	        	
-	    });
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {

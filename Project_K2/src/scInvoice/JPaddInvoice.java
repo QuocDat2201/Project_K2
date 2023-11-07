@@ -1,4 +1,4 @@
-package screen;
+package scInvoice;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

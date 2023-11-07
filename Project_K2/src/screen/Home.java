@@ -29,7 +29,12 @@ import javax.swing.UIManager;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 
+import scAcount.JPaccount;
 import scCustomer.JPmenucustomer;
+import scHome.JPhome;
+import scInvoice.JPaddInvoice;
+import scNotifi.JPsendNotifi;
+import scStorage.JPstorage;
 
 public class Home extends JFrame {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();

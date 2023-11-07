@@ -1,4 +1,4 @@
-package screen;
+package scNotifi;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;

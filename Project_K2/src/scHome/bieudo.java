@@ -1,6 +1,9 @@
-package screen;
+package scHome;
 
 import javax.swing.JPanel;
+
+import screen.JFrameLogin;
+
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;

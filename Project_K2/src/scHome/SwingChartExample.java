@@ -1,4 +1,4 @@
-package screen;
+package scHome;
 
 import javax.swing.*;
 import java.awt.*;

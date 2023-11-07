@@ -1,4 +1,4 @@
-package screen;
+package scHome;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;

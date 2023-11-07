@@ -1,6 +1,7 @@
-package screen;
+package scHome;
 
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
