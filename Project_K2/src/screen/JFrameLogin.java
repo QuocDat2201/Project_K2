@@ -34,9 +34,9 @@ import javax.swing.DropMode;
 import javax.swing.JComboBox;
 public class JFrameLogin extends JFrame {
 	private JPanel contentPane;
-	private JTextField juser;
+	private PlacehoclderTextField juser;
 	private static Map<String, Object> dataMap = new HashMap<String, Object>();
-	private JPasswordField jpass;
+	private PlacehoclderPassField jpass;
 	public static  int frameWidth ;
 	public static int frameHeight ;
 	public static Home home;
@@ -101,7 +101,7 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_2.setBounds(348, 119, 121, 30);
 		contentPane.add(lblNewLabel_2);
 
-		juser = new JTextField();
+		juser = new PlacehoclderTextField("username");
 		juser.setToolTipText("");
 		juser.setBounds(468, 120, 151, 28);
 		contentPane.add(juser);
@@ -136,7 +136,7 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel_3.setIcon(icon);
 		contentPane.add(lblNewLabel_3);
 
-		jpass = new JPasswordField();
+		jpass = new PlacehoclderPassField("password");
 		jpass.setBounds(468, 160, 151, 28);
 		contentPane.add(jpass);
 		
