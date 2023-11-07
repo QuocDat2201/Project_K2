@@ -72,6 +72,7 @@ public class JPaddInvoice extends JPanel {
 	private JTextField jProductPrice;
 	private JTable jtableListInvoice;
 	private JTextField jcurrentQuantily;
+	private JPanel panel;
 
 	/**
 	 * Create the panel.
@@ -79,7 +80,7 @@ public class JPaddInvoice extends JPanel {
 	public JPaddInvoice() {
 		setLayout(new BorderLayout(0, 0));
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -229,6 +230,15 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton_2.setBounds(385, 181, 85, 21);
 		panel_2.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("RECIEVE");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_3_actionPerformed(e);
+			}
+		});
+		btnNewButton_3.setBounds(279, 181, 85, 21);
+		panel_2.add(btnNewButton_3);
 		initJFrame();
 	}
 
@@ -483,5 +493,12 @@ public class JPaddInvoice extends JPanel {
 				super.replace(fb, offset, length, text, attrs);
 			}
 		}
+	}
+	protected void do_btnNewButton_3_actionPerformed(ActionEvent e) {
+		panel.removeAll();
+		panel.revalidate();
+		JPContact jpContact = new JPContact() ;
+		panel.add(jpContact);
+		panel.setVisible(true);
 	}
 }
