@@ -51,7 +51,9 @@ public class Home extends JFrame {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
+		
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -226,6 +228,19 @@ public class Home extends JFrame {
 		jpanel_2.setBackground(new Color(192, 192, 192));
 		getContentPane().add(jpanel_2, BorderLayout.CENTER);
 		jpanel_2.setLayout(new BorderLayout(0, 0));
+		
+		jpanel_2.addComponentListener(new ComponentAdapter() {
+
+			@Override
+			public void componentResized(ComponentEvent e) {
+				Dimension newSize = jpanel_2.getSize();
+				JPstorage jPstorage = new JPstorage();
+				jPstorage.setSize(newSize);
+				jPstorage.setPreferredSize(newSize);
+				jPstorage.revalidate();
+			}
+			
+		});
 
 	}
 
@@ -269,6 +284,10 @@ public class Home extends JFrame {
 		JPstorage jPstorage = new JPstorage(dataMap);
 		jpanel_2.add(jPstorage);
 		jPstorage.setVisible(true);
+		
+		jPstorage.setSize(jpanel_2.getSize());
+	    jPstorage.setPreferredSize(jpanel_2.getPreferredSize());
+	    jPstorage.revalidate();
 	}
 
 	protected void do_jbtaccount_actionPerformed(ActionEvent e) {// account

@@ -47,6 +47,8 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
 public class JPstorage extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -182,6 +184,7 @@ public class JPstorage extends JPanel {
 		panel_storage.add(scrollPane);
 
 		jtableProduct = new JTable();
+		jtableProduct.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jtableProduct.getTableHeader().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -523,39 +526,59 @@ public class JPstorage extends JPanel {
 		JcomboBox_Category.setModel(model);
 		JcomboBox_Category.setRenderer(new CategoryEditCellRender());
 		
-		
-		
+		panel_edit.nextFocus();
 		panel_edit.setVisible(true);
 		panel_storage.setVisible(false);
 	}
 	
 	protected void JButton_Save_actionPerformed(ActionEvent e) {
 		try {
+
 			Product_model product_model = new Product_model();
 			
 			products.setProductName(JtextField_name.getText());
-			products.setPrice(new BigDecimal(JtextField_price.getText()));
-			products.setQuantity(Integer.parseInt(JtextField_quantity.getText()));
 			Category category = (Category) JcomboBox_Category.getSelectedItem();
 			products.setCategory_id(category.getCategoryID());
-	
+			// start price < 0	
+			BigDecimal price = new BigDecimal(JtextField_price.getText());
+			int result = price.compareTo(BigDecimal.ZERO);
+			if (result < 0) {
+				products.setPrice(new BigDecimal(0));
+			} else {
+				products.setPrice(new BigDecimal(JtextField_price.getText()));
+			}
+			// end price < 0
+			
+			// start quantity < 0
+			if (Integer.parseInt(JtextField_quantity.getText()) < 0) {
+				products.setQuantity(0);
+			} else {
+				products.setQuantity(Integer.parseInt(JtextField_quantity.getText()));
+			}
+			// end quantity < 0			
+			
+			// start status set boolean
 			if (Integer.parseInt(JtextField_quantity.getText()) <= 10) {
 				products.setStatus(false);
 			} else {
 				products.setStatus(true);
 			}
+			// end status set boolean			
 			
 			if (product_model.Update(products)) {
-				JOptionPane.showMessageDialog(null, "Update Completed !");		
+				JOptionPane.showMessageDialog(null, "Update Completed !");	
 				panel_edit.setVisible(false);
 				panel_storage.setVisible(true);
-				
+				fillDatatoJTable(product_model.findAll());
 			} else {
 				JOptionPane.showMessageDialog(null, "Update Failed !");
 			}
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
+		
+		JPstorage jPstorage = new JPstorage();
+		jPstorage.setVisible(true);
 	}
 	
 	protected void JButton_Cancel_actionPerformed(ActionEvent e) {
@@ -574,5 +597,7 @@ public class JPstorage extends JPanel {
 		}
 
 	}
-/************************************** End of Edit JPanel ************************************/
+
+/************************************** Start of Edit JPanel ************************************/
+	
 }

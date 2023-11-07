@@ -39,7 +39,7 @@ public class JFrameLogin extends JFrame {
 	private JPasswordField jpass;
 	static  int frameWidth ;
 	static int frameHeight ;
-	static Home home = new Home(dataMap);
+	static Home home = new Home();
 	/**
 	 * Launch the application.
 	 */
