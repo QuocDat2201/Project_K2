@@ -6,7 +6,7 @@ private int point;
 private String rank;
 private int discount;
 public int getDiscount() {
-	return discount;
+	return discount/100;
 }
 public void setDiscount(int discount) {
 	this.discount = discount;
@@ -29,6 +29,7 @@ public String getRank() {
 public void setRank(String rank) {
 	this.rank = rank;
 }
+
 
 
 

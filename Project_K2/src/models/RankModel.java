@@ -38,7 +38,7 @@ public class RankModel {
     public List<Rank> findAll() {
         List<Rank> ranks = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT * FROM ranks");
+            PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT * FROM rank");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Rank rank = new Rank();

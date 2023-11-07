@@ -39,7 +39,7 @@ public class JFrameLogin extends JFrame {
 	private JPasswordField jpass;
 	static  int frameWidth ;
 	static int frameHeight ;
-	static Home home = new Home();
+	static Home home;
 	/**
 	 * Launch the application.
 	 */
@@ -55,13 +55,7 @@ public class JFrameLogin extends JFrame {
 				try {
 					JFrameLogin frame = new JFrameLogin();
 					frame.setVisible(true);
-					home.addComponentListener(new ComponentAdapter() {
-			            @Override
-			            public void componentResized(ComponentEvent e) {			            	
-			            	frameWidth = home.getWidth();
-			           	    frameHeight = home.getHeight();
-			            }
-			        });
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -161,9 +155,17 @@ public class JFrameLogin extends JFrame {
 			JOptionPane.showMessageDialog(null, "Account Invalid");
 		} else {
 			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap 			
-			Home home = new Home(dataMap);
+			home = new Home(dataMap);
 			home.setVisible(true);
 			this.setVisible(false);
+			home.addComponentListener(new ComponentAdapter() {
+	            @Override			            
+	            public void componentResized(ComponentEvent e) {	
+	            	frameWidth = home.getWidth();
+	           	    frameHeight = home.getHeight();
+	           	    System.out.println(frameWidth);
+	            }
+	        });
 		}
 	}
 }

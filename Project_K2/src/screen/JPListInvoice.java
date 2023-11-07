@@ -94,7 +94,7 @@ public class JPListInvoice extends JPanel {
 		lblInvoiceDate.setBounds(330, 32, 98, 26);
 		panel_1.add(lblInvoiceDate);
 
-		JLabel lblNewLabel_2 = new JLabel("Customer Name");
+		JLabel lblNewLabel_2 = new JLabel("Customer Phone");
 		lblNewLabel_2.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_2.setBounds(330, 64, 98, 26);
 		panel_1.add(lblNewLabel_2);
@@ -102,6 +102,7 @@ public class JPListInvoice extends JPanel {
 		jCustomerName = new JTextField();
 		jCustomerName.setColumns(10);
 		jCustomerName.setBounds(438, 67, 124, 22);
+//		jCustomerName.setBounds(438, 67, 124, 22);
 		panel_1.add(jCustomerName);
 		JButton btnaddButton = new JButton("");
 		btnaddButton.setContentAreaFilled(false);
