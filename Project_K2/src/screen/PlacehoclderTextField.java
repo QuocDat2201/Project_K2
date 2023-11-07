@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JTextField;
 
 public class PlacehoclderTextField extends JTextField {
-    private String placeholder;
+    private String placeholder;//a
 
     public PlacehoclderTextField(String placeholder) {
         this.placeholder = placeholder;
