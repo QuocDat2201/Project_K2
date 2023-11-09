@@ -1,13 +1,14 @@
 package entites;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Invoices {
 	private int InvoiceID;
-	private int SaleID;
 	private Date InvoiceDate;
 	private String CustomerName;
 	private boolean Status;
+	private BigDecimal Total;
 	
 	public int getInvoiceID() {
 		return InvoiceID;
@@ -15,11 +16,11 @@ public class Invoices {
 	public void setInvoiceID(int invoiceID) {
 		InvoiceID = invoiceID;
 	}
-	public int getSaleID() {
-		return SaleID;
+	public BigDecimal getTotal() {
+		return Total;
 	}
-	public void setSaleID(int saleID) {
-		SaleID = saleID;
+	public void setTotal(BigDecimal total) {
+		Total = total;
 	}
 	public Date getInvoiceDate() {
 		return InvoiceDate;

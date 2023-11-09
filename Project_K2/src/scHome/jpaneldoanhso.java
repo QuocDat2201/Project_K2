@@ -153,7 +153,7 @@ public class jpaneldoanhso extends JPanel {
 		for (Invoices invoice : invoices) {
 			// Tìm đối tượng CombinedData tương ứng dựa trên SaleID
 			for (CombinedData combinedData : combinedDataList) {
-				if (combinedData.getSaleID() == invoice.getSaleID()) {
+				if (combinedData.getSaleID() == invoice.getInvoiceID()) {
 					combinedData.setInvoiceDate(invoice.getInvoiceDate());
 					combinedData.setCustomerName(invoice.getCustomerName());
 					break; // Thoát khỏi vòng lặp khi tìm thấy SaleID tương ứng

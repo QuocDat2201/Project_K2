@@ -7,6 +7,20 @@ public class Sales {
 	private int ProductID;
 	private int Quantity;
 	private BigDecimal Price;
+	private int Invoice_id;
+	public int getInvoice_id() {
+		return Invoice_id;
+	}
+	public void setInvoice_id(int invoice_id) {
+		Invoice_id = invoice_id;
+	}
+	public String getProductName() {
+		return ProductName;
+	}
+	public void setProductName(String productName) {
+		ProductName = productName;
+	}
+	private String ProductName;
 	
 	public int getSaleID() {
 		return SaleID;

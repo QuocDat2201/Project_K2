@@ -15,11 +15,12 @@ public class Invoice_model {
 		boolean result = true;
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("insert into invoices(SaleID, InvoiceDate, CustomerName, Status) values(?,?,?,?)");
-			preparedStatement.setInt(1, invoices.getSaleID());
-			preparedStatement.setDate(2, new java.sql.Date(invoices.getInvoiceDate().getTime()));
-			preparedStatement.setString(3, invoices.getCustomerName());
-			preparedStatement.setBoolean(4, invoices.isStatus());
+					.prepareStatement("insert into invoices( InvoiceDate, CustomerName, Status,Total) values(?,?,?,?)");
+			
+			preparedStatement.setDate(1, new java.sql.Date(invoices.getInvoiceDate().getTime()));
+			preparedStatement.setString(2, invoices.getCustomerName());
+			preparedStatement.setBoolean(3, invoices.isStatus());
+			preparedStatement.setBigDecimal(4, invoices.getTotal());
 			result = preparedStatement.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +53,10 @@ public class Invoice_model {
 			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
 				Invoices invoice = new Invoices();
 				invoice.setInvoiceID(resultSet.getInt("InvoiceID"));
-				invoice.setSaleID(resultSet.getInt("SaleID"));
 				invoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
 				invoice.setCustomerName(resultSet.getString("CustomerName"));
 				invoice.setStatus(resultSet.getBoolean("Status"));
+				invoice.setTotal(resultSet.getBigDecimal("Total"));
 				invoices.add(invoice);
 			}
 		} catch (Exception e) {
@@ -66,28 +67,14 @@ public class Invoice_model {
 		return invoices;
 	}
 	
-	public boolean delete(int id){
-		boolean result = true  ; 
-		try {
-			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement
-					("delete from invoices where SaleID = ?");//java.sql
-			preparedStatement.setInt(1, id);
-			result = preparedStatement.executeUpdate()>0 ; //tu hieu luon :)) la neu them dc thi so dong se tang 
-		} catch (Exception e) {
-			e.printStackTrace();
-			 result = false ; 
-		}finally {
-			ConnectDB.disconnect();
-		} return result; 
-	}
 	
 	public boolean update(Invoices invoices){
 		boolean result = true  ; 
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement
-					("update invoices set status = ? where SaleID = ?");//java.sql
+					("update invoices set status = ? where InvoiceID = ?");//java.sql
 			preparedStatement.setBoolean(1, invoices.isStatus());
-			preparedStatement.setInt(2, invoices.getSaleID());
+			preparedStatement.setInt(2, invoices.getInvoiceID());
 			result = preparedStatement.executeUpdate()>0 ; //tu hieu luon :)) la neu them dc thi so dong se tang 
 		} catch (Exception e) {
 			e.printStackTrace();

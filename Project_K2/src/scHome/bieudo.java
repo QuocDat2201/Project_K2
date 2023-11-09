@@ -69,9 +69,6 @@ public class bieudo extends JPanel {
 	    String namechart = "Biểu đồ doanh số theo danh mục trong tháng 10";
 	    int x = JFrameLogin.frameWidth - 140;
 	    int y = JFrameLogin.frameHeight - 300;
-
-	    Chartbar swingChartExample = new Chartbar(namechart, categoriesArray, "USD", "Category", x, y, valuesArray);
-	    jpanel_1.add(swingChartExample);
 	}
 
 	
