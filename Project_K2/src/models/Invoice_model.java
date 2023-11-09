@@ -29,7 +29,21 @@ public class Invoice_model {
 		}
 		return result;
 	}
-	
+	public List<Double> findtotal() {
+		List<Double> total = new ArrayList<Double>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(s.Price)as total FROM invoices i JOIN sales s ON i.SaleID=s.SaleID JOIN products p ON s.ProductID = p.ProductID JOIN category c ON p.Category_id= c.CategoryID GROUP BY c.CategoryName;");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				total.add(resultSet.getDouble("total"));
+			}
+		} catch (Exception e) {
+			total = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return total;
+	}
 	public List<Invoices> findAll() {
 		List<Invoices> invoices = new ArrayList<Invoices>();
 		try {
