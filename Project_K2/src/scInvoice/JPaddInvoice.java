@@ -65,7 +65,6 @@ import java.awt.ComponentOrientation;
 public class JPaddInvoice extends JPanel {
 	private JTextField jCustomerName;
 	private JDateChooser jdateChooser;
-	private JComboBox jcomboBox;
 	private JTextField jtextQuantily;
 	private JTextField jtotal;
 	private JComboBox jcomboBoxProductID;
@@ -73,6 +72,8 @@ public class JPaddInvoice extends JPanel {
 	private JTable jtableListInvoice;
 	private JPanel panel;
 	private JLabel jcurrentQuantity;
+	private boolean status = false ;	 
+	private JTable jtableListQuantity;
 
 	/**
 	 * Create the panel.
@@ -92,23 +93,18 @@ public class JPaddInvoice extends JPanel {
 
 		JLabel lblInvoiceDate = new JLabel("Invoice Date");
 		lblInvoiceDate.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
-		lblInvoiceDate.setBounds(329, 32, 98, 26);
+		lblInvoiceDate.setBounds(319, 32, 98, 26);
 		panel_1.add(lblInvoiceDate);
 
 		JLabel lblNewLabel_2 = new JLabel("Customer Name");
 		lblNewLabel_2.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(329, 64, 98, 26);
+		lblNewLabel_2.setBounds(319, 68, 98, 26);
 		panel_1.add(lblNewLabel_2);
 
 		jCustomerName = new JTextField();
 		jCustomerName.setColumns(10);
-		jCustomerName.setBounds(437, 67, 124, 22);
+		jCustomerName.setBounds(433, 67, 143, 22);
 		panel_1.add(jCustomerName);
-
-		JLabel lblNewLabel_3 = new JLabel("Status");
-		lblNewLabel_3.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_3.setBounds(329, 135, 98, 26);
-		panel_1.add(lblNewLabel_3);
 
 		JButton btnNewButton = new JButton("Create");
 		btnNewButton.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD | Font.ITALIC, 10));
@@ -117,17 +113,13 @@ public class JPaddInvoice extends JPanel {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setBounds(132, 182, 85, 21);
+		btnNewButton.setBounds(314, 140, 85, 21);
 		panel_1.add(btnNewButton);
 
 		jdateChooser = new JDateChooser();
-		jdateChooser.setBounds(437, 32, 124, 22);
+		jdateChooser.setBounds(433, 32, 143, 22);
 		jdateChooser.setDateFormatString("dd/MM/yyyy");
 		panel_1.add(jdateChooser);
-
-		jcomboBox = new JComboBox();
-		jcomboBox.setBounds(437, 140, 43, 23);
-		panel_1.add(jcomboBox);
 
 		jtextQuantily = new JTextField();
 		jtextQuantily.addKeyListener(new KeyAdapter() {
@@ -137,20 +129,20 @@ public class JPaddInvoice extends JPanel {
 			}
 		});
 		jtextQuantily.setColumns(10);
-		jtextQuantily.setBounds(132, 106, 124, 22);
+		jtextQuantily.setBounds(107, 106, 63, 22);
 		panel_1.add(jtextQuantily);
 
 		((AbstractDocument) jtextQuantily.getDocument()).setDocumentFilter(new NumberDocumentFilter());
 
 		JLabel lblQuantily = new JLabel("Quantily");
 		lblQuantily.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
-		lblQuantily.setBounds(24, 103, 98, 26);
+		lblQuantily.setBounds(24, 101, 98, 26);
 		panel_1.add(lblQuantily);
 
 		jtotal = new JTextField();
 		jtotal.setEditable(false);
 		jtotal.setColumns(10);
-		jtotal.setBounds(132, 138, 124, 22);
+		jtotal.setBounds(107, 140, 63, 22);
 		panel_1.add(jtotal);
 
 		JLabel lblTotal = new JLabel("Total");
@@ -169,13 +161,13 @@ public class JPaddInvoice extends JPanel {
 				do_jcomboBoxProductID_actionPerformed(e);
 			}
 		});
-		jcomboBoxProductID.setBounds(132, 34, 124, 23);
+		jcomboBoxProductID.setBounds(107, 36, 124, 23);
 		panel_1.add(jcomboBoxProductID);
 
 		jProductPrice = new JTextField();
 		jProductPrice.setEditable(false);
 		jProductPrice.setColumns(10);
-		jProductPrice.setBounds(132, 67, 124, 22);
+		jProductPrice.setBounds(107, 69, 63, 22);
 		panel_1.add(jProductPrice);
 
 		JLabel lblPrice = new JLabel("Price");
@@ -185,13 +177,13 @@ public class JPaddInvoice extends JPanel {
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("Current Quantity");
 		lblNewLabel_2_1_1.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_2_1_1.setBounds(329, 104, 98, 26);
+		lblNewLabel_2_1_1.setBounds(319, 104, 98, 26);
 		panel_1.add(lblNewLabel_2_1_1);
 		
 		jcurrentQuantity = new JLabel("");
 		jcurrentQuantity.setBorder(new LineBorder(new Color(0, 0, 0)));
 		jcurrentQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		jcurrentQuantity.setBounds(437, 104, 65, 26);
+		jcurrentQuantity.setBounds(427, 104, 56, 26);
 		panel_1.add(jcurrentQuantity);
 
 		JPanel panel_2 = new JPanel();
@@ -202,7 +194,7 @@ public class JPaddInvoice extends JPanel {
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(new Color(255, 192, 203), 3));
-		scrollPane.setBounds(29, 21, 538, 162);
+		scrollPane.setBounds(29, 21, 413, 91);
 		panel_2.add(scrollPane);
 
 		jtableListInvoice = new JTable();
@@ -220,7 +212,7 @@ public class JPaddInvoice extends JPanel {
 				do_btnNewButton_1_actionPerformed(e);
 			}
 		});
-		btnNewButton_1.setBounds(483, 182, 85, 21);
+		btnNewButton_1.setBounds(357, 123, 85, 21);
 		panel_2.add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("Huy hoa don");
@@ -229,7 +221,7 @@ public class JPaddInvoice extends JPanel {
 				do_btnNewButton_2_actionPerformed(e);
 			}
 		});
-		btnNewButton_2.setBounds(385, 181, 85, 21);
+		btnNewButton_2.setBounds(259, 122, 85, 21);
 		panel_2.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Recieve");
@@ -238,8 +230,25 @@ public class JPaddInvoice extends JPanel {
 				do_btnNewButton_3_actionPerformed(e);
 			}
 		});
-		btnNewButton_3.setBounds(279, 181, 85, 21);
+		btnNewButton_3.setBounds(153, 122, 85, 21);
 		panel_2.add(btnNewButton_3);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBorder(new LineBorder(new Color(255, 182, 193), 3));
+		scrollPane_1.setBounds(452, 21, 140, 91);
+		panel_2.add(scrollPane_1);
+		
+		jtableListQuantity = new JTable();
+		scrollPane_1.setViewportView(jtableListQuantity);
+		
+		JButton btnNewButton_4 = new JButton("Notification");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_4_actionPerformed(e);
+			}
+		});
+		btnNewButton_4.setBounds(507, 122, 85, 21);
+		panel_2.add(btnNewButton_4);
 		initJFrame();
 	}
 
@@ -251,7 +260,6 @@ public class JPaddInvoice extends JPanel {
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 		model.addElement(0);
 		model.addElement(1);
-		jcomboBox.setModel(model);
 
 		DefaultComboBoxModel<Products> models = new DefaultComboBoxModel<Products>();
 		Product_model product_model = new Product_model();
@@ -262,7 +270,9 @@ public class JPaddInvoice extends JPanel {
 		jcomboBoxProductID.setModel(models);
 		jcomboBoxProductID.setRenderer(new ProductCellRender());
 		Sales_model sales_model = new Sales_model();
+		
 		Invoice_model invoice_model = new Invoice_model();
+		fillDataToJTableListQuantity(product_model.findAll());
 		fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
 	}
 
@@ -280,7 +290,7 @@ public class JPaddInvoice extends JPanel {
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		try {
 			if (jCustomerName.getText().equalsIgnoreCase("")) {
-				JOptionPane.showMessageDialog(null, "Faildroi");
+				JOptionPane.showMessageDialog(null, "Fail");
 			} else {
 				Product_model product_model = new Product_model() ; 
 				Object selectedProduct = jcomboBoxProductID.getSelectedItem();
@@ -289,7 +299,6 @@ public class JPaddInvoice extends JPanel {
 				int category_id = product.getCategory_id();
 				BigDecimal price = product.getPrice() ;
 				String name = product.getProductName();
-				boolean status = product.isStatus();
 				
 				Sales_model sales_model = new Sales_model();
 				Sales sales = new Sales();
@@ -316,7 +325,7 @@ public class JPaddInvoice extends JPanel {
 					invoices.setSaleID(newSalesID);
 					invoices.setCustomerName(jCustomerName.getText());
 					invoices.setInvoiceDate(jdateChooser.getDate());
-					if (Integer.parseInt(jcomboBox.getSelectedItem().toString()) == 1) {
+					if (status == true) {
 						invoices.setStatus(true);
 					} else {
 						invoices.setStatus(false);
@@ -324,7 +333,7 @@ public class JPaddInvoice extends JPanel {
 
 					if (invoice_model.Create(invoices)) {
 
-						JOptionPane.showMessageDialog(null, "SuccesInvoices");
+						JOptionPane.showMessageDialog(null, "Succes");
 						jcurrentQuantity.setText(String.valueOf(quantitynew));
 					} else {
 						JOptionPane.showMessageDialog(null, "FaildInvoice");
@@ -373,9 +382,9 @@ public class JPaddInvoice extends JPanel {
 
 		// Thêm cột cho JTable
 		model.addColumn("ID");
-		model.addColumn("Invoice Date");
-		model.addColumn("Customer Name");
-		model.addColumn("Product Name");
+		model.addColumn("Date");
+		model.addColumn("Customer");
+		model.addColumn("Product");
 		model.addColumn("Quantity");
 		model.addColumn("Total");
 		model.addColumn("Status");
@@ -412,7 +421,7 @@ public class JPaddInvoice extends JPanel {
 							: "",
 					combinedData.getCustomerName(), product_model.find(combinedData.getProductID()).getProductName(),
 					combinedData.getQuantity(), combinedData.getPrice(),
-					combinedData.isStatus() ? "Destroy" : "Live" });
+					combinedData.isStatus() ? "No" : "Yes" });
 		}
 		jtableListInvoice.getTableHeader().setReorderingAllowed(false);
 		jtableListInvoice.setModel(model);
@@ -420,18 +429,22 @@ public class JPaddInvoice extends JPanel {
 		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
 
 		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
-		TableColumn customerNameColumn = columnModel.getColumn(2); // Cột "Customer Name" ở index 2
-		customerNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
-		customerNameColumn.setMaxWidth(200); // Chiều rộng tối đa
-
-		// Lấy ra cột "Product Name" và thiết lập chiều rộng
-		TableColumn productNameColumn = columnModel.getColumn(3); // Cột "Product Name" ở index 3
-		productNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
-		productNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		TableColumn IDColumn = columnModel.getColumn(0); // Cột "Product Name" ở index 3
+		IDColumn.setMinWidth(5); // Chiều rộng tối thiểu
 		
 		TableColumn DateNameColumn = columnModel.getColumn(1); // Cột "Product Name" ở index 3
-		DateNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
-		DateNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		DateNameColumn.setMinWidth(60); // Chiều rộng tối thiểu
+		
+		TableColumn customerNameColumn = columnModel.getColumn(2); // Cột "Customer Name" ở index 2
+		customerNameColumn.setMinWidth(70); // Chiều rộng tối thiểu
+		
+		// Lấy ra cột "Product Name" và thiết lập chiều rộng
+		TableColumn productNameColumn = columnModel.getColumn(3); // Cột "Product Name" ở index 3
+		productNameColumn.setMinWidth(80); // Chiều rộng tối thiểu
+		
+		TableColumn quantityColumn = columnModel.getColumn(4); // Cột "Product Name" ở index 3
+		quantityColumn.setMinWidth(45); // Chiều rộng tối thiểu
+		
 
 	}
 
@@ -517,5 +530,38 @@ public class JPaddInvoice extends JPanel {
 		JPContact jpContact = new JPContact() ;
 		panel.add(jpContact);
 		panel.setVisible(true);
+	}
+	
+	public void fillDataToJTableListQuantity(List<Products> products) {
+		DefaultTableModel model = new DefaultTableModel() {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+		};
+
+		// Thêm cột cho JTable
+		model.addColumn("ID");
+		model.addColumn("Quantity");
+		for(Products product : products) {
+			if(product.getQuantity()<10) {
+				model.addRow(new Object[] {
+						product.getProductID(),
+						product.getQuantity()
+				});
+			}
+		}
+		jtableListQuantity.setModel(model);
+		jtableListQuantity.getTableHeader().setReorderingAllowed(false);
+		
+	}
+	protected void do_btnNewButton_4_actionPerformed(ActionEvent e) {
+		int result = JOptionPane.showConfirmDialog(null, "Are you sure", "Confirm", JOptionPane.YES_NO_OPTION);
+		int selectedIndex = jtableListQuantity.getSelectedRow();
+		int id = Integer.parseInt(jtableListQuantity.getValueAt(selectedIndex, 0).toString());
+		System.out.println(id);
 	}
 }
