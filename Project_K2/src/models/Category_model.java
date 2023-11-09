@@ -110,4 +110,87 @@ public class Category_model {
 		return categories;
 	}
 	
+	public List<Category> Sort_CatName_asc() {
+		List<Category> categories = new ArrayList<Category>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from category order by CategoryName asc");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Category category = new Category();
+				category.setCategoryID(resultSet.getInt("CategoryID"));
+				category.setCategoryName(resultSet.getString("CategoryName"));
+				categories.add(category);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			categories = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+
+		return categories;
+	}
+	
+	public List<Category> Sort_CatName_desc() {
+		List<Category> categories = new ArrayList<Category>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from category order by CategoryName desc");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Category category = new Category();
+				category.setCategoryID(resultSet.getInt("CategoryID"));
+				category.setCategoryName(resultSet.getString("CategoryName"));
+				categories.add(category);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			categories = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+
+		return categories;
+	}
+	
+	public List<Category> Sort_CatID_asc() {
+		List<Category> categories = new ArrayList<Category>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from category order by CategoryID asc");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Category category = new Category();
+				category.setCategoryID(resultSet.getInt("CategoryID"));
+				category.setCategoryName(resultSet.getString("CategoryName"));
+				categories.add(category);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			categories = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+
+		return categories;
+	}
+	
+	public List<Category> Sort_CatID_desc() {
+		List<Category> categories = new ArrayList<Category>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from category order by CategoryID desc");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Category category = new Category();
+				category.setCategoryID(resultSet.getInt("CategoryID"));
+				category.setCategoryName(resultSet.getString("CategoryName"));
+				categories.add(category);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			categories = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+
+		return categories;
+	}
 }

@@ -97,6 +97,11 @@ public class JPstorage extends JPanel {
 	private JTextField JtextField_Catname;
 	private JButton jButton_SearchCatName;
 	private JTable Jtable_Category;
+	private JPanel panel_CreateCategory;
+	private JLabel JLabel_createCatName;
+	private JTextField jtextField_createCatName;
+	private JButton JButton_CatCancel;
+	private JButton JButton_CatSave;
 
 	/**
 	 * Create the panel.
@@ -145,6 +150,11 @@ public class JPstorage extends JPanel {
 		jMenu_Create.add(jMenuItem_CreateProduct);
 
 		JMenuItem jMenuItem_CreateCategory = new JMenuItem("Create Category");
+		jMenuItem_CreateCategory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jMenuItem_CreateCategory_actionPerformed(e);
+			}
+		});
 		jMenuItem_CreateCategory.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/categories.png")));
 		jMenu_Create.add(jMenuItem_CreateCategory);
 
@@ -349,7 +359,7 @@ public class JPstorage extends JPanel {
 		lblCreateProduct = new JLabel("Create Product");
 		lblCreateProduct.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreateProduct.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblCreateProduct.setBounds(10, 35, 594, 24);
+		lblCreateProduct.setBounds(10, 35, 613, 24);
 		panel_CreateProduct.add(lblCreateProduct);
 		
 		jtextField_createName = new JTextField();
@@ -454,8 +464,54 @@ public class JPstorage extends JPanel {
 		panel_CategoryList.add(JscrollPane_Category);
 		
 		Jtable_Category = new JTable();
+		Jtable_Category.getTableHeader().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Jtable_Category_mouseClicked(e);
+			}
+		});
 		Jtable_Category.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JscrollPane_Category.setViewportView(Jtable_Category);
+		
+		panel_CreateCategory = new JPanel();
+		panel_CreateCategory.setBorder(new TitledBorder(null, "Create Category", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_main.add(panel_CreateCategory, "name_1212432548099300");
+		panel_CreateCategory.setLayout(null);
+		
+		JLabel lblCreateCategory = new JLabel("Create Category");
+		lblCreateCategory.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreateCategory.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblCreateCategory.setBounds(10, 43, 613, 24);
+		panel_CreateCategory.add(lblCreateCategory);
+		
+		JLabel_createCatName = new JLabel("Category's Name");
+		JLabel_createCatName.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_createCatName.setFont(new Font("Arial", Font.PLAIN, 15));
+		JLabel_createCatName.setBounds(175, 94, 277, 24);
+		panel_CreateCategory.add(JLabel_createCatName);
+		
+		jtextField_createCatName = new JTextField();
+		jtextField_createCatName.setColumns(10);
+		jtextField_createCatName.setBounds(175, 128, 271, 24);
+		panel_CreateCategory.add(jtextField_createCatName);
+		
+		JButton_CatCancel = new JButton("Cancel");
+		JButton_CatCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_CatCancel_actionPerformed(e);
+			}
+		});
+		JButton_CatCancel.setBounds(266, 162, 85, 21);
+		panel_CreateCategory.add(JButton_CatCancel);
+		
+		JButton_CatSave = new JButton("Save");
+		JButton_CatSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_CatSave_actionPerformed(e);
+			}
+		});
+		JButton_CatSave.setBounds(361, 162, 85, 21);
+		panel_CreateCategory.add(JButton_CatSave);
 
 	}
 
@@ -539,7 +595,6 @@ public class JPstorage extends JPanel {
 
 	protected void jtableProduct_mouseClicked(MouseEvent e) {
 		Product_model product_model = new Product_model();
-		Category_model category_model = new Category_model();
 		JTableHeader header = (JTableHeader) e.getSource();
 		int column = header.columnAtPoint(e.getPoint());
 		int column2 = header.columnAtPoint(e.getPoint());
@@ -595,6 +650,10 @@ public class JPstorage extends JPanel {
 	}
 
 	protected void jmenuitem_storage_actionPerformed(ActionEvent e) {
+		panel_CreateProduct.setVisible(false);
+		panel_CategoryList.setVisible(false);
+		panel_edit.setVisible(false);
+		panel_CreateCategory.setVisible(false);
 		panel_storage.setVisible(true);
 	}
 
@@ -688,7 +747,7 @@ public class JPstorage extends JPanel {
 		panel_storage.setVisible(false);
 		panel_CreateProduct.setVisible(false);
 		panel_CategoryList.setVisible(false);
-
+		panel_CreateCategory.setVisible(false);
 	}
 	
 	protected void JButton_Save_actionPerformed(ActionEvent e) {
@@ -778,6 +837,7 @@ public class JPstorage extends JPanel {
 		panel_storage.setVisible(false);
 		panel_CategoryList.setVisible(false);
 		panel_edit.setVisible(false);
+		panel_CreateCategory.setVisible(false);
 		
 		DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<Category>();
 		for (Category category : category_model.findAll()) {
@@ -804,7 +864,7 @@ public class JPstorage extends JPanel {
 			}
 		// end same name and same category
 			if (productname == false) {
-				JOptionPane.showMessageDialog(null, "This product name already exists in category " + selected.getCategoryName());
+				JOptionPane.showMessageDialog(null, "This product's name already exists in category " + selected.getCategoryName());
 			} else {
 				products.setProductName(jtextField_createName.getText());
 			
@@ -874,6 +934,7 @@ public class JPstorage extends JPanel {
 		panel_storage.setVisible(false);
 		panel_CreateProduct.setVisible(false);
 		panel_edit.setVisible(false);
+		panel_CreateCategory.setVisible(false);
 	}
 	
 	public void FillDataToJTableCategory(List<Category> categories) {
@@ -917,4 +978,73 @@ public class JPstorage extends JPanel {
 		
 		FillDataToJTableCategory(category_model.Search(name));
 	}
+	protected void Jtable_Category_mouseClicked(MouseEvent e) {
+		Category_model category_model = new Category_model();
+		JTableHeader header = (JTableHeader) e.getSource();
+		int column = header.columnAtPoint(e.getPoint());
+		
+		switch (column) {
+		case 0:
+			if (e.getClickCount() % 2 ==0) {
+				FillDataToJTableCategory(category_model.Sort_CatID_desc());
+			} else {
+				FillDataToJTableCategory(category_model.Sort_CatID_asc());
+			}
+			break;
+		case 1:
+			if (e.getClickCount() % 2 ==0) {
+				FillDataToJTableCategory(category_model.Sort_CatName_desc());
+			} else {
+				FillDataToJTableCategory(category_model.Sort_CatName_asc());
+			}
+			break;
+		default:
+			break;
+		}
+		
+		
+	}
+	
+	protected void jMenuItem_CreateCategory_actionPerformed(ActionEvent e) {
+		panel_CategoryList.setVisible(false);
+		panel_storage.setVisible(false);
+		panel_CreateProduct.setVisible(false);
+		panel_edit.setVisible(false);
+		panel_CreateCategory.setVisible(true);
+	}
+	
+	
+	protected void JButton_CatSave_actionPerformed(ActionEvent e) {
+		Category category = new Category();
+		Category_model category_model = new Category_model();
+		
+		// start same name and same category
+			boolean CatName = true;
+				for (Category category2 : category_model.findAll()) {
+					if (category2.getCategoryName().equalsIgnoreCase(jtextField_createCatName.getText().trim())) {
+						CatName = false;
+					}
+				}
+		// end same name and same category
+				
+		if (CatName == false) {
+			JOptionPane.showMessageDialog(null, "This category's name already exists");
+		}else {
+			category.setCategoryName(jtextField_createCatName.getText().trim());
+			if (category_model.Create(category)) {
+				JOptionPane.showMessageDialog(null, "Create Completed !");
+				FillDataToJTableCategory(category_model.findAll());
+				panel_CreateCategory.setVisible(false);
+				panel_CategoryList.setVisible(true);
+			}else {
+				JOptionPane.showMessageDialog(null, "Create Failed !");
+			}
+		}
+	}
+	
+	protected void JButton_CatCancel_actionPerformed(ActionEvent e) {
+		panel_CreateCategory.setVisible(false);
+		panel_CategoryList.setVisible(true);
+	}
+	
 }

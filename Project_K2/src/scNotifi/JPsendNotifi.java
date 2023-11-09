@@ -41,20 +41,20 @@ public class JPsendNotifi extends JPanel {
 		JMenuBar menuBar = new JMenuBar();
 		panel.add(menuBar, BorderLayout.NORTH);
 		
-		JMenuItem jmenuInbox = new JMenuItem("Inbox");
-		jmenuInbox.setHorizontalTextPosition(SwingConstants.LEFT);
-		jmenuInbox.setHorizontalAlignment(SwingConstants.RIGHT);
-		jmenuInbox.setIcon(new ImageIcon(JPsendNotifi.class.getResource("/Icon/inbox-mail.png")));
-		jmenuInbox.setBackground(new Color(240, 240, 240));
-		jmenuInbox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		jmenuInbox.addActionListener(new ActionListener() {
+		JMenuItem jmenuReport = new JMenuItem("Report");
+		jmenuReport.setHorizontalTextPosition(SwingConstants.LEFT);
+		jmenuReport.setHorizontalAlignment(SwingConstants.RIGHT);
+		jmenuReport.setIcon(new ImageIcon(JPsendNotifi.class.getResource("/Icon/inbox-mail.png")));
+		jmenuReport.setBackground(new Color(240, 240, 240));
+		jmenuReport.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		jmenuReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mntmNewMenuItem_actionPerformed(e);
 			}
 		});
-		menuBar.add(jmenuInbox);
+		menuBar.add(jmenuReport);
 		
-		JMenuItem jmailbox = new JMenuItem("Sent mailbox");
+		JMenuItem jmailbox = new JMenuItem("Sent report");
 		jmailbox.setHorizontalTextPosition(SwingConstants.LEFT);
 		jmailbox.setHorizontalAlignment(SwingConstants.RIGHT);
 		jmailbox.setIcon(new ImageIcon(JPsendNotifi.class.getResource("/Icon/send.png")));
