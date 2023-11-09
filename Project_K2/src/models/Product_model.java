@@ -475,6 +475,24 @@ public class Product_model {
 		return result;
 	}
 	
+	public boolean DeleteAll(int id) {
+		boolean result = true;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("delete from products where Category_id = ?");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate() > 0;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}finally {
+			ConnectDB.disconnect();
+		}
+
+		return result;
+	}
+	
 	public boolean Update(Products products) {
 		boolean result = true;
 		try {

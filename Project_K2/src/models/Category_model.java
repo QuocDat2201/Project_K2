@@ -193,4 +193,39 @@ public class Category_model {
 
 		return categories;
 	}
+	
+	public boolean Delete(int id) {
+		boolean result = true;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("delete from category where CategoryID = ?");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate() > 0;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}finally {
+			ConnectDB.disconnect();
+		}
+
+		return result;
+	}
+	
+	public boolean Update(Category category) {
+		boolean result = true;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("update category set CategoryName = ? where CategoryID = ?");
+			preparedStatement.setString(1, category.getCategoryName());
+			preparedStatement.setInt(2, category.getCategoryID());
+			result = preparedStatement.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return result;
+	}
 }
