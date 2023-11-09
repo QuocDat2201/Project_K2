@@ -42,7 +42,7 @@ public class bieudo extends JPanel {
 	}
 
 	private void initJframe() {
-		fill();
+		fill();//a
 	}
 	private void fill() {
 	    Category_model category_model = new Category_model();
