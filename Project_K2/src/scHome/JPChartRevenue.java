@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 
 public class JPChartRevenue extends JPanel {
 	private JPanel jpanel_1;
-	private JTextField textField;
 
 	/**
 	 * Create the panel.
@@ -37,13 +36,6 @@ public class JPChartRevenue extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Bieu do");
 		panel_2.add(lblNewLabel);
-		
-		JComboBox comboBox = new JComboBox();
-		panel_2.add(comboBox);
-		
-		textField = new JTextField();
-		panel_2.add(textField);
-		textField.setColumns(10);
 
 		jpanel_1 = new JPanel();
 		panel.add(jpanel_1, BorderLayout.CENTER);
@@ -56,11 +48,11 @@ public class JPChartRevenue extends JPanel {
 	    Category_model category_model = new Category_model();
 	    Invoice_model invoice_model = new Invoice_model();
 
-	    List<Category> categories = category_model.findAll();
+	    List<Category> revenueArray = category_model.findAll();
 	    List<Double> totals = invoice_model.findtotal();
 
-	    String[] categoriesArray = new String[categories.size()];
-	    double[] valuesArray = new double[categories.size()];
+	    String[] categoriesArray = new String[revenueArray.size()];
+	    double[] valuesArray = new double[revenueArray.size()];
 
 	    for (int i = 0; i < categories.size(); i++) {
 	        Category category = categories.get(i);
@@ -77,7 +69,7 @@ public class JPChartRevenue extends JPanel {
 	    String namechart = "Biểu đồ doanh số theo danh mục trong tháng 10";
 	    int x = JFrameLogin.frameWidth - 140;
 	    int y = JFrameLogin.frameHeight - 400;
-	    Chartbar Chartbar=new Chartbar(namechart, categoriesArray,"USD", "Category", x, y, valuesArray);
+	    Chartbar Chartbar=new Chartbar(namechart, revenueArray,"USD", "Revenue", x, y, valuesArray);
 	    jpanel_1.removeAll();
 	    jpanel_1.revalidate();
 	    jpanel_1.add(Chartbar);

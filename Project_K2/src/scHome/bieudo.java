@@ -17,10 +17,10 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
 
 public class bieudo extends JPanel {
 	private JPanel jpanel_1;
-	private JTextField textField;
 
 	/**
 	 * Create the panel.
@@ -34,16 +34,9 @@ public class bieudo extends JPanel {
 
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.NORTH);
-
-		JLabel lblNewLabel = new JLabel("Bieu do");
-		panel_2.add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		panel_2.add(comboBox);
-		
-		textField = new JTextField();
-		panel_2.add(textField);
-		textField.setColumns(10);
+		JDateChooser JdateChooser = new JDateChooser();
+		panel_2.add(JdateChooser);
 
 		jpanel_1 = new JPanel();
 		panel.add(jpanel_1, BorderLayout.CENTER);

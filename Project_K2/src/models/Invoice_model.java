@@ -15,12 +15,13 @@ public class Invoice_model {
 		boolean result = true;
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("insert into invoices( InvoiceDate, CustomerName, Status,Total) values(?,?,?,?)");
+					.prepareStatement("insert into invoices( InvoiceDate, CustomerName,CustomerPhone, Status,Total) values(?,?,?,?)");
 			
 			preparedStatement.setDate(1, new java.sql.Date(invoices.getInvoiceDate().getTime()));
 			preparedStatement.setString(2, invoices.getCustomerName());
-			preparedStatement.setBoolean(3, invoices.isStatus());
-			preparedStatement.setBigDecimal(4, invoices.getTotal());
+			preparedStatement.setString(3, invoices.getCustomerPhone());
+			preparedStatement.setBoolean(4, invoices.isStatus());
+			preparedStatement.setBigDecimal(5, invoices.getTotal());
 			result = preparedStatement.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,6 +56,7 @@ public class Invoice_model {
 				invoice.setInvoiceID(resultSet.getInt("InvoiceID"));
 				invoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
 				invoice.setCustomerName(resultSet.getString("CustomerName"));
+				invoice.setCustomerPhone(resultSet.getString("CustomerPhone"));
 				invoice.setStatus(resultSet.getBoolean("Status"));
 				invoice.setTotal(resultSet.getBigDecimal("Total"));
 				invoices.add(invoice);

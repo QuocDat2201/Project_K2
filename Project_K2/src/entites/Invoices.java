@@ -5,11 +5,18 @@ import java.util.Date;
 
 public class Invoices {
 	private int InvoiceID;
+
 	private Date InvoiceDate;
 	private String CustomerName;
+	private String CustomerPhone;
 	private boolean Status;
 	private BigDecimal Total;
-	
+	public String getCustomerPhone() {
+		return CustomerPhone;
+	}
+	public void setCustomerPhone(String customerPhone) {
+		CustomerPhone = customerPhone;
+	}
 	public int getInvoiceID() {
 		return InvoiceID;
 	}

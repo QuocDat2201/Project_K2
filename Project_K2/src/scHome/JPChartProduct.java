@@ -12,15 +12,23 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 
 import java.awt.FlowLayout;
+import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JMonthChooser;
 
 public class JPChartProduct extends JPanel {
 	private JPanel jpanel_1;
 	private JTextField textField;
+	private JButton btnNewButton;
+	private JMonthChooser jmonthChooser;
 
 	/**
 	 * Create the panel.
@@ -34,9 +42,6 @@ public class JPChartProduct extends JPanel {
 
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.NORTH);
-
-		JLabel lblNewLabel = new JLabel("Bieu do");
-		panel_2.add(lblNewLabel);
 		
 		JComboBox comboBox = new JComboBox();
 		panel_2.add(comboBox);
@@ -44,6 +49,13 @@ public class JPChartProduct extends JPanel {
 		textField = new JTextField();
 		panel_2.add(textField);
 		textField.setColumns(10);
+		
+		btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(JPChartProduct.class.getResource("/Icon/4781817_brows_browsing_find_search_seo_icon.png")));
+		panel_2.add(btnNewButton);
+		
+		jmonthChooser = new JMonthChooser();
+		panel_2.add(jmonthChooser);
 
 		jpanel_1 = new JPanel();
 		panel.add(jpanel_1, BorderLayout.CENTER);
@@ -52,18 +64,17 @@ public class JPChartProduct extends JPanel {
 		
 	}
 	private void fill() {
-		System.out.println("avc");
+		 YearMonth yearMonth = YearMonth.of(2023,jmonthChooser.getMonth());
+	        long daysInMonth = ChronoUnit.DAYS.between(yearMonth.atDay(1), yearMonth.atEndOfMonth()) + 1;
 	    Category_model category_model = new Category_model();
 	    Invoice_model invoice_model = new Invoice_model();
 
-	    List<Category> categories = category_model.findAll();
 	    List<Double> totals = invoice_model.findtotal();
 
-	    String[] categoriesArray = new String[categories.size()];
-	    double[] valuesArray = new double[categories.size()];
+	   
+	    double[] valuesArray =
 
-	    for (int i = 0; i < categories.size(); i++) {
-	        Category category = categories.get(i);
+	    for (int i = 0; i < daysInMonth; i++) {
 	        if (totals.size()>i) {
 	        	 Double total = totals.get(i);
 	        	 valuesArray[i] = total;
