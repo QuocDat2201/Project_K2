@@ -33,7 +33,7 @@ public class Invoice_model {
 	public List<Double> findtotal() {
 		List<Double> total = new ArrayList<Double>();
 		try {
-			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(s.Price)as total FROM invoices i JOIN sales s ON i.SaleID=s.SaleID JOIN products p ON s.ProductID = p.ProductID JOIN category c ON p.Category_id= c.CategoryID GROUP BY c.CategoryName;");// java.sql
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(i.Total)as total FROM invoices i JOIN sales s ON i.InvoiceID=s.Invoice_id JOIN products p ON s.ProductID = p.ProductID JOIN category c ON p.Category_id= c.CategoryID GROUP BY c.CategoryName;");// java.sql
 			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
 			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
 				total.add(resultSet.getDouble("total"));

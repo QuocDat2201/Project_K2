@@ -18,14 +18,14 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-public class bieudo extends JPanel {
+public class JPChartProduct extends JPanel {
 	private JPanel jpanel_1;
 	private JTextField textField;
 
 	/**
 	 * Create the panel.
 	 */
-	public bieudo() {
+	public JPChartProduct() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();

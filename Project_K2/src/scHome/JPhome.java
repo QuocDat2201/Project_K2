@@ -41,14 +41,23 @@ public class JPhome extends JPanel {
 		Product.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/897226_balance spendings_budget_money_save money_icon.png")));
 		menuBar.add(Product);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Bieu do");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		JMenu mnNewMenu = new JMenu("Bieu do");
+		mnNewMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				do_mntmNewMenuItem_2_actionPerformed(e);
+				do_mnNewMenu_actionPerformed(e);
 			}
 		});
-		mntmNewMenuItem_2.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/Bar Chart.png")));
-		menuBar.add(mntmNewMenuItem_2);
+		mnNewMenu.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/Bar Chart.png")));
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem bieudocategogy = new JMenuItem("ChartCategory");
+		mnNewMenu.add(bieudocategogy);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("ChartProduct");
+		mnNewMenu.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("BieudoDoanhthu");
+		mnNewMenu.add(mntmNewMenuItem_3);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Tien Ich");
 		mntmNewMenuItem_1.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/317717_operating system_windows_icon.png")));
@@ -65,18 +74,18 @@ public class JPhome extends JPanel {
 		jpanel.setVisible(true);
 		
 	}
-	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {
-		jpanel.removeAll();
-		jpanel.revalidate();
-		bieudo bieudo1=new bieudo();
-		jpanel.add(bieudo1);
-		jpanel.setVisible(true);
-	}
 	protected void do_Product_actionPerformed(ActionEvent e) {
 		jpanel.removeAll();
 		jpanel.revalidate();
 		jpaneldoanhso jpaneldoanhso=new jpaneldoanhso();
 		jpanel.add(jpaneldoanhso);
 		jpanel.setVisible(true);
+	}
+	protected void do_mnNewMenu_actionPerformed(ActionEvent e) {
+		jpanel.removeAll();
+//		jpanel.revalidate();
+//		bieudo bieudo1=new bieudo();
+//		jpanel.add(bieudo1);
+//		jpanel.setVisible(true);
 	}
 }
