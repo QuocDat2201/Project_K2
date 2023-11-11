@@ -99,7 +99,7 @@ public class jpaneldoanhso extends JPanel {
 		jtable.setRowHeight(rowHeight);
 		Sales_model sales_model1 = new Sales_model();
 		Invoice_model invoice_model1 = new Invoice_model();
-		fillDataToJTable(sales_model1.findAll(), invoice_model1.findAll());
+		//fillDataToJTable(sales_model1.findAll(), invoice_model1.findAll());
 	}
 	private class render extends DefaultTableCellRenderer {
 		public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,

@@ -284,9 +284,9 @@ public class Home extends JFrame {
 
 	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {// invoice
 		ClearScreen();
-		JPaddInvoice jPsendNotif = new JPaddInvoice();
-		jpanel_2.add(jPsendNotif);
-		jPsendNotif.setVisible(true);
+		JPaddInvoice jPaddInvoice = new JPaddInvoice();
+		jpanel_2.add(jPaddInvoice);
+		jPaddInvoice.setVisible(true);
 	}
 
 	protected void do_jbtlistproduct_actionPerformed(ActionEvent e) {// Storage

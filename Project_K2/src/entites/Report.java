@@ -1,11 +1,20 @@
 package entites;
 
+import java.util.Date;
+
 public class Report {
 	private int id;
 	private String content;
-	private int role_sent;
-	private int role_report;
+	private int role_sent; // from
+	private int role_report; // to
+	private Date create;
 	
+	public Date getCreate() {
+		return create;
+	}
+	public void setCreate(Date create) {
+		this.create = create;
+	}
 	public int getId() {
 		return id;
 	}

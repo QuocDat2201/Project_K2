@@ -26,6 +26,26 @@ public class Role_model {
 		}
 		return roles;
 	}
+	
+	public List<Role> findExcept(int roleid) {
+		List<Role> roles = new ArrayList<Role>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from role where Role_id != ?");
+			preparedStatement.setInt(1, roleid);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Role role = new Role();
+				role.setRole_id(resultSet.getInt("Role_id"));
+				role.setRole_Name(resultSet.getString("Role_Name"));
+				roles.add(role);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return roles;
+	}
 
 	public boolean Create(Role role) {
 		boolean result = true;

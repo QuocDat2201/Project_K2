@@ -630,8 +630,11 @@ public class JPstorage extends JPanel {
 		models.addColumn("Quantily");
 		models.addColumn("Status");
 		for (Products product : products) {
-			models.addRow(new Object[] { product.getProductID(), product.getProductName(),
-					category_model.find(product.getCategory_id()).getCategoryName(), product.getPrice(),
+			models.addRow(new Object[] { 
+					product.getProductID(), 
+					product.getProductName(),
+					category_model.find(product.getCategory_id()).getCategoryName(), 
+					product.getPrice(),
 					product.getQuantity(), product.isStatus() == true ? "Stocking" : "Out of stock" });
 		}
 
