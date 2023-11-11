@@ -204,7 +204,7 @@ public class JPstorage extends JPanel {
 		JPanel panel_category = new JPanel();
 		panel_category.setLayout(null);
 		panel_category.setBorder(
-				new TitledBorder(null, "Search By Category", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Sort By Category", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_category.setBounds(311, 10, 293, 53);
 		panel_storage.add(panel_category);
 
@@ -220,7 +220,7 @@ public class JPstorage extends JPanel {
 		JPanel panel_status = new JPanel();
 		panel_status.setLayout(null);
 		panel_status.setBorder(
-				new TitledBorder(null, "Search By Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Sort By Status", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_status.setBounds(311, 73, 293, 53);
 		panel_storage.add(panel_status);
 
