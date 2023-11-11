@@ -71,13 +71,15 @@ public class Invoice_model {
 		}
 		return invoices;
 	}
-	public Map<String,List> findProductMap() {
+	public Map<String,List> findProductMap(String name,int month) {
 		Map<String, List> map = new HashMap<String, List>();
 		List<Date> dates = new ArrayList<Date>();
 		List<Double> values = new ArrayList<Double>();
 		List<String> nameProduct = new ArrayList<String>();
 		try {
-			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(s.Quantity*s.Price)as Total ,i.InvoiceDate,p.ProductName FROM invoices i JOIN sales s ON i.InvoiceID=s.Invoice_id JOIN products p ON s.ProductID=p.ProductID GROUP BY p.ProductName,i.InvoiceDate;");// java.sql
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(s.Quantity*s.Price)as Total ,i.InvoiceDate,p.ProductName FROM invoices i JOIN sales s ON i.InvoiceID=s.Invoice_id JOIN products p ON s.ProductID=p.ProductID WHERE p.ProductName='?' and MONTH(i.InvoiceDate) = ? GROUP BY p.ProductName,i.InvoiceDate;");// java.sql
+			preparedStatement.setString(1, name);
+			preparedStatement.setInt(2, month);
 			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
 			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
 				dates.add(resultSet.getDate("InvoiceDate"));

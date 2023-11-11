@@ -3,15 +3,22 @@ package scHome;
 import javax.swing.JPanel;
 
 import entites.Category;
+import entites.Products;
 import models.Category_model;
 import models.Invoice_model;
+import models.Product_model;
+import scInvoice.JPaddInvoice.ProductCellRender;
 import screen.JFrameLogin;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 
 import java.awt.FlowLayout;
+import java.awt.geom.Area;
 import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
@@ -22,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -34,6 +42,7 @@ public class JPChartProduct extends JPanel {
 	private JTextField textField;
 	private JButton btnNewButton;
 	private JMonthChooser jmonthChooser;
+	private JComboBox comboBox;
 
 	/**
 	 * Create the panel.
@@ -48,7 +57,7 @@ public class JPChartProduct extends JPanel {
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.NORTH);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		panel_2.add(comboBox);
 		
 		textField = new JTextField();
@@ -69,31 +78,58 @@ public class JPChartProduct extends JPanel {
 		
 	}
 	private void fill() {
+		DefaultComboBoxModel<Products> models = new DefaultComboBoxModel<Products>();
+		Product_model product_model = new Product_model();
+		Products products = new Products();
+		for (Products product : product_model.findAll()) {
+			models.addElement(product);
+		}
+		comboBox.setModel(models);
+		comboBox.setRenderer(new ProductCellRender());
 	    Invoice_model invoice_model1 = new Invoice_model();
-	    Map<String, List> map = invoice_model1.findProductMap();
+	    Products products2=(Products) comboBox.getSelectedItem();
+	    Map<String, List> map = invoice_model1.findProductMap(products2.getProductName(),Integer.valueOf(jmonthChooser.getMonth()));
 	    List<Date> dates = map.get("dates");
-	    String[] dates2 = new String[dates.size()];
+	    String[] dates2 = new String[30];
 	    List<Double> values = map.get("values");
-	    double[] valuesArray = new double[values.size()];
+	    double[] valuesArray = new double[30];
 	    List<String> nameProduct = map.get("nameproducts");
-	    String[] nameStrings = new String[nameProduct.size()];
+	    String[] nameStrings = new String[30];
 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-	    for (int i = 0; i < dates.size(); i++) {
-	        dates2[i] = dateFormat.format(dates.get(i));
-	        valuesArray[i] = values.get(i);
-	        nameStrings[i] = nameProduct.get(i);
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+	    
+	    for (int i = 0; i < 30; i++) {
+	    	dates2[i]=String.valueOf(i+1);
+	    	for(int j=0;j < dates.size();j++) {
+	    		if(i==Integer.valueOf(dateFormat.format(dates.get(j)))) {
+	    			dates2[i] = dateFormat.format(dates.get(j));
+			        valuesArray[i] = values.get(j);
+			        nameStrings[i] = nameProduct.get(j);
+	    		}
+	    		
+	    	}
+	        
 	    }
 
-	    String namechart = "Biểu đồ doanh số theo danh mục trong tháng 10";
+	    String namechart = "Biểu đồ doanh số cua san pham "+products2.getProductName()+"trong tháng 10";
 	    int x = JFrameLogin.frameWidth - 140;
-	    int y = JFrameLogin.frameHeight - 400;
-	    Chartbar chartBar = new Chartbar(namechart, dates2, "USD", "Category", x, y, valuesArray);
+	    int y = JFrameLogin.frameHeight - 400;	    
+	    a sA =new a(namechart,dates2, x, y, valuesArray);
 	    jpanel_1.removeAll();
 	    jpanel_1.revalidate();
-	    jpanel_1.add(chartBar);
+	    jpanel_1.add(sA);
 	    jpanel_1.setVisible(true);
+	    
+	}
+	private class ProductCellRender extends DefaultListCellRenderer {
+
+		@Override
+		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
+			Products products = (Products) value;
+			return super.getListCellRendererComponent(list, products.getProductName(), index, isSelected, cellHasFocus);
+		}
+
 	}
 
 	
