@@ -1,10 +1,13 @@
 package models;
 
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import entites.Invoices;
 import entites.Products;
@@ -67,6 +70,30 @@ public class Invoice_model {
 			ConnectDB.disconnect();
 		}
 		return invoices;
+	}
+	public Map<String,List> findProductMap() {
+		Map<String, List> map = new HashMap<String, List>();
+		List<Date> dates = new ArrayList<Date>();
+		List<Double> values = new ArrayList<Double>();
+		List<String> nameProduct = new ArrayList<String>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(s.Quantity*s.Price)as Total ,i.InvoiceDate,p.ProductName FROM invoices i JOIN sales s ON i.InvoiceID=s.Invoice_id JOIN products p ON s.ProductID=p.ProductID GROUP BY p.ProductName,i.InvoiceDate;");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				dates.add(resultSet.getDate("InvoiceDate"));
+				values.add(resultSet.getDouble("Total"));
+				nameProduct.add(resultSet.getString("ProductName"));
+			}
+			map.put("dates",dates);
+			map.put("values", values);
+			map.put("nameproducts", nameProduct);
+			
+		} catch (Exception e) {
+			map=null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return map;
 	}
 	
 	

@@ -12,7 +12,11 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -45,7 +49,11 @@ public class bieudo extends JPanel {
 		
 	}
 	private void fill() {
-		System.out.println("avc");
+		
+		
+		
+		
+		
 	    Category_model category_model = new Category_model();
 	    Invoice_model invoice_model = new Invoice_model();
 

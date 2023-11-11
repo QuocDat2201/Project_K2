@@ -12,9 +12,14 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 
 import java.awt.FlowLayout;
+import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -64,34 +69,30 @@ public class JPChartProduct extends JPanel {
 		
 	}
 	private void fill() {
-		 YearMonth yearMonth = YearMonth.of(2023,jmonthChooser.getMonth());
-	        long daysInMonth = ChronoUnit.DAYS.between(yearMonth.atDay(1), yearMonth.atEndOfMonth()) + 1;
-	    Category_model category_model = new Category_model();
-	    Invoice_model invoice_model = new Invoice_model();
+	    Invoice_model invoice_model1 = new Invoice_model();
+	    Map<String, List> map = invoice_model1.findProductMap();
+	    List<Date> dates = map.get("dates");
+	    String[] dates2 = new String[dates.size()];
+	    List<Double> values = map.get("values");
+	    double[] valuesArray = new double[values.size()];
+	    List<String> nameProduct = map.get("nameproducts");
+	    String[] nameStrings = new String[nameProduct.size()];
 
-	    List<Double> totals = invoice_model.findtotal();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	   
-	    double[] valuesArray =
-
-	    for (int i = 0; i < daysInMonth; i++) {
-	        if (totals.size()>i) {
-	        	 Double total = totals.get(i);
-	        	 valuesArray[i] = total;
-			}
-	       
-
-	        categoriesArray[i] = category.getCategoryName();
-	       
+	    for (int i = 0; i < dates.size(); i++) {
+	        dates2[i] = dateFormat.format(dates.get(i));
+	        valuesArray[i] = values.get(i);
+	        nameStrings[i] = nameProduct.get(i);
 	    }
 
 	    String namechart = "Biểu đồ doanh số theo danh mục trong tháng 10";
 	    int x = JFrameLogin.frameWidth - 140;
 	    int y = JFrameLogin.frameHeight - 400;
-	    Chartbar Chartbar=new Chartbar(namechart, categoriesArray,"USD", "Category", x, y, valuesArray);
+	    Chartbar chartBar = new Chartbar(namechart, dates2, "USD", "Category", x, y, valuesArray);
 	    jpanel_1.removeAll();
 	    jpanel_1.revalidate();
-	    jpanel_1.add(Chartbar);
+	    jpanel_1.add(chartBar);
 	    jpanel_1.setVisible(true);
 	}
 

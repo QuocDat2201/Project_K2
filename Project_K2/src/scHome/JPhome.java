@@ -51,9 +51,19 @@ public class JPhome extends JPanel {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem bieudocategogy = new JMenuItem("ChartCategory");
+		bieudocategogy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_bieudocategogy_actionPerformed(e);
+			}
+		});
 		mnNewMenu.add(bieudocategogy);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("ChartProduct");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmNewMenuItem_2_actionPerformed(e);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("BieudoDoanhthu");
@@ -83,9 +93,23 @@ public class JPhome extends JPanel {
 	}
 	protected void do_mnNewMenu_actionPerformed(ActionEvent e) {
 		jpanel.removeAll();
-//		jpanel.revalidate();
-//		bieudo bieudo1=new bieudo();
-//		jpanel.add(bieudo1);
-//		jpanel.setVisible(true);
+		jpanel.revalidate();
+		bieudo bieudo1=new bieudo();
+		jpanel.add(bieudo1);
+		jpanel.setVisible(true);
+	}
+	protected void do_bieudocategogy_actionPerformed(ActionEvent e) {
+		jpanel.removeAll();
+		jpanel.revalidate();
+		bieudo bieudo1=new bieudo();
+		jpanel.add(bieudo1);
+		jpanel.setVisible(true);
+	}
+	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {
+		jpanel.removeAll();
+		jpanel.revalidate();
+		JPChartProduct bieudo1=new JPChartProduct();
+		jpanel.add(bieudo1);
+		jpanel.setVisible(true);
 	}
 }
