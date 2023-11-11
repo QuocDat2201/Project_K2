@@ -7,7 +7,6 @@ import entites.Products;
 import models.Category_model;
 import models.Invoice_model;
 import models.Product_model;
-import scInvoice.JPaddInvoice.ProductCellRender;
 import screen.JFrameLogin;
 
 import java.awt.BorderLayout;
@@ -111,7 +110,7 @@ public class JPChartProduct extends JPanel {
 	        
 	    }
 
-	    String namechart = "Biểu đồ doanh số cua san pham "+products2.getProductName()+"trong tháng 10";
+	    String namechart = "Biểu đồ doanh số cua san pham "+products2.getProductName()+"trong tháng "+jmonthChooser.getMonth();
 	    int x = JFrameLogin.frameWidth - 140;
 	    int y = JFrameLogin.frameHeight - 400;	    
 	    a sA =new a(namechart,dates2, x, y, valuesArray);

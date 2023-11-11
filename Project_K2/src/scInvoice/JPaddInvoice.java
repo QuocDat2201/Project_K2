@@ -266,7 +266,7 @@ public class JPaddInvoice extends JPanel {
 		fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
 	}
 
-	private class ProductCellRender extends DefaultListCellRenderer {
+	public class ProductCellRender extends DefaultListCellRenderer {
 
 		@Override
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
