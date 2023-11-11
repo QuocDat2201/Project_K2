@@ -174,22 +174,22 @@ public class Home extends JFrame {
 				new ImageIcon(Home.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
 		panel.add(jbtlistproduct);
 
-		JButton jbtsend = new JButton("Send");
-		jbtsend.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbtsend.setForeground(new Color(0, 0, 0));
-		jbtsend.setMinimumSize(new Dimension(59, 20));
-		jbtsend.setMaximumSize(new Dimension(190, 50));
-		jbtsend.setBackground(new Color(255, 0, 0));
-		jbtsend.setBorder(new LineBorder(new Color(255, 128, 255), 3));
-		jbtsend.setHorizontalTextPosition(SwingConstants.RIGHT);
-		jbtsend.setHorizontalAlignment(SwingConstants.LEFT);
-		jbtsend.addActionListener(new ActionListener() {
+		JButton jbtreport = new JButton("Reports");
+		jbtreport.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtreport.setForeground(new Color(0, 0, 0));
+		jbtreport.setMinimumSize(new Dimension(59, 20));
+		jbtreport.setMaximumSize(new Dimension(190, 50));
+		jbtreport.setBackground(new Color(255, 0, 0));
+		jbtreport.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbtreport.setHorizontalTextPosition(SwingConstants.RIGHT);
+		jbtreport.setHorizontalAlignment(SwingConstants.LEFT);
+		jbtreport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_1_actionPerformed(e);
 			}
 		});
-		jbtsend.setIcon(new ImageIcon(Home.class.getResource("/Icon/Comment.png")));
-		panel.add(jbtsend);
+		jbtreport.setIcon(new ImageIcon(Home.class.getResource("/Icon/report.png")));
+		panel.add(jbtreport);
 
 		jbtaccount = new JButton("Account");
 		jbtaccount.setFont(new Font("Segoe Print", Font.BOLD, 15));
