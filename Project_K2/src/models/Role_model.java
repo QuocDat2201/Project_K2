@@ -30,7 +30,7 @@ public class Role_model {
 	public List<Role> findExcept(int roleid) {
 		List<Role> roles = new ArrayList<Role>();
 		try {
-			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from role where Role_id != ?");
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from role where Role_id != ? and Role_id != 1");
 			preparedStatement.setInt(1, roleid);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {

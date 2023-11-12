@@ -10,25 +10,6 @@ import entites.Report;
 
 
 public class Report_model {
-	public boolean Create(Report report) {
-		boolean result = true;
-		try {
-			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("insert into report(content, role_sent, role_report, created) values(?,?,?,?)");
-			preparedStatement.setString(1, report.getContent());
-			preparedStatement.setInt(2, report.getRole_sent());
-			preparedStatement.setInt(3, report.getRole_report());
-			preparedStatement.setDate(4, new java.sql.Date(report.getCreate().getTime()));
-			result = preparedStatement.executeUpdate() > 0;
-		} catch (Exception e) {
-			e.printStackTrace();
-			result = false;
-		} finally {
-			ConnectDB.disconnect();
-		}
-		return result;
-	}
-	
 	public List<Report> findall() {
 		List<Report> reports = new ArrayList<Report>();
 		try {
@@ -449,5 +430,26 @@ public class Report_model {
 			ConnectDB.disconnect();
 		}
 		return reports;
+	}
+	/******************************End Model Panel History********************************/
+
+	/******************************Start Model Panel Send********************************/
+	public boolean Send(Report report) {
+		boolean result = true;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("insert into report(content, role_sent, role_report, created) values(?,?,?,?)");
+			preparedStatement.setString(1, report.getContent());
+			preparedStatement.setInt(2, report.getRole_sent());
+			preparedStatement.setInt(3, report.getRole_report());
+			preparedStatement.setDate(4, new java.sql.Date(report.getCreate().getTime()));
+			result = preparedStatement.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return result;
 	}
 }

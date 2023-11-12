@@ -68,9 +68,10 @@ public class JPsendNotifi extends JPanel {
 	private JDateChooser jdateChooser_to_history;
 	private JButton jButton_Send;
 	private JButton jButton_Cancel;
-	private JComboBox jcomboBox_senddate;
 	private JComboBox jcomboBox_sendto;
 	private JTextArea jtextArea_send;
+	private JDateChooser jdateChooser_sendDate;
+	private Report reports;
 	/**
 	 * Create the panel.
 	 */
@@ -99,6 +100,11 @@ public class JPsendNotifi extends JPanel {
 		menuBar.add(jMenuItem_Reports_History);
 		
 		JMenuItem jMenuItem_send = new JMenuItem("Send Reports");
+		jMenuItem_send.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jMenuItem_send_actionPerformed(e);
+			}
+		});
 		jMenuItem_send.setIcon(new ImageIcon(JPsendNotifi.class.getResource("/Small_Icon/send.png")));
 		menuBar.add(jMenuItem_send);
 		
@@ -252,10 +258,20 @@ public class JPsendNotifi extends JPanel {
 		panel_select_role.add(jcomboBox_sendto);
 		
 		jButton_Send = new JButton("Send");
+		jButton_Send.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jButton_Send_actionPerformed(e);
+			}
+		});
 		jButton_Send.setBounds(520, 164, 85, 28);
 		panel_send.add(jButton_Send);
 		
 		jButton_Cancel = new JButton("Cancel");
+		jButton_Cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jButton_Cancel_actionPerformed(e);
+			}
+		});
 		jButton_Cancel.setBounds(425, 164, 85, 28);
 		panel_send.add(jButton_Cancel);
 		
@@ -265,9 +281,11 @@ public class JPsendNotifi extends JPanel {
 		panel_date.setBounds(313, 95, 292, 65);
 		panel_send.add(panel_date);
 		
-		jcomboBox_senddate = new JComboBox();
-		jcomboBox_senddate.setBounds(10, 24, 272, 28);
-		panel_date.add(jcomboBox_senddate);
+		jdateChooser_sendDate = new JDateChooser();
+		jdateChooser_sendDate.setEnabled(false);
+		jdateChooser_sendDate.setDateFormatString("d/MM/y");
+		jdateChooser_sendDate.setBounds(10, 27, 272, 28);
+		panel_date.add(jdateChooser_sendDate);
 
 	}
 	public JPsendNotifi(Map<String, Object> ob) {
@@ -276,7 +294,7 @@ public class JPsendNotifi extends JPanel {
 		initJFrame();
 	}
 	
-/************************** Start of Panel List****************************/
+/**************************Start of Panel List****************************/
 	private void initJFrame() {
 		Users users = (Users) dataMap.get("user");
 		Role_model role_model = new Role_model();
@@ -400,9 +418,9 @@ public class JPsendNotifi extends JPanel {
 			break;
 		}
 	}
-	/************************** End of Panel List****************************/
+	/**************************End of Panel List****************************/
 	
-	/************************** Start of Panel History****************************/
+	/**************************Start of Panel History****************************/
 	
 	protected void jMenuItem_Reports_History_actionPerformed(ActionEvent e) {
 		panel_history.setVisible(true);
@@ -492,4 +510,68 @@ public class JPsendNotifi extends JPanel {
 			break;
 		}
 	}
+	
+	/**************************End of Panel History****************************/
+	
+	/**************************Start of Panel Send****************************/
+	protected void jMenuItem_send_actionPerformed(ActionEvent e) {
+		panel_send.setVisible(true);	
+		panel_list.setVisible(false);
+		panel_history.setVisible(false);
+		
+		Users users = (Users) dataMap.get("user");
+		Role_model role_model = new Role_model();
+		DefaultComboBoxModel<Role> model = new DefaultComboBoxModel<Role>();
+		for (Role role : role_model.findExcept(users.getRoleID())) {
+			model.addElement(role);
+		}
+		jcomboBox_sendto.setModel(model);
+		jcomboBox_sendto.setRenderer(new SendListCellRender());
+		
+		jdateChooser_sendDate.setDate(new Date());
+	}
+	
+	private class SendListCellRender extends DefaultListCellRenderer{
+
+		@Override
+		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
+			Role role = (Role) value;
+			return super.getListCellRendererComponent(list, role.getRole_Name(), index, isSelected, cellHasFocus);
+		}
+		
+	}
+	protected void jButton_Send_actionPerformed(ActionEvent e) {
+		Report report = new Report();
+		Users users = (Users) dataMap.get("user");
+		Report_model report_model = new Report_model();
+		Role role = (Role) jcomboBox_sendto.getSelectedItem();
+		
+		String Text = jtextArea_send.getText();
+		report.setRole_sent(users.getRoleID());
+		report.setRole_report(role.getRole_id());
+		report.setCreate(jdateChooser_sendDate.getDate());
+		
+		if (Text == null) {
+			JOptionPane.showMessageDialog(null, "You need to ENTER your report !");
+		} else {
+			report.setContent(Text);
+			
+			if (report_model.Send(report)) {
+				JOptionPane.showMessageDialog(null, "Sent Successfully !");
+				jtextArea_send.setText("");
+				jcomboBox_sendto.setSelectedIndex(0);
+			} else {
+				JOptionPane.showMessageDialog(null, "Send Failed !");
+			}
+		}
+		System.out.println(users.getRoleID());
+	}
+	
+	protected void jButton_Cancel_actionPerformed(ActionEvent e) {
+		jtextArea_send.setText("");
+		jcomboBox_sendto.setSelectedIndex(0);
+	}
+	
+	/**************************End of Panel Send****************************/
 }
