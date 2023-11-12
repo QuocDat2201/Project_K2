@@ -671,7 +671,6 @@ public class JPstorage extends JPanel {
 		Product_model product_model = new Product_model();
 		JTableHeader header = (JTableHeader) e.getSource();
 		int column = header.columnAtPoint(e.getPoint());
-		int column2 = header.columnAtPoint(e.getPoint());
 
 		switch (column) {
 		case 0:

@@ -32,6 +32,7 @@ import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import entites.Report;
 import entites.Role;
@@ -48,6 +49,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JPsendNotifi extends JPanel {
 	private  Map<String,Object> dataMap = new HashMap<String, Object>();
@@ -60,6 +63,14 @@ public class JPsendNotifi extends JPanel {
 	private JDateChooser jdateChooser_from;
 	private JDateChooser jdateChooser_to;
 	private JComboBox jcomboBox_list;
+	private JButton jButton_searchHistory;
+	private JDateChooser jdateChooser_from_history;
+	private JDateChooser jdateChooser_to_history;
+	private JButton jButton_Send;
+	private JButton jButton_Cancel;
+	private JComboBox jcomboBox_senddate;
+	private JComboBox jcomboBox_sendto;
+	private JTextArea jtextArea_send;
 	/**
 	 * Create the panel.
 	 */
@@ -79,6 +90,11 @@ public class JPsendNotifi extends JPanel {
 		menuBar.add(jMenuItem_Reports);
 		
 		JMenuItem jMenuItem_Reports_History = new JMenuItem("Reports History");
+		jMenuItem_Reports_History.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jMenuItem_Reports_History_actionPerformed(e);
+			}
+		});
 		jMenuItem_Reports_History.setIcon(new ImageIcon(JPsendNotifi.class.getResource("/Small_Icon/clipboard.png")));
 		menuBar.add(jMenuItem_Reports_History);
 		
@@ -100,6 +116,12 @@ public class JPsendNotifi extends JPanel {
 		panel_list.add(jscrollPane);
 		
 		jtable_Reports_List = new JTable();
+		jtable_Reports_List.getTableHeader().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				jtable_Reports_List_mouseClicked(e);
+			}
+		});
 		jscrollPane.setViewportView(jtable_Reports_List);
 		
 		JPanel panel_search_date_list = new JPanel();
@@ -162,30 +184,28 @@ public class JPsendNotifi extends JPanel {
 		panel_history.add(jscrollPane_history);
 		
 		jtable_history = new JTable();
+		jtable_history.getTableHeader().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				jtable_history_mouseClicked(e);
+			}
+		});
 		jscrollPane_history.setViewportView(jtable_history);
-		
-		JPanel panel_sort_role_history = new JPanel();
-		panel_sort_role_history.setLayout(null);
-		panel_sort_role_history.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Sort By Role", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_sort_role_history.setBounds(312, 20, 292, 134);
-		panel_history.add(panel_sort_role_history);
-		
-		JComboBox comboBox_history = new JComboBox();
-		comboBox_history.setBounds(10, 27, 272, 27);
-		panel_sort_role_history.add(comboBox_history);
 		
 		JPanel panel_search_date_history = new JPanel();
 		panel_search_date_history.setLayout(null);
 		panel_search_date_history.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Search By Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_search_date_history.setBounds(10, 18, 292, 134);
+		panel_search_date_history.setBounds(162, 18, 292, 134);
 		panel_history.add(panel_search_date_history);
 		
-		JDateChooser jdateChooser_from_history = new JDateChooser();
+		jdateChooser_from_history = new JDateChooser();
+		jdateChooser_from_history.setDateFormatString("d/MM/y");
 		jdateChooser_from_history.setBounds(54, 23, 228, 28);
 		panel_search_date_history.add(jdateChooser_from_history);
 		
-		JDateChooser jdateChooser_to_history = new JDateChooser();
-		jdateChooser_to_history.setBounds(54, 73, 228, 28);
+		jdateChooser_to_history = new JDateChooser();
+		jdateChooser_to_history.setDateFormatString("d/MM/y");
+		jdateChooser_to_history.setBounds(54, 61, 228, 28);
 		panel_search_date_history.add(jdateChooser_to_history);
 		
 		JLabel jLabel_from_history = new JLabel("From");
@@ -195,8 +215,17 @@ public class JPsendNotifi extends JPanel {
 		
 		JLabel jLabel_To_history = new JLabel("To");
 		jLabel_To_history.setHorizontalAlignment(SwingConstants.RIGHT);
-		jLabel_To_history.setBounds(10, 73, 34, 28);
+		jLabel_To_history.setBounds(10, 61, 34, 28);
 		panel_search_date_history.add(jLabel_To_history);
+		
+		jButton_searchHistory = new JButton("Search");
+		jButton_searchHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jButton_searchHistory_actionPerformed(e);
+			}
+		});
+		jButton_searchHistory.setBounds(107, 99, 85, 21);
+		panel_search_date_history.add(jButton_searchHistory);
 		
 		panel_send = new JPanel();
 		panel_send.setLayout(null);
@@ -205,30 +234,40 @@ public class JPsendNotifi extends JPanel {
 		
 		JScrollPane jscrollPane_send = new JScrollPane();
 		jscrollPane_send.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		jscrollPane_send.setBounds(10, 20, 292, 370);
+		jscrollPane_send.setBounds(10, 20, 293, 370);
 		panel_send.add(jscrollPane_send);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setLineWrap(true);
-		jscrollPane_send.setViewportView(textArea);
+		jtextArea_send = new JTextArea();
+		jtextArea_send.setLineWrap(true);
+		jscrollPane_send.setViewportView(jtextArea_send);
 		
 		JPanel panel_select_role = new JPanel();
 		panel_select_role.setLayout(null);
 		panel_select_role.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send To", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_select_role.setBounds(313, 20, 292, 134);
+		panel_select_role.setBounds(313, 20, 292, 65);
 		panel_send.add(panel_select_role);
 		
-		JComboBox jcomboBox_sendto = new JComboBox();
+		jcomboBox_sendto = new JComboBox();
 		jcomboBox_sendto.setBounds(10, 24, 272, 28);
 		panel_select_role.add(jcomboBox_sendto);
 		
-		JButton jButton_Send = new JButton("Send");
+		jButton_Send = new JButton("Send");
 		jButton_Send.setBounds(520, 164, 85, 28);
 		panel_send.add(jButton_Send);
 		
-		JButton jButton_Cancel = new JButton("Cancel");
+		jButton_Cancel = new JButton("Cancel");
 		jButton_Cancel.setBounds(425, 164, 85, 28);
 		panel_send.add(jButton_Cancel);
+		
+		JPanel panel_date = new JPanel();
+		panel_date.setLayout(null);
+		panel_date.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_date.setBounds(313, 95, 292, 65);
+		panel_send.add(panel_date);
+		
+		jcomboBox_senddate = new JComboBox();
+		jcomboBox_senddate.setBounds(10, 24, 272, 28);
+		panel_date.add(jcomboBox_senddate);
 
 	}
 	public JPsendNotifi(Map<String, Object> ob) {
@@ -237,7 +276,7 @@ public class JPsendNotifi extends JPanel {
 		initJFrame();
 	}
 	
-/**************************panel list****************************/
+/************************** Start of Panel List****************************/
 	private void initJFrame() {
 		Users users = (Users) dataMap.get("user");
 		Role_model role_model = new Role_model();
@@ -326,6 +365,131 @@ public class JPsendNotifi extends JPanel {
 			FillDataToJTableList(report_model.SearchRole(role.getRole_id(), users.getRoleID()));
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(null, "Cannot Find!");
+		}
+	}
+	
+	protected void jtable_Reports_List_mouseClicked(MouseEvent e) {
+		Users users = (Users) dataMap.get("user");
+		Report_model report_model = new Report_model();
+		JTableHeader header = (JTableHeader) e.getSource();
+		int column = header.columnAtPoint(e.getPoint());
+		
+		switch (column) {
+		case 0:
+			if (e.getClickCount() % 2 ==0) {
+				FillDataToJTableList(report_model.Sort_ID_desc(users.getRoleID()));
+			} else {
+				FillDataToJTableList(report_model.Sort_ID_asc(users.getRoleID()));
+			}
+			break;
+		case 2:
+			if (e.getClickCount() % 2 ==0) {
+				FillDataToJTableList(report_model.Sort_Role_desc(users.getRoleID()));
+			} else {
+				FillDataToJTableList(report_model.Sort_Role_asc(users.getRoleID()));
+			}
+			break;
+		case 3:
+			if (e.getClickCount() % 2 ==0) {
+				FillDataToJTableList(report_model.Sort_Date_desc(users.getRoleID()));
+			} else {
+				FillDataToJTableList(report_model.Sort_Date_asc(users.getRoleID()));
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	/************************** End of Panel List****************************/
+	
+	/************************** Start of Panel History****************************/
+	
+	protected void jMenuItem_Reports_History_actionPerformed(ActionEvent e) {
+		panel_history.setVisible(true);
+		panel_list.setVisible(false);
+		panel_send.setVisible(false);
+		
+		Users users = (Users) dataMap.get("user");
+		Role_model role_model = new Role_model();
+		int role_from = users.getRoleID();
+		Report_model report_model = new Report_model();
+		FillDataToJTableHistory(report_model.findhistory(role_from));
+	}
+	
+	public void FillDataToJTableHistory(List<Report> reports) {
+		Report_model report_model = new Report_model();
+		DefaultTableModel models = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
+		models.addColumn("Report's ID");
+		models.addColumn("Content");
+		models.addColumn("From");
+		models.addColumn("Created");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		for (Report report : reports) {
+			String role = null;
+			if (report.getRole_sent() == 1) {
+				role = "Admin";
+			} else if (report.getRole_sent() == 2) {
+				role = "Storage Manager";
+			} else if (report.getRole_sent() == 3) {
+				role = "Saler";
+			} else if (report.getRole_sent() == 4) {
+				role = "Sale Manager";
+			}
+			
+			models.addRow(new Object[] {
+				report.getId(),
+				report.getContent(),
+				role,
+				simpleDateFormat.format(report.getCreate())
+			});
+		}
+		
+		jtable_history.setModel(models);
+		jtable_history.getTableHeader().setReorderingAllowed(false);
+	}
+	
+	protected void jButton_searchHistory_actionPerformed(ActionEvent e) {
+		try {
+			Users users = (Users) dataMap.get("user");
+			Report_model report_model = new Report_model();
+			
+			Date from = jdateChooser_from_history.getDate();
+			Date to = jdateChooser_to_history.getDate();
+			FillDataToJTableHistory(report_model.SearchDateHistory(from, to ,users.getRoleID()));
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, e2.getMessage());
+		}
+	}
+	
+	
+	protected void jtable_history_mouseClicked(MouseEvent e) {
+		Users users = (Users) dataMap.get("user");
+		Report_model report_model = new Report_model();
+		JTableHeader header = (JTableHeader) e.getSource();
+		int column = header.columnAtPoint(e.getPoint());
+		
+		switch (column) {
+		case 0:
+			if (e.getClickCount() % 2 ==0) {
+				FillDataToJTableHistory(report_model.Sort_IDhistory_desc(users.getRoleID()));
+			} else {
+				FillDataToJTableHistory(report_model.Sort_IDhistory_asc(users.getRoleID()));
+			}
+			break;
+		case 3:
+			if (e.getClickCount() % 2 ==0) {
+				FillDataToJTableHistory(report_model.Sort_Datehistoy_desc(users.getRoleID()));
+			} else {
+				FillDataToJTableHistory(report_model.Sort_Datehistory_asc(users.getRoleID()));
+			}
+			break;
+		default:
+			break;
 		}
 	}
 }
