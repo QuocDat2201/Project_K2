@@ -51,6 +51,8 @@ import javax.swing.ScrollPaneConstants;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPopupMenu;
+import javax.swing.ListSelectionModel;
 
 public class JPsendNotifi extends JPanel {
 	private  Map<String,Object> dataMap = new HashMap<String, Object>();
@@ -72,6 +74,17 @@ public class JPsendNotifi extends JPanel {
 	private JTextArea jtextArea_send;
 	private JDateChooser jdateChooser_sendDate;
 	private Report reports;
+	private JPopupMenu jpopupMenu_List;
+	private JMenuItem jMenuItem_Detail;
+	private JPanel panel_details;
+	private JScrollPane jscrollPane_reportdetails;
+	private JPanel panel_RoleReportDetails;
+	private JPanel jpanel_DateReportDetails;
+	private JDateChooser jdateChooser_ReportDetails;
+	private JTextArea jtextArea_reportdetails;
+	private JTextField jtextField_RoleReportDetails;
+	private JPopupMenu jpopupMenu_History;
+	private JMenuItem jMenuItem_DetailsHistory;
 	/**
 	 * Create the panel.
 	 */
@@ -122,12 +135,25 @@ public class JPsendNotifi extends JPanel {
 		panel_list.add(jscrollPane);
 		
 		jtable_Reports_List = new JTable();
+		jtable_Reports_List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jtable_Reports_List.getTableHeader().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				jtable_Reports_List_mouseClicked(e);
 			}
 		});
+		
+		jpopupMenu_List = new JPopupMenu();
+		addPopup(jscrollPane, jpopupMenu_List);
+		
+		jMenuItem_Detail = new JMenuItem("More Details");
+		jMenuItem_Detail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jMenuItem_Detail_actionPerformed(e);
+			}
+		});
+		jMenuItem_Detail.setIcon(new ImageIcon(JPsendNotifi.class.getResource("/Small_Icon/file.png")));
+		jpopupMenu_List.add(jMenuItem_Detail);
 		jscrollPane.setViewportView(jtable_Reports_List);
 		
 		JPanel panel_search_date_list = new JPanel();
@@ -190,12 +216,25 @@ public class JPsendNotifi extends JPanel {
 		panel_history.add(jscrollPane_history);
 		
 		jtable_history = new JTable();
+		jtable_history.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jtable_history.getTableHeader().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				jtable_history_mouseClicked(e);
 			}
 		});
+		
+		jpopupMenu_History = new JPopupMenu();
+		addPopup(jscrollPane_history, jpopupMenu_History);
+		
+		jMenuItem_DetailsHistory = new JMenuItem("Details");
+		jMenuItem_DetailsHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jMenuItem_DetailsHistory_actionPerformed(e);
+			}
+		});
+		jMenuItem_DetailsHistory.setIcon(new ImageIcon(JPsendNotifi.class.getResource("/Small_Icon/file.png")));
+		jpopupMenu_History.add(jMenuItem_DetailsHistory);
 		jscrollPane_history.setViewportView(jtable_history);
 		
 		JPanel panel_search_date_history = new JPanel();
@@ -286,6 +325,45 @@ public class JPsendNotifi extends JPanel {
 		jdateChooser_sendDate.setDateFormatString("d/MM/y");
 		jdateChooser_sendDate.setBounds(10, 27, 272, 28);
 		panel_date.add(jdateChooser_sendDate);
+		
+		panel_details = new JPanel();
+		panel_details.setLayout(null);
+		panel_details.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Report Detail", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_main.add(panel_details, "name_10196213263200");
+		
+		jscrollPane_reportdetails = new JScrollPane();
+		jscrollPane_reportdetails.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		jscrollPane_reportdetails.setBounds(10, 20, 293, 370);
+		panel_details.add(jscrollPane_reportdetails);
+		
+		jtextArea_reportdetails = new JTextArea();
+		jtextArea_reportdetails.setLineWrap(true);
+		jtextArea_reportdetails.setEditable(false);
+		jscrollPane_reportdetails.setViewportView(jtextArea_reportdetails);
+		
+		panel_RoleReportDetails = new JPanel();
+		panel_RoleReportDetails.setLayout(null);
+		panel_RoleReportDetails.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send From", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_RoleReportDetails.setBounds(313, 20, 292, 65);
+		panel_details.add(panel_RoleReportDetails);
+		
+		jtextField_RoleReportDetails = new JTextField();
+		jtextField_RoleReportDetails.setEditable(false);
+		jtextField_RoleReportDetails.setBounds(10, 27, 272, 28);
+		panel_RoleReportDetails.add(jtextField_RoleReportDetails);
+		jtextField_RoleReportDetails.setColumns(10);
+		
+		jpanel_DateReportDetails = new JPanel();
+		jpanel_DateReportDetails.setLayout(null);
+		jpanel_DateReportDetails.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		jpanel_DateReportDetails.setBounds(313, 95, 292, 65);
+		panel_details.add(jpanel_DateReportDetails);
+		
+		jdateChooser_ReportDetails = new JDateChooser();
+		jdateChooser_ReportDetails.setEnabled(false);
+		jdateChooser_ReportDetails.setDateFormatString("d/MM/y");
+		jdateChooser_ReportDetails.setBounds(10, 27, 272, 28);
+		jpanel_DateReportDetails.add(jdateChooser_ReportDetails);
 
 	}
 	public JPsendNotifi(Map<String, Object> ob) {
@@ -308,12 +386,14 @@ public class JPsendNotifi extends JPanel {
 		}
 		jcomboBox_list.setModel(model);
 		jcomboBox_list.setRenderer(new ListCellRender());
+		jtable_Reports_List.setComponentPopupMenu(jpopupMenu_List);
 	}
 	
 	protected void jMenuItem_Reports_actionPerformed(ActionEvent e) {
 		panel_list.setVisible(true);
 		panel_history.setVisible(false);
 		panel_send.setVisible(false);
+		panel_details.setVisible(false);
 	}
 	
 	public void FillDataToJTableList(List<Report> reports) {
@@ -418,6 +498,24 @@ public class JPsendNotifi extends JPanel {
 			break;
 		}
 	}
+	
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 	/**************************End of Panel List****************************/
 	
 	/**************************Start of Panel History****************************/
@@ -426,12 +524,14 @@ public class JPsendNotifi extends JPanel {
 		panel_history.setVisible(true);
 		panel_list.setVisible(false);
 		panel_send.setVisible(false);
+		panel_details.setVisible(false);
 		
 		Users users = (Users) dataMap.get("user");
 		Role_model role_model = new Role_model();
 		int role_from = users.getRoleID();
 		Report_model report_model = new Report_model();
 		FillDataToJTableHistory(report_model.findhistory(role_from));
+		jtable_history.setComponentPopupMenu(jpopupMenu_History);
 	}
 	
 	public void FillDataToJTableHistory(List<Report> reports) {
@@ -518,6 +618,7 @@ public class JPsendNotifi extends JPanel {
 		panel_send.setVisible(true);	
 		panel_list.setVisible(false);
 		panel_history.setVisible(false);
+		panel_details.setVisible(false);
 		
 		Users users = (Users) dataMap.get("user");
 		Role_model role_model = new Role_model();
@@ -529,6 +630,7 @@ public class JPsendNotifi extends JPanel {
 		jcomboBox_sendto.setRenderer(new SendListCellRender());
 		
 		jdateChooser_sendDate.setDate(new Date());
+		
 	}
 	
 	private class SendListCellRender extends DefaultListCellRenderer{
@@ -574,4 +676,66 @@ public class JPsendNotifi extends JPanel {
 	}
 	
 	/**************************End of Panel Send****************************/
+	
+	/**************************Start of Panel Details List****************************/
+	protected void jMenuItem_Detail_actionPerformed(ActionEvent e) {
+		panel_details.setVisible(true);
+		panel_send.setVisible(false);	
+		panel_list.setVisible(false);
+		panel_history.setVisible(false);
+		panel_RoleReportDetails.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send From", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		Users users = (Users) dataMap.get("user");
+		Report_model report_model = new Report_model();
+		Role_model role_model = new Role_model();
+		
+		int selected = jtable_Reports_List.getSelectedRow();
+		int id = Integer.parseInt(jtable_Reports_List.getValueAt(selected, 0).toString());
+		
+		reports = report_model.findID(id);
+		jtextArea_reportdetails.setText(reports.getContent());
+		int role = reports.getRole_sent();
+		if (role == 2) {
+			jtextField_RoleReportDetails.setText("Storage Manager");
+		} else if (role == 3) {
+			jtextField_RoleReportDetails.setText("Saler");
+		} else if (role == 4) {
+			jtextField_RoleReportDetails.setText("Sale Manager");
+		} else if (role == 1) {
+			jtextField_RoleReportDetails.setText("Admin");
+		}
+		jdateChooser_ReportDetails.setDate(reports.getCreate());
+	}
+	/**************************End of Panel Details List****************************/
+	
+	/**************************Start of Panel Details History****************************/
+	protected void jMenuItem_DetailsHistory_actionPerformed(ActionEvent e) {
+		panel_details.setVisible(true);
+		panel_send.setVisible(false);	
+		panel_list.setVisible(false);
+		panel_history.setVisible(false);
+		panel_RoleReportDetails.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send To", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		Users users = (Users) dataMap.get("user");
+		Report_model report_model = new Report_model();
+		Role_model role_model = new Role_model();
+		
+		int selected = jtable_history.getSelectedRow();
+		int id = Integer.parseInt(jtable_history.getValueAt(selected, 0).toString());
+		
+		reports = report_model.findID(id);
+		jtextArea_reportdetails.setText(reports.getContent());
+		int role = reports.getRole_report();
+		if (role == 2) {
+			jtextField_RoleReportDetails.setText("Storage Manager");
+		} else if (role == 3) {
+			jtextField_RoleReportDetails.setText("Saler");
+		} else if (role == 4) {
+			jtextField_RoleReportDetails.setText("Sale Manager");
+		} else if (role == 1) {
+			jtextField_RoleReportDetails.setText("Admin");
+		}
+		jdateChooser_ReportDetails.setDate(reports.getCreate());
+	}
+	/**************************End of Panel Details History****************************/
 }

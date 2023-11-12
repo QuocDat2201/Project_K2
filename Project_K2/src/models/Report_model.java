@@ -452,4 +452,32 @@ public class Report_model {
 		}
 		return result;
 	}
+	/******************************End Model Panel Send********************************/
+	
+	/******************************Start Model Panel Details List********************************/
+	
+	public Report findID(int role) {
+		Report report = new Report();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("select * from report where id = ?");
+			preparedStatement.setInt(1, role);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				report.setId(resultSet.getInt("id"));
+				report.setContent(resultSet.getString("content"));
+				report.setRole_report(resultSet.getInt("role_report"));
+				report.setRole_sent(resultSet.getInt("role_sent"));
+				report.setCreate(resultSet.getDate("created"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			report = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return report;
+	}
+	/******************************End Model Panel Details List********************************/
+	
 }

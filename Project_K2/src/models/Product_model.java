@@ -59,7 +59,6 @@ public class Product_model {
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
 			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
-				
 				product.setProductID(resultSet.getInt("ProductID"));
 				product.setProductName(resultSet.getString("ProductName"));
 				product.setCategory_id(resultSet.getInt("Category_id"));
