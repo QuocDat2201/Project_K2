@@ -18,7 +18,7 @@ public class Invoice_model {
 		boolean result = true;
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("insert into invoices( InvoiceDate, CustomerName,CustomerPhone, Status,Total) values(?,?,?,?)");
+					.prepareStatement("insert into invoices( InvoiceDate, CustomerName,CustomerPhone, Status,Total) values(?,?,?,?,?)");
 			
 			preparedStatement.setDate(1, new java.sql.Date(invoices.getInvoiceDate().getTime()));
 			preparedStatement.setString(2, invoices.getCustomerName());
