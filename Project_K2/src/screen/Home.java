@@ -279,6 +279,7 @@ public class Home extends JFrame {
 		JPsendNotifi jPsendNotifi = new JPsendNotifi(dataMap);
 		jpanel_2.add(jPsendNotifi);
 		jPsendNotifi.setVisible(true);
+		
 
 	}
 
