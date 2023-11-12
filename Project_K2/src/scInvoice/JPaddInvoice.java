@@ -462,7 +462,26 @@ public class JPaddInvoice extends JPanel {
 		sales.setProductName(((Products) jcomboBoxProductID.getSelectedItem()).getProductName());
 		sales.setQuantity(Integer.valueOf(jtextQuantily.getText()));
 		sales.setPrice(((Products) jcomboBoxProductID.getSelectedItem()).getPrice());
-		invoiceItemList.add(sales);
+		int j = 0, flag = 0;
+
+		for (Sales sales1 : invoiceItemList) {
+			if (sales1.getProductName()
+					.equalsIgnoreCase(((Products) jcomboBoxProductID.getSelectedItem()).getProductName())) {
+				sales.setQuantity(sales.getQuantity() + sales1.getQuantity());
+				invoiceItemList.set(j, sales);
+				flag = 1;
+				break;
+
+			}
+
+			j++;
+		}
+		if (flag == 0) {
+			invoiceItemList.add(sales);
+		} else {
+
+		}
+
 		fillDataToJTable1(invoiceItemList);
 		BigDecimal sum = new BigDecimal(0);
 		for (int i = 0; i < jtable1.getRowCount(); i++) {
@@ -485,32 +504,59 @@ public class JPaddInvoice extends JPanel {
 		Sales sales;
 		Customer customerr;
 		Invoices invoice = new Invoices();
-	
+		int flag = 1;
 
-		for (int i = 0; i < invoiceItemList.size(); i++) {
-			sales = invoiceItemList.get(i);
-			customer.setPoint(Integer.valueOf((int) (customer.getPoint() + Double.valueOf(jtotal.getText()) / 10)));
-			if (jNameCustomer.getText().equalsIgnoreCase("")) {
-				invoice.setCustomerName("Khach le");
-			} else {
-				invoice.setCustomerName(jNameCustomer.getText());
+		// tao hoa don
+		if (jNameCustomer.getText().equalsIgnoreCase("")) {
+			invoice.setCustomerName("Khach le");
+		} else {
+			invoice.setCustomerName(jNameCustomer.getText());
+		}
+		invoice.setCustomerPhone(jCustomerphone.getText());
+		invoice.setInvoiceDate(jdateChooser.getDate());
+		invoice.setStatus(true);
+		invoice.setTotal(new BigDecimal(jtotal.getText()));
+		if (model.Create(invoice)) {
+			//tao sale
+			for (int i = 0; i < invoiceItemList.size(); i++) {
+				sales = invoiceItemList.get(i);
+				int idInvoice = model.findAllsort().getInvoiceID();
+				sales.setInvoice_id(idInvoice);
+				if (sales_model.Create(sales)) {
+
+				} else {
+					flag = 0;
+					break;
+				}
 			}
-			invoice.setCustomerPhone(jCustomerphone.getText());
-			invoice.setInvoiceDate(jdateChooser.getDate());
-			invoice.setStatus(true);
-			invoice.setTotal(new BigDecimal(jtotal.getText()));
-			if (model.Create(invoice)) {
-				Integer iv=model.find
-			} else {
-				JOptionPane.showMessageDialog(null, "Invalid");
+		} else {
+			flag = 0;
+
+		}
+
+		// tao customer
+		customer.setPoint(Integer.valueOf((int) (customer.getPoint() + (Double.valueOf(jtotal.getText()) / 10))));
+		int flagCreateCustomer = 0;
+		for (Customer customert11 : customerModel.findAll()) {
+			if (customert11.getPhoneString().equalsIgnoreCase(jCustomerphone.getText())) {
+				customerModel.Update(customer);
+				flagCreateCustomer = 1;
 				break;
 			}
-			if (sales_model.Create(sales) && customerModel.create(customer)) {
-				
-			} else {
-				JOptionPane.showMessageDialog(null, "Invalid");
-			}
 		}
+		if (flagCreateCustomer == 0) {
+			customerModel.create(customer);
+		}
+		
+		
+		
+		if (flag == 1) {
+			JOptionPane.showMessageDialog(null, "Success");
+		} else {
+			JOptionPane.showMessageDialog(null, "Invalid");
+		}
+		customer = null;
+		invoiceItemList.clear();
 	}
 
 	protected void do_jCustomerName_keyReleased(KeyEvent e) {
@@ -523,12 +569,15 @@ public class JPaddInvoice extends JPanel {
 				if (jCustomerphone.getText().equalsIgnoreCase(customer1.getPhoneString())) {
 					jNameCustomer.setText(customer1.getNameString());
 					customer = customer1;
-				
-					BigDecimal tol = new BigDecimal(jtotal.getText());
+
+					double tol = Double.valueOf(jtotal.getText());
+
 					for (Rank rank : rankModel.findAll()) {
 						if (customer1.getPoint() >= rank.getPoint()) {
-							BigDecimal tol1 = tol.multiply(new BigDecimal(rank.getDiscount() / 100));
-							jtotal.setText(String.valueOf(tol.subtract(tol1)));
+							System.out.println(rank.getDiscount());
+							double tol1 = tol * (((double) rank.getDiscount()) / 100);
+							jtotal.setText(String.valueOf(tol - tol1));
+
 						}
 
 					}
@@ -543,10 +592,11 @@ public class JPaddInvoice extends JPanel {
 				customer.setPhoneString(jCustomerphone.getText());
 				customer.setPoint(0);
 				customer.setRank(1);
+				System.out.println("okokokok");
 			}
-		}else {
+		} else {
 			jNameCustomer.setText("");
 		}
-		
+
 	}
 }

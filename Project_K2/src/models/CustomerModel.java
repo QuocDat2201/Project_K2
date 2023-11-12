@@ -34,7 +34,25 @@ public class CustomerModel {
         }
         return result;
     }
-
+    public boolean Update(Customer customer) {
+        boolean result = true;
+        try {
+            PreparedStatement preparedStatement = ConnectDB.connection()
+                    .prepareStatement("UPDATE `customer` SET `Point` = ? WHERE `customer`.`PhoneNumber` = ?");
+   
+          
+            preparedStatement.setInt(1, customer.getPoint());
+            preparedStatement.setString(2, customer.getPhoneString());
+           
+            result = preparedStatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            ConnectDB.disconnect();
+        }
+        return result;
+    }
     // Phương thức để truy xuất tất cả khách hàng
     public List<Customer> findAll() {
         List<Customer> customers = new ArrayList<>();

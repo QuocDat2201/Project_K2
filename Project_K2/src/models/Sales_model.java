@@ -16,10 +16,12 @@ public class Sales_model {
 		boolean result = true;
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("insert into sales(ProductID, Quantity, Price) values(?,?,?)");
+					.prepareStatement("insert into sales(ProductID, Quantity, Price,invoice_id,Product_Name) values(?,?,?,?,?)");
 			preparedStatement.setInt(1, sales.getProductID());
 			preparedStatement.setInt(2, sales.getQuantity());
 			preparedStatement.setBigDecimal(3, sales.getPrice());
+			preparedStatement.setInt(4, sales.getInvoice_id());
+			preparedStatement.setString(5,sales.getProductName());
 			result = preparedStatement.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();

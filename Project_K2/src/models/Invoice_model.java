@@ -71,6 +71,27 @@ public class Invoice_model {
 		}
 		return invoices;
 	}
+	public Invoices findAllsort() {
+		Invoices invoices = new Invoices();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from invoices order by InvoiceID desc limit 1;");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {
+				invoices.setInvoiceID(resultSet.getInt("InvoiceID"));
+				invoices.setInvoiceDate(resultSet.getDate("InvoiceDate"));
+				invoices.setCustomerName(resultSet.getString("CustomerName"));
+				invoices.setCustomerPhone(resultSet.getString("CustomerPhone"));
+				invoices.setStatus(resultSet.getBoolean("Status"));
+				invoices.setTotal(resultSet.getBigDecimal("Total"));
+			}
+			
+		} catch (Exception e) {
+			invoices = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return invoices;
+	}
 	public Map<String,List> findProductMap(String name,int month) {
 		Map<String, List> map = new HashMap<String, List>();
 		List<Date> dates = new ArrayList<Date>();
