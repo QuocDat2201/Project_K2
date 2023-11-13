@@ -34,6 +34,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.border.TitledBorder;
 
 public class JPaddAcount extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -49,62 +50,61 @@ public class JPaddAcount extends JPanel {
 	public JPaddAcount() {
 		setLayout(new BorderLayout(0, 0));
 		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Create Account", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panel.setBackground(new Color(240, 240, 240));
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		panel.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Username");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(123, 76, 162, 25);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setBounds(40, 46, 176, 25);
 		panel.add(lblNewLabel);
 
 		jusername = new JTextField();
-		jusername.setBounds(295, 75, 176, 28);
+		jusername.setBounds(40, 73, 243, 28);
 		panel.add(jusername);
 		jusername.setColumns(10);
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPassword.setBounds(123, 111, 160, 25);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPassword.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPassword.setBounds(40, 111, 176, 25);
 		panel.add(lblPassword);
 
 		JLabel lblConfirmNewPassword = new JLabel("Confirm Password");
-		lblConfirmNewPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConfirmNewPassword.setBounds(123, 149, 162, 25);
+		lblConfirmNewPassword.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblConfirmNewPassword.setHorizontalAlignment(SwingConstants.LEFT);
+		lblConfirmNewPassword.setBounds(40, 172, 176, 25);
 		panel.add(lblConfirmNewPassword);
 
-		JLabel lblNewLabel_1 = new JLabel("Register");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(0, 21, 564, 32);
-		panel.add(lblNewLabel_1);
-
 		JLabel lblNewLabel_2 = new JLabel("Role");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(123, 181, 162, 25);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_2.setBounds(307, 46, 176, 25);
 		panel.add(lblNewLabel_2);
 
 		jcomboBox = new JComboBox();
-		jcomboBox.setBounds(295, 181, 176, 28);
+		jcomboBox.setBounds(307, 72, 247, 28);
 		panel.add(jcomboBox);
 
-		JButton Jbutton_register = new JButton("Register");
+		JButton Jbutton_register = new JButton("Create");
 		Jbutton_register.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Jbutton_register_actionPerformed(e);
 			}
 		});
-		Jbutton_register.setBounds(243, 229, 85, 21);
+		Jbutton_register.setBounds(469, 114, 85, 21);
 		panel.add(Jbutton_register);
 
 		Jpassword = new JPasswordField();
-		Jpassword.setBounds(295, 110, 176, 28);
+		Jpassword.setBounds(40, 134, 243, 28);
 		panel.add(Jpassword);
 
 		JConfirm_passwordField = new JPasswordField();
-		JConfirm_passwordField.setBounds(295, 148, 176, 28);
+		JConfirm_passwordField.setBounds(40, 195, 243, 28);
 		panel.add(JConfirm_passwordField);
-		panel.setLayout(new BorderLayout(0, 0));
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(128, 255, 0));

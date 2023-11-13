@@ -32,6 +32,7 @@ import entites.Users;
 import models.UsersModel;
 
 import java.awt.Font;
+import javax.swing.border.TitledBorder;
 
 public class JPaccount extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -55,6 +56,7 @@ public class JPaccount extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 
 		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Change Password", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panel.setBackground(new Color(240, 240, 240));
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -62,14 +64,13 @@ public class JPaccount extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Current Password");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(98, 70, 160, 25);
+		lblNewLabel.setBounds(168, 46, 176, 25);
 		panel.add(lblNewLabel);
 
 		jpass = new JPasswordField();
 		jpass.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		jpass.setBackground(new Color(255, 255, 255));
-		jpass.setBorder(new LineBorder(new Color(255, 255, 255)));
-		jpass.setBounds(268, 70, 170, 25);
+		jpass.setBounds(168, 73, 243, 28);
 		panel.add(jpass);
 		jpass.setColumns(10);
 		jeyecurent = new JButton();
@@ -84,11 +85,11 @@ public class JPaccount extends JPanel {
 		});
 		jeyecurent.setIcon(
 				new ImageIcon(JPaccount.class.getResource("/Icon/3994371_eye_hidden_hide_invisible_private_icon.png")));
-		jeyecurent.setBounds(448, 70, 25, 25);
+		jeyecurent.setBounds(421, 73, 25, 28);
 		panel.add(jeyecurent);
 		JLabel lblPassword = new JLabel("New Password");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblPassword.setBounds(98, 122, 160, 32);
+		lblPassword.setBounds(168, 111, 176, 25);
 		panel.add(lblPassword);
 		jeyenewpass = new JButton();
 		jeyenewpass.addActionListener(new ActionListener() {
@@ -101,42 +102,28 @@ public class JPaccount extends JPanel {
 		jeyenewpass.setBorderPainted(false);
 		jeyenewpass.setIcon(
 				new ImageIcon(JPaccount.class.getResource("/Icon/3994371_eye_hidden_hide_invisible_private_icon.png")));
-		jeyenewpass.setBounds(448, 126, 25, 25);
+		jeyenewpass.setBounds(421, 134, 25, 25);
 		panel.add(jeyenewpass);
 		jnewPassword = new JPasswordField();
 		jnewPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		jnewPassword.setBorder(new LineBorder(new Color(255, 255, 255)));
 		jnewPassword.setBackground(new Color(255, 255, 255));
 		jnewPassword.setVerifyInputWhenFocusTarget(false);
 
 		jnewPassword.setColumns(10);
-		jnewPassword.setBounds(268, 126, 170, 25);
+		jnewPassword.setBounds(168, 134, 243, 28);
 		panel.add(jnewPassword);
 
 		JLabel lblConfirmNewPassword = new JLabel("Confirm New Password");
 		lblConfirmNewPassword.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblConfirmNewPassword.setBounds(98, 176, 145, 39);
+		lblConfirmNewPassword.setBounds(168, 172, 176, 25);
 		panel.add(lblConfirmNewPassword);
 
 		jConfimNewPassword = new JPasswordField();
 		jConfimNewPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		jConfimNewPassword.setBorder(new LineBorder(new Color(255, 255, 255)));
 		jConfimNewPassword.setBackground(new Color(255, 255, 255));
 		jConfimNewPassword.setColumns(10);
-		jConfimNewPassword.setBounds(268, 183, 170, 25);
+		jConfimNewPassword.setBounds(168, 195, 243, 28);
 		panel.add(jConfimNewPassword);
-
-		JLabel lblNewLabel_1 = new JLabel("___________________________");
-		lblNewLabel_1.setBounds(268, 144, 186, 14);
-		panel.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_1_1 = new JLabel("___________________________");
-		lblNewLabel_1_1.setBounds(268, 201, 186, 14);
-		panel.add(lblNewLabel_1_1);
-
-		JLabel lblNewLabel_1_2 = new JLabel("__________________________");
-		lblNewLabel_1_2.setBounds(267, 87, 186, 14);
-		panel.add(lblNewLabel_1_2);
 
 		jeyenewpass_1 = new JButton();
 		jeyenewpass_1.addActionListener(new ActionListener() {
@@ -149,7 +136,7 @@ public class JPaccount extends JPanel {
 		jeyenewpass_1.setRequestFocusEnabled(false);
 		jeyenewpass_1.setContentAreaFilled(false);
 		jeyenewpass_1.setBorderPainted(false);
-		jeyenewpass_1.setBounds(448, 183, 25, 25);
+		jeyenewpass_1.setBounds(421, 195, 25, 25);
 		panel.add(jeyenewpass_1);
 
 		JButton jButton_Save = new JButton("Save");
@@ -158,7 +145,7 @@ public class JPaccount extends JPanel {
 				jButton_Save_actionPerformed(e);
 			}
 		});
-		jButton_Save.setBounds(311, 238, 85, 21);
+		jButton_Save.setBounds(259, 233, 85, 21);
 		panel.add(jButton_Save);
 
 		JMenuBar menuBar = new JMenuBar();
