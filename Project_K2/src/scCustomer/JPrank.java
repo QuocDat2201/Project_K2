@@ -11,6 +11,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import entites.Customer;
 import entites.Rank;
@@ -61,10 +63,20 @@ public class JPrank extends JPanel {
 		addPopup(scrollPane, popupMenu);
 		
 		JMenuItem jedit = new JMenuItem("Edit");
+		jedit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_jedit_actionPerformed(e);
+			}
+		});
 		jedit.setIcon(new ImageIcon(JPrank.class.getResource("/Small_Icon/edit.png")));
 		popupMenu.add(jedit);
 		
 		JMenuItem jdelete = new JMenuItem("Delete");
+		jdelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_jdelete_actionPerformed(e);
+			}
+		});
 		jdelete.setIcon(new ImageIcon(JPrank.class.getResource("/Small_Icon/bin (1).png")));
 		popupMenu.add(jdelete);
 
@@ -74,7 +86,13 @@ public class JPrank extends JPanel {
 		iniJFrame();
 	}
 
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {//add
+		panel_1.removeAll();
+		panel_1.revalidate();
+		JPaddrank editrank= new JPaddrank();
+		panel_1.add(editrank);
+		panel_1.setVisible(true);
+		
 	}
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -101,12 +119,13 @@ public class JPrank extends JPanel {
 				return false;
 			}
 		};
+		model.addColumn("Id");
 		model.addColumn("Point");
 		model.addColumn("RankName");
 		model.addColumn("Discount");
 		RankModel rankModel = new RankModel();try {
 			for (Rank rank : rankModel.findAll()) {
-				model.addRow(new Object[] {rank.getPoint() ,rank.getRank(),rank.getDiscount()});
+				model.addRow(new Object[] {rank.getId(),rank.getPoint() ,rank.getRank(),rank.getDiscount()});
 
 			}
 		} catch (Exception e) {
@@ -117,6 +136,24 @@ public class JPrank extends JPanel {
 		int rowHeight = 25; // Đặt chiều cao hàng tùy ý
 		table.setRowHeight(rowHeight);
 		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table.getColumnModel();
 
+		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
+		TableColumn customerNameColumn = columnModel.getColumn(0); // Cột "Customer Name" ở index 2
+		customerNameColumn.setMinWidth(40); // Chiều rộng tối thiểu
+		customerNameColumn.setMaxWidth(40); // Chiều rộng tối đa
+
+	}
+	protected void do_jedit_actionPerformed(ActionEvent e) {//edit
+		int index = table.getSelectedRow();
+		int id =(int) table.getValueAt(index,0);
+		panel_1.removeAll();
+		panel_1.revalidate();
+		JPeditrank editrank= new JPeditrank(id);
+		System.out.println(id+"jp");
+		panel_1.add(editrank);
+		panel_1.setVisible(true);
+	}
+	protected void do_jdelete_actionPerformed(ActionEvent e) {//delete
 	}
 }

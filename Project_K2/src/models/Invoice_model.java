@@ -1,8 +1,10 @@
 package models;
 
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +51,21 @@ public class Invoice_model {
 		}
 		return total;
 	}
+	public List<String> findtotalcategogy() {
+		List<String> cate = new ArrayList<String>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(i.Total)as total,c.CategoryName as catename FROM invoices i JOIN sales s ON i.InvoiceID=s.Invoice_id JOIN products p ON s.ProductID = p.ProductID JOIN category c ON p.Category_id= c.CategoryID GROUP BY c.CategoryName;");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				cate.add(resultSet.getString("catename"));
+			}
+		} catch (Exception e) {
+			cate = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return cate;
+	}
 	public List<Invoices> findAll() {
 		List<Invoices> invoices = new ArrayList<Invoices>();
 		try {
@@ -71,6 +88,29 @@ public class Invoice_model {
 		}
 		return invoices;
 	}
+	public Invoices findID(int id) {
+		Invoices invoice = new Invoices();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from invoices where InvoiceID=?");// java.sql
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+			
+				invoice.setInvoiceID(resultSet.getInt("InvoiceID"));
+				invoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
+				invoice.setCustomerName(resultSet.getString("CustomerName"));
+				invoice.setCustomerPhone(resultSet.getString("CustomerPhone"));
+				invoice.setStatus(resultSet.getBoolean("Status"));
+				invoice.setTotal(resultSet.getBigDecimal("Total"));
+				
+			}
+		} catch (Exception e) {
+			invoice = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return invoice;
+	}
 	public Invoices findAllsort() {
 		Invoices invoices = new Invoices();
 		try {
@@ -92,32 +132,63 @@ public class Invoice_model {
 		}
 		return invoices;
 	}
-	public Map<String,List> findProductMap(String name,int month) {
-		Map<String, List> map = new HashMap<String, List>();
-		List<Date> dates = new ArrayList<Date>();
-		List<Double> values = new ArrayList<Double>();
-		List<String> nameProduct = new ArrayList<String>();
-		try {
-			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT SUM(s.Quantity*s.Price)as Total ,i.InvoiceDate,p.ProductName FROM invoices i JOIN sales s ON i.InvoiceID=s.Invoice_id JOIN products p ON s.ProductID=p.ProductID WHERE p.ProductName='?' and MONTH(i.InvoiceDate) = ? GROUP BY p.ProductName,i.InvoiceDate;");// java.sql
-			preparedStatement.setString(1, name);
-			preparedStatement.setInt(2, month);
-			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
-			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
-				dates.add(resultSet.getDate("InvoiceDate"));
-				values.add(resultSet.getDouble("Total"));
-				nameProduct.add(resultSet.getString("ProductName"));
-			}
-			map.put("dates",dates);
-			map.put("values", values);
-			map.put("nameproducts", nameProduct);
-			
-		} catch (Exception e) {
-			map=null;
-		} finally {
-			ConnectDB.disconnect();
-		}
-		return map;
-	}
+
+    public Map<String, Object> findProductMap(String name, int month) {
+        Map<String, Object> map = new HashMap<>();
+        List<Date> dates = new ArrayList<Date>();
+        List<Double> values = new ArrayList<Double>();
+        List<String> nameProduct = new ArrayList<String>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+System.out.println("xong");
+        try {
+            connection = ConnectDB.connection();
+
+            if (connection != null) {
+                preparedStatement = connection.prepareStatement("SELECT SUM(s.Quantity * s.Price) as Total, i.InvoiceDate, p.ProductName FROM invoices i JOIN sales s ON i.InvoiceID = s.Invoice_id JOIN products p ON s.ProductID = p.ProductID WHERE p.ProductName = ? and MONTH(i.InvoiceDate) = ? GROUP BY p.ProductName, i.InvoiceDate;");
+                preparedStatement.setString(1, name);
+                preparedStatement.setInt(2, month);
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    dates.add(resultSet.getDate("InvoiceDate"));
+                    values.add(resultSet.getDouble("Total"));
+                    System.out.println(dates.get(0));
+                    nameProduct.add(resultSet.getString("ProductName"));
+                }
+
+                map.put("dates", dates);
+                List<Date> a= (List<Date>) map.get("dates");
+                map.put("values", values);
+                map.put("nameproducts", nameProduct);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Hoặc xử lý ngoại lệ theo cách khác
+        } finally {
+            // Đóng PreparedStatement và ResultSet
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Hoặc xử lý ngoại lệ theo cách khác
+            }
+
+            // Ngắt kết nối
+            ConnectDB.disconnect();
+
+            // Kiểm tra và xử lý map
+            if (map.isEmpty()) {
+                map = null;
+            }
+        }
+        return map;
+    }
 	
 	
 	public boolean update(Invoices invoices){

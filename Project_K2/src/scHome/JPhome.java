@@ -32,7 +32,14 @@ public class JPhome extends JPanel {
 		JMenuBar menuBar = new JMenuBar();
 		add(menuBar, BorderLayout.NORTH);
 		
-		JMenuItem Product = new JMenuItem("Doanh so");
+		JMenu mnNewMenu = new JMenu("Bieu do");
+		mnNewMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mnNewMenu_actionPerformed(e);
+			}
+		});
+		
+		JMenu Product = new JMenu("Doanh so");
 		Product.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_Product_actionPerformed(e);
@@ -40,13 +47,6 @@ public class JPhome extends JPanel {
 		});
 		Product.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/897226_balance spendings_budget_money_save money_icon.png")));
 		menuBar.add(Product);
-		
-		JMenu mnNewMenu = new JMenu("Bieu do");
-		mnNewMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_mnNewMenu_actionPerformed(e);
-			}
-		});
 		mnNewMenu.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/Bar Chart.png")));
 		menuBar.add(mnNewMenu);
 		
@@ -68,10 +68,6 @@ public class JPhome extends JPanel {
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("BieudoDoanhthu");
 		mnNewMenu.add(mntmNewMenuItem_3);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Tien Ich");
-		mntmNewMenuItem_1.setIcon(new ImageIcon(JPhome.class.getResource("/Icon/317717_operating system_windows_icon.png")));
-		menuBar.add(mntmNewMenuItem_1);
 
 	}
 	public JPhome(Object ob) {

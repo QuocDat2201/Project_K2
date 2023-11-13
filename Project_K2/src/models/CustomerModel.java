@@ -38,11 +38,11 @@ public class CustomerModel {
         boolean result = true;
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
-                    .prepareStatement("UPDATE `customer` SET `Point` = ? WHERE `customer`.`PhoneNumber` = ?");
+                    .prepareStatement("UPDATE `customer` SET  `Name` = ?, `Point` = ? WHERE `customer`.`PhoneNumber` = ?");
    
-          
-            preparedStatement.setInt(1, customer.getPoint());
-            preparedStatement.setString(2, customer.getPhoneString());
+           preparedStatement.setString(1, customer.getNameString());
+            preparedStatement.setInt(2, customer.getPoint());
+            preparedStatement.setString(3, customer.getPhoneString());
            
             result = preparedStatement.executeUpdate() > 0;
         } catch (Exception e) {

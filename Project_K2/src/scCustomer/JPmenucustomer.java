@@ -22,8 +22,10 @@ import java.awt.event.ActionEvent;
 
 public class JPmenucustomer extends JPanel {
 	private JPanel panel;
-	static JMenuItem mntmNewMenuItem_2;
-
+	public static JMenuItem mntmNewMenuItem_2;
+	public static JMenuItem mntmNewMenuItem_1 ;
+		
+	
 	/**
 	 * Create the panel.
 	 */
@@ -46,7 +48,7 @@ public class JPmenucustomer extends JPanel {
 		mntmNewMenuItem.setIcon(new ImageIcon(JPcustomer.class.getResource("/Icon/Profile.png")));
 		menuBar.add(mntmNewMenuItem);
 
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Rank");
+		mntmNewMenuItem_1 = new JMenuItem("Rank");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mntmNewMenuItem_1_actionPerformed(e);

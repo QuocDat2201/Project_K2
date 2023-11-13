@@ -84,7 +84,7 @@ public class jpaneldoanhso extends JPanel {
 		Sales_model sales_model = new Sales_model();
 		BigDecimal total = BigDecimal.ZERO;
 		for (Sales sale : sales_model.findAll()) {
-			total = total.add(sale.getPrice());
+			total = total.add(sale.getPrice().multiply(new BigDecimal(sale.getQuantity())) );
 		}
 		model.addColumn("Thu");
 		model.addColumn("Chi");
