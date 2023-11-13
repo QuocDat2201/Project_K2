@@ -378,8 +378,7 @@ public class JPsendNotifi extends JPanel {
 		Role_model role_model = new Role_model();
 		int role_to = users.getRoleID();
 		Report_model report_model = new Report_model();
-		FillDataToJTableList(report_model.find(role_to));
-		
+			
 		DefaultComboBoxModel<Role> model = new DefaultComboBoxModel<Role>();
 		for (Role role : role_model.findExcept(users.getRoleID())) {
 			model.addElement(role);
@@ -387,6 +386,13 @@ public class JPsendNotifi extends JPanel {
 		jcomboBox_list.setModel(model);
 		jcomboBox_list.setRenderer(new ListCellRender());
 		jtable_Reports_List.setComponentPopupMenu(jpopupMenu_List);
+		
+		/********Role Admin*******/
+		if (users.getRoleID() == 1) {
+			FillDataToJTableList(report_model.findall());
+		} else {
+			FillDataToJTableList(report_model.find(role_to));
+		}
 	}
 	
 	protected void jMenuItem_Reports_actionPerformed(ActionEvent e) {
@@ -438,7 +444,14 @@ public class JPsendNotifi extends JPanel {
 			Date from = jdateChooser_from.getDate();
 			Date to = jdateChooser_to.getDate();
 			Users users = (Users) dataMap.get("user");
-			FillDataToJTableList(report_model.SearchDate(from, to, users.getRoleID()));
+			
+			/************Role Admin*************/
+			if (users.getRoleID() == 1) {
+				FillDataToJTableList(report_model.SearchDateListAdmin(from, to));
+			} else {
+				FillDataToJTableList(report_model.SearchDateList(from, to, users.getRoleID()));
+			}
+			
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(null, "Cannot find !");
 		}
@@ -460,7 +473,13 @@ public class JPsendNotifi extends JPanel {
 			Users users = (Users) dataMap.get("user");
 			Report_model report_model = new Report_model();
 			Role role = (Role) jcomboBox_list.getSelectedItem();
-			FillDataToJTableList(report_model.SearchRole(role.getRole_id(), users.getRoleID()));
+			
+			/******Role Admin******/
+			if (users.getRoleID() == 1) {
+				FillDataToJTableList(report_model.SearchRoleListAdmin(role.getRole_id()));
+			} else {
+				FillDataToJTableList(report_model.SearchRoleList(role.getRole_id(), users.getRoleID()));
+			}
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(null, "Cannot Find!");
 		}
@@ -472,30 +491,58 @@ public class JPsendNotifi extends JPanel {
 		JTableHeader header = (JTableHeader) e.getSource();
 		int column = header.columnAtPoint(e.getPoint());
 		
-		switch (column) {
-		case 0:
-			if (e.getClickCount() % 2 ==0) {
-				FillDataToJTableList(report_model.Sort_ID_desc(users.getRoleID()));
-			} else {
-				FillDataToJTableList(report_model.Sort_ID_asc(users.getRoleID()));
+		if (users.getRoleID() == 1) {
+			switch (column) {
+			case 0:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableList(report_model.AdminSort_ID_desc());
+				} else {
+					FillDataToJTableList(report_model.AdminSort_ID_asc());
+				}
+				break;
+			case 2:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableList(report_model.AdminSort_Role_desc());
+				} else {
+					FillDataToJTableList(report_model.AdminSort_Role_asc());
+				}
+				break;
+			case 3:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableList(report_model.AdminSort_Date_desc());
+				} else {
+					FillDataToJTableList(report_model.AdminSort_Date_asc());
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case 2:
-			if (e.getClickCount() % 2 ==0) {
-				FillDataToJTableList(report_model.Sort_Role_desc(users.getRoleID()));
-			} else {
-				FillDataToJTableList(report_model.Sort_Role_asc(users.getRoleID()));
+		} else {
+			switch (column) {
+			case 0:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableList(report_model.Sort_ID_desc(users.getRoleID()));
+				} else {
+					FillDataToJTableList(report_model.Sort_ID_asc(users.getRoleID()));
+				}
+				break;
+			case 2:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableList(report_model.Sort_Role_desc(users.getRoleID()));
+				} else {
+					FillDataToJTableList(report_model.Sort_Role_asc(users.getRoleID()));
+				}
+				break;
+			case 3:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableList(report_model.Sort_Date_desc(users.getRoleID()));
+				} else {
+					FillDataToJTableList(report_model.Sort_Date_asc(users.getRoleID()));
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case 3:
-			if (e.getClickCount() % 2 ==0) {
-				FillDataToJTableList(report_model.Sort_Date_desc(users.getRoleID()));
-			} else {
-				FillDataToJTableList(report_model.Sort_Date_asc(users.getRoleID()));
-			}
-			break;
-		default:
-			break;
 		}
 	}
 	
@@ -528,8 +575,10 @@ public class JPsendNotifi extends JPanel {
 		
 		Users users = (Users) dataMap.get("user");
 		Role_model role_model = new Role_model();
-		int role_from = users.getRoleID();
 		Report_model report_model = new Report_model();
+		Report report = new Report();
+		int role_from = users.getRoleID();
+
 		FillDataToJTableHistory(report_model.findhistory(role_from));
 		jtable_history.setComponentPopupMenu(jpopupMenu_History);
 	}
@@ -544,18 +593,18 @@ public class JPsendNotifi extends JPanel {
 		};
 		models.addColumn("Report's ID");
 		models.addColumn("Content");
-		models.addColumn("From");
+		models.addColumn("To");
 		models.addColumn("Created");
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		for (Report report : reports) {
 			String role = null;
-			if (report.getRole_sent() == 1) {
+			if (report.getRole_report() == 1) {
 				role = "Admin";
-			} else if (report.getRole_sent() == 2) {
+			} else if (report.getRole_report() == 2) {
 				role = "Storage Manager";
-			} else if (report.getRole_sent() == 3) {
+			} else if (report.getRole_report() == 3) {
 				role = "Saler";
-			} else if (report.getRole_sent() == 4) {
+			} else if (report.getRole_report() == 4) {
 				role = "Sale Manager";
 			}
 			
@@ -590,24 +639,45 @@ public class JPsendNotifi extends JPanel {
 		Report_model report_model = new Report_model();
 		JTableHeader header = (JTableHeader) e.getSource();
 		int column = header.columnAtPoint(e.getPoint());
-		
-		switch (column) {
-		case 0:
-			if (e.getClickCount() % 2 ==0) {
-				FillDataToJTableHistory(report_model.Sort_IDhistory_desc(users.getRoleID()));
-			} else {
-				FillDataToJTableHistory(report_model.Sort_IDhistory_asc(users.getRoleID()));
+		/**************Admin Role*************/
+		if (users.getRoleID() == 1) {
+			switch (column) {
+			case 0:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableHistory(report_model.AdminSort_ID_desc());
+				} else {
+					FillDataToJTableHistory(report_model.AdminSort_ID_asc());
+				}
+				break;
+			case 3:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableHistory(report_model.AdminSort_Date_desc());
+				} else {
+					FillDataToJTableHistory(report_model.AdminSort_Date_asc());
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case 3:
-			if (e.getClickCount() % 2 ==0) {
-				FillDataToJTableHistory(report_model.Sort_Datehistoy_desc(users.getRoleID()));
-			} else {
-				FillDataToJTableHistory(report_model.Sort_Datehistory_asc(users.getRoleID()));
+		} else {
+			switch (column) {
+			case 0:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableHistory(report_model.Sort_IDhistory_desc(users.getRoleID()));
+				} else {
+					FillDataToJTableHistory(report_model.Sort_IDhistory_asc(users.getRoleID()));
+				}
+				break;
+			case 3:
+				if (e.getClickCount() % 2 ==0) {
+					FillDataToJTableHistory(report_model.Sort_Datehistoy_desc(users.getRoleID()));
+				} else {
+					FillDataToJTableHistory(report_model.Sort_Datehistory_asc(users.getRoleID()));
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		default:
-			break;
 		}
 	}
 	

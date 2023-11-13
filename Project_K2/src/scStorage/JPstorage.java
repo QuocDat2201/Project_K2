@@ -444,7 +444,7 @@ public class JPstorage extends JPanel {
 		panel_SearchCatName = new JPanel();
 		panel_SearchCatName.setLayout(null);
 		panel_SearchCatName.setBorder(new TitledBorder(null, "Search By Name", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_SearchCatName.setBounds(10, 10, 600, 116);
+		panel_SearchCatName.setBounds(120, 10, 381, 116);
 		panel_CategoryList.add(panel_SearchCatName);
 		
 		JtextField_Catname = new JTextField();
@@ -455,7 +455,7 @@ public class JPstorage extends JPanel {
 			}
 		});
 		JtextField_Catname.setColumns(10);
-		JtextField_Catname.setBounds(10, 28, 580, 31);
+		JtextField_Catname.setBounds(10, 28, 361, 31);
 		panel_SearchCatName.add(JtextField_Catname);
 		
 		jButton_SearchCatName = new JButton("Search");
@@ -464,7 +464,7 @@ public class JPstorage extends JPanel {
 				jButton_SearchCatName_actionPerformed(e);
 			}
 		});
-		jButton_SearchCatName.setBounds(254, 68, 85, 25);
+		jButton_SearchCatName.setBounds(144, 69, 85, 25);
 		panel_SearchCatName.add(jButton_SearchCatName);
 		
 		JScrollPane JscrollPane_Category = new JScrollPane();
