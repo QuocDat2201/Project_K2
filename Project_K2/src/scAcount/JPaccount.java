@@ -177,6 +177,13 @@ public class JPaccount extends JPanel {
 	public JPaccount(Object ob) {
 		this();
 		this.dataMap = (Map<String, Object>) ob;
+		Users users = (Users) dataMap.get("user");
+		
+		if (users.getRoleID() == 1) {
+			jmenuAddAccount.setVisible(true);
+		} else {
+			jmenuAddAccount.setVisible(false);
+		}
 	}
 
 	protected void do_jmenuAddAccount_actionPerformed(ActionEvent e) {

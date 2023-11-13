@@ -31,6 +31,7 @@ import javax.swing.JList;
 
 import entites.Category;
 import entites.Products;
+import entites.Users;
 import models.Category_model;
 import models.Product_model;
 import screen.JFrameLogin;
@@ -66,7 +67,7 @@ public class JPstorage extends JPanel {
 	private JButton jButton_Search;
 	private JMenuItem JMenuItem_Edit;
 	private JMenuItem JMenuItem_Delete;
-	private JPopupMenu popupMenu;
+	private JPopupMenu jpopupMenu_storage;
 	private JPanel panel_main;
 	private JPanel panel_storage;
 	private JPanel panel_edit;
@@ -103,13 +104,14 @@ public class JPstorage extends JPanel {
 	private JTextField jtextField_createCatName;
 	private JButton JButton_CatCancel;
 	private JButton JButton_CatSave;
-	private JPopupMenu popupMenu_Category;
+	private JPopupMenu jpopupMenu_Category;
 	private JPanel panel_editCategory;
 	private JLabel lblEdit_Category;
 	private JLabel JLabel_editCatName;
 	private JTextField jtextField_EditCategory;
 	private JButton JButton_EditCatCancel;
 	private JButton JButton_EditCatSave;
+	private JMenu jMenu_Create;
 	
 	/**
 	 * Create the panel.
@@ -143,7 +145,7 @@ public class JPstorage extends JPanel {
 		jmenuitem_Category.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_Category);
 
-		JMenu jMenu_Create = new JMenu("New Create");
+		jMenu_Create = new JMenu("New Create");
 		jMenu_Create.setHorizontalAlignment(SwingConstants.CENTER);
 		jMenu_Create.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/add.png")));
 		menuBar.add(jMenu_Create);
@@ -247,8 +249,8 @@ public class JPstorage extends JPanel {
 		});
 		scrollPane.setViewportView(jtableProduct);
 
-		popupMenu = new JPopupMenu();
-		addPopup(jtableProduct, popupMenu);
+		jpopupMenu_storage = new JPopupMenu();
+		addPopup(jtableProduct, jpopupMenu_storage);
 
 		JMenuItem_Delete = new JMenuItem("Delete");
 		JMenuItem_Delete.addActionListener(new ActionListener() {
@@ -257,7 +259,7 @@ public class JPstorage extends JPanel {
 			}
 		});
 		JMenuItem_Delete.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/bin (1).png")));
-		popupMenu.add(JMenuItem_Delete);
+		jpopupMenu_storage.add(JMenuItem_Delete);
 
 		JMenuItem_Edit = new JMenuItem("Edit");
 		JMenuItem_Edit.addActionListener(new ActionListener() {
@@ -266,7 +268,7 @@ public class JPstorage extends JPanel {
 			}
 		});
 		JMenuItem_Edit.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/edit.png")));
-		popupMenu.add(JMenuItem_Edit);
+		jpopupMenu_storage.add(JMenuItem_Edit);
 
 		panel_edit = new JPanel();
 		panel_edit.setBorder(
@@ -479,8 +481,8 @@ public class JPstorage extends JPanel {
 			}
 		});
 		
-		popupMenu_Category = new JPopupMenu();
-		addPopup(JscrollPane_Category, popupMenu_Category);
+		jpopupMenu_Category = new JPopupMenu();
+		addPopup(JscrollPane_Category, jpopupMenu_Category);
 		
 		JMenuItem MnuItem_Delete = new JMenuItem("Delete");
 		MnuItem_Delete.addActionListener(new ActionListener() {
@@ -488,9 +490,8 @@ public class JPstorage extends JPanel {
 				MnuItem_Delete_actionPerformed(e);
 			}
 		});
-		MnuItem_Delete.setHorizontalAlignment(SwingConstants.CENTER);
 		MnuItem_Delete.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/bin (1).png")));
-		popupMenu_Category.add(MnuItem_Delete);
+		jpopupMenu_Category.add(MnuItem_Delete);
 		
 		JMenuItem MenuItem_Edit = new JMenuItem("Edit");
 		MenuItem_Edit.addActionListener(new ActionListener() {
@@ -499,8 +500,7 @@ public class JPstorage extends JPanel {
 			}
 		});
 		MenuItem_Edit.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/edit.png")));
-		MenuItem_Edit.setHorizontalAlignment(SwingConstants.CENTER);
-		popupMenu_Category.add(MenuItem_Edit);
+		jpopupMenu_Category.add(MenuItem_Edit);
 		Jtable_Category.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JscrollPane_Category.setViewportView(Jtable_Category);
 		
@@ -593,11 +593,12 @@ public class JPstorage extends JPanel {
 	}
 /************************** Begin of Storage JPanel *********************************/
 	
-	public void initJFrame() {
+	public void initJFrame() { 
+		Users users = (Users) dataMap.get("user");
 		Category_model category_model = new Category_model();
 		Product_model product_model = new Product_model();
 		FillDataToJTableProduct(product_model.findAll());
-		jtableProduct.setComponentPopupMenu(popupMenu);
+		jtableProduct.setComponentPopupMenu(jpopupMenu_storage);
 
 		DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<Category>();
 		for (Category category : category_model.findAll()) {
@@ -612,6 +613,13 @@ public class JPstorage extends JPanel {
 		jcomboBox_status.setModel(model2);
 		jcomboBox_category.setRenderer(new CategoryCellRender());
 		jcomboBox_status.setRenderer(new StatusCellRender());
+		
+		if (users.getRoleID() == 1 || users.getRoleID() == 2) {
+			jMenu_Create.setVisible(true);
+		} else {
+			jMenu_Create.setVisible(false);
+			jtableProduct.setComponentPopupMenu(null);
+		}
 	}
 
 	public void FillDataToJTableProduct(List<Products> products) {
@@ -1018,6 +1026,7 @@ public class JPstorage extends JPanel {
 	}
 	
 	public void FillDataToJTableCategory(List<Category> categories) {
+		Users users = (Users) dataMap.get("user");
 		Category_model category_model = new Category_model();
 		Product_model product_model = new Product_model();
 		DefaultTableModel models = new DefaultTableModel() {
@@ -1044,7 +1053,13 @@ public class JPstorage extends JPanel {
 		Jtable_Category.getColumnModel().getColumn(0).setPreferredWidth(100);
 		Jtable_Category.getColumnModel().getColumn(1).setPreferredWidth(247);
 		Jtable_Category.getColumnModel().getColumn(2).setPreferredWidth(247);
-		Jtable_Category.setComponentPopupMenu(popupMenu_Category);
+		Jtable_Category.setComponentPopupMenu(jpopupMenu_Category);
+	
+		if (users.getRoleID() == 1 || users.getRoleID() == 2) {
+			jMenu_Create.setVisible(true);
+		} else {
+			Jtable_Category.setComponentPopupMenu(null);	
+		}
 	}
 	protected void JtextField_Catname_keyReleased(KeyEvent e) {
 		Category_model category_model = new Category_model();
@@ -1206,4 +1221,5 @@ public class JPstorage extends JPanel {
 			}
 		}
 	}
+	/************************************** End of Edit Category JPanel ************************************/
 }
