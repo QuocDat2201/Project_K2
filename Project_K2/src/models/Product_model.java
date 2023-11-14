@@ -512,4 +512,22 @@ public class Product_model {
 		}
 		return result;
 	}
+	
+	public boolean UpdateQuantity(Products products) {
+		boolean result = true;
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection()
+					.prepareStatement("update products set Quantity = ? where ProductID = ?");
+			
+			preparedStatement.setInt(1, products.getQuantity());
+			preparedStatement.setInt(2, products.getProductID());
+			result = preparedStatement.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return result;
+	}
 }

@@ -13,9 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 
+import entites.Products;
 import entites.Purchaseinvoicedetails;
 import entites.Purchaseinvoices;
 import entites.Suppliers;
+import models.Product_model;
 import models.Purchaseinvoicedetails_model;
 import models.Purchaseinvoices_model;
 import models.Suppliers_model;
@@ -85,6 +87,15 @@ public class JPPurchase extends JPanel {
 		});
 		btnNewButton.setBounds(368, 143, 85, 21);
 		panel_1.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_1_actionPerformed(e);
+			}
+		});
+		btnNewButton_1.setBounds(175, 188, 85, 21);
+		panel_1.add(btnNewButton_1);
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
@@ -163,5 +174,27 @@ public class JPPurchase extends JPanel {
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(null,"Please check Profile");
 		}
+	}
+	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
+		Purchaseinvoicedetails_model purchaseinvoicedetails_model = new Purchaseinvoicedetails_model() ; 
+		Product_model product_model = new Product_model() ;
+		
+		for(Integer saleID : saleIDs) {
+			Purchaseinvoicedetails purchaseinvoicedetails = purchaseinvoicedetails_model.find(saleID) ; 
+			int addquantity = purchaseinvoicedetails.getQuantity();//so luong them
+			Products products = product_model.find(purchaseinvoicedetails.getProductID());
+			System.out.println(products.getProductID());
+			System.out.println(products.getProductName());
+			System.out.println(products.getQuantity());
+			int oldquantity = products.getQuantity() ; //so luong hien tai
+			int newquantity = oldquantity + addquantity ; //so luong moi nhat
+			products.setProductID(purchaseinvoicedetails.getProductID());
+			products.setQuantity(newquantity);
+			if(product_model.Update(products)) {
+				JOptionPane.showMessageDialog(null,"Succes");
+			}
+		}
+		
+		
 	}
 }

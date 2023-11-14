@@ -80,7 +80,7 @@ public class JPPurchaseDetails extends JPanel {
 			}
 		});
 		jtextFieldQuantity.setColumns(10);
-		jtextFieldQuantity.setBounds(186, 89, 135, 24);
+		jtextFieldQuantity.setBounds(184, 90, 135, 24);
 		panel_2.add(jtextFieldQuantity);
 		jtextFieldQuantity.addKeyListener(new KeyAdapter() {
 		    @Override
@@ -122,7 +122,7 @@ public class JPPurchaseDetails extends JPanel {
 				do_jcomboBoxProduct_actionPerformed(e);
 			}
 		});
-		jcomboBoxProduct.setBounds(184, 50, 135, 24);
+		jcomboBoxProduct.setBounds(184, 48, 135, 24);
 		panel_2.add(jcomboBoxProduct);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("Total");

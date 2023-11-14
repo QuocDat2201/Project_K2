@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import entites.Products;
 import entites.Purchaseinvoicedetails;
 
 public class Purchaseinvoicedetails_model {
@@ -81,5 +82,51 @@ public class Purchaseinvoicedetails_model {
 		}finally {
 			ConnectDB.disconnect();
 		} return result; 
+	}
+	
+	public Purchaseinvoicedetails find(int id) {
+		Purchaseinvoicedetails purchaseinvoicedetails = new Purchaseinvoicedetails();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from purchaseinvoicedetails where DetailsID = ? ");// java.sql
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+			
+				purchaseinvoicedetails.setDetailID(resultSet.getInt("DetailsID"));
+				purchaseinvoicedetails.setInvoiceID(resultSet.getInt("InvoiceID"));
+				purchaseinvoicedetails.setProductID(resultSet.getInt("ProductID"));
+				purchaseinvoicedetails.setQuantity(resultSet.getInt("Quantity"));
+				purchaseinvoicedetails.setUnitPrice(resultSet.getBigDecimal("UnitPrice"));
+				
+				
+			}
+		} catch (Exception e) {
+			purchaseinvoicedetails = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return purchaseinvoicedetails;
+	}
+	
+	public List<Purchaseinvoicedetails> findAll() {
+		List<Purchaseinvoicedetails> purchaseinvoicedetails = new ArrayList<Purchaseinvoicedetails>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from purchaseinvoicedetails");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Purchaseinvoicedetails purchaseinvoicedetail = new Purchaseinvoicedetails();
+				purchaseinvoicedetail.setDetailID(resultSet.getInt("DetailsID"));
+				purchaseinvoicedetail.setInvoiceID(resultSet.getInt("InvoiceID"));
+				purchaseinvoicedetail.setProductID(resultSet.getInt("ProductID"));
+				purchaseinvoicedetail.setQuantity(resultSet.getInt("Quantity"));
+				purchaseinvoicedetail.setUnitPrice(resultSet.getBigDecimal("UnitPrice"));
+				purchaseinvoicedetails.add(purchaseinvoicedetail);
+			}
+		} catch (Exception e) {
+			purchaseinvoicedetails = null;
+		} finally {
+			ConnectDB.disconnect();
+		}
+		return purchaseinvoicedetails;
 	}
 }
