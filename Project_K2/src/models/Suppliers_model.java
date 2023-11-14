@@ -34,6 +34,7 @@ public class Suppliers_model {
 	            ResultSet resultSet = preparedStatement.executeQuery();
 	            while (resultSet.next()) {
 	                Suppliers supplier=new Suppliers();
+	               // supplier.setSupplierID(resultSet.getInt("SupplierID"));
 	                supplier.setSupplierName(resultSet.getString("SupplierName"));
 	                supplier.setContactName(resultSet.getString("ContactName"));
 	                supplier.setEmail(resultSet.getString("Email"));

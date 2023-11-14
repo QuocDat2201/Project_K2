@@ -7,6 +7,7 @@ public class Suppliers {
 	private String Email;
 	private String Phone;
 	
+	
 	public int getSupplierID() {
 		return SupplierID;
 	}
