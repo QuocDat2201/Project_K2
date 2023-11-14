@@ -7,6 +7,7 @@ import javax.swing.DefaultListCellRenderer;
 
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -33,6 +34,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class JPPurchase extends JPanel {
 	private JComboBox jcomboBoxSupplier;
@@ -41,14 +44,16 @@ public class JPPurchase extends JPanel {
 	private List<Integer> saleIDs ; 
 	private JLabel jlabelTotal;
 	private JPanel panel;
+	private JTable jtableListPurchase;
 	/**
 	 * Create the panel.
 	 */
 	public JPPurchase() {
-		setLayout(new BorderLayout(0, 0));
+		setLayout(null);
 		
 		panel = new JPanel();
-		add(panel, BorderLayout.CENTER);
+		panel.setBounds(0, 0, 599, 481);
+		add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JPanel panel_1 = new JPanel();
@@ -101,8 +106,27 @@ public class JPPurchase extends JPanel {
 		btnNewButton_2.setBounds(325, 58, 85, 21);
 		panel_1.add(btnNewButton_2);
 		
+		JButton btnNewButton_1 = new JButton("Add");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_1_actionPerformed(e);
+			}
+		});
+		btnNewButton_1.setBounds(470, 143, 85, 21);
+		panel_1.add(btnNewButton_1);
+		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(224, 255, 255));
+		panel_2.setBorder(new TitledBorder(null, "ListPurchase", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(21, 21, 549, 140);
+		panel_2.add(scrollPane);
+		
+		jtableListPurchase = new JTable();
+		scrollPane.setViewportView(jtableListPurchase);
 		
 	}
 	public JPPurchase(Map<String,Object> data) {
@@ -124,15 +148,16 @@ public class JPPurchase extends JPanel {
 		
 		
 		
+		
 		Purchaseinvoicedetails_model purchaseinvoicedetails_model = new Purchaseinvoicedetails_model() ; 
 		BigDecimal total = new BigDecimal("0.00");
-
+		
 		for(Purchaseinvoicedetails purchaseinvoicedetails : purchaseinvoicedetails_model.findInvoice_id()) {
 			total = total.add(purchaseinvoicedetails.getUnitPrice());
 		}
 		jlabelTotal.setText(String.valueOf(total));
-		
-		
+		Purchaseinvoices_model purchaseinvoices_model = new Purchaseinvoices_model() ; 
+		fillDataToJTable(purchaseinvoices_model.findAll());
 	}
 	
 	private class SupplierCellRender extends DefaultListCellRenderer{
@@ -169,6 +194,21 @@ public class JPPurchase extends JPanel {
 						purchaseinvoicedetails.setInvoiceID(id);
 						purchaseinvoicedetails_model.Update(purchaseinvoicedetails);
 					}
+					Product_model product_model = new Product_model() ;  
+					for(Integer saleID : saleIDs) {
+						
+						Purchaseinvoicedetails purchaseinvoicedetails = purchaseinvoicedetails_model.find(saleID);
+						int addquantity = purchaseinvoicedetails.getQuantity();//so luong them
+						
+						Products products = product_model.find(purchaseinvoicedetails.getProductID());
+						int oldquantity = products.getQuantity();//so luong cu 
+						int newquantity = oldquantity + addquantity ;
+						products.setProductID(purchaseinvoicedetails.getProductID());
+						products.setQuantity(newquantity);
+						product_model.Update(products);
+						fillDataToJTable(purchaseinvoices_model.findAll());
+						
+					}
 				}else {
 					JOptionPane.showMessageDialog(null,"Please complete all information");
 				}
@@ -185,5 +225,53 @@ public class JPPurchase extends JPanel {
 		JPsuppliers jPsuppliers=new JPsuppliers();
 		panel.add(jPsuppliers);
 		panel.setVisible(true);
+	}
+	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
+		Product_model product_model = new Product_model() ; 
+		Purchaseinvoicedetails_model purchaseinvoicedetails_model = new Purchaseinvoicedetails_model() ;// 
+		for(Integer saleID : saleIDs) {
+			
+			Purchaseinvoicedetails purchaseinvoicedetails = purchaseinvoicedetails_model.find(saleID);
+			int addquantity = purchaseinvoicedetails.getQuantity();//so luong them
+			
+			Products products = product_model.find(purchaseinvoicedetails.getProductID());
+			int oldquantity = products.getQuantity();//so luong cu 
+			int newquantity = oldquantity + addquantity ;
+			products.setProductID(purchaseinvoicedetails.getProductID());
+			products.setQuantity(newquantity);
+			if(product_model.Update(products)) {
+				JOptionPane.showMessageDialog(null, "Succes");
+			}else {
+				JOptionPane.showMessageDialog(null,"Faild");
+			}
+			
+		}
+	}
+	
+	public void fillDataToJTable(List<Purchaseinvoices> purchaseinvoices) {
+		DefaultTableModel model = new DefaultTableModel() {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+		}; 
+		model.addColumn("InvoiceID");
+		model.addColumn("Supplier name");
+		model.addColumn("Date");
+		model.addColumn("Total Amount");
+		for(Purchaseinvoices purchaseinvoice : purchaseinvoices) {
+			model.addRow(new Object[] {
+				purchaseinvoice.getInvoiceID(),
+				purchaseinvoice.getSupplierID(),
+				purchaseinvoice.getInvoiceDate(),
+				purchaseinvoice.getTotalAmount()
+			});
+		}
+		jtableListPurchase.setModel(model);
+		jtableListPurchase.getTableHeader().setReorderingAllowed(false);
+		
 	}
 }
