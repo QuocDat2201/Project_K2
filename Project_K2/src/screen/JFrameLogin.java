@@ -154,7 +154,7 @@ public class JFrameLogin extends JFrame {
 		if (users == null) {
 			JOptionPane.showMessageDialog(null, "Account Invalid");
 		} else {
-			dataMap.put("user", users);// dong luu du lieu thong tin ac dang nhap 			
+			dataMap.put("user", users); //dong luu du lieu thong tin ac dang nhap 			
 			home = new Home(dataMap);
 			home.setVisible(true);
 			this.setVisible(false);

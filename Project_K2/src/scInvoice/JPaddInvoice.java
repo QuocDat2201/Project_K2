@@ -270,7 +270,7 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton_3.setBounds(395, 181, 85, 21);
 		panel_2.add(btnNewButton_3);
-		
+
 		JButton btnNewButton_4 = new JButton("Nhap hang");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -621,16 +621,18 @@ public class JPaddInvoice extends JPanel {
 				// tao customer
 				customer.setPoint(
 						Integer.valueOf((int) (customer.getPoint() + (Double.valueOf(jtotal.getText()) / 10))));
-				customer.setNameString(jNameCustomer.getText());
+				
 				int flagCreateCustomer = 0;
 				for (Customer customert11 : customerModel.findAll()) {
 					if (customert11.getPhoneString().equalsIgnoreCase(jCustomerphone.getText())) {
+						customer.setNameString(jNameCustomer.getText());
 						customerModel.Update(customer);
 						flagCreateCustomer = 1;
 						break;
 					}
 				}
 				if (flagCreateCustomer == 0) {
+					System.out.println(customer.getNameString()+2);
 					customerModel.create(customer);
 				}
 
@@ -665,6 +667,7 @@ public class JPaddInvoice extends JPanel {
 			boolean flag = false;
 			for (Customer customer1 : model.findAll()) {
 				if (jCustomerphone.getText().equalsIgnoreCase(customer1.getPhoneString())) {
+					customer =null;
 					jNameCustomer.setText(customer1.getNameString());
 					customer = customer1;
 
@@ -691,7 +694,7 @@ public class JPaddInvoice extends JPanel {
 					customer.setPhoneString(jCustomerphone.getText());
 					customer.setPoint(0);
 					customer.setRank(1);
-					System.out.println("okokokok");
+					System.out.println("khacle");
 				} else {
 					customer = new Customer();
 					customer.setNameString(jNameCustomer.getText());
@@ -709,25 +712,24 @@ public class JPaddInvoice extends JPanel {
 	}
 
 	protected void do_btnNewButton_4_actionPerformed(ActionEvent e) {
-		panel.removeAll(); 
+		panel.removeAll();
 		panel.revalidate();
-		JPPurchaseDetails jpPurchaseDetails = new JPPurchaseDetails() ; 
+		JPPurchaseDetails jpPurchaseDetails = new JPPurchaseDetails();
 		panel.add(jpPurchaseDetails);
 	}
 
-   
 	protected void do_mntmNewMenuItem_actionPerformed(ActionEvent e) {// xem them
-		Sales_model sales_model=new Sales_model();
+		Sales_model sales_model = new Sales_model();
 		int indexrow = jtableListInvoice.getSelectedRow();
 		int id = (int) jtableListInvoice.getValueAt(indexrow, 0);
-		List<Sales> listSales=new ArrayList<Sales>();
+		List<Sales> listSales = new ArrayList<Sales>();
 		for (Sales sales : sales_model.findAll()) {
-			System.out.println("Name"+sales.getProductName());
-			System.out.println("get"+sales.getInvoice_id());
-			if (sales.getInvoice_id()==id) {
+			System.out.println("Name" + sales.getProductName());
+			System.out.println("get" + sales.getInvoice_id());
+			if (sales.getInvoice_id() == id) {
 				listSales.add(sales);
 				System.out.println("ok");
-			} 
+			}
 		}
 		fillDataToJTable2(listSales);
 	}
@@ -738,13 +740,13 @@ public class JPaddInvoice extends JPanel {
 		Invoice_model invoice_model = new Invoice_model();
 		Invoices invoices = invoice_model.findID(id);
 		invoices.setStatus(false);
-		if(invoice_model.update(invoices)) {
-			JOptionPane.showMessageDialog(null,"Succe");
+		if (invoice_model.update(invoices)) {
+			JOptionPane.showMessageDialog(null, "Succe");
 			fillDataToJTable(invoice_model.findAll());
-		}else {
-			JOptionPane.showMessageDialog(null,"Inva");
+		} else {
+			JOptionPane.showMessageDialog(null, "Inva");
 		}
-		
+
 	}
 //	   private class ColoredCellRenderer extends DefaultTableCellRenderer {
 //	        @Override

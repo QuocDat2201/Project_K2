@@ -1,24 +1,7 @@
-<<<<<<< HEAD
-/scInvoice/
-=======
-/Icon/
-/Small_Icon/
-/controller/
-/entites/
-/libs/
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
-/models/
-<<<<<<< HEAD
-=======
-/scAcount/
 /scCustomer/
 /scHome/
 /scInvoice/
 /scNotifi/
 /scStorage/
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
 /screen/
-<<<<<<< HEAD
-/entites/
-=======
->>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2.git
+/models/

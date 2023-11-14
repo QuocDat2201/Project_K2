@@ -13,9 +13,11 @@ import javax.swing.table.DefaultTableModel;
 
 import entites.CombinedData;
 import entites.Invoices;
+import entites.Purchaseinvoices;
 import entites.Sales;
 import models.Invoice_model;
 import models.Product_model;
+import models.Purchaseinvoices_model;
 import models.Sales_model;
 
 import javax.swing.JButton;
@@ -81,14 +83,19 @@ public class jpaneldoanhso extends JPanel {
 	private void iniJFrame() {
 
 		DefaultTableModel model = new DefaultTableModel();
+		Purchaseinvoices_model purchaseinvoices_model=new Purchaseinvoices_model();
+		BigDecimal totalthu = BigDecimal.ZERO;
+		for (Purchaseinvoices purchaseinvoices : purchaseinvoices_model.findAll()) {
+				totalthu.add(purchaseinvoices.getTotalAmount());
+		}
 		Sales_model sales_model = new Sales_model();
 		BigDecimal total = BigDecimal.ZERO;
 		for (Sales sale : sales_model.findAll()) {
 			total = total.add(sale.getPrice().multiply(new BigDecimal(sale.getQuantity())) );
 		}
-		model.addColumn("Thu");
-		model.addColumn("Chi");
-		model.addRow(new Object[] { total, total });
+		model.addColumn("Revenue");
+		model.addColumn("Expense");
+		model.addRow(new Object[] { total, totalthu });
 
 		jtable.setModel(model); // Set the model to the existing jtable field
 		jtable.setDefaultRenderer(Object.class, new render());
