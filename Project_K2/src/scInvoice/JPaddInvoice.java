@@ -24,6 +24,7 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -339,6 +340,7 @@ public class JPaddInvoice extends JPanel {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		jtableListInvoice.getTableHeader().setReorderingAllowed(false);
 		jtableListInvoice.setModel(model);
+//		jtableListInvoice.setDefaultRenderer(Object.class,new ColoredCellRenderer());
 		// Lấy ra model của cột từ JTable
 		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
 
@@ -727,4 +729,20 @@ public class JPaddInvoice extends JPanel {
 		}
 		
 	}
+//	   private class ColoredCellRenderer extends DefaultTableCellRenderer {
+//	        @Override
+//	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//	            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+//
+//	            String Status = (String) table.getValueAt(row, 4);
+//
+//
+//	            if (Status.equalsIgnoreCase("canl")) {         
+//	                
+//	                    setBackground(Color.RED);               
+//	            }
+//
+//	            return this;
+//	        }
+//	    }
 }
