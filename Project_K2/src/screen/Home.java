@@ -32,7 +32,9 @@ import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 
 import scAcount.JPaccount;
+import scCustomer.JPmenuSuppliers;
 import scCustomer.JPmenucustomer;
+import scCustomer.JPsuppliers;
 import scHome.JPhome;
 import scInvoice.JPaddInvoice;
 import scNotifi.JPsendNotifi;
@@ -158,6 +160,11 @@ public class Home extends JFrame {
 		panel.add(jbcusstomer);
 
 		jbtaccount_2 = new JButton("Account");
+		jbtaccount_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_jbtaccount_2_actionPerformed(e);
+			}
+		});
 		jbtaccount_2.setFont(new Font("Segoe Print", Font.BOLD, 15));
 		jbtaccount_2.setForeground(new Color(0, 0, 0));
 		jbtaccount_2.setIcon(
@@ -327,4 +334,11 @@ public class Home extends JFrame {
 
 	}
 	
+	protected void do_jbtaccount_2_actionPerformed(ActionEvent e) {
+		JPmenuSuppliers jPmenuSuppliers = new JPmenuSuppliers() ; 
+		ClearScreen();
+		jpanel_2.add(jPmenuSuppliers);
+		jPmenuSuppliers.setVisible(true);
+		
+	}
 }

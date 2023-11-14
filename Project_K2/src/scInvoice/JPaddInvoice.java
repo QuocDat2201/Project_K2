@@ -270,15 +270,6 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton_3.setBounds(395, 181, 85, 21);
 		panel_2.add(btnNewButton_3);
-		
-		JButton btnNewButton_4 = new JButton("Nhap hang");
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_btnNewButton_4_actionPerformed(e);
-			}
-		});
-		btnNewButton_4.setBounds(295, 183, 85, 21);
-		panel_2.add(btnNewButton_4);
 		initJFrame();
 	}
 
@@ -706,13 +697,6 @@ public class JPaddInvoice extends JPanel {
 			jNameCustomer.setText("");
 		}
 
-	}
-
-	protected void do_btnNewButton_4_actionPerformed(ActionEvent e) {
-		panel.removeAll(); 
-		panel.revalidate();
-		JPPurchaseDetails jpPurchaseDetails = new JPPurchaseDetails() ; 
-		panel.add(jpPurchaseDetails);
 	}
 
    

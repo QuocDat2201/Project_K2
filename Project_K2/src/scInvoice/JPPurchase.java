@@ -21,6 +21,7 @@ import models.Product_model;
 import models.Purchaseinvoicedetails_model;
 import models.Purchaseinvoices_model;
 import models.Suppliers_model;
+import scCustomer.JPsuppliers;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -31,6 +32,7 @@ import java.util.Map;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class JPPurchase extends JPanel {
 	private JComboBox jcomboBoxSupplier;
@@ -38,13 +40,14 @@ public class JPPurchase extends JPanel {
 	private Map<String,Object> data ;
 	private List<Integer> saleIDs ; 
 	private JLabel jlabelTotal;
+	private JPanel panel;
 	/**
 	 * Create the panel.
 	 */
 	public JPPurchase() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
@@ -88,14 +91,15 @@ public class JPPurchase extends JPanel {
 		btnNewButton.setBounds(368, 143, 85, 21);
 		panel_1.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_2 = new JButton("Add");
+		btnNewButton_2.setIcon(new ImageIcon(JPPurchase.class.getResource("/Icon/39039_gtk_add_icon.png")));
+		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				do_btnNewButton_1_actionPerformed(e);
+				do_btnNewButton_2_actionPerformed(e);
 			}
 		});
-		btnNewButton_1.setBounds(175, 188, 85, 21);
-		panel_1.add(btnNewButton_1);
+		btnNewButton_2.setBounds(325, 58, 85, 21);
+		panel_1.add(btnNewButton_2);
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
@@ -175,26 +179,11 @@ public class JPPurchase extends JPanel {
 			JOptionPane.showMessageDialog(null,"Please check Profile");
 		}
 	}
-	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
-		Purchaseinvoicedetails_model purchaseinvoicedetails_model = new Purchaseinvoicedetails_model() ; 
-		Product_model product_model = new Product_model() ;
-		
-		for(Integer saleID : saleIDs) {
-			Purchaseinvoicedetails purchaseinvoicedetails = purchaseinvoicedetails_model.find(saleID) ; 
-			int addquantity = purchaseinvoicedetails.getQuantity();//so luong them
-			Products products = product_model.find(purchaseinvoicedetails.getProductID());
-			System.out.println(products.getProductID());
-			System.out.println(products.getProductName());
-			System.out.println(products.getQuantity());
-			int oldquantity = products.getQuantity() ; //so luong hien tai
-			int newquantity = oldquantity + addquantity ; //so luong moi nhat
-			products.setProductID(purchaseinvoicedetails.getProductID());
-			products.setQuantity(newquantity);
-			if(product_model.Update(products)) {
-				JOptionPane.showMessageDialog(null,"Succes");
-			}
-		}
-		
-		
+	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {
+		panel.removeAll();
+		panel.revalidate();
+		JPsuppliers jPsuppliers=new JPsuppliers();
+		panel.add(jPsuppliers);
+		panel.setVisible(true);
 	}
 }
