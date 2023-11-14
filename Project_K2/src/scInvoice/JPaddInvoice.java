@@ -270,6 +270,7 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton_3.setBounds(395, 181, 85, 21);
 		panel_2.add(btnNewButton_3);
+<<<<<<< HEAD
 
 		JButton btnNewButton_4 = new JButton("Nhap hang");
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -279,6 +280,8 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton_4.setBounds(295, 183, 85, 21);
 		panel_2.add(btnNewButton_4);
+=======
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2
 		initJFrame();
 	}
 
@@ -711,6 +714,7 @@ public class JPaddInvoice extends JPanel {
 
 	}
 
+<<<<<<< HEAD
 	protected void do_btnNewButton_4_actionPerformed(ActionEvent e) {
 		panel.removeAll();
 		panel.revalidate();
@@ -718,6 +722,9 @@ public class JPaddInvoice extends JPanel {
 		panel.add(jpPurchaseDetails);
 	}
 
+=======
+   
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2
 	protected void do_mntmNewMenuItem_actionPerformed(ActionEvent e) {// xem them
 		Sales_model sales_model = new Sales_model();
 		int indexrow = jtableListInvoice.getSelectedRow();

@@ -24,7 +24,6 @@ import java.awt.event.ActionEvent;
 
 public class JPsuppliers extends JPanel {
 	private JTable table;
-	private JTextField textField;
 	private JTextField textField_1;
 	private JPanel panel_1;
 
@@ -40,13 +39,6 @@ public class JPsuppliers extends JPanel {
 
 		panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.NORTH);
-
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
-
-		JLabel lblNewLabel = new JLabel("New label");
-		panel_1.add(lblNewLabel);
 
 		textField_1 = new JTextField();
 		panel_1.add(textField_1);

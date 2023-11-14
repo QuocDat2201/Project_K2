@@ -104,7 +104,7 @@ public class JPPurchaseDetails extends JPanel {
 		
 		jlabelPrice = new JLabel("");
 		jlabelPrice.setBorder(new LineBorder(new Color(0, 0, 0)));
-		jlabelPrice.setBounds(186, 123, 77, 24);
+		jlabelPrice.setBounds(186, 123, 62, 24);
 		panel_2.add(jlabelPrice);
 		
 		JButton btnNewButton = new JButton("Create");
@@ -131,17 +131,8 @@ public class JPPurchaseDetails extends JPanel {
 		
 		jlabelTotalPrice = new JLabel("");
 		jlabelTotalPrice.setBorder(new LineBorder(new Color(0, 0, 0)));
-		jlabelTotalPrice.setBounds(186, 157, 77, 24);
+		jlabelTotalPrice.setBounds(186, 157, 62, 24);
 		panel_2.add(jlabelTotalPrice);
-		
-		JButton btnNewButton_1 = new JButton("dem");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_btnNewButton_1_actionPerformed(e);
-			}
-		});
-		btnNewButton_1.setBounds(236, 178, 85, 21);
-		panel_2.add(btnNewButton_1);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "ListPurchase", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -151,7 +142,7 @@ public class JPPurchaseDetails extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(new Color(255, 182, 193), 2));
-		scrollPane.setBounds(10, 29, 586, 167);
+		scrollPane.setBounds(10, 29, 586, 136);
 		panel_1.add(scrollPane);
 		
 		jtableListPurchase = new JTable();
@@ -163,7 +154,7 @@ public class JPPurchaseDetails extends JPanel {
 				do_btnNewButton_2_actionPerformed(e);
 			}
 		});
-		btnNewButton_2.setBounds(484, 194, 112, 21);
+		btnNewButton_2.setBounds(484, 175, 112, 21);
 		panel_1.add(btnNewButton_2);
 		initJFrame();
 	}
@@ -278,10 +269,6 @@ public class JPPurchaseDetails extends JPanel {
 	    }
 
 	    return saleIDs;
-	}
-	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
-		List<Integer> saleIDs = getAllSaleIDs();
-		System.out.println(saleIDs);
 	}
 	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {
 		List<Integer> saleIDs = getAllSaleIDs();

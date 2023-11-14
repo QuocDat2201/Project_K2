@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import entites.Purchaseinvoicedetails;
 import entites.Purchaseinvoices;
 import entites.Purchaseinvoices;
 
@@ -43,6 +44,7 @@ public class Purchaseinvoices_model {
 		}
 		return newSalesID;
 	}
+<<<<<<< HEAD
 
 	public List<Purchaseinvoices> findAll() {
 		
@@ -56,6 +58,21 @@ public class Purchaseinvoices_model {
 				purchaseinvoice.setSupplierID(resultSet.getInt("SupplierID"));
 				purchaseinvoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
 				purchaseinvoice.setTotalAmount(resultSet.getBigDecimal("TotalAmount"));
+=======
+	
+	public List<Purchaseinvoices> findAll() {
+		List<Purchaseinvoices> purchaseinvoices = new ArrayList<Purchaseinvoices>();
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from purchaseinvoices");// java.sql
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
+				Purchaseinvoices purchaseinvoice = new Purchaseinvoices();
+				purchaseinvoice.setInvoiceID(resultSet.getInt("InvoiceID"));
+				purchaseinvoice.setSupplierID(resultSet.getInt("SupplierID"));
+				purchaseinvoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
+				purchaseinvoice.setTotalAmount(resultSet.getBigDecimal("TotalAmount"));
+				
+>>>>>>> branch 'main' of https://github.com/QuocDat2201/Project_K2
 				purchaseinvoices.add(purchaseinvoice);
 			}
 		} catch (Exception e) {
