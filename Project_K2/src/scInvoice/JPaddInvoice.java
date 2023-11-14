@@ -24,6 +24,7 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -223,13 +224,33 @@ public class JPaddInvoice extends JPanel {
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(new Color(255, 192, 203), 3));
-		scrollPane.setBounds(60, 11, 538, 162);
+		scrollPane.setBounds(60, 22, 538, 167);
 		panel_2.add(scrollPane);
+
+		JPopupMenu popupMenu = new JPopupMenu();
+		addPopup(scrollPane, popupMenu);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("More");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmNewMenuItem_actionPerformed(e);
+			}
+		});
+		popupMenu.add(mntmNewMenuItem);
+
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Huy");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmNewMenuItem_1_actionPerformed(e);
+			}
+		});
+		popupMenu.add(mntmNewMenuItem_1);
 
 		jtableListInvoice = new JTable();
 		jtableListInvoice.setBorder(new LineBorder(new Color(255, 240, 245), 2));
 		jtableListInvoice.setBackground(new Color(255, 240, 245));
 		jtableListInvoice.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		jtableListInvoice.setComponentPopupMenu(popupMenu);
 		scrollPane.setViewportView(jtableListInvoice);
 
 		JButton btnNewButton_2 = new JButton("Huy hoa don");
@@ -282,6 +303,7 @@ public class JPaddInvoice extends JPanel {
 		Invoice_model invoice_model = new Invoice_model();
 //		fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
 		fillDataToJTable1(invoiceItemList);
+		fillDataToJTable(invoice_model.findAll());
 	}
 
 	public class ProductCellRender extends DefaultListCellRenderer {
@@ -295,7 +317,7 @@ public class JPaddInvoice extends JPanel {
 
 	}
 
-	public void fillDataToJTable(List<Sales> sales) {
+	public void fillDataToJTable(List<Invoices> invoicess) {
 		DefaultTableModel model = new DefaultTableModel() {
 
 			@Override
@@ -308,43 +330,41 @@ public class JPaddInvoice extends JPanel {
 
 		// Thêm cột cho JTable
 		model.addColumn("ID");
-		model.addColumn("Invoice Date");
-		model.addColumn("Customer Name");
-		model.addColumn("Product Name");
-		model.addColumn("Quantity");
-		model.addColumn("Total");
-		model.addColumn("Status");
 
+		model.addColumn("Customer Name");
+		model.addColumn("Customer Phone");
+		model.addColumn("Total");
+		model.addColumn("Invoice Date");
+		model.addColumn("Status");
 		// Tạo danh sách tạm thời để lưu thông tin sáp nhập từ Sales và Invoices
 		List<CombinedData> combinedDataList = new ArrayList<CombinedData>();
 		Product_model product_model = new Product_model();
 
-		for (Sales sale : sales) {
-			CombinedData combinedData = new CombinedData(sale.getSaleID(), null, // Để trống Invoice Date
-					null, // Để trống Customer Name
-					sale.getProductID(), sale.getQuantity(), sale.getPrice());
+		for (Invoices invoi : invoicess) {
+			model.addRow(new Object[] { invoi.getInvoiceID(), invoi.getCustomerName(), invoi.getCustomerPhone(),
+					invoi.getTotal(), invoi.getInvoiceDate(), invoi.isStatus() ? "conf" : "cancl" });
 
-			combinedDataList.add(combinedData);
 		}
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		jtableListInvoice.getTableHeader().setReorderingAllowed(false);
 		jtableListInvoice.setModel(model);
+//		jtableListInvoice.setDefaultRenderer(Object.class,new ColoredCellRenderer());
 		// Lấy ra model của cột từ JTable
 		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
 
 		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
-		TableColumn customerNameColumn = columnModel.getColumn(2); // Cột "Customer Name" ở index 2
-		customerNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
-		customerNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		TableColumn customerNameColumn = columnModel.getColumn(0); // Cột "Customer Name" ở index 2
+		customerNameColumn.setMinWidth(30); // Chiều rộng tối thiểu
+		customerNameColumn.setMaxWidth(30); // Chiều rộng tối đa
 
 		// Lấy ra cột "Product Name" và thiết lập chiều rộng
-		TableColumn productNameColumn = columnModel.getColumn(3); // Cột "Product Name" ở index 3
-		productNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
+		TableColumn productNameColumn = columnModel.getColumn(1); // Cột "Product Name" ở index 3
+		productNameColumn.setMinWidth(150); // Chiều rộng tối thiểu
 		productNameColumn.setMaxWidth(200); // Chiều rộng tối đa
 
-		TableColumn DateNameColumn = columnModel.getColumn(1); // Cột "Product Name" ở index 3
-		DateNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
+		TableColumn DateNameColumn = columnModel.getColumn(2); // Cột "Product Name" ở index 3
+		DateNameColumn.setMinWidth(150); // Chiều rộng tối thiểu
 		DateNameColumn.setMaxWidth(200); // Chiều rộng tối đa
 
 	}
@@ -399,6 +419,59 @@ public class JPaddInvoice extends JPanel {
 		TableColumn DateNameColumn2 = columnModel.getColumn(4); //
 		DateNameColumn2.setMinWidth(60); // Chiều rộng tối thiểu
 		DateNameColumn2.setMaxWidth(60); // Chiều rộng tối đa
+
+	}
+
+	public void fillDataToJTable2(List<Sales> sales) {
+		DefaultTableModel model = new DefaultTableModel() {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+		};
+
+		// Thêm cột cho JTable
+		model.addColumn("STT");
+		model.addColumn("Product Name");
+		model.addColumn("Price");
+		model.addColumn("Quantity");
+		model.addColumn("Total");
+		Product_model product_model = new Product_model();
+		int sl = 0;
+		for (Sales sale : sales) {
+			sl++;
+			model.addRow(new Object[] { sl, sale.getProductName(), sale.getPrice(), sale.getQuantity(),
+					sale.getPrice().multiply(new BigDecimal(sale.getQuantity())) });
+		}
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		jtableListInvoice.getTableHeader().setReorderingAllowed(false);
+		jtableListInvoice.setModel(model);
+		// Lấy ra model của cột từ JTable
+		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
+
+		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
+		TableColumn customerNameColumn = columnModel.getColumn(2); // Cột "Customer Name" ở index 2
+		customerNameColumn.setMinWidth(50); // Chiều rộng tối thiểu
+		customerNameColumn.setMaxWidth(100); // Chiều rộng tối đa
+
+		// Lấy ra cột "Product Name" và thiết lập chiều rộng
+		TableColumn productNameColumn = columnModel.getColumn(3); // Cột "Product Name" ở index 3
+		productNameColumn.setMinWidth(60); // Chiều rộng tối thiểu
+		productNameColumn.setMaxWidth(100); // Chiều rộng tối đa
+
+		TableColumn DateNameColumn = columnModel.getColumn(1);
+		DateNameColumn.setMinWidth(70); // Chiều rộng tối thiểu
+		DateNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		TableColumn DateNameColumn0 = columnModel.getColumn(0); //
+		DateNameColumn0.setMinWidth(40); // Chiều rộng tối thiểu
+		DateNameColumn0.setMaxWidth(40); // Chiều rộng tối đa
+		TableColumn DateNameColumn2 = columnModel.getColumn(4); //
+		DateNameColumn2.setMinWidth(60); // Chiều rộng tối thiểu
+		DateNameColumn2.setMaxWidth(100); // Chiều rộng tối đa
 
 	}
 
@@ -507,65 +580,81 @@ public class JPaddInvoice extends JPanel {
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		Invoice_model model = new Invoice_model();
-		CustomerModel customerModel = new CustomerModel();
-		Sales_model sales_model = new Sales_model();
-		Sales sales;
-		Customer customerr;
-		Invoices invoice = new Invoices();
-		int flag = 1;
+		if (jCustomerphone.getText().length() == 10) {
+			if (invoiceItemList.size() != 0) {
+				Invoice_model model = new Invoice_model();
+				CustomerModel customerModel = new CustomerModel();
+				Sales_model sales_model = new Sales_model();
+				Sales sales;
+				Customer customerr;
+				Invoices invoice = new Invoices();
+				int flag = 1;
 
-		// tao hoa don
-		if (jNameCustomer.getText().equalsIgnoreCase("")) {
-			invoice.setCustomerName("Khach le");
-		} else {
-			invoice.setCustomerName(jNameCustomer.getText());
-		}
-		invoice.setCustomerPhone(jCustomerphone.getText());
-		invoice.setInvoiceDate(jdateChooser.getDate());
-		invoice.setStatus(true);
-		invoice.setTotal(new BigDecimal(jtotal.getText()));
-		if (model.Create(invoice)) {
-			//tao sale
-			for (int i = 0; i < invoiceItemList.size(); i++) {
-				sales = invoiceItemList.get(i);
-				int idInvoice = model.findAllsort().getInvoiceID();
-				sales.setInvoice_id(idInvoice);
-				if (sales_model.Create(sales)) {
+				// tao hoa don
+				if (jNameCustomer.getText().equalsIgnoreCase("")) {
+					invoice.setCustomerName("Khach le");
+				} else {
+					invoice.setCustomerName(jNameCustomer.getText());
+				}
+				invoice.setCustomerPhone(jCustomerphone.getText());
+				invoice.setInvoiceDate(jdateChooser.getDate());
+				invoice.setStatus(true);
+				invoice.setTotal(new BigDecimal(jtotal.getText()));
+				if (model.Create(invoice)) {
+					// tao sale
+					for (int i = 0; i < invoiceItemList.size(); i++) {
+						sales = invoiceItemList.get(i);
+						int idInvoice = model.findAllsort().getInvoiceID();
+						sales.setInvoice_id(idInvoice);
+						if (sales_model.Create(sales)) {
 
+						} else {
+							flag = 0;
+							break;
+						}
+					}
 				} else {
 					flag = 0;
-					break;
+
 				}
+
+				// tao customer
+				customer.setPoint(
+						Integer.valueOf((int) (customer.getPoint() + (Double.valueOf(jtotal.getText()) / 10))));
+				customer.setNameString(jNameCustomer.getText());
+				int flagCreateCustomer = 0;
+				for (Customer customert11 : customerModel.findAll()) {
+					if (customert11.getPhoneString().equalsIgnoreCase(jCustomerphone.getText())) {
+						customerModel.Update(customer);
+						flagCreateCustomer = 1;
+						break;
+					}
+				}
+				if (flagCreateCustomer == 0) {
+					customerModel.create(customer);
+				}
+
+				if (flag == 1) {
+					JOptionPane.showMessageDialog(null, "Success");
+				} else {
+					JOptionPane.showMessageDialog(null, "Invalid");
+				}
+				customer = null;
+				invoiceItemList.clear();
+				fillDataToJTable1(invoiceItemList);
+				jNameCustomer.setText("");
+				jCustomerphone.setText("");
+				jcurrentQuantity.setText("");
+				jtextQuantily.setText("");
+				jtotal.setText("");
+				fillDataToJTable(model.findAll());
+			} else {
+				JOptionPane.showMessageDialog(null, "item null");
 			}
 		} else {
-			flag = 0;
-
+			JOptionPane.showMessageDialog(null, "phone error");
 		}
 
-		// tao customer
-		customer.setPoint(Integer.valueOf((int) (customer.getPoint() + (Double.valueOf(jtotal.getText()) / 10))));
-		int flagCreateCustomer = 0;
-		for (Customer customert11 : customerModel.findAll()) {
-			if (customert11.getPhoneString().equalsIgnoreCase(jCustomerphone.getText())) {
-				customerModel.Update(customer);
-				flagCreateCustomer = 1;
-				break;
-			}
-		}
-		if (flagCreateCustomer == 0) {
-			customerModel.create(customer);
-		}
-		
-		
-		
-		if (flag == 1) {
-			JOptionPane.showMessageDialog(null, "Success");
-		} else {
-			JOptionPane.showMessageDialog(null, "Invalid");
-		}
-		customer = null;
-		invoiceItemList.clear();
 	}
 
 	protected void do_jCustomerName_keyReleased(KeyEvent e) {
@@ -596,22 +685,81 @@ public class JPaddInvoice extends JPanel {
 				}
 			}
 			if (!flag) {
-				customer = new Customer();
-				customer.setNameString("Khach le");
-				customer.setPhoneString(jCustomerphone.getText());
-				customer.setPoint(0);
-				customer.setRank(1);
-				System.out.println("okokokok");
+				if (jNameCustomer.getText().equalsIgnoreCase("")) {
+					customer = new Customer();
+					customer.setNameString("Khach le");
+					customer.setPhoneString(jCustomerphone.getText());
+					customer.setPoint(0);
+					customer.setRank(1);
+					System.out.println("okokokok");
+				} else {
+					customer = new Customer();
+					customer.setNameString(jNameCustomer.getText());
+					customer.setPhoneString(jCustomerphone.getText());
+					customer.setPoint(0);
+					customer.setRank(1);
+					System.out.println("okokokok");
+				}
+
 			}
 		} else {
 			jNameCustomer.setText("");
 		}
 
 	}
+
 	protected void do_btnNewButton_4_actionPerformed(ActionEvent e) {
 		panel.removeAll(); 
 		panel.revalidate();
 		JPPurchaseDetails jpPurchaseDetails = new JPPurchaseDetails() ; 
 		panel.add(jpPurchaseDetails);
 	}
+
+   
+	protected void do_mntmNewMenuItem_actionPerformed(ActionEvent e) {// xem them
+		Sales_model sales_model=new Sales_model();
+		int indexrow = jtableListInvoice.getSelectedRow();
+		int id = (int) jtableListInvoice.getValueAt(indexrow, 0);
+		List<Sales> listSales=new ArrayList<Sales>();
+		for (Sales sales : sales_model.findAll()) {
+			System.out.println("Name"+sales.getProductName());
+			System.out.println("get"+sales.getInvoice_id());
+			if (sales.getInvoice_id()==id) {
+				listSales.add(sales);
+				System.out.println("ok");
+			} 
+		}
+		fillDataToJTable2(listSales);
+	}
+
+	protected void do_mntmNewMenuItem_1_actionPerformed(ActionEvent e) {// huy
+		int indexrow = jtableListInvoice.getSelectedRow();
+		int id = (int) jtableListInvoice.getValueAt(indexrow, 0);
+		Invoice_model invoice_model = new Invoice_model();
+		Invoices invoices = invoice_model.findID(id);
+		invoices.setStatus(false);
+		if(invoice_model.update(invoices)) {
+			JOptionPane.showMessageDialog(null,"Succe");
+			fillDataToJTable(invoice_model.findAll());
+		}else {
+			JOptionPane.showMessageDialog(null,"Inva");
+		}
+		
+	}
+//	   private class ColoredCellRenderer extends DefaultTableCellRenderer {
+//	        @Override
+//	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//	            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+//
+//	            String Status = (String) table.getValueAt(row, 4);
+//
+//
+//	            if (Status.equalsIgnoreCase("canl")) {         
+//	                
+//	                    setBackground(Color.RED);               
+//	            }
+//
+//	            return this;
+//	        }
+//	    }
 }

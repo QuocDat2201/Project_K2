@@ -61,7 +61,7 @@ public class RankModel {
         boolean result = true;
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
-                    .prepareStatement("UPDATE ranks SET point = ?, rank = ?, discount = ? WHERE id = ?");
+                    .prepareStatement("UPDATE rank SET point = ?, rank = ?, discount = ? WHERE id = ?");
             preparedStatement.setInt(1, rank.getPoint());
             preparedStatement.setString(2, rank.getRank());
             preparedStatement.setInt(3, rank.getDiscount());

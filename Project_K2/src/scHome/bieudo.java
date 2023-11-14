@@ -57,27 +57,29 @@ public class bieudo extends JPanel {
 	    Category_model category_model = new Category_model();
 	    Invoice_model invoice_model = new Invoice_model();
 
-	    List<Category> categories = category_model.findAll();
+	    List<String> categories = invoice_model.findtotalcategogy();
 	    List<Double> totals = invoice_model.findtotal();
 
-	    String[] categoriesArray = new String[categories.size()];
+	    String[] categoriesArray = new String[categories.size()] ;
+	   
 	    double[] valuesArray = new double[categories.size()];
 
 	    for (int i = 0; i < categories.size(); i++) {
-	        Category category = categories.get(i);
+	    	 categoriesArray[i]= categories.get(i);
 	        if (totals.size()>i) {
 	        	 Double total = totals.get(i);
 	        	 valuesArray[i] = total;
 			}
-	       
-
-	        categoriesArray[i] = category.getCategoryName();
+	  	        
 	       
 	    }
 
 	    String namechart = "Biểu đồ doanh số theo danh mục trong tháng 10";
 	    int x = JFrameLogin.frameWidth - 140;
 	    int y = JFrameLogin.frameHeight - 400;
+	    for (String d : categoriesArray) {
+			System.err.println(d);
+		}
 	    Chartbar Chartbar=new Chartbar(namechart, categoriesArray,"USD", "Category", x, y, valuesArray);
 	    jpanel_1.removeAll();
 	    jpanel_1.revalidate();

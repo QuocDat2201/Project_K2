@@ -80,7 +80,8 @@ public class Sales_model {
 				sale.setProductID(resultSet.getInt("ProductID"));
 				sale.setQuantity(resultSet.getInt("Quantity"));
 				sale.setPrice(resultSet.getBigDecimal("Price"));
-				
+				sale.setProductName(resultSet.getString("Product_name"));
+				sale.setInvoice_id(resultSet.getInt("Invoice_id"));
 				sales.add(sale);
 			}
 		} catch (Exception e) {

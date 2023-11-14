@@ -40,24 +40,25 @@ public class a extends JPanel {
 
     private DefaultCategoryDataset createDataset(String[] catagory, double[] valuet) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
- for (int i = 0; i < catagory.length; i++) {
+ for (int i = 0; i < valuet.length; i++) {
+	 System.out.println(valuet[i]+"test"+catagory[i]);
      dataset.addValue(valuet[i],"Doanh Thu", catagory[i]);
  }
 
         return dataset;
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Line Chart Example");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            String []cate= {"a","b"};//Day
-            double[] b= {0,1}; //value
-    
-            frame.add(new a("Example Line Chart",cate,400,200,b));
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            JFrame frame = new JFrame("Line Chart Example");
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            String []cate= {"a","b"};//Day
+//            double[] b= {0,1}; //value
+//    
+//            frame.add(new a("Example Line Chart",cate,400,200,b));
+//            frame.pack();
+//            frame.setLocationRelativeTo(null);
+//            frame.setVisible(true);
+//        });
+//    }
 }
