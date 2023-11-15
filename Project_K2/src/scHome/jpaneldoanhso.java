@@ -33,47 +33,91 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
 
 public class jpaneldoanhso extends JPanel {
 	private JTable jtable;
-	private JTable jtable_1;
+	private JTable table_1;
 
 	/**
 	 * Create the panel.
 	 */
 	public jpaneldoanhso() {
-		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
-		
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setBounds(0, 110, 609, 94);
 		Dimension Dimension = new Dimension(panel.getPreferredSize().width, 50);
+		setLayout(null);
 		panel.setPreferredSize(Dimension);
-		add(panel, BorderLayout.CENTER);
+		add(panel);
 		revalidate();
 		repaint();
+		panel.setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane, BorderLayout.CENTER);
+		scrollPane.setBounds(0, 0, 609, 94);
+		panel.add(scrollPane);
 
 		jtable = new JTable();
 		scrollPane.setViewportView(jtable);
 		JPanel panel1 = new JPanel();
+		panel1.setBounds(0, 199, 599, 234);
 		
-		add(panel1, BorderLayout.SOUTH);
-		panel1.setLayout(new BorderLayout(0, 0));
+		add(panel1);
 		JPanel panel2 = new JPanel();
-		add(panel2, BorderLayout.NORTH);
+		panel2.setBackground(new Color(128, 0, 255));
+		panel2.setBounds(0, 81, 609, 30);
+		add(panel2);
 
 		JLabel lblNewLabel = new JLabel("doanh so 30 ngay gan nhat");
 		panel2.add(lblNewLabel);
 		Dimension newDimension = new Dimension(panel1.getPreferredSize().width, 190);
 		panel1.setPreferredSize(newDimension);
+		panel1.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		panel1.add(scrollPane_1, BorderLayout.CENTER);
+		scrollPane_1.setBounds(0, 0, 609, 243);
+		panel1.add(scrollPane_1);
 		
-		jtable_1 = new JTable();
-		scrollPane_1.setViewportView(jtable_1);
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 0));
+		panel_1.setBounds(0, 0, 303, 84);
+		add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(jpaneldoanhso.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
+		lblNewLabel_1.setBounds(85, 29, 54, 44);
+		panel_1.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("New label");
+		lblNewLabel_1_1.setBounds(149, 29, 73, 44);
+		panel_1.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_1_2 = new JLabel("New label");
+		lblNewLabel_1_1_2.setBounds(106, 0, 73, 32);
+		panel_1.add(lblNewLabel_1_1_2);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(0, 255, 0));
+		panel_2.setBounds(304, 0, 305, 84);
+		add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("");
+		lblNewLabel_1_2.setIcon(new ImageIcon(jpaneldoanhso.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
+		lblNewLabel_1_2.setBounds(69, 30, 55, 43);
+		panel_2.add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("New label");
+		lblNewLabel_1_1_1.setBounds(152, 30, 60, 43);
+		panel_2.add(lblNewLabel_1_1_1);
+		
+		JLabel lblNewLabel_1_1_2_1 = new JLabel("New label");
+		lblNewLabel_1_1_2_1.setBounds(117, 0, 73, 32);
+		panel_2.add(lblNewLabel_1_1_2_1);
 
 		revalidate();
 		repaint();
@@ -180,5 +224,4 @@ public class jpaneldoanhso extends JPanel {
 		jtable_1.setModel(model);
 		// Lấy ra model của cột từ JTable
 	}
-
 }

@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 //alo
 public class JPhome extends JPanel {
 	private  Map<String,Object> dataMap=new HashMap<String, Object>();
@@ -39,7 +40,8 @@ public class JPhome extends JPanel {
 			}
 		});
 		
-		JMenu Product = new JMenu("Doanh so");
+		JMenuItem Product = new JMenuItem("Doanh so");
+		Product.setHorizontalAlignment(SwingConstants.LEFT);
 		Product.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_Product_actionPerformed(e);
