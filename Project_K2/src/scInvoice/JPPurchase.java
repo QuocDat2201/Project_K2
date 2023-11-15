@@ -75,6 +75,7 @@ public class JPPurchase extends JPanel {
 		panel_1.add(lblDate);
 		
 		jdateChooser = new JDateChooser();
+		jdateChooser.setDateFormatString("dd/MM/yyyy");
 		jdateChooser.setBounds(175, 95, 132, 28);
 		panel_1.add(jdateChooser);
 		
@@ -105,15 +106,6 @@ public class JPPurchase extends JPanel {
 		});
 		btnNewButton_2.setBounds(325, 58, 85, 21);
 		panel_1.add(btnNewButton_2);
-		
-		JButton btnNewButton_1 = new JButton("Add");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_btnNewButton_1_actionPerformed(e);
-			}
-		});
-		btnNewButton_1.setBounds(470, 143, 85, 21);
-		panel_1.add(btnNewButton_1);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(224, 255, 255));
@@ -225,27 +217,6 @@ public class JPPurchase extends JPanel {
 		JPsuppliers jPsuppliers=new JPsuppliers();
 		panel.add(jPsuppliers);
 		panel.setVisible(true);
-	}
-	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
-		Product_model product_model = new Product_model() ; 
-		Purchaseinvoicedetails_model purchaseinvoicedetails_model = new Purchaseinvoicedetails_model() ;// 
-		for(Integer saleID : saleIDs) {
-			
-			Purchaseinvoicedetails purchaseinvoicedetails = purchaseinvoicedetails_model.find(saleID);
-			int addquantity = purchaseinvoicedetails.getQuantity();//so luong them
-			
-			Products products = product_model.find(purchaseinvoicedetails.getProductID());
-			int oldquantity = products.getQuantity();//so luong cu 
-			int newquantity = oldquantity + addquantity ;
-			products.setProductID(purchaseinvoicedetails.getProductID());
-			products.setQuantity(newquantity);
-			if(product_model.Update(products)) {
-				JOptionPane.showMessageDialog(null, "Succes");
-			}else {
-				JOptionPane.showMessageDialog(null,"Faild");
-			}
-			
-		}
 	}
 	
 	public void fillDataToJTable(List<Purchaseinvoices> purchaseinvoices) {

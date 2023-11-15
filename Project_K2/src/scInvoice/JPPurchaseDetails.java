@@ -219,9 +219,14 @@ public class JPPurchaseDetails extends JPanel {
 	}
 	protected void do_jtextFieldQuantity_keyReleased(KeyEvent e) {
 		try {
-			double quantity = Double.parseDouble(jtextFieldQuantity.getText());
-			double total = quantity * Double.parseDouble(jlabelPrice.getText());
-			jlabelTotalPrice.setText(String.valueOf(total));
+//			
+			
+	        BigDecimal quantity1 = new BigDecimal(jtextFieldQuantity.getText());
+	        BigDecimal price1 = new BigDecimal(jlabelPrice.getText());
+	        BigDecimal total1 = quantity1.multiply(price1);
+	
+	        jlabelTotalPrice.setText(total1.toString());
+
 		} catch (Exception e2) {
 			// TODO: handle exception
 		}

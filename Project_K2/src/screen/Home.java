@@ -159,7 +159,7 @@ public class Home extends JFrame {
 		jbcusstomer.setBackground(new Color(0, 255, 0));
 		panel.add(jbcusstomer);
 
-		jbtaccount_2 = new JButton("Account");
+		jbtaccount_2 = new JButton("Supplier");
 		jbtaccount_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_jbtaccount_2_actionPerformed(e);
