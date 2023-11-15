@@ -9,6 +9,20 @@ public class Recieve {
 	private String phone ; 
 	private String email ; 
 	private String reason ; 
+	private String product_name ; 
+	private int quantity ;
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	private Date date ;
 	public int getId_recieve() {
 		return id_recieve;

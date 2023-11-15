@@ -35,6 +35,8 @@ public class JPContact extends JPanel {
 	private JTextArea jtextAreaReason;
 	private JDateChooser jdateChooser;
 	private JTable jtableRecieve;
+	private JTextField jtextFieldProductName;
+	private JTextField jtextFieldQuantity;
 
 	/**
 	 * Create the panel.
@@ -95,7 +97,7 @@ public class JPContact extends JPanel {
 		panel_1.add(jtextFieldPhone);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(359, 20, 153, 91);
+		scrollPane.setBounds(359, 27, 150, 62);
 		panel_1.add(scrollPane);
 		
 		jtextAreaReason = new JTextArea();
@@ -107,16 +109,34 @@ public class JPContact extends JPanel {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setBounds(359, 189, 85, 21);
+		btnNewButton.setBounds(359, 171, 94, 26);
 		panel_1.add(btnNewButton);
 		
 		JLabel lblDate = new JLabel("Date");
-		lblDate.setBounds(285, 135, 44, 26);
+		lblDate.setBounds(44, 171, 44, 26);
 		panel_1.add(lblDate);
 		
 		jdateChooser = new JDateChooser();
-		jdateChooser.setBounds(359, 135, 134, 26);
+		jdateChooser.setBounds(135, 172, 134, 26);
 		panel_1.add(jdateChooser);
+		
+		jtextFieldProductName = new JTextField();
+		jtextFieldProductName.setColumns(10);
+		jtextFieldProductName.setBounds(359, 100, 139, 26);
+		panel_1.add(jtextFieldProductName);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Product");
+		lblNewLabel_1_1_1.setBounds(285, 99, 88, 26);
+		panel_1.add(lblNewLabel_1_1_1);
+		
+		jtextFieldQuantity = new JTextField();
+		jtextFieldQuantity.setColumns(10);
+		jtextFieldQuantity.setBounds(359, 135, 139, 26);
+		panel_1.add(jtextFieldQuantity);
+		
+		JLabel lblNewLabel_1_1_2 = new JLabel("Quantity");
+		lblNewLabel_1_1_2.setBounds(285, 134, 88, 26);
+		panel_1.add(lblNewLabel_1_1_2);
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
@@ -149,6 +169,8 @@ public class JPContact extends JPanel {
 		recieve.setEmail(jtextFieldEmail.getText());
 		recieve.setPhone(jtextFieldPhone.getText());
 		recieve.setReason(jtextAreaReason.getText());
+		recieve.setProduct_name(jtextFieldProductName.getText());
+		recieve.setQuantity(Integer.parseInt(jtextFieldQuantity.getText()));
 		if(recieve_model.Create(recieve)) {
 			JOptionPane.showMessageDialog(null,"Succes");
 			fillDataToJTable(recieve_model.findAll());
@@ -175,6 +197,8 @@ public class JPContact extends JPanel {
 		model.addColumn("Email");
 		model.addColumn("Reason");
 		model.addColumn("Date");
+		model.addColumn("Product Name");
+		model.addColumn("Quantity");
 		for(Recieve recieve : recieves) {
 			model.addRow(new Object[] {
 					recieve.getId_recieve(),
@@ -183,7 +207,9 @@ public class JPContact extends JPanel {
 					recieve.getPhone(),
 					recieve.getEmail(),
 					recieve.getReason(),
-					recieve.getDate()
+					recieve.getDate(),
+					recieve.getProduct_name(),
+					recieve.getQuantity()
 			});
 		}
 		jtableRecieve.setModel(model);

@@ -13,13 +13,15 @@ public class Recieve_model {
 		boolean result = true;
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection()
-					.prepareStatement("insert into recieve(customer_recieve, address,phone,email,reason,date) values(?,?,?,?,?,?)");			
+					.prepareStatement("insert into recieve(customer_name, address,phone,email,reason,date,product_name,quantity) values(?,?,?,?,?,?,?,?)");			
 			preparedStatement.setString(1, recieve.getCustomer_recieve());
 			preparedStatement.setString(2, recieve.getAddress());
 			preparedStatement.setString(3, recieve.getPhone());
 			preparedStatement.setString(4, recieve.getEmail());
 			preparedStatement.setString(5, recieve.getReason());
 			preparedStatement.setDate(6, new java.sql.Date(recieve.getDate().getTime()));
+			preparedStatement.setString(7, recieve.getProduct_name());
+			preparedStatement.setInt(8,recieve.getQuantity());
 			result = preparedStatement.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,13 +40,14 @@ public class Recieve_model {
             while (resultSet.next()) {
             	Recieve recieve=new Recieve();
             	recieve.setAddress(resultSet.getString("address"));
-            	recieve.setCustomer_recieve(resultSet.getString("customer_recieve"));
+            	recieve.setCustomer_recieve(resultSet.getString("customer_name"));
             	recieve.setDate(resultSet.getDate("date"));
             	recieve.setEmail(resultSet.getString("email"));
-            	recieve.setId_recieve(resultSet.getInt("id_recieve"));
+            	recieve.setId_recieve(resultSet.getInt("id"));
             	recieve.setPhone(resultSet.getString("phone"));
             	recieve.setReason(resultSet.getString("reason"));
-            	
+            	recieve.setProduct_name(resultSet.getString("product_name"));
+            	recieve.setQuantity(resultSet.getInt("quantity"));
     
             	recieves.add(recieve);
             }

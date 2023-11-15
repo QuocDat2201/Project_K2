@@ -93,6 +93,8 @@ public class JPPurchase extends JPanel {
 		panel_1.add(jlabelTotal);
 		
 		JButton btnNewButton = new JButton("Create");
+		btnNewButton.setForeground(new Color(255, 0, 0));
+		btnNewButton.setBackground(new Color(255, 255, 0));
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -103,6 +105,8 @@ public class JPPurchase extends JPanel {
 		panel_1.add(btnNewButton);
 		
 		JButton btnNewButton_2 = new JButton("Add");
+		btnNewButton_2.setForeground(new Color(255, 0, 0));
+		btnNewButton_2.setBackground(new Color(255, 255, 0));
 		btnNewButton_2.setFont(new Font("Dialog", Font.BOLD, 13));
 		btnNewButton_2.setIcon(new ImageIcon(JPPurchase.class.getResource("/Icon/39039_gtk_add_icon.png")));
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -128,6 +132,11 @@ public class JPPurchase extends JPanel {
 		scrollPane.setViewportView(jtableListPurchase);
 		
 		JButton btnNewButton_1 = new JButton("Delete");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_1_actionPerformed(e);
+			}
+		});
 		btnNewButton_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnNewButton_1.setBackground(new Color(127, 255, 212));
 		btnNewButton_1.setBounds(459, 171, 111, 21);
@@ -257,5 +266,7 @@ public class JPPurchase extends JPanel {
 		jtableListPurchase.setModel(model);
 		jtableListPurchase.getTableHeader().setReorderingAllowed(false);
 		
+	}
+	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
 	}
 }

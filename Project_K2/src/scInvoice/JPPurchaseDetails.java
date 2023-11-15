@@ -114,7 +114,7 @@ public class JPPurchaseDetails extends JPanel {
 		JButton btnNewButton = new JButton("Create");
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color(135, 206, 250));
+		btnNewButton.setBackground(new Color(255, 255, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
@@ -158,7 +158,7 @@ public class JPPurchaseDetails extends JPanel {
 		scrollPane.setViewportView(jtableListPurchase);
 		
 		JButton btnNewButton_2 = new JButton("Thanh Toan");
-		btnNewButton_2.setBackground(new Color(135, 206, 250));
+		btnNewButton_2.setBackground(new Color(255, 255, 0));
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnNewButton_2.addActionListener(new ActionListener() {

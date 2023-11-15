@@ -224,7 +224,7 @@ public class JPaddInvoice extends JPanel {
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(new Color(255, 192, 203), 3));
-		scrollPane.setBounds(60, 22, 538, 167);
+		scrollPane.setBounds(32, 23, 548, 126);
 		panel_2.add(scrollPane);
 
 		JPopupMenu popupMenu = new JPopupMenu();
@@ -259,7 +259,7 @@ public class JPaddInvoice extends JPanel {
 				do_btnNewButton_2_actionPerformed(e);
 			}
 		});
-		btnNewButton_2.setBounds(479, 181, 85, 21);
+		btnNewButton_2.setBounds(479, 159, 85, 21);
 		panel_2.add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("Recieve");
@@ -268,7 +268,7 @@ public class JPaddInvoice extends JPanel {
 				do_btnNewButton_3_actionPerformed(e);
 			}
 		});
-		btnNewButton_3.setBounds(395, 181, 85, 21);
+		btnNewButton_3.setBounds(388, 159, 85, 21);
 		panel_2.add(btnNewButton_3);
 		initJFrame();
 	}
