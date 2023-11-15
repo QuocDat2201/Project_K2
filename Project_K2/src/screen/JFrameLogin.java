@@ -72,7 +72,7 @@ public class JFrameLogin extends JFrame {
 		setBounds(100, 100, 653, 347);
 		setResizable(false);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 159, 203));
+		contentPane.setBackground(new Color(0, 128, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);

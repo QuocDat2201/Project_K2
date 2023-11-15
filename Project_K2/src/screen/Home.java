@@ -89,18 +89,18 @@ public class Home extends JFrame {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
 		panel = new JPanel();
-		panel.setBackground(new Color(254, 199, 222));
+		panel.setBackground(new Color(0, 255, 255));
 		getContentPane().add(panel, BorderLayout.WEST);
 
 		jbthome = new JButton("Home");
 		jbthome.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbthome.setForeground(new Color(0, 0, 0));
+		jbthome.setForeground(new Color(255, 255, 255));
 		jbthome.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbthome.setHorizontalAlignment(SwingConstants.LEFT);
 		jbthome.setMinimumSize(new Dimension(59, 20));
 		jbthome.setMaximumSize(new Dimension(190, 50));
-		jbthome.setBackground(new Color(0, 255, 0));
-		jbthome.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbthome.setBackground(new Color(0, 128, 255));
+		jbthome.setBorder(new LineBorder(new Color(0, 255, 255)));
 		jbthome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
@@ -112,13 +112,13 @@ public class Home extends JFrame {
 
 		jbtinvoice = new JButton("Invoice");
 		jbtinvoice.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbtinvoice.setForeground(new Color(0, 0, 0));
+		jbtinvoice.setForeground(new Color(255, 255, 255));
 		jbtinvoice.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbtinvoice.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtinvoice.setMinimumSize(new Dimension(59, 20));
 		jbtinvoice.setMaximumSize(new Dimension(190, 50));
-		jbtinvoice.setBackground(new Color(255, 0, 0));
-		jbtinvoice.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbtinvoice.setBackground(new Color(0, 128, 255));
+		jbtinvoice.setBorder(new LineBorder(new Color(0, 255, 255)));
 		jbtinvoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_2_actionPerformed(e);
@@ -129,12 +129,12 @@ public class Home extends JFrame {
 
 		jbtlistproduct = new JButton("Storage");
 		jbtlistproduct.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbtlistproduct.setForeground(new Color(0, 0, 0));
+		jbtlistproduct.setForeground(new Color(255, 255, 255));
 		jbtlistproduct.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtlistproduct.setMinimumSize(new Dimension(59, 20));
 		jbtlistproduct.setMaximumSize(new Dimension(190, 50));
-		jbtlistproduct.setBackground(new Color(0, 255, 0));
-		jbtlistproduct.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbtlistproduct.setBackground(new Color(0, 128, 255));
+		jbtlistproduct.setBorder(new LineBorder(new Color(0, 255, 255)));
 		jbtlistproduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_jbtlistproduct_actionPerformed(e);
@@ -148,15 +148,15 @@ public class Home extends JFrame {
 			}
 		});
 		jbcusstomer.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbcusstomer.setForeground(new Color(0, 0, 0));
+		jbcusstomer.setForeground(new Color(255, 255, 255));
 		jbcusstomer.setHorizontalAlignment(SwingConstants.LEFT);
 		jbcusstomer.setIcon(
 				new ImageIcon(Home.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
 		jbcusstomer.setMinimumSize(new Dimension(59, 20));
 		jbcusstomer.setMaximumSize(new Dimension(190, 50));
 		jbcusstomer.setHorizontalTextPosition(SwingConstants.RIGHT);
-		jbcusstomer.setBorder(new LineBorder(new Color(255, 128, 255), 3));
-		jbcusstomer.setBackground(new Color(0, 255, 0));
+		jbcusstomer.setBorder(new LineBorder(new Color(0, 255, 255)));
+		jbcusstomer.setBackground(new Color(0, 128, 255));
 		panel.add(jbcusstomer);
 
 		jbtaccount_2 = new JButton("Supplier");
@@ -166,15 +166,15 @@ public class Home extends JFrame {
 			}
 		});
 		jbtaccount_2.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbtaccount_2.setForeground(new Color(0, 0, 0));
+		jbtaccount_2.setForeground(new Color(255, 255, 255));
 		jbtaccount_2.setIcon(
 				new ImageIcon(Home.class.getResource("/Icon/1298747_instagram_brand_logo_social media_icon.png")));
 		jbtaccount_2.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtaccount_2.setMinimumSize(new Dimension(59, 20));
 		jbtaccount_2.setMaximumSize(new Dimension(190, 50));
 		jbtaccount_2.setHorizontalTextPosition(SwingConstants.RIGHT);
-		jbtaccount_2.setBorder(new LineBorder(new Color(255, 128, 255), 3));
-		jbtaccount_2.setBackground(new Color(255, 0, 0));
+		jbtaccount_2.setBorder(new LineBorder(new Color(0, 255, 255)));
+		jbtaccount_2.setBackground(new Color(0, 128, 255));
 		panel.add(jbtaccount_2);
 		jbtlistproduct.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 100));
 		jbtlistproduct.setIcon(
@@ -183,11 +183,11 @@ public class Home extends JFrame {
 
 		JButton jbtreport = new JButton("Reports");
 		jbtreport.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbtreport.setForeground(new Color(0, 0, 0));
+		jbtreport.setForeground(new Color(255, 255, 255));
 		jbtreport.setMinimumSize(new Dimension(59, 20));
 		jbtreport.setMaximumSize(new Dimension(190, 50));
-		jbtreport.setBackground(new Color(255, 0, 0));
-		jbtreport.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbtreport.setBackground(new Color(0, 128, 255));
+		jbtreport.setBorder(new LineBorder(new Color(0, 255, 255)));
 		jbtreport.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbtreport.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtreport.addActionListener(new ActionListener() {
@@ -200,13 +200,13 @@ public class Home extends JFrame {
 
 		jbtaccount = new JButton("Account");
 		jbtaccount.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		jbtaccount.setForeground(new Color(0, 0, 0));
+		jbtaccount.setForeground(new Color(255, 255, 255));
 		jbtaccount.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtaccount.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbtaccount.setMinimumSize(new Dimension(59, 20));
 		jbtaccount.setMaximumSize(new Dimension(190, 50));
-		jbtaccount.setBackground(new Color(0, 255, 0));
-		jbtaccount.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		jbtaccount.setBackground(new Color(0, 128, 255));
+		jbtaccount.setBorder(new LineBorder(new Color(0, 255, 255)));
 		jbtaccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_jbtaccount_actionPerformed(e);
@@ -217,7 +217,7 @@ public class Home extends JFrame {
 
 		btnNewButton = new JButton("Sign out");
 		btnNewButton.setFont(new Font("Segoe Print", Font.BOLD, 15));
-		btnNewButton.setForeground(new Color(0, 0, 0));
+		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnNewButton_actionPerformed(e);
@@ -226,17 +226,19 @@ public class Home extends JFrame {
 		btnNewButton.setHorizontalTextPosition(SwingConstants.RIGHT);
 		btnNewButton.setMinimumSize(new Dimension(59, 20));
 		btnNewButton.setMaximumSize(new Dimension(190, 50));
-		btnNewButton.setBackground(new Color(255, 0, 0));
-		btnNewButton.setBorder(new LineBorder(new Color(255, 128, 255), 3));
+		btnNewButton.setBackground(new Color(0, 128, 255));
+		btnNewButton.setBorder(new LineBorder(new Color(0, 255, 255)));
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton.setIcon(new ImageIcon(Home.class.getResource("/Icon/Back.png")));
 		panel.add(btnNewButton);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(210, 0, 95));
+		panel_1.setForeground(new Color(255, 255, 255));
+		panel_1.setBackground(new Color(0, 128, 255));
 		getContentPane().add(panel_1, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel(title);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		panel_1.add(lblNewLabel);
 
