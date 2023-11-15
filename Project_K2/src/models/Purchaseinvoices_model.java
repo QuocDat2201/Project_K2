@@ -9,6 +9,7 @@ import java.util.List;
 
 import entites.Purchaseinvoicedetails;
 import entites.Purchaseinvoices;
+import entites.Purchaseinvoices;
 
 
 public class Purchaseinvoices_model {
@@ -43,20 +44,20 @@ public class Purchaseinvoices_model {
 		}
 		return newSalesID;
 	}
-	
+
 	public List<Purchaseinvoices> findAll() {
+		
 		List<Purchaseinvoices> purchaseinvoices = new ArrayList<Purchaseinvoices>();
 		try {
 			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from purchaseinvoices");// java.sql
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
-				Purchaseinvoices purchaseinvoice = new Purchaseinvoices();
+				Purchaseinvoices purchaseinvoice = new Purchaseinvoices();	
 				purchaseinvoice.setInvoiceID(resultSet.getInt("InvoiceID"));
 				purchaseinvoice.setSupplierID(resultSet.getInt("SupplierID"));
 				purchaseinvoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
 				purchaseinvoice.setTotalAmount(resultSet.getBigDecimal("TotalAmount"));
-				
-				purchaseinvoices.add(purchaseinvoice);
+	
 			}
 		} catch (Exception e) {
 			purchaseinvoices = null;
