@@ -253,7 +253,7 @@ public class JPaddInvoice extends JPanel {
 		jtableListInvoice.setComponentPopupMenu(popupMenu);
 		scrollPane.setViewportView(jtableListInvoice);
 
-		JButton btnNewButton_2 = new JButton("Huy hoa don");
+		JButton btnNewButton_2 = new JButton("Cancel");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_2_actionPerformed(e);
@@ -270,15 +270,6 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton_3.setBounds(395, 181, 85, 21);
 		panel_2.add(btnNewButton_3);
-
-		JButton btnNewButton_4 = new JButton("Nhap hang");
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_btnNewButton_4_actionPerformed(e);
-			}
-		});
-		btnNewButton_4.setBounds(295, 183, 85, 21);
-		panel_2.add(btnNewButton_4);
 		initJFrame();
 	}
 
@@ -709,13 +700,6 @@ public class JPaddInvoice extends JPanel {
 			jNameCustomer.setText("");
 		}
 
-	}
-
-	protected void do_btnNewButton_4_actionPerformed(ActionEvent e) {
-		panel.removeAll();
-		panel.revalidate();
-		JPPurchaseDetails jpPurchaseDetails = new JPPurchaseDetails();
-		panel.add(jpPurchaseDetails);
 	}
 	protected void do_mntmNewMenuItem_actionPerformed(ActionEvent e) {// xem them
 		Sales_model sales_model = new Sales_model();

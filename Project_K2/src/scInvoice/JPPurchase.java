@@ -36,6 +36,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Font;
 
 public class JPPurchase extends JPanel {
 	private JComboBox jcomboBoxSupplier;
@@ -63,48 +64,53 @@ public class JPPurchase extends JPanel {
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Supplier");
-		lblNewLabel.setBounds(75, 57, 90, 22);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewLabel.setBounds(75, 31, 90, 22);
 		panel_1.add(lblNewLabel);
 		
 		jcomboBoxSupplier = new JComboBox();
-		jcomboBoxSupplier.setBounds(175, 58, 132, 21);
+		jcomboBoxSupplier.setBounds(175, 32, 132, 21);
 		panel_1.add(jcomboBoxSupplier);
 		
 		JLabel lblDate = new JLabel("Date");
-		lblDate.setBounds(75, 101, 90, 22);
+		lblDate.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblDate.setBounds(75, 75, 90, 22);
 		panel_1.add(lblDate);
 		
 		jdateChooser = new JDateChooser();
 		jdateChooser.setDateFormatString("dd/MM/yyyy");
-		jdateChooser.setBounds(175, 95, 132, 28);
+		jdateChooser.setBounds(175, 69, 132, 28);
 		panel_1.add(jdateChooser);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Total");
-		lblNewLabel_1_1.setBounds(75, 142, 90, 22);
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewLabel_1_1.setBounds(75, 116, 90, 22);
 		panel_1.add(lblNewLabel_1_1);
 		
 		jlabelTotal = new JLabel("");
 		jlabelTotal.setBorder(new LineBorder(new Color(0, 0, 0)));
-		jlabelTotal.setBounds(175, 142, 78, 22);
+		jlabelTotal.setBounds(175, 116, 78, 22);
 		panel_1.add(jlabelTotal);
 		
-		JButton btnNewButton = new JButton("create");
+		JButton btnNewButton = new JButton("Create");
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setBounds(368, 143, 85, 21);
+		btnNewButton.setBounds(175, 148, 85, 21);
 		panel_1.add(btnNewButton);
 		
 		JButton btnNewButton_2 = new JButton("Add");
+		btnNewButton_2.setFont(new Font("Dialog", Font.BOLD, 13));
 		btnNewButton_2.setIcon(new ImageIcon(JPPurchase.class.getResource("/Icon/39039_gtk_add_icon.png")));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_2_actionPerformed(e);
 			}
 		});
-		btnNewButton_2.setBounds(325, 58, 85, 21);
+		btnNewButton_2.setBounds(322, 33, 85, 21);
 		panel_1.add(btnNewButton_2);
 		
 		JPanel panel_2 = new JPanel();
@@ -118,7 +124,14 @@ public class JPPurchase extends JPanel {
 		panel_2.add(scrollPane);
 		
 		jtableListPurchase = new JTable();
+		jtableListPurchase.setFont(new Font("Dialog", Font.BOLD, 11));
 		scrollPane.setViewportView(jtableListPurchase);
+		
+		JButton btnNewButton_1 = new JButton("Delete");
+		btnNewButton_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		btnNewButton_1.setBackground(new Color(127, 255, 212));
+		btnNewButton_1.setBounds(459, 171, 111, 21);
+		panel_2.add(btnNewButton_1);
 		
 	}
 	public JPPurchase(Map<String,Object> data) {

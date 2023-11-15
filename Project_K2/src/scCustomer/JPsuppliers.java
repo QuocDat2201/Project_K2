@@ -21,10 +21,10 @@ import models.Suppliers_model;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class JPsuppliers extends JPanel {
 	private JTable table;
-	private JTextField textField_1;
 	private JPanel panel_1;
 
 	/**
@@ -40,14 +40,8 @@ public class JPsuppliers extends JPanel {
 		panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.NORTH);
 
-		textField_1 = new JTextField();
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
-
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panel_1.add(lblNewLabel_1);
-
 		JButton btnNewButton = new JButton("Add Supplier");
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);

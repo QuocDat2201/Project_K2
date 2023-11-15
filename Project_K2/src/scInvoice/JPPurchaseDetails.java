@@ -39,6 +39,7 @@ import java.util.Map;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EtchedBorder;
+import java.awt.Font;
 
 public class JPPurchaseDetails extends JPanel {
 	private JTextField jtextFieldQuantity;
@@ -60,16 +61,18 @@ public class JPPurchaseDetails extends JPanel {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 218, 185));
-		panel_2.setBorder(new TitledBorder(null, "Create Purchase", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Create Purchase", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("ProductName");
-		lblNewLabel.setBounds(97, 48, 77, 24);
+		JLabel lblNewLabel = new JLabel("Product Name");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewLabel.setBounds(97, 23, 103, 24);
 		panel_2.add(lblNewLabel);
 		
 		JLabel lblQuantity = new JLabel("Quantity");
-		lblQuantity.setBounds(97, 89, 77, 24);
+		lblQuantity.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblQuantity.setBounds(97, 64, 77, 24);
 		panel_2.add(lblQuantity);
 		
 		jtextFieldQuantity = new JTextField();
@@ -80,7 +83,7 @@ public class JPPurchaseDetails extends JPanel {
 			}
 		});
 		jtextFieldQuantity.setColumns(10);
-		jtextFieldQuantity.setBounds(184, 90, 135, 24);
+		jtextFieldQuantity.setBounds(228, 65, 64, 24);
 		panel_2.add(jtextFieldQuantity);
 		jtextFieldQuantity.addKeyListener(new KeyAdapter() {
 		    @Override
@@ -99,21 +102,25 @@ public class JPPurchaseDetails extends JPanel {
 
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Price");
-		lblNewLabel_2_1.setBounds(97, 123, 77, 24);
+		lblNewLabel_2_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewLabel_2_1.setBounds(97, 98, 77, 24);
 		panel_2.add(lblNewLabel_2_1);
 		
 		jlabelPrice = new JLabel("");
 		jlabelPrice.setBorder(new LineBorder(new Color(0, 0, 0)));
-		jlabelPrice.setBounds(186, 123, 62, 24);
+		jlabelPrice.setBounds(228, 98, 64, 24);
 		panel_2.add(jlabelPrice);
 		
 		JButton btnNewButton = new JButton("Create");
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnNewButton.setForeground(new Color(0, 0, 0));
+		btnNewButton.setBackground(new Color(135, 206, 250));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setBounds(342, 178, 85, 21);
+		btnNewButton.setBounds(228, 166, 82, 21);
 		panel_2.add(btnNewButton);
 		
 		jcomboBoxProduct = new JComboBox();
@@ -122,16 +129,17 @@ public class JPPurchaseDetails extends JPanel {
 				do_jcomboBoxProduct_actionPerformed(e);
 			}
 		});
-		jcomboBoxProduct.setBounds(184, 48, 135, 24);
+		jcomboBoxProduct.setBounds(228, 23, 135, 24);
 		panel_2.add(jcomboBoxProduct);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("Total");
-		lblNewLabel_2_1_1.setBounds(97, 157, 77, 24);
+		lblNewLabel_2_1_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewLabel_2_1_1.setBounds(97, 132, 77, 24);
 		panel_2.add(lblNewLabel_2_1_1);
 		
 		jlabelTotalPrice = new JLabel("");
 		jlabelTotalPrice.setBorder(new LineBorder(new Color(0, 0, 0)));
-		jlabelTotalPrice.setBounds(186, 157, 62, 24);
+		jlabelTotalPrice.setBounds(228, 132, 64, 24);
 		panel_2.add(jlabelTotalPrice);
 		
 		JPanel panel_1 = new JPanel();
@@ -146,9 +154,13 @@ public class JPPurchaseDetails extends JPanel {
 		panel_1.add(scrollPane);
 		
 		jtableListPurchase = new JTable();
+		jtableListPurchase.setFont(new Font("Dialog", Font.BOLD, 11));
 		scrollPane.setViewportView(jtableListPurchase);
 		
 		JButton btnNewButton_2 = new JButton("Thanh Toan");
+		btnNewButton_2.setBackground(new Color(135, 206, 250));
+		btnNewButton_2.setForeground(new Color(0, 0, 0));
+		btnNewButton_2.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_2_actionPerformed(e);

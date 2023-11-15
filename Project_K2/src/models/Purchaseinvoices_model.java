@@ -57,7 +57,7 @@ public class Purchaseinvoices_model {
 				purchaseinvoice.setSupplierID(resultSet.getInt("SupplierID"));
 				purchaseinvoice.setInvoiceDate(resultSet.getDate("InvoiceDate"));
 				purchaseinvoice.setTotalAmount(resultSet.getBigDecimal("TotalAmount"));
-	
+				purchaseinvoices.add(purchaseinvoice);
 			}
 		} catch (Exception e) {
 			purchaseinvoices = null;
