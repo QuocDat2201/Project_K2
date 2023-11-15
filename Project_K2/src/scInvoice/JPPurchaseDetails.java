@@ -295,7 +295,7 @@ public class JPPurchaseDetails extends JPanel {
 		if(saleIDs.isEmpty()) {
 	        JOptionPane.showMessageDialog(null, "No item is Choose.", "Warning", JOptionPane.WARNING_MESSAGE);
 
-		}else {
+		}else {//a
 			panel.removeAll();
 			panel.revalidate();
 			JPPurchase jpPurchase = new JPPurchase(data) ; 
