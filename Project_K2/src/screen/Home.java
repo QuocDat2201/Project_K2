@@ -307,7 +307,7 @@ public class Home extends JFrame {
 	    jPstorage.setPreferredSize(jpanel_2.getPreferredSize());
 	    jPstorage.revalidate();
 	}
-
+//huydz
 	protected void do_jbtaccount_actionPerformed(ActionEvent e) {// account
 		ClearScreen();
 		JPaccount jPaccount = new JPaccount(dataMap);
