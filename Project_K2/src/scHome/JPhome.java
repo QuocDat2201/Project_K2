@@ -31,9 +31,11 @@ public class JPhome extends JPanel {
 		jpanel.setLayout(new BorderLayout(0, 0));
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(0, 64, 128));
 		add(menuBar, BorderLayout.NORTH);
 		
 		JMenu mnNewMenu = new JMenu("Bieu do");
+		mnNewMenu.setBackground(new Color(0, 64, 128));
 		mnNewMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mnNewMenu_actionPerformed(e);
@@ -41,6 +43,7 @@ public class JPhome extends JPanel {
 		});
 		
 		JMenuItem Product = new JMenuItem("Doanh so");
+		Product.setBackground(new Color(0, 64, 128));
 		Product.setHorizontalAlignment(SwingConstants.LEFT);
 		Product.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,6 +72,11 @@ public class JPhome extends JPanel {
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("BieudoDoanhthu");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmNewMenuItem_3_actionPerformed(e);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_3);
 
 	}
@@ -107,6 +115,13 @@ public class JPhome extends JPanel {
 		jpanel.removeAll();
 		jpanel.revalidate();
 		JPChartProduct bieudo1=new JPChartProduct();
+		jpanel.add(bieudo1);
+		jpanel.setVisible(true);
+	}
+	protected void do_mntmNewMenuItem_3_actionPerformed(ActionEvent e) {
+		jpanel.removeAll();
+		jpanel.revalidate();
+		JPChartRevenue bieudo1=new JPChartRevenue();
 		jpanel.add(bieudo1);
 		jpanel.setVisible(true);
 	}

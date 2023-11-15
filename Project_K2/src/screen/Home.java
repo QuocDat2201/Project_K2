@@ -31,6 +31,9 @@ import javax.swing.UIManager;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 
+import entites.Role;
+import entites.Users;
+import models.Role_model;
 import scAcount.JPaccount;
 import scCustomer.JPmenuSuppliers;
 import scCustomer.JPmenucustomer;
@@ -39,6 +42,8 @@ import scHome.JPhome;
 import scInvoice.JPaddInvoice;
 import scNotifi.JPsendNotifi;
 import scStorage.JPstorage;
+import java.awt.Point;
+import java.awt.ComponentOrientation;
 
 public class Home extends JFrame {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -55,6 +60,8 @@ public class Home extends JFrame {
 	Font defaultFont = new Font("Arial", Font.PLAIN, 14);
 	public static JButton jbcusstomer;
 	private JButton jbtaccount_2;
+	private JLabel jnamuser;
+	private JLabel jrole;
 
 	public static void main(String[] args) {
 		try {
@@ -85,15 +92,16 @@ public class Home extends JFrame {
 		setTitle("Manager");
 		contentPane = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 741, 514);
-		getContentPane().setLayout(new BorderLayout(0, 0));
+		setBounds(100, 100, 780, 514);
+		getContentPane().setLayout(null);
 
 		panel = new JPanel();
+		panel.setBounds(0, 45, 107, 430);
 		panel.setBackground(new Color(0, 255, 255));
-		getContentPane().add(panel, BorderLayout.WEST);
+		getContentPane().add(panel);
 
 		jbthome = new JButton("Home");
-		jbthome.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbthome.setFont(new Font("Arial", Font.BOLD, 15));
 		jbthome.setForeground(new Color(255, 255, 255));
 		jbthome.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbthome.setHorizontalAlignment(SwingConstants.LEFT);
@@ -111,7 +119,7 @@ public class Home extends JFrame {
 		panel.add(jbthome);
 
 		jbtinvoice = new JButton("Invoice");
-		jbtinvoice.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtinvoice.setFont(new Font("Arial", Font.BOLD, 15));
 		jbtinvoice.setForeground(new Color(255, 255, 255));
 		jbtinvoice.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jbtinvoice.setHorizontalAlignment(SwingConstants.LEFT);
@@ -128,7 +136,7 @@ public class Home extends JFrame {
 		panel.add(jbtinvoice);
 
 		jbtlistproduct = new JButton("Storage");
-		jbtlistproduct.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtlistproduct.setFont(new Font("Arial", Font.BOLD, 15));
 		jbtlistproduct.setForeground(new Color(255, 255, 255));
 		jbtlistproduct.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtlistproduct.setMinimumSize(new Dimension(59, 20));
@@ -147,7 +155,7 @@ public class Home extends JFrame {
 				do_jbcusstomer_actionPerformed(e);
 			}
 		});
-		jbcusstomer.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbcusstomer.setFont(new Font("Arial", Font.BOLD, 15));
 		jbcusstomer.setForeground(new Color(255, 255, 255));
 		jbcusstomer.setHorizontalAlignment(SwingConstants.LEFT);
 		jbcusstomer.setIcon(
@@ -165,10 +173,10 @@ public class Home extends JFrame {
 				do_jbtaccount_2_actionPerformed(e);
 			}
 		});
-		jbtaccount_2.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtaccount_2.setFont(new Font("Arial", Font.BOLD, 15));
 		jbtaccount_2.setForeground(new Color(255, 255, 255));
 		jbtaccount_2.setIcon(
-				new ImageIcon(Home.class.getResource("/Icon/1298747_instagram_brand_logo_social media_icon.png")));
+				new ImageIcon(Home.class.getResource("/Icon/Profile.png")));
 		jbtaccount_2.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtaccount_2.setMinimumSize(new Dimension(59, 20));
 		jbtaccount_2.setMaximumSize(new Dimension(190, 50));
@@ -182,7 +190,7 @@ public class Home extends JFrame {
 		panel.add(jbtlistproduct);
 
 		JButton jbtreport = new JButton("Reports");
-		jbtreport.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtreport.setFont(new Font("Arial", Font.BOLD, 15));
 		jbtreport.setForeground(new Color(255, 255, 255));
 		jbtreport.setMinimumSize(new Dimension(59, 20));
 		jbtreport.setMaximumSize(new Dimension(190, 50));
@@ -199,7 +207,7 @@ public class Home extends JFrame {
 		panel.add(jbtreport);
 
 		jbtaccount = new JButton("Account");
-		jbtaccount.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		jbtaccount.setFont(new Font("Arial", Font.BOLD, 15));
 		jbtaccount.setForeground(new Color(255, 255, 255));
 		jbtaccount.setHorizontalAlignment(SwingConstants.LEFT);
 		jbtaccount.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -216,7 +224,7 @@ public class Home extends JFrame {
 		panel.add(jbtaccount);
 
 		btnNewButton = new JButton("Sign out");
-		btnNewButton.setFont(new Font("Segoe Print", Font.BOLD, 15));
+		btnNewButton.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -233,19 +241,48 @@ public class Home extends JFrame {
 		panel.add(btnNewButton);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(107, 0, 657, 47);
 		panel_1.setForeground(new Color(255, 255, 255));
 		panel_1.setBackground(new Color(0, 128, 255));
-		getContentPane().add(panel_1, BorderLayout.NORTH);
-
-		JLabel lblNewLabel = new JLabel(title);
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
-		panel_1.add(lblNewLabel);
+		getContentPane().add(panel_1);
+				panel_1.setLayout(null);
+				
+				JLabel lblNewLabel_2 = new JLabel("Hello");
+				lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
+				lblNewLabel_2.setBounds(6, 6, 55, 16);
+				panel_1.add(lblNewLabel_2);
+				
+				jnamuser = new JLabel("jnameuser");
+				jnamuser.setFont(new Font("Arial", Font.BOLD, 13));
+				jnamuser.setBounds(61, 6, 123, 16);
+				panel_1.add(jnamuser);
+				
+				JLabel lblNewLabel_2_1 = new JLabel("Role");
+				lblNewLabel_2_1.setFont(new Font("Arial", Font.BOLD, 13));
+				lblNewLabel_2_1.setBounds(6, 25, 55, 16);
+				panel_1.add(lblNewLabel_2_1);
+				
+				jrole = new JLabel("jrole\r\n");
+				jrole.setFont(new Font("Arial", Font.BOLD, 13));
+				jrole.setBounds(61, 25, 123, 16);
+				panel_1.add(jrole);
 
 		jpanel_2 = new JPanel();
+		jpanel_2.setBounds(107, 45, 657, 430);
 		jpanel_2.setBackground(new Color(192, 192, 192));
-		getContentPane().add(jpanel_2, BorderLayout.CENTER);
+		getContentPane().add(jpanel_2);
 		jpanel_2.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(0, 64, 128));
+		panel_2.setBounds(0, 0, 107, 47);
+		getContentPane().add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Home.class.getResource("/Icon/boxes.png")));
+		lblNewLabel_1.setBounds(33, 6, 46, 35);
+		panel_2.add(lblNewLabel_1);
 		
 		jpanel_2.addComponentListener(new ComponentAdapter() {
 
@@ -270,6 +307,18 @@ public class Home extends JFrame {
 
 	private void initJFrame() {
 		ClearScreen();
+		Users user=(Users) dataMap.get("user");
+		jnamuser.setText(user.getUsername());
+		Role_model role_model=new Role_model();
+		for (Role role : role_model.findAll()) {
+			if (user.getRoleID()==role.getRole_id()) {
+				jrole.setText(role.getRole_Name());
+				break;
+			} else {
+
+			}
+		}
+		
 		JPhome jPhome = new JPhome(dataMap);
 		jpanel_2.add(jPhome);
 		jPhome.setVisible(true);

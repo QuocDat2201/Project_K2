@@ -35,6 +35,7 @@ import entites.Users;
 import models.Category_model;
 import models.Product_model;
 import screen.JFrameLogin;
+import screen.PlacehoclderTextField;
 
 import javax.swing.JPopupMenu;
 import java.awt.Component;
@@ -60,7 +61,7 @@ import javax.swing.border.EtchedBorder;
 
 public class JPstorage extends JPanel {
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
-	private JTextField jtextField_Search;
+	private PlacehoclderTextField jtextField_Search;
 	private JTable jtableProduct;
 	private JComboBox jcomboBox_status;
 	private JComboBox jcomboBox_category;
@@ -183,7 +184,7 @@ public class JPstorage extends JPanel {
 		panel_searchname.setBounds(10, 10, 293, 116);
 		panel_storage.add(panel_searchname);
 
-		jtextField_Search = new JTextField();
+		jtextField_Search = new PlacehoclderTextField("Search Name");
 		jtextField_Search.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -191,7 +192,7 @@ public class JPstorage extends JPanel {
 			}
 		});
 		jtextField_Search.setColumns(10);
-		jtextField_Search.setBounds(10, 28, 273, 31);
+		jtextField_Search.setBounds(10, 34, 273, 25);
 		panel_searchname.add(jtextField_Search);
 
 		jButton_Search = new JButton("Search");

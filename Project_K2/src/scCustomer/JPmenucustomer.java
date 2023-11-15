@@ -22,8 +22,8 @@ import java.awt.event.ActionEvent;
 
 public class JPmenucustomer extends JPanel {
 	private JPanel panel;
-	public static JMenuItem mntmNewMenuItem_2;
-	public static JMenuItem mntmNewMenuItem_1 ;
+	public static JMenuItem mntmNewMenuItem_2;//supliers
+	public static JMenuItem mntmNewMenuItem_1 ;//rank
 		
 	
 	/**

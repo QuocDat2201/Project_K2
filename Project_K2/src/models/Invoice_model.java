@@ -206,4 +206,59 @@ System.out.println("xong");
 			ConnectDB.disconnect();
 		} return result; 
 	}
+	 public Map<String, Object> findRevenueMap( int month) {
+	        Map<String, Object> map = new HashMap<>();
+	        List<Date> dates = new ArrayList<Date>();
+	        List<Double> values = new ArrayList<Double>();
+	       
+	        Connection connection = null;
+	        PreparedStatement preparedStatement = null;
+	        ResultSet resultSet = null;
+	        try {
+	            connection = ConnectDB.connection();
+
+	            if (connection != null) {
+	                preparedStatement = connection.prepareStatement("	SELECT SUM(s.Quantity * s.Price) as Total, i.InvoiceDate, p.ProductName FROM invoices i JOIN sales s ON i.InvoiceID = s.Invoice_id JOIN products p ON s.ProductID = p.ProductID where MONTH(i.InvoiceDate) = ? GROUP BY i.InvoiceDate;");
+	                preparedStatement.setInt(1, month);
+	                resultSet = preparedStatement.executeQuery();
+
+	                while (resultSet.next()) {
+	                    dates.add(resultSet.getDate("InvoiceDate"));
+	                    values.add(resultSet.getDouble("Total"));
+	                   
+	                    
+	                }
+
+	                map.put("dates", dates);
+	                List<Date> a= (List<Date>) map.get("dates");
+	                map.put("values", values);
+	         
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Hoặc xử lý ngoại lệ theo cách khác
+	        } finally {
+	            // Đóng PreparedStatement và ResultSet
+	            try {
+	                if (preparedStatement != null) {
+	                    preparedStatement.close();
+	                }
+	                if (resultSet != null) {
+	                    resultSet.close();
+	                }
+	            } catch (SQLException e) {
+	                e.printStackTrace(); // Hoặc xử lý ngoại lệ theo cách khác
+	            }
+
+	            // Ngắt kết nối
+	            ConnectDB.disconnect();
+
+	            // Kiểm tra và xử lý map
+	            if (map.isEmpty()) {
+	                map = null;
+	            }
+	        }
+	        return map;
+	    }
+
 }

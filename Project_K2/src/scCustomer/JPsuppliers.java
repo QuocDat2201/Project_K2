@@ -22,6 +22,7 @@ import models.Suppliers_model;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.FlowLayout;
 
 public class JPsuppliers extends JPanel {
 	private JTable table;
@@ -31,14 +32,17 @@ public class JPsuppliers extends JPanel {
 	 * Create the panel.
 	 */
 	public JPsuppliers() {
-		setLayout(new BorderLayout(0, 0));
+		setLayout(null);
 
 		JPanel panel = new JPanel();
-		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setBounds(0, 0, 621, 408);
+		add(panel);
+		panel.setLayout(null);
 
 		panel_1 = new JPanel();
-		panel.add(panel_1, BorderLayout.NORTH);
+		panel_1.setBackground(new Color(0, 64, 128));
+		panel_1.setBounds(0, 0, 621, 77);
+		panel.add(panel_1);
 
 		JButton btnNewButton = new JButton("Add Supplier");
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -47,14 +51,16 @@ public class JPsuppliers extends JPanel {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
+		panel_1.setLayout(new BorderLayout(0, 0));
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton.setIcon(new ImageIcon(
 				JPcustomer.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
 		panel_1.add(btnNewButton);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBackground(new Color(255, 0, 0));
-		panel.add(scrollPane, BorderLayout.CENTER);
+		scrollPane.setBounds(0, 94, 621, 314);
+		scrollPane.setBackground(new Color(0, 64, 0));
+		panel.add(scrollPane);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);

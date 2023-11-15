@@ -46,6 +46,7 @@ import models.Invoice_model;
 import models.Product_model;
 import models.RankModel;
 import models.Sales_model;
+import screen.PlacehoclderTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -69,9 +70,9 @@ import java.awt.ComponentOrientation;
 import java.awt.Insets;
 
 public class JPaddInvoice extends JPanel {
-	private JTextField jCustomerphone;
+	private PlacehoclderTextField jCustomerphone;
 	private JDateChooser jdateChooser;
-	private JTextField jtextQuantily;
+	private PlacehoclderTextField jtextQuantily;
 	private JTextField jtotal;
 	private JComboBox jcomboBoxProductID;
 	private JTable jtableListInvoice;
@@ -80,7 +81,7 @@ public class JPaddInvoice extends JPanel {
 	private List<Sales> invoiceItemList = new ArrayList<Sales>();
 	private JScrollPane scrollPane_1;
 	private JTextField jcurrentQuantity;
-	private JTextField jNameCustomer;
+	private PlacehoclderTextField jNameCustomer;
 	private Customer customer;
 
 	/**
@@ -94,12 +95,12 @@ public class JPaddInvoice extends JPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 240, 245));
+		panel_1.setBackground(new Color(232, 249, 255));
 		panel_1.setBorder(new TitledBorder(null, "Create Invoice", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
-		jtextQuantily = new JTextField();
+		jtextQuantily = new PlacehoclderTextField("quantity");
 		jtextQuantily.setColumns(10);
 		jtextQuantily.setBounds(299, 14, 50, 22);
 		panel_1.add(jtextQuantily);
@@ -131,6 +132,7 @@ public class JPaddInvoice extends JPanel {
 		panel_1.add(lblNewLabel_2_1_1);
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(255, 255, 255));
 		panel_3.setBounds(10, 38, 599, 157);
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
@@ -167,7 +169,7 @@ public class JPaddInvoice extends JPanel {
 		panel_3.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
 
-		jCustomerphone = new JTextField();
+		jCustomerphone =new PlacehoclderTextField("input 10 number");
 		jCustomerphone.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -188,6 +190,7 @@ public class JPaddInvoice extends JPanel {
 		panel_3.add(scrollPane_1);
 
 		jtable1 = new JTable();
+		jtable1.setBackground(new Color(255, 255, 255));
 		scrollPane_1.setViewportView(jtable1);
 
 		JLabel lblNewLabel_2_1 = new JLabel("Customer Name");
@@ -195,7 +198,7 @@ public class JPaddInvoice extends JPanel {
 		lblNewLabel_2_1.setBounds(0, 10, 98, 26);
 		panel_3.add(lblNewLabel_2_1);
 
-		jNameCustomer = new JTextField();
+		jNameCustomer = new PlacehoclderTextField("name customer");
 		jNameCustomer.setColumns(10);
 		jNameCustomer.setBounds(95, 13, 159, 22);
 		panel_3.add(jNameCustomer);
@@ -217,7 +220,7 @@ public class JPaddInvoice extends JPanel {
 		jcurrentQuantity.setColumns(10);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(255, 250, 205));
+		panel_2.setBackground(new Color(232, 249, 255));
 		panel_2.setBorder(new TitledBorder(null, "List Invoice", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_2);
 		panel_2.setLayout(null);
@@ -248,7 +251,7 @@ public class JPaddInvoice extends JPanel {
 
 		jtableListInvoice = new JTable();
 		jtableListInvoice.setBorder(new LineBorder(new Color(255, 240, 245), 2));
-		jtableListInvoice.setBackground(new Color(255, 240, 245));
+		jtableListInvoice.setBackground(new Color(251, 251, 251));
 		jtableListInvoice.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		jtableListInvoice.setComponentPopupMenu(popupMenu);
 		scrollPane.setViewportView(jtableListInvoice);

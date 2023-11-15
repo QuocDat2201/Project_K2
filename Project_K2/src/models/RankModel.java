@@ -20,9 +20,10 @@ public class RankModel {
         boolean result = true;
         try {
             PreparedStatement preparedStatement = ConnectDB.connection()
-                    .prepareStatement("INSERT INTO ranks(point,rank,discount) VALUES(?,?,?)");
-            preparedStatement.setInt(1,rank.getPoint());
-            preparedStatement.setString(2, rank.getRank());
+                    .prepareStatement("INSERT INTO rank (`rank`, `point`, `discount`) VALUES (?, ?, ?)");
+
+            preparedStatement.setString(1, rank.getRank());
+            preparedStatement.setInt(2, rank.getPoint());
             preparedStatement.setInt(3, rank.getDiscount());
             result = preparedStatement.executeUpdate() > 0;
         } catch (Exception e) {
@@ -33,6 +34,7 @@ public class RankModel {
         }
         return result;
     }
+
 
     // Phương thức để truy xuất tất cả các rank
     public List<Rank> findAll() {

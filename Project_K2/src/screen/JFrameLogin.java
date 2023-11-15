@@ -122,7 +122,7 @@ public class JFrameLogin extends JFrame {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setForeground(new Color(149, 0, 67));
+		btnNewButton.setForeground(new Color(85, 85, 85));
 		btnNewButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		btnNewButton.setBounds(468, 194, 151, 28);
 		contentPane.add(btnNewButton);
