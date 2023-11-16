@@ -141,7 +141,7 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(jpass);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(528, 195, 36, 26);
+		comboBox.setBounds(528, 195, 36, 26);//ss
 		contentPane.add(comboBox);
 	}
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Login
