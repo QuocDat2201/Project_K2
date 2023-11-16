@@ -183,6 +183,7 @@ public class JPsendNotifi extends JPanel {
 		panel_search_date_list.add(jLabel_To);
 		
 		jButton_Search_Date = new JButton("Search");
+		jButton_Search_Date.setBackground(new Color(0, 128, 255));
 		jButton_Search_Date.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jButton_Search_Date_actionPerformed(e);

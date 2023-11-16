@@ -241,7 +241,7 @@ public class Home extends JFrame {
 		panel.add(btnNewButton);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(107, 0, 659, 47);
+		panel_1.setBounds(107, 0, 657, 47);
 		panel_1.setForeground(new Color(255, 255, 255));
 		panel_1.setBackground(new Color(0, 128, 255));
 		getContentPane().add(panel_1);

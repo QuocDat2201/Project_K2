@@ -189,6 +189,18 @@ public class JPaddInvoice extends JPanel {
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(264, 11, 325, 130);
 		panel_3.add(scrollPane_1);
+		
+		JPopupMenu popupMenu_1 = new JPopupMenu();
+		addPopup(scrollPane_1, popupMenu_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Delete");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmNewMenuItem_2_actionPerformed(e);
+			}
+		});
+		mntmNewMenuItem_2.setBackground(new Color(240, 240, 240));
+		popupMenu_1.add(mntmNewMenuItem_2);
 
 		jtable1 = new JTable();
 		jtable1.setBackground(new Color(255, 255, 255));
@@ -267,6 +279,7 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton_3.setBounds(508, 177, 85, 21);
 		panel_2.add(btnNewButton_3);
+		jtable1.setComponentPopupMenu(popupMenu_1);
 		initJFrame();
 	}
 
@@ -292,6 +305,7 @@ public class JPaddInvoice extends JPanel {
 //		fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
 		fillDataToJTable1(invoiceItemList);
 		fillDataToJTable(invoice_model.findAll());
+		
 	}
 
 	public class ProductCellRender extends DefaultListCellRenderer {
@@ -706,27 +720,28 @@ public class JPaddInvoice extends JPanel {
 		Invoices invoices = invoice_model.findID(id);
 		invoices.setStatus(false);
 		if (invoice_model.update(invoices)) {
-			JOptionPane.showMessageDialog(null, "Succe");
+			JOptionPane.showMessageDialog(null, "Success");
 			fillDataToJTable(invoice_model.findAll());
 		} else {
-			JOptionPane.showMessageDialog(null, "Inva");
+			JOptionPane.showMessageDialog(null, "Invaild");
 		}
 
 	}
-//	   private class ColoredCellRenderer extends DefaultTableCellRenderer {
-//	        @Override
-//	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-//	            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//
-//	            String Status = (String) table.getValueAt(row, 4);
-//
-//
-//	            if (Status.equalsIgnoreCase("canl")) {         
-//	                
-//	                    setBackground(Color.RED);               
-//	            }
-//
-//	            return this;
-//	        }
-//	    }
+	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {
+		int index = jtable1.getSelectedRow();
+		String nameProS=(String) jtable1.getValueAt(index,1);
+		BigDecimal total= new BigDecimal(0);
+		for (int j = 0; j < invoiceItemList.size(); j++) {
+			Sales sales=invoiceItemList.get(j);
+			total=total.add(invoiceItemList.get(j).getPrice()
+					.multiply(new BigDecimal(invoiceItemList.get(j).getQuantity())));
+			if (sales.getProductName().equalsIgnoreCase(nameProS)) {
+				invoiceItemList.remove(j);
+				
+			} 
+		}
+		fillDataToJTable1(invoiceItemList);
+		jtotal.setText(String.valueOf(total));
+		
+	}
 }
