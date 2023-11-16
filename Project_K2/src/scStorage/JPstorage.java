@@ -304,6 +304,15 @@ public class JPstorage extends JPanel {
 		JtextField_price.setColumns(10);
 		JtextField_price.setBounds(317, 98, 271, 24);
 		panel_edit.add(JtextField_price);
+		JtextField_price.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+		        if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+		            e.consume();
+		        }
+		    }
+		});
 
 		JLabel JLabel_quantity = new JLabel("Quantity");
 		JLabel_quantity.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -321,6 +330,15 @@ public class JPstorage extends JPanel {
 		JtextField_quantity.setColumns(10);
 		JtextField_quantity.setBounds(20, 166, 271, 24);
 		panel_edit.add(JtextField_quantity);
+		JtextField_quantity.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+		        if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+		            e.consume();
+		        }
+		    }
+		});
 
 		JtextField_status = new JTextField();
 		JtextField_status.setEnabled(false);
@@ -388,6 +406,15 @@ public class JPstorage extends JPanel {
 		jtextField_createPrice.setColumns(10);
 		jtextField_createPrice.setBounds(317, 98, 271, 24);
 		panel_CreateProduct.add(jtextField_createPrice);
+		jtextField_createPrice.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+		        if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+		            e.consume();
+		        }
+		    }
+		});
 		
 		JLabel_createQuantity = new JLabel("Quantity");
 		JLabel_createQuantity.setHorizontalAlignment(SwingConstants.LEFT);
@@ -405,6 +432,15 @@ public class JPstorage extends JPanel {
 		jtextField_createQuantity.setColumns(10);
 		jtextField_createQuantity.setBounds(20, 166, 271, 24);
 		panel_CreateProduct.add(jtextField_createQuantity);
+		jtextField_createQuantity.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+		        if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+		            e.consume();
+		        }
+		    }
+		});
 		
 		jtextField_createStatus = new JTextField();
 		jtextField_createStatus.setEnabled(false);

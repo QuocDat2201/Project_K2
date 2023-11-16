@@ -186,7 +186,7 @@ public class Home extends JFrame {
 		panel.add(jbtaccount_2);
 		jbtlistproduct.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 100));
 		jbtlistproduct.setIcon(
-				new ImageIcon(Home.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
+				new ImageIcon(Home.class.getResource("/Icon/warehouse.png")));
 		panel.add(jbtlistproduct);
 
 		JButton jbtreport = new JButton("Reports");
@@ -220,7 +220,7 @@ public class Home extends JFrame {
 				do_jbtaccount_actionPerformed(e);
 			}
 		});
-		jbtaccount.setIcon(new ImageIcon(Home.class.getResource("/Icon/172626_user_male_icon.png")));
+		jbtaccount.setIcon(new ImageIcon(Home.class.getResource("/Icon/user.png")));
 		panel.add(jbtaccount);
 
 		btnNewButton = new JButton("Sign out");
