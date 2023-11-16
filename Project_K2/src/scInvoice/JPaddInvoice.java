@@ -347,19 +347,19 @@ public class JPaddInvoice extends JPanel {
 		// Lấy ra model của cột từ JTable
 		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
 
-		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
+		
 		TableColumn customerNameColumn = columnModel.getColumn(0); // Cột "Customer Name" ở index 2
 		customerNameColumn.setMinWidth(30); // Chiều rộng tối thiểu
 		customerNameColumn.setMaxWidth(30); // Chiều rộng tối đa
 
-		// Lấy ra cột "Product Name" và thiết lập chiều rộng
-		TableColumn productNameColumn = columnModel.getColumn(1); // Cột "Product Name" ở index 3
-		productNameColumn.setMinWidth(150); // Chiều rộng tối thiểu
-		productNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		
+		TableColumn productNameColumn = columnModel.getColumn(1);
+		productNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
+		productNameColumn.setMaxWidth(100); // Chiều rộng tối đa
 
-		TableColumn DateNameColumn = columnModel.getColumn(2); // Cột "Product Name" ở index 3
-		DateNameColumn.setMinWidth(150); // Chiều rộng tối thiểu
-		DateNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		TableColumn DateNameColumn = columnModel.getColumn(2); 
+		DateNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
+		DateNameColumn.setMaxWidth(100); // Chiều rộng tối đa
 
 	}
 
@@ -448,16 +448,16 @@ public class JPaddInvoice extends JPanel {
 		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
 
 		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
-		TableColumn customerNameColumn = columnModel.getColumn(2); // Cột "Customer Name" ở index 2
-		customerNameColumn.setMinWidth(50); // Chiều rộng tối thiểu
-		customerNameColumn.setMaxWidth(100); // Chiều rộng tối đa
+		TableColumn customerNameColumn = columnModel.getColumn(1); // Cột "Customer Name" ở index 2
+		customerNameColumn.setMinWidth(30); // Chiều rộng tối thiểu
+		customerNameColumn.setMaxWidth(60); // Chiều rộng tối đa
 
 		// Lấy ra cột "Product Name" và thiết lập chiều rộng
 		TableColumn productNameColumn = columnModel.getColumn(3); // Cột "Product Name" ở index 3
 		productNameColumn.setMinWidth(60); // Chiều rộng tối thiểu
 		productNameColumn.setMaxWidth(100); // Chiều rộng tối đa
 
-		TableColumn DateNameColumn = columnModel.getColumn(1);
+		TableColumn DateNameColumn = columnModel.getColumn(2);
 		DateNameColumn.setMinWidth(70); // Chiều rộng tối thiểu
 		DateNameColumn.setMaxWidth(200); // Chiều rộng tối đa
 		TableColumn DateNameColumn0 = columnModel.getColumn(0); //

@@ -28,7 +28,8 @@ public class JPmenuSuppliers extends JPanel {
 		JMenuBar menuBar = new JMenuBar();
 		add(menuBar, BorderLayout.NORTH);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("          Supplier");
+		JMenuItem mntmNewMenuItem = new JMenuItem("                                                Supplier");
+		mntmNewMenuItem.setHorizontalTextPosition(SwingConstants.CENTER);
 		mntmNewMenuItem.setForeground(new Color(250, 128, 114));
 		mntmNewMenuItem.setBackground(new Color(224, 255, 255));
 		mntmNewMenuItem.setFont(new Font("Dialog", Font.BOLD, 12));

@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
@@ -26,6 +28,7 @@ import javax.swing.table.TableColumnModel;
 
 import java.awt.Color;
 import javax.swing.JTable;
+import java.awt.Font;
 
 public class JPContact extends JPanel {
 	private JTextField jtextFieldCustomerName;
@@ -55,24 +58,29 @@ public class JPContact extends JPanel {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Customer Name");
+		JLabel lblNewLabel = new JLabel("Customer");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblNewLabel.setBounds(44, 27, 88, 26);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblContactname = new JLabel("Address");
+		lblContactname.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblContactname.setBounds(44, 63, 88, 26);
 		panel_1.add(lblContactname);
 		
 		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblEmail.setBounds(44, 99, 88, 26);
 		panel_1.add(lblEmail);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Phone");
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblNewLabel_1_1.setBounds(44, 135, 88, 26);
 		panel_1.add(lblNewLabel_1_1);
 		
 		JLabel lblReason = new JLabel("Reason");
-		lblReason.setBounds(285, 27, 44, 26);
+		lblReason.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblReason.setBounds(314, 27, 44, 26);
 		panel_1.add(lblReason);
 		
 		jtextFieldCustomerName = new JTextField();
@@ -97,22 +105,24 @@ public class JPContact extends JPanel {
 		panel_1.add(jtextFieldPhone);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(359, 27, 150, 62);
+		scrollPane.setBounds(388, 27, 150, 62);
 		panel_1.add(scrollPane);
 		
 		jtextAreaReason = new JTextArea();
 		scrollPane.setViewportView(jtextAreaReason);
 		
 		JButton btnNewButton = new JButton("Send");
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setBounds(359, 171, 94, 26);
+		btnNewButton.setBounds(388, 171, 94, 26);
 		panel_1.add(btnNewButton);
 		
 		JLabel lblDate = new JLabel("Date");
+		lblDate.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblDate.setBounds(44, 171, 44, 26);
 		panel_1.add(lblDate);
 		
@@ -122,28 +132,52 @@ public class JPContact extends JPanel {
 		
 		jtextFieldProductName = new JTextField();
 		jtextFieldProductName.setColumns(10);
-		jtextFieldProductName.setBounds(359, 100, 139, 26);
+		jtextFieldProductName.setBounds(388, 100, 139, 26);
 		panel_1.add(jtextFieldProductName);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Product");
-		lblNewLabel_1_1_1.setBounds(285, 99, 88, 26);
+		lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblNewLabel_1_1_1.setBounds(314, 99, 88, 26);
 		panel_1.add(lblNewLabel_1_1_1);
 		
 		jtextFieldQuantity = new JTextField();
 		jtextFieldQuantity.setColumns(10);
-		jtextFieldQuantity.setBounds(359, 135, 139, 26);
+		jtextFieldQuantity.setBounds(388, 135, 139, 26);
 		panel_1.add(jtextFieldQuantity);
+		jtextFieldQuantity.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+		        if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+		            e.consume();
+		        }
+		    }
+
+		    @Override
+		    public void keyReleased(KeyEvent e) {
+		        do_jtextFieldQuantity_keyReleased(e);
+		    }
+
+			private void do_jtextFieldQuantity_keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("Quantity");
-		lblNewLabel_1_1_2.setBounds(285, 134, 88, 26);
+		lblNewLabel_1_1_2.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblNewLabel_1_1_2.setBounds(314, 134, 88, 26);
 		panel_1.add(lblNewLabel_1_1_2);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(224, 255, 255));
+		panel_2.setBorder(new TitledBorder(null, "List Recieve", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 10, 557, 238);
+		scrollPane_1.setBackground(new Color(224, 255, 255));
+		scrollPane_1.setBounds(22, 29, 603, 123);
 		panel_2.add(scrollPane_1);
 		
 		jtableRecieve = new JTable();
@@ -157,9 +191,7 @@ public class JPContact extends JPanel {
 	}
 	
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		String reason = jtextAreaReason.getText() ; 
-		System.out.println(reason);
-		
+		String reason = jtextAreaReason.getText() ;
 		Recieve recieve = new Recieve() ; 
 		Recieve_model recieve_model = new Recieve_model() ;
 		
@@ -192,10 +224,6 @@ public class JPContact extends JPanel {
 		}; 
 		model.addColumn("ID");
 		model.addColumn("Customer Name");
-		model.addColumn("Address");
-		model.addColumn("Phone");
-		model.addColumn("Email");
-		model.addColumn("Reason");
 		model.addColumn("Date");
 		model.addColumn("Product Name");
 		model.addColumn("Quantity");
@@ -203,10 +231,6 @@ public class JPContact extends JPanel {
 			model.addRow(new Object[] {
 					recieve.getId_recieve(),
 					recieve.getCustomer_recieve(),
-					recieve.getAddress(),
-					recieve.getPhone(),
-					recieve.getEmail(),
-					recieve.getReason(),
 					recieve.getDate(),
 					recieve.getProduct_name(),
 					recieve.getQuantity()

@@ -163,7 +163,7 @@ public class JFrameLogin extends JFrame {
 	            public void componentResized(ComponentEvent e) {	
 	            	frameWidth = home.getWidth();
 	           	    frameHeight = home.getHeight();
-	           	    System.out.println(frameWidth);
+	           	    
 	            }
 	        });
 		}
