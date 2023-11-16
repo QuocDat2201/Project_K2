@@ -27,6 +27,10 @@ import java.awt.FlowLayout;
 public class JPsuppliers extends JPanel {
 	private JTable table;
 	private JPanel panel_1;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Create the panel.
@@ -35,44 +39,72 @@ public class JPsuppliers extends JPanel {
 		setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 621, 408);
+		panel.setBounds(0, 0, 660, 402);
 		add(panel);
 		panel.setLayout(null);
 
 		panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 64, 128));
-		panel_1.setBounds(0, 0, 621, 77);
+		panel_1.setBounds(0, 0, 660, 95);
+		panel_1.setBackground(new Color(0, 54, 108));
 		panel.add(panel_1);
-
-		JButton btnNewButton = new JButton("Add Supplier");
-		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_btnNewButton_actionPerformed(e);
-			}
-		});
-		panel_1.setLayout(new BorderLayout(0, 0));
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setIcon(new ImageIcon(
-				JPcustomer.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(24, 11, 104, 26);
+		panel_1.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setBounds(24, 48, 104, 26);
+		panel_1.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBounds(128, 11, 149, 26);
+		panel_1.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(128, 48, 149, 25);
+		panel_1.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(391, 48, 149, 25);
+		panel_1.add(textField_2);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("New label");
+		lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_1.setBounds(287, 48, 104, 26);
+		panel_1.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setBounds(287, 11, 104, 26);
+		panel_1.add(lblNewLabel_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(391, 11, 149, 26);
+		panel_1.add(textField_3);
+		
+		JButton btnNewButton = new JButton("Create");
+		btnNewButton.setBounds(577, 50, 73, 23);
 		panel_1.add(btnNewButton);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 94, 621, 314);
+		scrollPane.setBounds(0, 94, 660, 314);
 		scrollPane.setBackground(new Color(0, 64, 0));
 		panel.add(scrollPane);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		iniJFrame();
-	}
-
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		JPaddsuppleir jPaddcustomer=new JPaddsuppleir();
-		panel_1.removeAll();
-		panel_1.revalidate();
-		panel_1.add(jPaddcustomer);
-		panel_1.setVisible(true);
 	}
 
 	private void iniJFrame() {
