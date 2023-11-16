@@ -226,7 +226,7 @@ public class JPaddInvoice extends JPanel {
 		panel_2.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBorder(new LineBorder(new Color(255, 192, 203), 3));
+		scrollPane.setBorder(new LineBorder(new Color(0, 0, 128)));
 		scrollPane.setBounds(26, 22, 600, 150);
 		panel_2.add(scrollPane);
 

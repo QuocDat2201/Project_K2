@@ -111,7 +111,7 @@ public class jpaneldoanhso extends JPanel {
 		panel_1.setBackground(new Color(0, 128, 0));
 		panel_1.setBounds(0, 0, 332, 84);
 		add(panel_1);
-		panel_1.setLayout(null);
+		panel_1.setLayout(null);//add
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(jpaneldoanhso.class.getResource("/Icon/403022_business man_male_user_avatar_profile_icon.png")));
