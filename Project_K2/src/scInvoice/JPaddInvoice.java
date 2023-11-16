@@ -138,6 +138,7 @@ public class JPaddInvoice extends JPanel {
 		panel_3.setLayout(null);
 
 		JButton btnNewButton = new JButton("Create");
+		btnNewButton.setBackground(new Color(0, 128, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
@@ -204,6 +205,7 @@ public class JPaddInvoice extends JPanel {
 		panel_3.add(jNameCustomer);
 
 		JButton btnNewButton_1 = new JButton("Add");
+		btnNewButton_1.setBackground(new Color(0, 128, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_1_actionPerformed(e);
@@ -257,6 +259,7 @@ public class JPaddInvoice extends JPanel {
 		scrollPane.setViewportView(jtableListInvoice);
 
 		JButton btnNewButton_3 = new JButton("Recieve");
+		btnNewButton_3.setBackground(new Color(0, 128, 255));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_3_actionPerformed(e);

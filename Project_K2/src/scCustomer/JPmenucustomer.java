@@ -19,6 +19,7 @@ import models.CustomerModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class JPmenucustomer extends JPanel {
 	private JPanel panel;
@@ -39,6 +40,7 @@ public class JPmenucustomer extends JPanel {
 		add(menuBar, BorderLayout.NORTH);
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Customer");
+		mntmNewMenuItem.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mntmNewMenuItem_actionPerformed(e);
@@ -48,6 +50,7 @@ public class JPmenucustomer extends JPanel {
 		menuBar.add(mntmNewMenuItem);
 
 		mntmNewMenuItem_1 = new JMenuItem("Rank");
+		mntmNewMenuItem_1.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mntmNewMenuItem_1_actionPerformed(e);

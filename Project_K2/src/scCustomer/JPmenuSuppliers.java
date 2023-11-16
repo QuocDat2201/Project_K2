@@ -32,7 +32,7 @@ public class JPmenuSuppliers extends JPanel {
 		JMenuItem mntmNewMenuItem = new JMenuItem("                                                Supplier");
 		mntmNewMenuItem.setIcon(new ImageIcon(JPmenuSuppliers.class.getResource("/Icon/Profile.png")));
 		mntmNewMenuItem.setHorizontalTextPosition(SwingConstants.CENTER);
-		mntmNewMenuItem.setForeground(new Color(250, 128, 114));
+		mntmNewMenuItem.setForeground(new Color(0, 0, 0));
 		mntmNewMenuItem.setBackground(new Color(224, 255, 255));
 		mntmNewMenuItem.setFont(new Font("Dialog", Font.BOLD, 12));
 		mntmNewMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
@@ -45,7 +45,7 @@ public class JPmenuSuppliers extends JPanel {
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Purchase");
 		mntmNewMenuItem_1.setIcon(new ImageIcon(JPmenuSuppliers.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
-		mntmNewMenuItem_1.setForeground(new Color(255, 20, 147));
+		mntmNewMenuItem_1.setForeground(new Color(0, 0, 0));
 		mntmNewMenuItem_1.setBackground(new Color(250, 235, 215));
 		mntmNewMenuItem_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		mntmNewMenuItem_1.setHorizontalAlignment(SwingConstants.CENTER);

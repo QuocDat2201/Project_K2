@@ -73,7 +73,7 @@ public class JPsuppliers extends JPanel {
 		
 		jemail = new JTextField();
 		jemail.setColumns(10);
-		jemail.setBounds(391, 48, 149, 25);
+		jemail.setBounds(401, 49, 149, 25);
 		panel_1.add(jemail);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Email");
@@ -85,18 +85,18 @@ public class JPsuppliers extends JPanel {
 		JLabel lblNewLabel_2 = new JLabel("Suppleir Contact");
 		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
 		lblNewLabel_2.setForeground(new Color(0, 0, 0));
-		lblNewLabel_2.setBounds(287, 11, 104, 26);
+		lblNewLabel_2.setBounds(287, 11, 110, 26);
 		panel_1.add(lblNewLabel_2);
 		
 		jcontact = new JTextField();
 		jcontact.setColumns(10);
-		jcontact.setBounds(391, 11, 149, 26);
+		jcontact.setBounds(401, 12, 149, 26);
 		panel_1.add(jcontact);
 		
 		JButton btnNewButton = new JButton("Create");
-		btnNewButton.setBackground(new Color(0, 0, 160));
+		btnNewButton.setBackground(new Color(0, 128, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setForeground(new Color(192, 192, 192));
+		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBounds(566, 47, 84, 26);
 		panel_1.add(btnNewButton);
 

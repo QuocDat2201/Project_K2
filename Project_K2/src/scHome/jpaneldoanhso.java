@@ -119,9 +119,9 @@ public class jpaneldoanhso extends JPanel {
 		panel_1.add(lblNewLabel_1);
 		
 		JLabel jtextkhachhang = new JLabel("50000+");
-		jtextkhachhang.setFont(new Font("Arial", Font.PLAIN, 12));
+		jtextkhachhang.setFont(new Font("Dialog", Font.BOLD, 15));
 		jtextkhachhang.setForeground(new Color(193, 241, 255));
-		jtextkhachhang.setBounds(149, 29, 73, 44);
+		jtextkhachhang.setBounds(149, 29, 93, 44);
 		panel_1.add(jtextkhachhang);
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("Khach Hang");
@@ -143,9 +143,9 @@ public class jpaneldoanhso extends JPanel {
 		panel_2.add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("200000+");
-		lblNewLabel_1_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel_1_1_1.setForeground(new Color(193, 241, 255));
-		lblNewLabel_1_1_1.setBounds(152, 30, 60, 43);
+		lblNewLabel_1_1_1.setBounds(152, 30, 90, 43);
 		panel_2.add(lblNewLabel_1_1_1);
 		
 		JLabel lblNewLabel_1_1_2_1 = new JLabel("So san pham da ban");
