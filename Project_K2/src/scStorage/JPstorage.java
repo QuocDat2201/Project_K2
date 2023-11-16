@@ -1019,12 +1019,13 @@ public class JPstorage extends JPanel {
 			// end status set boolean
 				
 				if (product_model.Create(products)) {
-					JOptionPane.showMessageDialog(null, "CCreate Successful !");
+					JOptionPane.showMessageDialog(null, "Create Successful !");
+					panel_CreateProduct.setVisible(false);
 					panel_edit.setVisible(false);
 					panel_storage.setVisible(true);
 					FillDataToJTableProduct(product_model.findAll());
 				} else {
-					JOptionPane.showMessageDialog(null, "Creation Failed");
+					JOptionPane.showMessageDialog(null, "Creation Failed !");
 				}
 			}
 	}
