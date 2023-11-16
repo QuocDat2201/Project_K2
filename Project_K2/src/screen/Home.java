@@ -149,7 +149,7 @@ public class Home extends JFrame {
 			}
 		});
 
-		jbcusstomer = new JButton("Cusstomer");
+		jbcusstomer = new JButton("Customer");
 		jbcusstomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_jbcusstomer_actionPerformed(e);
@@ -241,29 +241,33 @@ public class Home extends JFrame {
 		panel.add(btnNewButton);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(107, 0, 657, 47);
+		panel_1.setBounds(107, 0, 659, 47);
 		panel_1.setForeground(new Color(255, 255, 255));
 		panel_1.setBackground(new Color(0, 128, 255));
 		getContentPane().add(panel_1);
 				panel_1.setLayout(null);
 				
 				JLabel lblNewLabel_2 = new JLabel("Hello");
-				lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
+				lblNewLabel_2.setForeground(new Color(0, 0, 0));
+				lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 14));
 				lblNewLabel_2.setBounds(6, 6, 55, 16);
 				panel_1.add(lblNewLabel_2);
 				
 				jnamuser = new JLabel("jnameuser");
-				jnamuser.setFont(new Font("Arial", Font.BOLD, 13));
+				jnamuser.setForeground(new Color(0, 0, 0));
+				jnamuser.setFont(new Font("Arial", Font.BOLD, 14));
 				jnamuser.setBounds(61, 6, 123, 16);
 				panel_1.add(jnamuser);
 				
 				JLabel lblNewLabel_2_1 = new JLabel("Role");
-				lblNewLabel_2_1.setFont(new Font("Arial", Font.BOLD, 13));
+				lblNewLabel_2_1.setForeground(new Color(0, 0, 0));
+				lblNewLabel_2_1.setFont(new Font("Arial", Font.BOLD, 14));
 				lblNewLabel_2_1.setBounds(6, 25, 55, 16);
 				panel_1.add(lblNewLabel_2_1);
 				
 				jrole = new JLabel("jrole\r\n");
-				jrole.setFont(new Font("Arial", Font.BOLD, 13));
+				jrole.setForeground(new Color(0, 0, 0));
+				jrole.setFont(new Font("Arial", Font.BOLD, 14));
 				jrole.setBounds(61, 25, 123, 16);
 				panel_1.add(jrole);
 
@@ -274,14 +278,14 @@ public class Home extends JFrame {
 		jpanel_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(0, 64, 128));
+		panel_2.setBackground(new Color(0, 0, 160));
 		panel_2.setBounds(0, 0, 107, 47);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Home.class.getResource("/Icon/boxes.png")));
-		lblNewLabel_1.setBounds(33, 6, 46, 35);
+		lblNewLabel_1.setBounds(44, 6, 46, 35);
 		panel_2.add(lblNewLabel_1);
 		
 		jpanel_2.addComponentListener(new ComponentAdapter() {
@@ -313,6 +317,9 @@ public class Home extends JFrame {
 		for (Role role : role_model.findAll()) {
 			if (user.getRoleID()==role.getRole_id()) {
 				jrole.setText(role.getRole_Name());
+				if(user.getRoleID()==4) {
+					jbcusstomer.setVisible(false);
+				}
 				break;
 			} else {
 

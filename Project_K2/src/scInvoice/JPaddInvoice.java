@@ -227,7 +227,7 @@ public class JPaddInvoice extends JPanel {
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(new Color(255, 192, 203), 3));
-		scrollPane.setBounds(32, 23, 548, 126);
+		scrollPane.setBounds(26, 22, 600, 150);
 		panel_2.add(scrollPane);
 
 		JPopupMenu popupMenu = new JPopupMenu();
@@ -256,22 +256,13 @@ public class JPaddInvoice extends JPanel {
 		jtableListInvoice.setComponentPopupMenu(popupMenu);
 		scrollPane.setViewportView(jtableListInvoice);
 
-		JButton btnNewButton_2 = new JButton("Cancel");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_btnNewButton_2_actionPerformed(e);
-			}
-		});
-		btnNewButton_2.setBounds(479, 159, 85, 21);
-		panel_2.add(btnNewButton_2);
-
 		JButton btnNewButton_3 = new JButton("Recieve");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_3_actionPerformed(e);
 			}
 		});
-		btnNewButton_3.setBounds(388, 159, 85, 21);
+		btnNewButton_3.setBounds(508, 177, 85, 21);
 		panel_2.add(btnNewButton_3);
 		initJFrame();
 	}
@@ -336,7 +327,7 @@ public class JPaddInvoice extends JPanel {
 
 		for (Invoices invoi : invoicess) {
 			model.addRow(new Object[] { invoi.getInvoiceID(), invoi.getCustomerName(), invoi.getCustomerPhone(),
-					invoi.getTotal(), invoi.getInvoiceDate(), invoi.isStatus() ? "conf" : "cancl" });
+					invoi.getTotal(), invoi.getInvoiceDate(), invoi.isStatus() ? "Confirm" : "Cancel" });
 
 		}
 
@@ -487,21 +478,6 @@ public class JPaddInvoice extends JPanel {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
-	}
-
-	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {// huy hoa don
-		int result = JOptionPane.showConfirmDialog(null, "Are you sure", "Confirm", JOptionPane.YES_NO_OPTION);
-		int selectedIndex = jtableListInvoice.getSelectedRow();
-		int id = Integer.parseInt(jtableListInvoice.getValueAt(selectedIndex, 0).toString());
-		Invoice_model invoice_model = new Invoice_model();
-		Sales_model sales_model = new Sales_model();
-		Invoices invoices = new Invoices();
-		invoices.setStatus(true);
-		if (invoice_model.update(invoices)) {
-			JOptionPane.showMessageDialog(null, "Success");
-//			fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
-		}
-
 	}
 
 	class NumberDocumentFilter extends DocumentFilter {

@@ -36,6 +36,8 @@ import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class jpaneldoanhso extends JPanel {
 	private JTable table_1;
@@ -48,8 +50,9 @@ public class jpaneldoanhso extends JPanel {
 	public jpaneldoanhso() {
 
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.setBackground(new Color(234, 247, 255));
-		panel.setBounds(0, 110, 650, 94);
+		panel.setBounds(0, 105, 662, 97);
 		Dimension Dimension = new Dimension(panel.getPreferredSize().width, 50);
 		setLayout(null);
 		panel.setPreferredSize(Dimension);
@@ -64,13 +67,17 @@ public class jpaneldoanhso extends JPanel {
 		panel.add(Revenue);
 		
 		jthu = new JLabel("New label");
+		jthu.setBorder(new LineBorder(new Color(0, 255, 64), 4));
+		jthu.setFont(new Font("Arial", Font.BOLD, 25));
 		jthu.setHorizontalAlignment(SwingConstants.CENTER);
-		jthu.setBounds(31, 25, 271, 58);
+		jthu.setBounds(10, 25, 319, 58);
 		panel.add(jthu);
 		
 		jchi = new JLabel("New label");
+		jchi.setBorder(new LineBorder(new Color(255, 0, 0), 4));
+		jchi.setFont(new Font("Arial", Font.BOLD, 25));
 		jchi.setHorizontalAlignment(SwingConstants.CENTER);
-		jchi.setBounds(358, 25, 271, 58);
+		jchi.setBounds(339, 25, 303, 58);
 		panel.add(jchi);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Exspen");
@@ -83,7 +90,7 @@ public class jpaneldoanhso extends JPanel {
 		add(panel1);
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(new Color(232, 249, 255));
-		panel2.setBounds(0, 81, 650, 30);
+		panel2.setBounds(0, 81, 662, 30);
 		add(panel2);
 
 		JLabel lblNewLabel = new JLabel("doanh so 30 ngay gan nhat");
@@ -94,7 +101,7 @@ public class jpaneldoanhso extends JPanel {
 		panel1.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(0, 11, 473, 223);
+		scrollPane_1.setBounds(0, 0, 477, 201);
 		panel1.add(scrollPane_1);
 		
 		table_1 = new JTable();
@@ -102,7 +109,7 @@ public class jpaneldoanhso extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 128, 0));
-		panel_1.setBounds(0, 0, 339, 84);
+		panel_1.setBounds(0, 0, 332, 84);
 		add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -126,7 +133,7 @@ public class jpaneldoanhso extends JPanel {
 		JPanel panel_2 = new JPanel();
 		panel_2.setForeground(new Color(193, 241, 255));
 		panel_2.setBackground(new Color(0, 128, 0));
-		panel_2.setBounds(342, 0, 339, 84);
+		panel_2.setBounds(336, 0, 345, 84);
 		add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -148,10 +155,10 @@ public class jpaneldoanhso extends JPanel {
 		panel_2.add(lblNewLabel_1_1_2_1);
 		
 		JPanel panel1_1 = new JPanel();
-		panel1_1.setBackground(new Color(0, 0, 255));
+		panel1_1.setBackground(new Color(0, 0, 160));
 		panel1_1.setLayout(null);
 		panel1_1.setPreferredSize(new Dimension(10, 190));
-		panel1_1.setBounds(476, 199, 174, 234);
+		panel1_1.setBounds(476, 199, 186, 234);
 		add(panel1_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("top 10 products\r\n\r\r\n");
@@ -168,7 +175,7 @@ public class jpaneldoanhso extends JPanel {
 		panel1_1.add(lblNewLabel_2_1);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(-2, 59, 178, 176);
+		scrollPane_2.setBounds(-2, 59, 188, 143);
 		panel1_1.add(scrollPane_2);
 
 		revalidate();
@@ -178,49 +185,25 @@ public class jpaneldoanhso extends JPanel {
 
 	private void iniJFrame() {
 
-//		DefaultTableModel model = new DefaultTableModel();
-//		Purchaseinvoices_model purchaseinvoices_model=new Purchaseinvoices_model();
-//		BigDecimal totalthu = BigDecimal.ZERO;
-//		for (Purchaseinvoices purchaseinvoices : purchaseinvoices_model.findAll()) {
-//				totalthu.add(purchaseinvoices.getTotalAmount());
-//		}
-//		Sales_model sales_model = new Sales_model();
-//		BigDecimal total = BigDecimal.ZERO;
-//		for (Sales sale : sales_model.findAll()) {
-//			total = total.add(sale.getPrice().multiply(new BigDecimal(sale.getQuantity())) );
-//		}
-//		model.addColumn("Revenue");
-//		model.addColumn("Expense");
-//		model.addRow(new Object[] { total, totalthu });
-//
-//		jtable.setModel(model); // Set the model to the existing jtable field
-//		jtable.setDefaultRenderer(Object.class, new render());
-//
-//		TableColumnModel columnModel = jtable.getColumnModel();
-//		TableColumn column = columnModel.getColumn(0); // Cột "Thu" (cột đầu tiên)
-//		int rowHeight = 50; // Đặt chiều cao hàng tùy ý
-//		jtable.setRowHeight(rowHeight);
+		DefaultTableModel model = new DefaultTableModel();
+		Purchaseinvoices_model purchaseinvoices_model=new Purchaseinvoices_model();
+		BigDecimal totalthu = BigDecimal.ZERO;
+		for (Purchaseinvoices purchaseinvoices : purchaseinvoices_model.findAll()) {
+				totalthu= totalthu.add(purchaseinvoices.getTotalAmount());
+		}
+		Invoice_model invoice_model=new Invoice_model();
+		Invoices invoices=new Invoices();
+		BigDecimal total = BigDecimal.ZERO;
+		for (Invoices invoice: invoice_model.findAll()) {
+			total = total.add(invoice.getTotal());
+		}
+		jchi.setText(String.valueOf(total)+" $");
+		jthu.setText(String.valueOf(totalthu)+" $");
 		Sales_model sales_model1 = new Sales_model();
 		Invoice_model invoice_model1 = new Invoice_model();
 		//fillDataToJTable(sales_model1.findAll(), invoice_model1.findAll());
 		
 		fillDataToJTable(invoice_model1.findAll());
-	}
-	private class render extends DefaultTableCellRenderer {
-		public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-				boolean hasFocus, int row, int column) {
-			java.awt.Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
-					column);
-			if (column == 0) {
-				c.setForeground(Color.GREEN); 
-				c.setFont(c.getFont().deriveFont(50f));
-			}else {
-				c.setForeground(Color.RED);
-				c.setFont(c.getFont().deriveFont(50f));
-			}
-			return c;
-		}
-		
 	}
 	public void fillDataToJTable(List<Invoices> invoicess) {
 		DefaultTableModel model = new DefaultTableModel() {
@@ -247,7 +230,7 @@ public class jpaneldoanhso extends JPanel {
 
 		for (Invoices invoi : invoicess) {
 			model.addRow(new Object[] { invoi.getInvoiceID(), invoi.getCustomerName(), invoi.getCustomerPhone(),
-					invoi.getTotal(), invoi.getInvoiceDate(), invoi.isStatus() ? "conf" : "cancl" });
+					invoi.getTotal(), invoi.getInvoiceDate(), invoi.isStatus() ? "Confirm" : "Cancel" });
 
 		}
 
@@ -266,14 +249,14 @@ public class jpaneldoanhso extends JPanel {
 		// Lấy ra cột "Product Name" và thiết lập chiều rộng
 		TableColumn productNameColumn = columnModel.getColumn(1); // Cột "Product Name" ở index 3
 		productNameColumn.setMinWidth(110); // Chiều rộng tối thiểu
-		productNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		productNameColumn.setMaxWidth(110); // Chiều rộng tối đa
 
 		TableColumn DateNameColumn = columnModel.getColumn(2); // Cột "Product Name" ở index 3
 		DateNameColumn.setMinWidth(110); // Chiều rộng tối thiểu
-		DateNameColumn.setMaxWidth(200); // Chiều rộng tối đa
+		DateNameColumn.setMaxWidth(110); // Chiều rộng tối đa
 		TableColumn DateNameColumn3 = columnModel.getColumn(3); // Cột "Product Name" ở index 3
-		DateNameColumn3.setMinWidth(70); // Chiều rộng tối thiểu
-		DateNameColumn3.setMaxWidth(200); // Chiều rộng tối đa
+		DateNameColumn3.setMinWidth(40); // Chiều rộng tối thiểu
+		DateNameColumn3.setMaxWidth(40); // Chiều rộng tối đa
 
 	}	
 }

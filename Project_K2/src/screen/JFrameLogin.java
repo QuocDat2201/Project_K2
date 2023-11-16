@@ -128,7 +128,7 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(btnNewButton);
 
 		JLabel lblNewLabel_3 = new JLabel();
-		lblNewLabel_3.setBounds(0, 0, 324, 308);
+		lblNewLabel_3.setBounds(0, 0, 324, 310);
 		ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("/Icon/th.jpg")).getImage()
 				.getScaledInstance(324, 308, Image.SCALE_SMOOTH)); // Thay thế bằng đường dẫn thực tế của hình ảnh
 

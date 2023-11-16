@@ -60,19 +60,19 @@ public class JPPurchaseDetails extends JPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(255, 218, 185));
+		panel_2.setBackground(new Color(223, 243, 255));
 		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Create Purchase", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Product Name");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblNewLabel.setBounds(97, 23, 103, 24);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel.setBounds(28, 23, 112, 34);
 		panel_2.add(lblNewLabel);
 		
 		JLabel lblQuantity = new JLabel("Quantity");
-		lblQuantity.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblQuantity.setBounds(97, 64, 77, 24);
+		lblQuantity.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblQuantity.setBounds(195, 28, 77, 24);
 		panel_2.add(lblQuantity);
 		
 		jtextFieldQuantity = new JTextField();
@@ -83,7 +83,7 @@ public class JPPurchaseDetails extends JPanel {
 			}
 		});
 		jtextFieldQuantity.setColumns(10);
-		jtextFieldQuantity.setBounds(228, 65, 64, 24);
+		jtextFieldQuantity.setBounds(195, 68, 77, 24);
 		panel_2.add(jtextFieldQuantity);
 		jtextFieldQuantity.addKeyListener(new KeyAdapter() {
 		    @Override
@@ -102,25 +102,26 @@ public class JPPurchaseDetails extends JPanel {
 
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Price");
-		lblNewLabel_2_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblNewLabel_2_1.setBounds(97, 98, 77, 24);
+		lblNewLabel_2_1.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel_2_1.setBounds(331, 28, 77, 24);
 		panel_2.add(lblNewLabel_2_1);
 		
 		jlabelPrice = new JLabel("");
 		jlabelPrice.setBorder(new LineBorder(new Color(0, 0, 0)));
-		jlabelPrice.setBounds(228, 98, 64, 24);
+		jlabelPrice.setBackground(new Color(128, 128, 0));
+		jlabelPrice.setBounds(329, 68, 79, 24);
 		panel_2.add(jlabelPrice);
 		
-		JButton btnNewButton = new JButton("Create");
-		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color(255, 255, 0));
+		JButton btnNewButton = new JButton("Add");
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 15));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(0, 64, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setBounds(228, 166, 82, 21);
+		btnNewButton.setBounds(272, 158, 101, 41);
 		panel_2.add(btnNewButton);
 		
 		jcomboBoxProduct = new JComboBox();
@@ -129,28 +130,28 @@ public class JPPurchaseDetails extends JPanel {
 				do_jcomboBoxProduct_actionPerformed(e);
 			}
 		});
-		jcomboBoxProduct.setBounds(228, 23, 135, 24);
+		jcomboBoxProduct.setBounds(21, 67, 119, 24);
 		panel_2.add(jcomboBoxProduct);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("Total");
-		lblNewLabel_2_1_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblNewLabel_2_1_1.setBounds(97, 132, 77, 24);
+		lblNewLabel_2_1_1.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel_2_1_1.setBounds(462, 28, 77, 24);
 		panel_2.add(lblNewLabel_2_1_1);
 		
 		jlabelTotalPrice = new JLabel("");
 		jlabelTotalPrice.setBorder(new LineBorder(new Color(0, 0, 0)));
-		jlabelTotalPrice.setBounds(228, 132, 64, 24);
+		jlabelTotalPrice.setBounds(462, 68, 77, 24);
 		panel_2.add(jlabelTotalPrice);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "ListPurchase", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBackground(new Color(255, 250, 205));
+		panel_1.setBackground(new Color(223, 243, 255));
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(new Color(255, 182, 193), 2));
-		scrollPane.setBounds(10, 29, 586, 136);
+		scrollPane.setBounds(26, 20, 586, 145);
 		panel_1.add(scrollPane);
 		
 		jtableListPurchase = new JTable();
@@ -158,8 +159,8 @@ public class JPPurchaseDetails extends JPanel {
 		scrollPane.setViewportView(jtableListPurchase);
 		
 		JButton btnNewButton_2 = new JButton("Thanh Toan");
-		btnNewButton_2.setBackground(new Color(255, 255, 0));
-		btnNewButton_2.setForeground(new Color(0, 0, 0));
+		btnNewButton_2.setBackground(new Color(0, 64, 0));
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -45,7 +45,7 @@ public class JPsuppliers extends JPanel {
 
 		panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 660, 95);
-		panel_1.setBackground(new Color(0, 54, 108));
+		panel_1.setBackground(new Color(56, 51, 253));
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
