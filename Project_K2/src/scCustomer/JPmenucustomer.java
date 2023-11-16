@@ -22,7 +22,6 @@ import java.awt.event.ActionEvent;
 
 public class JPmenucustomer extends JPanel {
 	private JPanel panel;
-	public static JMenuItem mntmNewMenuItem_2;//supliers
 	public static JMenuItem mntmNewMenuItem_1 ;//rank
 		
 	
@@ -56,15 +55,6 @@ public class JPmenucustomer extends JPanel {
 		});
 		mntmNewMenuItem_1.setIcon(new ImageIcon(JPcustomer.class.getResource("/Icon/7007523_rate_ranking_rank_finance_business_icon.png")));
 		menuBar.add(mntmNewMenuItem_1);
-		
-		mntmNewMenuItem_2 = new JMenuItem("Suppleirs");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_mntmNewMenuItem_2_actionPerformed(e);
-			}
-		});
-		mntmNewMenuItem_2.setIcon(new ImageIcon(JPmenucustomer.class.getResource("/Icon/4172167_box_object_product_item_merchandise_icon.png")));
-		menuBar.add(mntmNewMenuItem_2);
 		iniJFrame();
 	}
 
@@ -103,14 +93,6 @@ public class JPmenucustomer extends JPanel {
 		panel.revalidate();
 		JPrank jPrank=new JPrank();
 		panel.add(jPrank);
-		panel.setVisible(true);
-	}
-	
-	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {
-		panel.removeAll();
-		panel.revalidate();
-		JPsuppliers jPsuppliers=new JPsuppliers();
-		panel.add(jPsuppliers);
 		panel.setVisible(true);
 	}
 }

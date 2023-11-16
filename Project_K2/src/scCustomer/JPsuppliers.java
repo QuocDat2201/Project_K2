@@ -27,10 +27,10 @@ import java.awt.FlowLayout;
 public class JPsuppliers extends JPanel {
 	private JTable table;
 	private JPanel panel_1;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField jname;
+	private JTextField jphone;
+	private JTextField jemail;
+	private JTextField jcontact;
 
 	/**
 	 * Create the panel.
@@ -45,56 +45,59 @@ public class JPsuppliers extends JPanel {
 
 		panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 660, 95);
-		panel_1.setBackground(new Color(56, 51, 253));
+		panel_1.setBackground(new Color(192, 192, 192));
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
+		JLabel lblNewLabel = new JLabel("Suppleir Name");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		lblNewLabel.setForeground(new Color(0, 0, 0));
 		lblNewLabel.setBounds(24, 11, 104, 26);
 		panel_1.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		JLabel lblNewLabel_1 = new JLabel("Phone");
+		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 13));
+		lblNewLabel_1.setForeground(new Color(0, 0, 0));
 		lblNewLabel_1.setBounds(24, 48, 104, 26);
 		panel_1.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(128, 11, 149, 26);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		jname = new JTextField();
+		jname.setBounds(128, 11, 149, 26);
+		panel_1.add(jname);
+		jname.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(128, 48, 149, 25);
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
+		jphone = new JTextField();
+		jphone.setBounds(128, 48, 149, 25);
+		panel_1.add(jphone);
+		jphone.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(391, 48, 149, 25);
-		panel_1.add(textField_2);
+		jemail = new JTextField();
+		jemail.setColumns(10);
+		jemail.setBounds(391, 48, 149, 25);
+		panel_1.add(jemail);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("New label");
-		lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
+		JLabel lblNewLabel_1_1 = new JLabel("Email");
+		lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 13));
+		lblNewLabel_1_1.setForeground(new Color(0, 0, 0));
 		lblNewLabel_1_1.setBounds(287, 48, 104, 26);
 		panel_1.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		JLabel lblNewLabel_2 = new JLabel("Suppleir Contact");
+		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
+		lblNewLabel_2.setForeground(new Color(0, 0, 0));
 		lblNewLabel_2.setBounds(287, 11, 104, 26);
 		panel_1.add(lblNewLabel_2);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(391, 11, 149, 26);
-		panel_1.add(textField_3);
+		jcontact = new JTextField();
+		jcontact.setColumns(10);
+		jcontact.setBounds(391, 11, 149, 26);
+		panel_1.add(jcontact);
 		
 		JButton btnNewButton = new JButton("Create");
-		btnNewButton.setBounds(577, 50, 73, 23);
+		btnNewButton.setBackground(new Color(0, 0, 160));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNewButton.setForeground(new Color(192, 192, 192));
+		btnNewButton.setBounds(566, 47, 84, 26);
 		panel_1.add(btnNewButton);
 
 		JScrollPane scrollPane = new JScrollPane();

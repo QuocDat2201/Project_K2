@@ -99,7 +99,6 @@ public class JPaddsuppleir extends JPanel {
 		if (suppliers_model.Create(suppliers)) {
 			JOptionPane.showMessageDialog(null, "Sucsess");
 			JPcustomer jcustomer=new JPcustomer();
-			JPmenucustomer.mntmNewMenuItem_2.doClick();
 		} else {
 			JOptionPane.showMessageDialog(null, "Faild");
 			

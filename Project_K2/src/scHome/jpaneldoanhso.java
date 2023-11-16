@@ -52,7 +52,7 @@ public class jpaneldoanhso extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.setBackground(new Color(234, 247, 255));
-		panel.setBounds(0, 105, 662, 97);
+		panel.setBounds(0, 105, 662, 98);
 		Dimension Dimension = new Dimension(panel.getPreferredSize().width, 50);
 		setLayout(null);
 		panel.setPreferredSize(Dimension);
@@ -155,7 +155,7 @@ public class jpaneldoanhso extends JPanel {
 		panel_2.add(lblNewLabel_1_1_2_1);
 		
 		JPanel panel1_1 = new JPanel();
-		panel1_1.setBackground(new Color(0, 0, 160));
+		panel1_1.setBackground(new Color(0, 128, 255));
 		panel1_1.setLayout(null);
 		panel1_1.setPreferredSize(new Dimension(10, 190));
 		panel1_1.setBounds(476, 199, 186, 234);
@@ -164,18 +164,18 @@ public class jpaneldoanhso extends JPanel {
 		JLabel lblNewLabel_2 = new JLabel("top 10 products\r\n\r\r\n");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setBackground(new Color(255, 255, 255));
-		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
-		lblNewLabel_2.setBounds(45, 11, 98, 20);
+		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 14));
+		lblNewLabel_2.setBounds(37, 0, 116, 20);
 		panel1_1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("best saler\r\r\n");
 		lblNewLabel_2_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2_1.setFont(new Font("Arial", Font.BOLD, 13));
-		lblNewLabel_2_1.setBounds(55, 29, 69, 27);
+		lblNewLabel_2_1.setFont(new Font("Arial", Font.BOLD, 14));
+		lblNewLabel_2_1.setBounds(65, 10, 69, 27);
 		panel1_1.add(lblNewLabel_2_1);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(-2, 59, 188, 143);
+		scrollPane_2.setBounds(0, 40, 186, 162);
 		panel1_1.add(scrollPane_2);
 
 		revalidate();
