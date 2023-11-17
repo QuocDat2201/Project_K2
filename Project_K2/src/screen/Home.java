@@ -317,9 +317,6 @@ public class Home extends JFrame {
 		for (Role role : role_model.findAll()) {
 			if (user.getRoleID()==role.getRole_id()) {
 				jrole.setText(role.getRole_Name());
-				if(user.getRoleID()==4) {
-					jbcusstomer.setVisible(false);
-				}
 				break;
 			} else {
 
@@ -328,10 +325,20 @@ public class Home extends JFrame {
 		
 		JPhome jPhome = new JPhome(dataMap);
 		jpanel_2.add(jPhome);
-		jPhome.setVisible(true);
+		jPhome.setVisible(true); 
+		
+		if (user.getRoleID() == 2) {
+			jbtinvoice.setVisible(false);
+			jbcusstomer.setVisible(false);
+		}else if (user.getRoleID() == 4) {
+			jbtaccount_2.setVisible(false);
+		}else if (user.getRoleID() == 3) {
+			jbtaccount_2.setVisible(false);
+		}
 	}
 
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Home
+		Users user=(Users) dataMap.get("user");
 		ClearScreen();
 		JPhome jPhome = new JPhome(dataMap);
 		jpanel_2.add(jPhome);
@@ -340,6 +347,7 @@ public class Home extends JFrame {
 	}
 
 	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {// send
+		Users user=(Users) dataMap.get("user");
 		ClearScreen();
 		JPsendNotifi jPsendNotifi = new JPsendNotifi(dataMap);
 		jpanel_2.add(jPsendNotifi);
@@ -349,13 +357,16 @@ public class Home extends JFrame {
 	}
 
 	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {// invoice
+		Users user=(Users) dataMap.get("user");
 		ClearScreen();
 		JPaddInvoice jPaddInvoice = new JPaddInvoice();
 		jpanel_2.add(jPaddInvoice);
 		jPaddInvoice.setVisible(true);
+		
 	}
 
 	protected void do_jbtlistproduct_actionPerformed(ActionEvent e) {// Storage
+		Users user=(Users) dataMap.get("user");
 		ClearScreen();
 		JPstorage jPstorage = new JPstorage(dataMap);
 		jpanel_2.add(jPstorage);
@@ -367,6 +378,7 @@ public class Home extends JFrame {
 	}
 //huydz
 	protected void do_jbtaccount_actionPerformed(ActionEvent e) {// account
+		Users user=(Users) dataMap.get("user");
 		ClearScreen();
 		JPaccount jPaccount = new JPaccount(dataMap);
 		jpanel_2.add(jPaccount);
@@ -385,6 +397,7 @@ public class Home extends JFrame {
 //		jpanel_2.repaint();
 	}
 	protected void do_jbcusstomer_actionPerformed(ActionEvent e) {
+		Users user=(Users) dataMap.get("user");
 		JPmenucustomer jcustomer=new JPmenucustomer();
 		ClearScreen();
 		jpanel_2.add(jcustomer);
@@ -393,6 +406,7 @@ public class Home extends JFrame {
 	}
 	
 	protected void do_jbtaccount_2_actionPerformed(ActionEvent e) {
+		Users user=(Users) dataMap.get("user");
 		JPmenuSuppliers jPmenuSuppliers = new JPmenuSuppliers() ; 
 		ClearScreen();
 		jpanel_2.add(jPmenuSuppliers);
