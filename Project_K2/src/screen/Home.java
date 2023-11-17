@@ -284,8 +284,8 @@ public class Home extends JFrame {
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Home.class.getResource("/Icon/boxes.png")));
-		lblNewLabel_1.setBounds(44, 6, 46, 35);
+		lblNewLabel_1.setIcon(new ImageIcon(Home.class.getResource("/Icon/9165464_warehouse_storage_icon.png")));
+		lblNewLabel_1.setBounds(33, 6, 46, 35);
 		panel_2.add(lblNewLabel_1);
 		
 		jpanel_2.addComponentListener(new ComponentAdapter() {
