@@ -34,7 +34,7 @@ public class JPhome extends JPanel {
 		menuBar.setBackground(new Color(0, 64, 128));
 		add(menuBar, BorderLayout.NORTH);
 		
-		JMenu mnNewMenu = new JMenu("Bieu do");
+		JMenu mnNewMenu = new JMenu("Chart");
 		mnNewMenu.setBackground(new Color(0, 64, 128));
 		mnNewMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -42,7 +42,7 @@ public class JPhome extends JPanel {
 			}
 		});
 		
-		JMenuItem Product = new JMenuItem("Doanh so");
+		JMenuItem Product = new JMenuItem("New");
 		Product.setBackground(new Color(0, 64, 128));
 		Product.setHorizontalAlignment(SwingConstants.LEFT);
 		Product.addActionListener(new ActionListener() {
@@ -71,7 +71,7 @@ public class JPhome extends JPanel {
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("BieudoDoanhthu");
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("ChartRevenue");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mntmNewMenuItem_3_actionPerformed(e);

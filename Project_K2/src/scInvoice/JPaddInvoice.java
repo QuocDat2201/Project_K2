@@ -343,16 +343,19 @@ public class JPaddInvoice extends JPanel {
 		// Tạo danh sách tạm thời để lưu thông tin sáp nhập từ Sales và Invoices
 		List<CombinedData> combinedDataList = new ArrayList<CombinedData>();
 		Product_model product_model = new Product_model();
-
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		for (Invoices invoi : invoicess) {
 			model.addRow(new Object[] { invoi.getInvoiceID(), invoi.getCustomerName(), invoi.getCustomerPhone(),
-					invoi.getTotal(), invoi.getInvoiceDate(), invoi.isStatus() ? "Confirm" : "Cancel" });
+					invoi.getTotal(),simpleDateFormat.format(invoi.getInvoiceDate()) , invoi.isStatus() ? "Confirm" : "Cancel" });
 
 		}
 
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	
 		jtableListInvoice.getTableHeader().setReorderingAllowed(false);
 		jtableListInvoice.setModel(model);
+		 for (int i = 0; i < jtableListInvoice.getColumnCount(); i++) {
+			 jtableListInvoice.getColumnModel().getColumn(i).setCellRenderer(new CustomColorRenderer());
+         }
 //		jtableListInvoice.setDefaultRenderer(Object.class,new ColoredCellRenderer());
 		// Lấy ra model của cột từ JTable
 		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
@@ -399,6 +402,9 @@ public class JPaddInvoice extends JPanel {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		jtable1.getTableHeader().setReorderingAllowed(false);
 		jtable1.setModel(model);
+		 for (int i = 0; i < jtable1.getColumnCount(); i++) {
+             jtable1.getColumnModel().getColumn(i).setCellRenderer(new CustomColorRenderer());
+         }
 		// Lấy ra model của cột từ JTable
 		TableColumnModel columnModel = jtable1.getColumnModel();
 
@@ -771,4 +777,31 @@ public class JPaddInvoice extends JPanel {
 		jtotal.setText(String.valueOf(total));
 
 	}
-}
+	class CustomColorRenderer extends DefaultTableCellRenderer {
+
+	    @Override
+	    public Component getTableCellRendererComponent(JTable table, Object value,
+	                                                   boolean isSelected, boolean hasFocus,
+	                                                   int row, int column) {
+	        Component c = super.getTableCellRendererComponent(table, value,
+	                isSelected, hasFocus, row, column);
+
+	        // Lấy dữ liệu từ tất cả các cột trong dòng
+	        String firstName = String.valueOf(table.getValueAt(row, 0)); // Giả sử cột "First Name" ở cột thứ 0
+	        String lastName = String.valueOf(table.getValueAt(row, 1)); // Giả sử cột "Last Name" ở cột thứ 1
+	        String age = String.valueOf(table.getValueAt(row, 2)); // Giả sử cột "Age" ở cột thứ 2
+	        String status = String.valueOf(table.getValueAt(row, 5)); // Giả sử cột "Status" ở cột thứ 5
+
+	        // Thay đổi màu sắc dựa trên điều kiện (ví dụ: màu đỏ nếu giá trị "Cancel")
+	        if (status.equalsIgnoreCase("Cancel")) {
+	            c.setBackground(Color.RED);
+	            c.setForeground(Color.WHITE); // Đặt màu chữ trắng để đảm bảo đọc được trên nền đỏ
+	        } else {
+	            // Mặc định cho các hàng khác
+	            c.setBackground(table.getBackground());
+	            c.setForeground(table.getForeground());
+	        }
+
+	        return c;
+	    }
+}}
