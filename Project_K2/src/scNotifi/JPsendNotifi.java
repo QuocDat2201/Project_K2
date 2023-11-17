@@ -131,7 +131,7 @@ public class JPsendNotifi extends JPanel {
 		panel_list.setLayout(null);
 		
 		JScrollPane jscrollPane = new JScrollPane();
-		jscrollPane.setBounds(10, 162, 595, 228);
+		jscrollPane.setBounds(10, 162, 633, 228);
 		panel_list.add(jscrollPane);
 		
 		jtable_Reports_List = new JTable();
@@ -158,18 +158,18 @@ public class JPsendNotifi extends JPanel {
 		
 		JPanel panel_search_date_list = new JPanel();
 		panel_search_date_list.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Search By Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_search_date_list.setBounds(10, 20, 292, 134);
+		panel_search_date_list.setBounds(10, 20, 322, 134);
 		panel_list.add(panel_search_date_list);
 		panel_search_date_list.setLayout(null);
 		
 		jdateChooser_from = new JDateChooser();
 		jdateChooser_from.setDateFormatString("d/MM/y");
-		jdateChooser_from.setBounds(54, 23, 228, 28);
+		jdateChooser_from.setBounds(54, 23, 258, 28);
 		panel_search_date_list.add(jdateChooser_from);
 		
 		jdateChooser_to = new JDateChooser();
 		jdateChooser_to.setDateFormatString("d/MM/y");
-		jdateChooser_to.setBounds(54, 61, 228, 28);
+		jdateChooser_to.setBounds(54, 61, 258, 28);
 		panel_search_date_list.add(jdateChooser_to);
 		
 		JLabel jLabel_from = new JLabel("From");
@@ -183,18 +183,18 @@ public class JPsendNotifi extends JPanel {
 		panel_search_date_list.add(jLabel_To);
 		
 		jButton_Search_Date = new JButton("Search");
-		jButton_Search_Date.setBackground(new Color(0, 128, 255));
+		jButton_Search_Date.setBackground(new Color(240, 240, 240));
 		jButton_Search_Date.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jButton_Search_Date_actionPerformed(e);
 			}
 		});
-		jButton_Search_Date.setBounds(106, 99, 85, 21);
+		jButton_Search_Date.setBounds(137, 99, 85, 21);
 		panel_search_date_list.add(jButton_Search_Date);
 		
 		JPanel panel_sort_role = new JPanel();
 		panel_sort_role.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Sort By Role", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_sort_role.setBounds(312, 20, 292, 134);
+		panel_sort_role.setBounds(339, 18, 304, 134);
 		panel_list.add(panel_sort_role);
 		panel_sort_role.setLayout(null);
 		
@@ -204,16 +204,16 @@ public class JPsendNotifi extends JPanel {
 				jcomboBox_list_actionPerformed(e);
 			}
 		});
-		jcomboBox_list.setBounds(10, 27, 272, 27);
+		jcomboBox_list.setBounds(10, 27, 284, 27);
 		panel_sort_role.add(jcomboBox_list);
 		
 		panel_history = new JPanel();
 		panel_history.setLayout(null);
-		panel_history.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Reports History", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_history.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Reports History", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_main.add(panel_history, "name_1410858547499000");
 		
 		JScrollPane jscrollPane_history = new JScrollPane();
-		jscrollPane_history.setBounds(10, 162, 595, 228);
+		jscrollPane_history.setBounds(10, 162, 645, 228);
 		panel_history.add(jscrollPane_history);
 		
 		jtable_history = new JTable();
@@ -241,17 +241,17 @@ public class JPsendNotifi extends JPanel {
 		JPanel panel_search_date_history = new JPanel();
 		panel_search_date_history.setLayout(null);
 		panel_search_date_history.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Search By Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_search_date_history.setBounds(162, 18, 292, 134);
+		panel_search_date_history.setBounds(162, 18, 338, 134);
 		panel_history.add(panel_search_date_history);
 		
 		jdateChooser_from_history = new JDateChooser();
 		jdateChooser_from_history.setDateFormatString("d/MM/y");
-		jdateChooser_from_history.setBounds(54, 23, 228, 28);
+		jdateChooser_from_history.setBounds(54, 23, 274, 28);
 		panel_search_date_history.add(jdateChooser_from_history);
 		
 		jdateChooser_to_history = new JDateChooser();
 		jdateChooser_to_history.setDateFormatString("d/MM/y");
-		jdateChooser_to_history.setBounds(54, 61, 228, 28);
+		jdateChooser_to_history.setBounds(54, 61, 274, 28);
 		panel_search_date_history.add(jdateChooser_to_history);
 		
 		JLabel jLabel_from_history = new JLabel("From");
@@ -270,7 +270,7 @@ public class JPsendNotifi extends JPanel {
 				jButton_searchHistory_actionPerformed(e);
 			}
 		});
-		jButton_searchHistory.setBounds(107, 99, 85, 21);
+		jButton_searchHistory.setBounds(148, 99, 85, 21);
 		panel_search_date_history.add(jButton_searchHistory);
 		
 		panel_send = new JPanel();
@@ -280,7 +280,7 @@ public class JPsendNotifi extends JPanel {
 		
 		JScrollPane jscrollPane_send = new JScrollPane();
 		jscrollPane_send.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		jscrollPane_send.setBounds(10, 20, 293, 370);
+		jscrollPane_send.setBounds(10, 20, 313, 370);
 		panel_send.add(jscrollPane_send);
 		
 		jtextArea_send = new JTextArea();
@@ -290,11 +290,11 @@ public class JPsendNotifi extends JPanel {
 		JPanel panel_select_role = new JPanel();
 		panel_select_role.setLayout(null);
 		panel_select_role.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send To", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_select_role.setBounds(313, 20, 292, 65);
+		panel_select_role.setBounds(333, 20, 313, 65);
 		panel_send.add(panel_select_role);
 		
 		jcomboBox_sendto = new JComboBox();
-		jcomboBox_sendto.setBounds(10, 24, 272, 28);
+		jcomboBox_sendto.setBounds(10, 24, 293, 28);
 		panel_select_role.add(jcomboBox_sendto);
 		
 		jButton_Send = new JButton("Send");
@@ -303,7 +303,7 @@ public class JPsendNotifi extends JPanel {
 				jButton_Send_actionPerformed(e);
 			}
 		});
-		jButton_Send.setBounds(520, 164, 85, 28);
+		jButton_Send.setBounds(559, 164, 85, 28);
 		panel_send.add(jButton_Send);
 		
 		jButton_Cancel = new JButton("Cancel");
@@ -312,19 +312,19 @@ public class JPsendNotifi extends JPanel {
 				jButton_Cancel_actionPerformed(e);
 			}
 		});
-		jButton_Cancel.setBounds(425, 164, 85, 28);
+		jButton_Cancel.setBounds(464, 164, 85, 28);
 		panel_send.add(jButton_Cancel);
 		
 		JPanel panel_date = new JPanel();
 		panel_date.setLayout(null);
 		panel_date.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Send Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_date.setBounds(313, 95, 292, 65);
+		panel_date.setBounds(333, 89, 313, 65);
 		panel_send.add(panel_date);
 		
 		jdateChooser_sendDate = new JDateChooser();
 		jdateChooser_sendDate.setEnabled(false);
 		jdateChooser_sendDate.setDateFormatString("d/MM/y");
-		jdateChooser_sendDate.setBounds(10, 27, 272, 28);
+		jdateChooser_sendDate.setBounds(10, 27, 293, 28);
 		panel_date.add(jdateChooser_sendDate);
 		
 		panel_details = new JPanel();
@@ -738,7 +738,6 @@ public class JPsendNotifi extends JPanel {
 				JOptionPane.showMessageDialog(null, "Send Failed !");
 			}
 		}
-		System.out.println(users.getRoleID());
 	}
 	
 	protected void jButton_Cancel_actionPerformed(ActionEvent e) {

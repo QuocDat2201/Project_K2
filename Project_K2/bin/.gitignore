@@ -1,6 +1,13 @@
 /Icon/
-/screen/
+/Small_Icon/
+/controller/
 /entites/
+/libs/
+/models/
+/scAcount/
 /scCustomer/
+/scHome/
 /scInvoice/
+/scNotifi/
 /scStorage/
+/screen/

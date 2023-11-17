@@ -81,9 +81,8 @@ public class JPstorage extends JPanel {
 	private Products products;
 	private Category categories;
 	private JComboBox JcomboBox_Category;
-	private JPanel panel_CreateProduct;
+	private JPanel panel_Create;
 	private JLabel JLabel_createName;
-	private JLabel lblCreateProduct;
 	private JTextField jtextField_createName;
 	private JLabel JLabel_createPrice;
 	private JTextField jtextField_createPrice;
@@ -100,11 +99,6 @@ public class JPstorage extends JPanel {
 	private JTextField JtextField_Catname;
 	private JButton jButton_SearchCatName;
 	private JTable Jtable_Category;
-	private JPanel panel_CreateCategory;
-	private JLabel JLabel_createCatName;
-	private JTextField jtextField_createCatName;
-	private JButton JButton_CatCancel;
-	private JButton JButton_CatSave;
 	private JPopupMenu jpopupMenu_Category;
 	private JPanel panel_editCategory;
 	private JLabel lblEdit_Category;
@@ -112,7 +106,8 @@ public class JPstorage extends JPanel {
 	private JTextField jtextField_EditCategory;
 	private JButton JButton_EditCatCancel;
 	private JButton JButton_EditCatSave;
-	private JMenu jMenu_Create;
+	private JTextField jtextField_createCatName;
+	private JMenuItem jMenuItem_Create;
 	
 	/**
 	 * Create the panel.
@@ -145,29 +140,16 @@ public class JPstorage extends JPanel {
 		jmenuitem_Category.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/categories.png")));
 		jmenuitem_Category.setBackground(new Color(255, 255, 128));
 		menuBar.add(jmenuitem_Category);
-
-		jMenu_Create = new JMenu("New Create");
-		jMenu_Create.setHorizontalAlignment(SwingConstants.CENTER);
-		jMenu_Create.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/add.png")));
-		menuBar.add(jMenu_Create);
-
-		JMenuItem jMenuItem_CreateProduct = new JMenuItem("Create Product");
-		jMenuItem_CreateProduct.addActionListener(new ActionListener() {
+		
+		jMenuItem_Create = new JMenuItem("New Create");
+		jMenuItem_Create.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jMenuItem_CreateProduct_actionPerformed(e);
+				jMenuItem_Create_actionPerformed(e);
 			}
 		});
-		jMenuItem_CreateProduct.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/box.png")));
-		jMenu_Create.add(jMenuItem_CreateProduct);
-
-		JMenuItem jMenuItem_CreateCategory = new JMenuItem("Create Category");
-		jMenuItem_CreateCategory.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jMenuItem_CreateCategory_actionPerformed(e);
-			}
-		});
-		jMenuItem_CreateCategory.setIcon(new ImageIcon(JPstorage.class.getResource("/Icon/categories.png")));
-		jMenu_Create.add(jMenuItem_CreateCategory);
+		jMenuItem_Create.setHorizontalAlignment(SwingConstants.CENTER);
+		jMenuItem_Create.setIcon(new ImageIcon(JPstorage.class.getResource("/Small_Icon/add.png")));
+		menuBar.add(jMenuItem_Create);
 
 		panel_main = new JPanel();
 		add(panel_main, BorderLayout.CENTER);
@@ -181,7 +163,7 @@ public class JPstorage extends JPanel {
 		panel_searchname.setLayout(null);
 		panel_searchname.setBorder(
 				new TitledBorder(null, "Search By Name", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_searchname.setBounds(10, 10, 293, 116);
+		panel_searchname.setBounds(10, 10, 316, 116);
 		panel_storage.add(panel_searchname);
 
 		jtextField_Search = new PlacehoclderTextField("Search Name");
@@ -192,7 +174,7 @@ public class JPstorage extends JPanel {
 			}
 		});
 		jtextField_Search.setColumns(10);
-		jtextField_Search.setBounds(10, 34, 273, 25);
+		jtextField_Search.setBounds(10, 34, 296, 25);
 		panel_searchname.add(jtextField_Search);
 
 		jButton_Search = new JButton("Search");
@@ -201,14 +183,14 @@ public class JPstorage extends JPanel {
 				jButton_Search_actionPerformed(e);
 			}
 		});
-		jButton_Search.setBounds(96, 69, 85, 25);
+		jButton_Search.setBounds(114, 69, 85, 25);
 		panel_searchname.add(jButton_Search);
 
 		JPanel panel_category = new JPanel();
 		panel_category.setLayout(null);
 		panel_category.setBorder(
 				new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Sort By Category", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_category.setBounds(311, 10, 293, 53);
+		panel_category.setBounds(336, 10, 316, 53);
 		panel_storage.add(panel_category);
 
 		jcomboBox_category = new JComboBox();
@@ -217,14 +199,14 @@ public class JPstorage extends JPanel {
 				jcomboBox_category_actionPerformed(e);
 			}
 		});
-		jcomboBox_category.setBounds(10, 22, 273, 21);
+		jcomboBox_category.setBounds(10, 22, 296, 21);
 		panel_category.add(jcomboBox_category);
 
 		JPanel panel_status = new JPanel();
 		panel_status.setLayout(null);
 		panel_status.setBorder(
 				new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Sort By Status", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_status.setBounds(311, 73, 293, 53);
+		panel_status.setBounds(336, 73, 316, 53);
 		panel_storage.add(panel_status);
 
 		jcomboBox_status = new JComboBox();
@@ -233,7 +215,7 @@ public class JPstorage extends JPanel {
 				jcomboBox_status_actionPerformed(e);
 			}
 		});
-		jcomboBox_status.setBounds(10, 22, 273, 21);
+		jcomboBox_status.setBounds(10, 22, 296, 21);
 		panel_status.add(jcomboBox_status);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -286,23 +268,23 @@ public class JPstorage extends JPanel {
 		JLabel lblNewLabel = new JLabel("Update Product");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblNewLabel.setBounds(10, 35, 594, 24);
+		lblNewLabel.setBounds(10, 35, 642, 24);
 		panel_edit.add(lblNewLabel);
 
 		JtextField_name = new JTextField();
 		JtextField_name.setColumns(10);
-		JtextField_name.setBounds(20, 98, 271, 24);
+		JtextField_name.setBounds(20, 98, 307, 24);
 		panel_edit.add(JtextField_name);
 
 		JLabel JLabel_price = new JLabel("Price");
 		JLabel_price.setFont(new Font("Arial", Font.PLAIN, 15));
 		JLabel_price.setHorizontalAlignment(SwingConstants.LEFT);
-		JLabel_price.setBounds(317, 69, 271, 24);
+		JLabel_price.setBounds(337, 69, 315, 24);
 		panel_edit.add(JLabel_price);
 
 		JtextField_price = new JTextField();
 		JtextField_price.setColumns(10);
-		JtextField_price.setBounds(317, 98, 271, 24);
+		JtextField_price.setBounds(337, 98, 307, 24);
 		panel_edit.add(JtextField_price);
 		JtextField_price.addKeyListener(new KeyAdapter() {
 		    @Override
@@ -323,12 +305,12 @@ public class JPstorage extends JPanel {
 		JLabel JLabel_status = new JLabel("Status");
 		JLabel_status.setFont(new Font("Arial", Font.PLAIN, 15));
 		JLabel_status.setHorizontalAlignment(SwingConstants.LEFT);
-		JLabel_status.setBounds(317, 132, 271, 24);
+		JLabel_status.setBounds(337, 132, 315, 24);
 		panel_edit.add(JLabel_status);
 
 		JtextField_quantity = new JTextField();
 		JtextField_quantity.setColumns(10);
-		JtextField_quantity.setBounds(20, 166, 271, 24);
+		JtextField_quantity.setBounds(20, 166, 307, 24);
 		panel_edit.add(JtextField_quantity);
 		JtextField_quantity.addKeyListener(new KeyAdapter() {
 		    @Override
@@ -344,16 +326,17 @@ public class JPstorage extends JPanel {
 		JtextField_status.setEnabled(false);
 		JtextField_status.setEditable(false);
 		JtextField_status.setColumns(10);
-		JtextField_status.setBounds(317, 166, 271, 24);
+		JtextField_status.setBounds(337, 166, 307, 24);
 		panel_edit.add(JtextField_status);
 
 		JLabel JLabel_category = new JLabel("Category");
+		JLabel_category.setFont(new Font("Arial", Font.PLAIN, 15));
 		JLabel_category.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel_category.setBounds(20, 200, 277, 24);
 		panel_edit.add(JLabel_category);
 
 		JcomboBox_Category = new JComboBox();
-		JcomboBox_Category.setBounds(20, 234, 271, 24);
+		JcomboBox_Category.setBounds(20, 234, 307, 24);
 		panel_edit.add(JcomboBox_Category);
 
 		JButton_Cancel = new JButton("Cancel");
@@ -362,7 +345,7 @@ public class JPstorage extends JPanel {
 				JButton_Cancel_actionPerformed(e);
 			}
 		});
-		JButton_Cancel.setBounds(403, 236, 85, 21);
+		JButton_Cancel.setBounds(460, 203, 85, 21);
 		panel_edit.add(JButton_Cancel);
 
 		JButton_Save = new JButton("Save");
@@ -371,41 +354,137 @@ public class JPstorage extends JPanel {
 				JButton_Save_actionPerformed(e);
 			}
 		});
-		JButton_Save.setBounds(498, 236, 85, 21);
+		JButton_Save.setBounds(555, 203, 85, 21);
 		panel_edit.add(JButton_Save);
 		
-		panel_CreateProduct = new JPanel();
-		panel_CreateProduct.setLayout(null);
-		panel_CreateProduct.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Create Product", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_main.add(panel_CreateProduct, "name_1041333684938200");
+		panel_Create = new JPanel();
+		panel_Create.setLayout(null);
+		panel_Create.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "New Create", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_main.add(panel_Create, "name_1041333684938200");
+		
+		JPanel panel_CreateProd = new JPanel();
+		panel_CreateProd.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Create Product", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_CreateProd.setBounds(10, 15, 642, 233);
+		panel_Create.add(panel_CreateProd);
+		panel_CreateProd.setLayout(null);
 		
 		JLabel_createName = new JLabel("Product's Name");
+		JLabel_createName.setBounds(10, 20, 277, 24);
+		panel_CreateProd.add(JLabel_createName);
 		JLabel_createName.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel_createName.setFont(new Font("Arial", Font.PLAIN, 15));
-		JLabel_createName.setBounds(20, 69, 277, 24);
-		panel_CreateProduct.add(JLabel_createName);
-		
-		lblCreateProduct = new JLabel("Create Product");
-		lblCreateProduct.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCreateProduct.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblCreateProduct.setBounds(10, 35, 613, 24);
-		panel_CreateProduct.add(lblCreateProduct);
-		
-		jtextField_createName = new JTextField();
-		jtextField_createName.setColumns(10);
-		jtextField_createName.setBounds(20, 98, 271, 24);
-		panel_CreateProduct.add(jtextField_createName);
 		
 		JLabel_createPrice = new JLabel("Price");
+		JLabel_createPrice.setBounds(323, 20, 271, 24);
+		panel_CreateProd.add(JLabel_createPrice);
 		JLabel_createPrice.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel_createPrice.setFont(new Font("Arial", Font.PLAIN, 15));
-		JLabel_createPrice.setBounds(317, 69, 271, 24);
-		panel_CreateProduct.add(JLabel_createPrice);
+		
+		jtextField_createName = new JTextField();
+		jtextField_createName.setBounds(10, 54, 307, 24);
+		panel_CreateProd.add(jtextField_createName);
+		jtextField_createName.setColumns(10);
 		
 		jtextField_createPrice = new JTextField();
+		jtextField_createPrice.setBounds(323, 54, 309, 24);
+		panel_CreateProd.add(jtextField_createPrice);
 		jtextField_createPrice.setColumns(10);
-		jtextField_createPrice.setBounds(317, 98, 271, 24);
-		panel_CreateProduct.add(jtextField_createPrice);
+		
+		JLabel_createQuantity = new JLabel("Quantity");
+		JLabel_createQuantity.setBounds(10, 88, 277, 24);
+		panel_CreateProd.add(JLabel_createQuantity);
+		JLabel_createQuantity.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_createQuantity.setFont(new Font("Arial", Font.PLAIN, 15));
+		
+		JLabel_createStatus = new JLabel("Status");
+		JLabel_createStatus.setBounds(323, 88, 271, 24);
+		panel_CreateProd.add(JLabel_createStatus);
+		JLabel_createStatus.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_createStatus.setFont(new Font("Arial", Font.PLAIN, 15));
+		
+		jtextField_createQuantity = new JTextField();
+		jtextField_createQuantity.setBounds(10, 122, 307, 24);
+		panel_CreateProd.add(jtextField_createQuantity);
+		jtextField_createQuantity.setColumns(10);
+		
+		jtextField_createStatus = new JTextField();
+		jtextField_createStatus.setBounds(323, 122, 309, 24);
+		panel_CreateProd.add(jtextField_createStatus);
+		jtextField_createStatus.setEnabled(false);
+		jtextField_createStatus.setEditable(false);
+		jtextField_createStatus.setColumns(10);
+		
+		JLabel_createCategory = new JLabel("Category");
+		JLabel_createCategory.setFont(new Font("Arial", Font.PLAIN, 15));
+		JLabel_createCategory.setBounds(10, 156, 277, 24);
+		panel_CreateProd.add(JLabel_createCategory);
+		JLabel_createCategory.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JcomboBox_createCategory = new JComboBox();
+		JcomboBox_createCategory.setBounds(10, 190, 307, 24);
+		panel_CreateProd.add(JcomboBox_createCategory);
+		
+		JButton_Cancel_1 = new JButton("Cancel");
+		JButton_Cancel_1.setBounds(452, 156, 85, 21);
+		panel_CreateProd.add(JButton_Cancel_1);
+		
+		JButton_Save_1 = new JButton("Save");
+		JButton_Save_1.setBounds(547, 156, 85, 21);
+		panel_CreateProd.add(JButton_Save_1);
+		
+		JPanel panel_CreateCat = new JPanel();
+		panel_CreateCat.setBorder(new TitledBorder(null, "Create Category", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_CreateCat.setBounds(10, 258, 642, 132);
+		panel_Create.add(panel_CreateCat);
+		panel_CreateCat.setLayout(null);
+		
+		JLabel JLabel_createCatName = new JLabel("Category's Name");
+		JLabel_createCatName.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel_createCatName.setFont(new Font("Arial", Font.PLAIN, 15));
+		JLabel_createCatName.setBounds(177, 26, 277, 24);
+		panel_CreateCat.add(JLabel_createCatName);
+		
+		jtextField_createCatName = new JTextField();
+		jtextField_createCatName.setColumns(10);
+		jtextField_createCatName.setBounds(177, 52, 271, 24);
+		panel_CreateCat.add(jtextField_createCatName);
+		
+		JButton JButton_CatSave = new JButton("Save");
+		JButton_CatSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_CatSave_actionPerformed(e);
+			}
+		});
+		JButton_CatSave.setBounds(363, 86, 85, 21);
+		panel_CreateCat.add(JButton_CatSave);
+		
+		JButton JButton_CatCancel = new JButton("Cancel");
+		JButton_CatCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_CatCancel_actionPerformed(e);
+			}
+		});
+		JButton_CatCancel.setBounds(268, 86, 85, 21);
+		panel_CreateCat.add(JButton_CatCancel);
+		JButton_Save_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_Save_1_actionPerformed(e);
+			}
+		});
+		JButton_Cancel_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JButton_Cancel_1_actionPerformed(e);
+			}
+		});
+		jtextField_createQuantity.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+		        if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+		            e.consume();
+		        }
+		    }
+		});
 		jtextField_createPrice.addKeyListener(new KeyAdapter() {
 		    @Override
 		    public void keyTyped(KeyEvent e) {
@@ -416,66 +495,6 @@ public class JPstorage extends JPanel {
 		    }
 		});
 		
-		JLabel_createQuantity = new JLabel("Quantity");
-		JLabel_createQuantity.setHorizontalAlignment(SwingConstants.LEFT);
-		JLabel_createQuantity.setFont(new Font("Arial", Font.PLAIN, 15));
-		JLabel_createQuantity.setBounds(20, 132, 277, 24);
-		panel_CreateProduct.add(JLabel_createQuantity);
-		
-		JLabel_createStatus = new JLabel("Status");
-		JLabel_createStatus.setHorizontalAlignment(SwingConstants.LEFT);
-		JLabel_createStatus.setFont(new Font("Arial", Font.PLAIN, 15));
-		JLabel_createStatus.setBounds(317, 132, 271, 24);
-		panel_CreateProduct.add(JLabel_createStatus);
-		
-		jtextField_createQuantity = new JTextField();
-		jtextField_createQuantity.setColumns(10);
-		jtextField_createQuantity.setBounds(20, 166, 271, 24);
-		panel_CreateProduct.add(jtextField_createQuantity);
-		jtextField_createQuantity.addKeyListener(new KeyAdapter() {
-		    @Override
-		    public void keyTyped(KeyEvent e) {
-		        char c = e.getKeyChar();
-		        if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
-		            e.consume();
-		        }
-		    }
-		});
-		
-		jtextField_createStatus = new JTextField();
-		jtextField_createStatus.setEnabled(false);
-		jtextField_createStatus.setEditable(false);
-		jtextField_createStatus.setColumns(10);
-		jtextField_createStatus.setBounds(317, 166, 271, 24);
-		panel_CreateProduct.add(jtextField_createStatus);
-		
-		JLabel_createCategory = new JLabel("Category");
-		JLabel_createCategory.setHorizontalAlignment(SwingConstants.LEFT);
-		JLabel_createCategory.setBounds(20, 200, 277, 24);
-		panel_CreateProduct.add(JLabel_createCategory);
-		
-		JcomboBox_createCategory = new JComboBox();
-		JcomboBox_createCategory.setBounds(20, 234, 271, 24);
-		panel_CreateProduct.add(JcomboBox_createCategory);
-		
-		JButton_Cancel_1 = new JButton("Cancel");
-		JButton_Cancel_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JButton_Cancel_1_actionPerformed(e);
-			}
-		});
-		JButton_Cancel_1.setBounds(403, 236, 85, 21);
-		panel_CreateProduct.add(JButton_Cancel_1);
-		
-		JButton_Save_1 = new JButton("Save");
-		JButton_Save_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JButton_Save_1_actionPerformed(e);
-			}
-		});
-		JButton_Save_1.setBounds(498, 236, 85, 21);
-		panel_CreateProduct.add(JButton_Save_1);
-		
 		panel_CategoryList = new JPanel();
 		panel_CategoryList.setLayout(null);
 		panel_main.add(panel_CategoryList, "name_1051396032192500");
@@ -483,7 +502,7 @@ public class JPstorage extends JPanel {
 		panel_SearchCatName = new JPanel();
 		panel_SearchCatName.setLayout(null);
 		panel_SearchCatName.setBorder(new TitledBorder(null, "Search By Name", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_SearchCatName.setBounds(120, 10, 381, 116);
+		panel_SearchCatName.setBounds(120, 10, 409, 116);
 		panel_CategoryList.add(panel_SearchCatName);
 		
 		JtextField_Catname = new JTextField();
@@ -494,7 +513,7 @@ public class JPstorage extends JPanel {
 			}
 		});
 		JtextField_Catname.setColumns(10);
-		JtextField_Catname.setBounds(10, 28, 361, 31);
+		JtextField_Catname.setBounds(10, 28, 389, 31);
 		panel_SearchCatName.add(JtextField_Catname);
 		
 		jButton_SearchCatName = new JButton("Search");
@@ -503,11 +522,11 @@ public class JPstorage extends JPanel {
 				jButton_SearchCatName_actionPerformed(e);
 			}
 		});
-		jButton_SearchCatName.setBounds(144, 69, 85, 25);
+		jButton_SearchCatName.setBounds(162, 69, 85, 25);
 		panel_SearchCatName.add(jButton_SearchCatName);
 		
 		JScrollPane JscrollPane_Category = new JScrollPane();
-		JscrollPane_Category.setBounds(10, 136, 600, 245);
+		JscrollPane_Category.setBounds(10, 136, 642, 245);
 		panel_CategoryList.add(JscrollPane_Category);
 		
 		Jtable_Category = new JTable();
@@ -541,46 +560,6 @@ public class JPstorage extends JPanel {
 		Jtable_Category.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JscrollPane_Category.setViewportView(Jtable_Category);
 		
-		panel_CreateCategory = new JPanel();
-		panel_CreateCategory.setBorder(new TitledBorder(null, "Create Category", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_main.add(panel_CreateCategory, "name_1212432548099300");
-		panel_CreateCategory.setLayout(null);
-		
-		JLabel lblCreateCategory = new JLabel("Create Category");
-		lblCreateCategory.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCreateCategory.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblCreateCategory.setBounds(10, 43, 613, 24);
-		panel_CreateCategory.add(lblCreateCategory);
-		
-		JLabel_createCatName = new JLabel("Category's Name");
-		JLabel_createCatName.setHorizontalAlignment(SwingConstants.LEFT);
-		JLabel_createCatName.setFont(new Font("Arial", Font.PLAIN, 15));
-		JLabel_createCatName.setBounds(175, 94, 277, 24);
-		panel_CreateCategory.add(JLabel_createCatName);
-		
-		jtextField_createCatName = new JTextField();
-		jtextField_createCatName.setColumns(10);
-		jtextField_createCatName.setBounds(175, 128, 271, 24);
-		panel_CreateCategory.add(jtextField_createCatName);
-		
-		JButton_CatCancel = new JButton("Cancel");
-		JButton_CatCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JButton_CatCancel_actionPerformed(e);
-			}
-		});
-		JButton_CatCancel.setBounds(266, 162, 85, 21);
-		panel_CreateCategory.add(JButton_CatCancel);
-		
-		JButton_CatSave = new JButton("Save");
-		JButton_CatSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JButton_CatSave_actionPerformed(e);
-			}
-		});
-		JButton_CatSave.setBounds(361, 162, 85, 21);
-		panel_CreateCategory.add(JButton_CatSave);
-		
 		panel_editCategory = new JPanel();
 		panel_editCategory.setLayout(null);
 		panel_editCategory.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Edit Category", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -589,18 +568,18 @@ public class JPstorage extends JPanel {
 		lblEdit_Category = new JLabel("Edit Category");
 		lblEdit_Category.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEdit_Category.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblEdit_Category.setBounds(10, 43, 613, 24);
+		lblEdit_Category.setBounds(10, 43, 642, 24);
 		panel_editCategory.add(lblEdit_Category);
 		
 		JLabel_editCatName = new JLabel("Category's Name");
 		JLabel_editCatName.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel_editCatName.setFont(new Font("Arial", Font.PLAIN, 15));
-		JLabel_editCatName.setBounds(175, 94, 277, 24);
+		JLabel_editCatName.setBounds(185, 94, 277, 24);
 		panel_editCategory.add(JLabel_editCatName);
 		
 		jtextField_EditCategory = new JTextField();
 		jtextField_EditCategory.setColumns(10);
-		jtextField_EditCategory.setBounds(175, 128, 271, 30);
+		jtextField_EditCategory.setBounds(185, 128, 271, 30);
 		panel_editCategory.add(jtextField_EditCategory);
 		
 		JButton_EditCatCancel = new JButton("Cancel");
@@ -609,7 +588,7 @@ public class JPstorage extends JPanel {
 				JButton_EditCatCancel_actionPerformed(e);
 			}
 		});
-		JButton_EditCatCancel.setBounds(266, 162, 85, 21);
+		JButton_EditCatCancel.setBounds(276, 162, 85, 21);
 		panel_editCategory.add(JButton_EditCatCancel);
 		
 		JButton_EditCatSave = new JButton("Save");
@@ -618,7 +597,7 @@ public class JPstorage extends JPanel {
 				JButton_EditCatSave_actionPerformed(e);
 			}
 		});
-		JButton_EditCatSave.setBounds(361, 162, 85, 21);
+		JButton_EditCatSave.setBounds(371, 162, 85, 21);
 		panel_editCategory.add(JButton_EditCatSave);
 
 	}
@@ -652,9 +631,9 @@ public class JPstorage extends JPanel {
 		jcomboBox_status.setRenderer(new StatusCellRender());
 		
 		if (users.getRoleID() == 1 || users.getRoleID() == 2) {
-			jMenu_Create.setVisible(true);
+			jMenuItem_Create.setVisible(true);
 		} else {
-			jMenu_Create.setVisible(false);
+			jMenuItem_Create.setVisible(false);
 			jtableProduct.setComponentPopupMenu(null);
 		}
 	}
@@ -770,10 +749,9 @@ public class JPstorage extends JPanel {
 	protected void jmenuitem_storage_actionPerformed(ActionEvent e) {
 		Product_model product_model = new Product_model();
 		FillDataToJTableProduct(product_model.findAll());
-		panel_CreateProduct.setVisible(false);
+		panel_Create.setVisible(false);
 		panel_CategoryList.setVisible(false);
 		panel_edit.setVisible(false);
-		panel_CreateCategory.setVisible(false);
 		panel_editCategory.setVisible(false);
 		panel_storage.setVisible(true);
 		
@@ -867,9 +845,8 @@ public class JPstorage extends JPanel {
 		
 		panel_edit.setVisible(true);
 		panel_storage.setVisible(false);
-		panel_CreateProduct.setVisible(false);
+		panel_Create.setVisible(false);
 		panel_CategoryList.setVisible(false);
-		panel_CreateCategory.setVisible(false);
 		panel_editCategory.setVisible(false);
 	}
 	
@@ -951,31 +928,29 @@ public class JPstorage extends JPanel {
 		}
 
 	}
-	/************************************** End of Edit JPanel ************************************/
 	
-	/************************************** Start of Create Products JPanel ************************************/
-	protected void jMenuItem_CreateProduct_actionPerformed(ActionEvent e) {
-		Category_model category_model = new Category_model();
-		panel_CreateProduct.setVisible(true);
-		panel_storage.setVisible(false);
+	/****************************************Begin of Create Panel********************************************/
+	protected void jMenuItem_Create_actionPerformed(ActionEvent e) {
+		panel_Create.setVisible(true);
 		panel_CategoryList.setVisible(false);
 		panel_edit.setVisible(false);
-		panel_CreateCategory.setVisible(false);
 		panel_editCategory.setVisible(false);
+		panel_storage.setVisible(false);
 		
+		Category_model category_model = new Category_model();
 		DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<Category>();
 		for (Category category : category_model.findAll()) {
 			model.addElement(category);
 		}
-		
 		JcomboBox_createCategory.setModel(model);
 		JcomboBox_createCategory.setRenderer(new CategoryCPCellRender());
+
 	}
 	
 	protected void JButton_Save_1_actionPerformed(ActionEvent e) {
 		Products products = new Products();
 		Product_model product_model = new Product_model();
-
+		
 		Category selected = (Category) JcomboBox_createCategory.getSelectedItem();
 		products.setCategory_id(selected.getCategoryID());
 		
@@ -1020,7 +995,7 @@ public class JPstorage extends JPanel {
 				
 				if (product_model.Create(products)) {
 					JOptionPane.showMessageDialog(null, "Create Successful !");
-					panel_CreateProduct.setVisible(false);
+					panel_Create.setVisible(false);
 					panel_edit.setVisible(false);
 					panel_storage.setVisible(true);
 					FillDataToJTableProduct(product_model.findAll());
@@ -1031,7 +1006,7 @@ public class JPstorage extends JPanel {
 	}
 	
 	protected void JButton_Cancel_1_actionPerformed(ActionEvent e) {
-		panel_CreateProduct.setVisible(false);
+		panel_Create.setVisible(false);
 		panel_storage.setVisible(true);
 	}
 	
@@ -1047,7 +1022,40 @@ public class JPstorage extends JPanel {
 
 	}
 	
-	/************************************** End of Create Products JPanel ************************************/
+	protected void JButton_CatSave_actionPerformed(ActionEvent e) {
+		Category category = new Category();
+		Category_model category_model = new Category_model();
+		
+		// start same name and same category
+			boolean CatName = true;
+				for (Category category2 : category_model.findAll()) {
+					if (category2.getCategoryName().equalsIgnoreCase(jtextField_createCatName.getText().trim())) {
+						CatName = false;
+					}
+				}
+		// end same name and same category
+				
+		if (CatName == false) {
+			JOptionPane.showMessageDialog(null, "This category's name already exists");
+		}else {
+			category.setCategoryName(jtextField_createCatName.getText().trim());
+			if (category_model.Create(category)) {
+				JOptionPane.showMessageDialog(null, "Create Successful !");
+				FillDataToJTableCategory(category_model.findAll());
+				panel_Create.setVisible(false);
+				panel_CategoryList.setVisible(true);
+			}else {
+				JOptionPane.showMessageDialog(null, "Creation Failed !");
+			}
+		}
+	}
+	
+	protected void JButton_CatCancel_actionPerformed(ActionEvent e) {
+		panel_CategoryList.setVisible(true);
+		panel_Create.setVisible(false);
+	}
+	
+	/************************************** End of Create JPanel ************************************/
 	
 	/************************************** Start of Listed Category JPanel ************************************/
 	protected void jmenuitem_Category_actionPerformed(ActionEvent e) {
@@ -1057,9 +1065,8 @@ public class JPstorage extends JPanel {
 		
 		panel_CategoryList.setVisible(true);
 		panel_storage.setVisible(false);
-		panel_CreateProduct.setVisible(false);
+		panel_Create.setVisible(false);
 		panel_edit.setVisible(false);
-		panel_CreateCategory.setVisible(false);
 		panel_editCategory.setVisible(false);
 	}
 	
@@ -1089,12 +1096,12 @@ public class JPstorage extends JPanel {
 		Jtable_Category.getTableHeader().setReorderingAllowed(false);
 		Jtable_Category.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		Jtable_Category.getColumnModel().getColumn(0).setPreferredWidth(100);
-		Jtable_Category.getColumnModel().getColumn(1).setPreferredWidth(247);
-		Jtable_Category.getColumnModel().getColumn(2).setPreferredWidth(247);
+		Jtable_Category.getColumnModel().getColumn(1).setPreferredWidth(268);
+		Jtable_Category.getColumnModel().getColumn(2).setPreferredWidth(268);
 		Jtable_Category.setComponentPopupMenu(jpopupMenu_Category);
 	
 		if (users.getRoleID() == 1 || users.getRoleID() == 2) {
-			jMenu_Create.setVisible(true);
+			jMenuItem_Create.setVisible(true);
 		} else {
 			Jtable_Category.setComponentPopupMenu(null);	
 		}
@@ -1138,52 +1145,7 @@ public class JPstorage extends JPanel {
 		
 		
 	}
-	/************************************** End of Listed Category JPanel ************************************/
-	
-	/************************************** Start of Create Category JPanel ************************************/
-	protected void jMenuItem_CreateCategory_actionPerformed(ActionEvent e) {
-		panel_CategoryList.setVisible(false);
-		panel_storage.setVisible(false);
-		panel_CreateProduct.setVisible(false);
-		panel_edit.setVisible(false);
-		panel_editCategory.setVisible(false);
-		panel_CreateCategory.setVisible(true);
-	}
-	
-	
-	protected void JButton_CatSave_actionPerformed(ActionEvent e) {
-		Category category = new Category();
-		Category_model category_model = new Category_model();
-		
-		// start same name and same category
-			boolean CatName = true;
-				for (Category category2 : category_model.findAll()) {
-					if (category2.getCategoryName().equalsIgnoreCase(jtextField_createCatName.getText().trim())) {
-						CatName = false;
-					}
-				}
-		// end same name and same category
-				
-		if (CatName == false) {
-			JOptionPane.showMessageDialog(null, "This category's name already exists");
-		}else {
-			category.setCategoryName(jtextField_createCatName.getText().trim());
-			if (category_model.Create(category)) {
-				JOptionPane.showMessageDialog(null, "Create Successful !");
-				FillDataToJTableCategory(category_model.findAll());
-				panel_CreateCategory.setVisible(false);
-				panel_CategoryList.setVisible(true);
-			}else {
-				JOptionPane.showMessageDialog(null, "Creation Failed !");
-			}
-		}
-	}
-	
-	protected void JButton_CatCancel_actionPerformed(ActionEvent e) {
-		panel_CreateCategory.setVisible(false);
-		panel_CategoryList.setVisible(true);
-	}
-	/************************************** End of Create Category JPanel ************************************/
+
 	
 	/************************************** Start of Delete Category ************************************/
 	protected void MnuItem_Delete_actionPerformed(ActionEvent e) {
@@ -1225,9 +1187,8 @@ public class JPstorage extends JPanel {
 		panel_editCategory.setVisible(true);
 		panel_edit.setVisible(false);
 		panel_storage.setVisible(false);
-		panel_CreateProduct.setVisible(false);
+		panel_Create.setVisible(false);
 		panel_CategoryList.setVisible(false);
-		panel_CreateCategory.setVisible(false);
 	}
 	
 	protected void JButton_EditCatCancel_actionPerformed(ActionEvent e) {
@@ -1259,5 +1220,4 @@ public class JPstorage extends JPanel {
 			}
 		}
 	}
-	/************************************** End of Edit Category JPanel ************************************/
 }
