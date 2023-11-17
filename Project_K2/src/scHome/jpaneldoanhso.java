@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import entites.CombinedData;
 import entites.Invoices;
+import entites.ProductTopsaler;
 import entites.Purchaseinvoices;
 import entites.Sales;
 import models.Invoice_model;
@@ -43,6 +44,7 @@ public class jpaneldoanhso extends JPanel {
 	private JTable table_1;
 	private JLabel jthu;
 	private JLabel jchi;
+	private JTable table;
 
 	/**
 	 * Create the panel.
@@ -52,7 +54,7 @@ public class jpaneldoanhso extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.setBackground(new Color(234, 247, 255));
-		panel.setBounds(0, 105, 662, 98);
+		panel.setBounds(0, 105, 656, 98);
 		Dimension Dimension = new Dimension(panel.getPreferredSize().width, 50);
 		setLayout(null);
 		panel.setPreferredSize(Dimension);
@@ -177,6 +179,9 @@ public class jpaneldoanhso extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(0, 40, 186, 162);
 		panel1_1.add(scrollPane_2);
+		
+		table = new JTable();
+		scrollPane_2.setViewportView(table);
 
 		revalidate();
 		repaint();
@@ -202,9 +207,21 @@ public class jpaneldoanhso extends JPanel {
 		Sales_model sales_model1 = new Sales_model();
 		Invoice_model invoice_model1 = new Invoice_model();
 		//fillDataToJTable(sales_model1.findAll(), invoice_model1.findAll());
-		
+		fillbestsaler(invoice_model.findAllTopsalers());
 		fillDataToJTable(invoice_model1.findAll());
 	}
+	 private void fillbestsaler(List<ProductTopsaler> sales) {
+		 DefaultTableModel model =new DefaultTableModel();
+		 model.addColumn("Name");
+		 model.addColumn("Total");
+		 for (ProductTopsaler productTopsaler  : sales) {
+			model.addRow(new Object[] {
+					productTopsaler.getNameString(),productTopsaler.getTotalBigDecimal()
+			});
+		 }
+		 table.setModel(model);
+		 
+	 }
 	public void fillDataToJTable(List<Invoices> invoicess) {
 		DefaultTableModel model = new DefaultTableModel() {
 
@@ -244,7 +261,7 @@ public class jpaneldoanhso extends JPanel {
 		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
 		TableColumn customerNameColumn = columnModel.getColumn(0); // Cột "Customer Name" ở index 2
 		customerNameColumn.setMinWidth(30); // Chiều rộng tối thiểu
-		customerNameColumn.setMaxWidth(30); // Chiều rộng tối đa
+		customerNameColumn.setMaxWidth(30); // Chiều rộng1 tối đa
 
 		// Lấy ra cột "Product Name" và thiết lập chiều rộng
 		TableColumn productNameColumn = columnModel.getColumn(1); // Cột "Product Name" ở index 3
@@ -255,9 +272,11 @@ public class jpaneldoanhso extends JPanel {
 		DateNameColumn.setMinWidth(110); // Chiều rộng tối thiểu
 		DateNameColumn.setMaxWidth(110); // Chiều rộng tối đa
 		TableColumn DateNameColumn3 = columnModel.getColumn(3); // Cột "Product Name" ở index 3
-		DateNameColumn3.setMinWidth(40); // Chiều rộng tối thiểu
-		DateNameColumn3.setMaxWidth(40); // Chiều rộng tối đa
-
+		DateNameColumn3.setMinWidth(60); // Chiều rộng tối thiểu
+		DateNameColumn3.setMaxWidth(60); // Chiều rộng tối đa
+		TableColumn DateNameColumn5 = columnModel.getColumn(5); // Cột "Product Name" ở index 3
+		DateNameColumn5.setMinWidth(60); // Chiều rộng tối thiểu
+		DateNameColumn5.setMaxWidth(60); // Chiều rộng tối đa
 	}	
 }
 

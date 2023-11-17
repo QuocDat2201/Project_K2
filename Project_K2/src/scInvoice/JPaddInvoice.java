@@ -170,7 +170,7 @@ public class JPaddInvoice extends JPanel {
 		panel_3.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Malgun Gothic", Font.BOLD | Font.ITALIC, 11));
 
-		jCustomerphone =new PlacehoclderTextField("input 10 number");
+		jCustomerphone = new PlacehoclderTextField("input 10 number");
 		jCustomerphone.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -189,10 +189,10 @@ public class JPaddInvoice extends JPanel {
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(264, 11, 325, 130);
 		panel_3.add(scrollPane_1);
-		
+
 		JPopupMenu popupMenu_1 = new JPopupMenu();
 		addPopup(scrollPane_1, popupMenu_1);
-		
+
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Delete");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -305,7 +305,7 @@ public class JPaddInvoice extends JPanel {
 //		fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
 		fillDataToJTable1(invoiceItemList);
 		fillDataToJTable(invoice_model.findAll());
-		
+
 	}
 
 	public class ProductCellRender extends DefaultListCellRenderer {
@@ -355,17 +355,15 @@ public class JPaddInvoice extends JPanel {
 		// Lấy ra model của cột từ JTable
 		TableColumnModel columnModel = jtableListInvoice.getColumnModel();
 
-		
 		TableColumn customerNameColumn = columnModel.getColumn(0); // Cột "Customer Name" ở index 2
 		customerNameColumn.setMinWidth(30); // Chiều rộng tối thiểu
 		customerNameColumn.setMaxWidth(30); // Chiều rộng tối đa
 
-		
 		TableColumn productNameColumn = columnModel.getColumn(1);
 		productNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
 		productNameColumn.setMaxWidth(100); // Chiều rộng tối đa
 
-		TableColumn DateNameColumn = columnModel.getColumn(2); 
+		TableColumn DateNameColumn = columnModel.getColumn(2);
 		DateNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
 		DateNameColumn.setMaxWidth(100); // Chiều rộng tối đa
 
@@ -458,7 +456,7 @@ public class JPaddInvoice extends JPanel {
 		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
 		TableColumn customerNameColumn = columnModel.getColumn(1); // Cột "Customer Name" ở index 2
 		customerNameColumn.setMinWidth(30); // Chiều rộng tối thiểu
-		customerNameColumn.setMaxWidth(60); // Chiều rộng tối đa
+		customerNameColumn.setMaxWidth(300); // Chiều rộng tối đa
 
 		// Lấy ra cột "Product Name" và thiết lập chiều rộng
 		TableColumn productNameColumn = columnModel.getColumn(3); // Cột "Product Name" ở index 3
@@ -608,7 +606,7 @@ public class JPaddInvoice extends JPanel {
 				// tao customer
 				customer.setPoint(
 						Integer.valueOf((int) (customer.getPoint() + (Double.valueOf(jtotal.getText()) / 10))));
-				
+
 				int flagCreateCustomer = 0;
 				for (Customer customert11 : customerModel.findAll()) {
 					if (customert11.getPhoneString().equalsIgnoreCase(jCustomerphone.getText())) {
@@ -619,7 +617,7 @@ public class JPaddInvoice extends JPanel {
 					}
 				}
 				if (flagCreateCustomer == 0) {
-					System.out.println(customer.getNameString()+2);
+					System.out.println(customer.getNameString() + 2);
 					customerModel.create(customer);
 				}
 
@@ -654,12 +652,10 @@ public class JPaddInvoice extends JPanel {
 			boolean flag = false;
 			for (Customer customer1 : model.findAll()) {
 				if (jCustomerphone.getText().equalsIgnoreCase(customer1.getPhoneString())) {
-					customer =null;
+					customer = null;
 					jNameCustomer.setText(customer1.getNameString());
 					customer = customer1;
-
 					double tol = Double.valueOf(jtotal.getText());
-
 					for (Rank rank : rankModel.findAll()) {
 						if (customer1.getPoint() >= rank.getPoint()) {
 							System.out.println(rank.getDiscount());
@@ -672,6 +668,16 @@ public class JPaddInvoice extends JPanel {
 
 					flag = true;
 					break;
+				} else {
+					BigDecimal total = new BigDecimal(0);
+
+					for (int j = 0; j < invoiceItemList.size(); j++) {
+						total = total.add(invoiceItemList.get(j).getPrice()
+								.multiply(new BigDecimal(invoiceItemList.get(j).getQuantity())));
+
+					}
+					jtotal.setText(paramString().valueOf(total));
+
 				}
 			}
 			if (!flag) {
@@ -682,6 +688,7 @@ public class JPaddInvoice extends JPanel {
 					customer.setPoint(0);
 					customer.setRank(1);
 					System.out.println("khacle");
+					
 				} else {
 					customer = new Customer();
 					customer.setNameString(jNameCustomer.getText());
@@ -692,11 +699,10 @@ public class JPaddInvoice extends JPanel {
 				}
 
 			}
-		} else {
-			jNameCustomer.setText("");
-		}
+		} 
 
 	}
+
 	protected void do_mntmNewMenuItem_actionPerformed(ActionEvent e) {// xem them
 		Sales_model sales_model = new Sales_model();
 		int indexrow = jtableListInvoice.getSelectedRow();
@@ -727,21 +733,24 @@ public class JPaddInvoice extends JPanel {
 		}
 
 	}
-	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {
+
+	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {// delete sales
 		int index = jtable1.getSelectedRow();
-		String nameProS=(String) jtable1.getValueAt(index,1);
-		BigDecimal total= new BigDecimal(0);
+		String nameProS = (String) jtable1.getValueAt(index, 1);
+		BigDecimal total = new BigDecimal(0);
 		for (int j = 0; j < invoiceItemList.size(); j++) {
-			Sales sales=invoiceItemList.get(j);
-			total=total.add(invoiceItemList.get(j).getPrice()
-					.multiply(new BigDecimal(invoiceItemList.get(j).getQuantity())));
+			Sales sales = invoiceItemList.get(j);
 			if (sales.getProductName().equalsIgnoreCase(nameProS)) {
 				invoiceItemList.remove(j);
-				
-			} 
+			}
+		}
+		for (int j = 0; j < invoiceItemList.size(); j++) {
+			total = total.add(
+					invoiceItemList.get(j).getPrice().multiply(new BigDecimal(invoiceItemList.get(j).getQuantity())));
+
 		}
 		fillDataToJTable1(invoiceItemList);
 		jtotal.setText(String.valueOf(total));
-		
+
 	}
 }

@@ -121,7 +121,7 @@ public class JPPurchaseDetails extends JPanel {
 				do_btnNewButton_actionPerformed(e);
 			}
 		});
-		btnNewButton.setBounds(272, 158, 101, 41);
+		btnNewButton.setBounds(272, 130, 101, 41);
 		panel_2.add(btnNewButton);
 		
 		jcomboBoxProduct = new JComboBox();

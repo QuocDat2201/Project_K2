@@ -53,7 +53,7 @@ public class JPPurchase extends JPanel {
 		setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 599, 481);
+		panel.setBounds(0, 0, 631, 481);
 		add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
@@ -124,7 +124,7 @@ public class JPPurchase extends JPanel {
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 21, 549, 140);
+		scrollPane.setBounds(37, 21, 549, 140);
 		panel_2.add(scrollPane);
 		
 		jtableListPurchase = new JTable();

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import entites.Invoices;
+import entites.ProductTopsaler;
 import entites.Products;
 
 
@@ -69,7 +70,7 @@ public class Invoice_model {
 	public List<Invoices> findAll() {
 		List<Invoices> invoices = new ArrayList<Invoices>();
 		try {
-			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from invoices");// java.sql
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("select * from invoices order by InvoiceID desc");// java.sql
 			ResultSet resultSet = preparedStatement.executeQuery();// java.sql
 			while (resultSet.next()) {// .next la kiem tra xem co con dong hay ko
 				Invoices invoice = new Invoices();
@@ -141,7 +142,6 @@ public class Invoice_model {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-System.out.println("xong");
         try {
             connection = ConnectDB.connection();
 
@@ -260,5 +260,25 @@ System.out.println("xong");
 	        }
 	        return map;
 	    }
+	 public List<ProductTopsaler > findAllTopsalers() {
+		List<ProductTopsaler>	 invoices = new ArrayList<ProductTopsaler>();
+			try {
+				PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT sum(s.Quantity * s.Price) AS total,s.Product_name as name,sum( s.Quantity) as quantity FROM sales s JOIN invoices i on s.Invoice_id=i.InvoiceID WHERE i.InvoiceDate>= CURDATE() - INTERVAL 30 DAY GROUP BY s.ProductID ORDER BY `total` DESC limit 10;");// java.sql
+				ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+				while (resultSet.next()) {
+					ProductTopsaler productTopsaler=new ProductTopsaler();
+					productTopsaler.setNameString(resultSet.getString("name"));
+					productTopsaler.setQuantity(resultSet.getInt("quantity"));
+					productTopsaler.setTotalBigDecimal(resultSet.getBigDecimal("total"));
+				invoices.add(productTopsaler);
+				}
+				
+			} catch (Exception e) {
+				invoices = null;
+			} finally {
+				ConnectDB.disconnect();
+			}
+			return invoices;
+		}
 
 }
