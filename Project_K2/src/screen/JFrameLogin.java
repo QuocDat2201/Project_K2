@@ -82,16 +82,8 @@ public class JFrameLogin extends JFrame {
 		lblNewLabel.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 24));
 		lblNewLabel.setForeground(SystemColor.menu);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(425, 23, 121, 49);
+		lblNewLabel.setBounds(428, 49, 121, 49);
 		contentPane.add(lblNewLabel);
-
-		JLabel lblNewLabel_1 = new JLabel("Welcome ! Let's get started");
-		lblNewLabel_1.setForeground(SystemColor.text);
-		lblNewLabel_1.setBackground(SystemColor.menu);
-		lblNewLabel_1.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(348, 84, 271, 16);
-		contentPane.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("Username");
 		lblNewLabel_2.setIcon(new ImageIcon(
@@ -116,7 +108,7 @@ public class JFrameLogin extends JFrame {
 
 		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.setIcon(
-				new ImageIcon(JFrameLogin.class.getResource("/Icon/4043232_avatar_batman_comics_hero_icon.png")));
+				null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnNewButton_actionPerformed(e);
