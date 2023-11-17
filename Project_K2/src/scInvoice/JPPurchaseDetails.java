@@ -211,9 +211,7 @@ public class JPPurchaseDetails extends JPanel {
 			BigDecimal total = new BigDecimal(jlabelTotalPrice.getText());
 			purchaseinvoicedetails.setUnitPrice(total);		
 			if(purchaseinvoicedetails_model.Create(purchaseinvoicedetails)) {
-				JOptionPane.showMessageDialog(null,"Succes");
-			}else {
-				JOptionPane.showMessageDialog(null,"Faild");
+			
 			}
 			fillDataToJTable(purchaseinvoicedetails_model.findInvoice_id());
 

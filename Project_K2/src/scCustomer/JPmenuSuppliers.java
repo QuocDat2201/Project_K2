@@ -55,6 +55,15 @@ public class JPmenuSuppliers extends JPanel {
 			}
 		});
 		menuBar.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("ListPurchase");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmNewMenuItem_2_actionPerformed(e);
+			}
+		});
+		mntmNewMenuItem_2.setIcon(new ImageIcon(JPmenuSuppliers.class.getResource("/Icon/Modify.png")));
+		menuBar.add(mntmNewMenuItem_2);
 		initJFrame();
 	}
 	public void initJFrame() {
@@ -75,6 +84,12 @@ public class JPmenuSuppliers extends JPanel {
 		panel.removeAll(); 
 		panel.revalidate();
 		JPsuppliers jPsuppliers = new JPsuppliers() ;
+		panel.add(jPsuppliers);
+	}
+	protected void do_mntmNewMenuItem_2_actionPerformed(ActionEvent e) {
+		panel.removeAll(); 
+		panel.revalidate();
+		JPb jPsuppliers = new JPb() ;
 		panel.add(jPsuppliers);
 	}
 }

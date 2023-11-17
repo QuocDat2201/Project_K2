@@ -112,7 +112,7 @@ public class JPChartRevenue extends JPanel {
 		    	
 
 
-		    String namechart = "Biểu đồ doanh số theo danh mục trong tháng "+(month);
+		    String namechart = "Biểu đồ doanh trong tháng "+(month);
 		    int x = JFrameLogin.frameWidth - 140;
 		    int y = JFrameLogin.frameHeight - 400;
 		    a sA = new a(namechart, Date, x, y, valuesArray);

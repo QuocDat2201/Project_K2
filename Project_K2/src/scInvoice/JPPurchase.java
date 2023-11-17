@@ -255,10 +255,17 @@ public class JPPurchase extends JPanel {
 		model.addColumn("Supplier name");
 		model.addColumn("Date");
 		model.addColumn("Total Amount");
+		Suppliers_model xModel=new Suppliers_model();
 		for(Purchaseinvoices purchaseinvoice : purchaseinvoices) {
+			String nameString=null;
+			for (Suppliers suppliers:xModel.findAll()) {
+				if (suppliers.getSupplierID()==purchaseinvoice.getSupplierID()) {
+					nameString=suppliers.getSupplierName();
+				}
+			}
 			model.addRow(new Object[] {
 				purchaseinvoice.getInvoiceID(),
-				purchaseinvoice.getSupplierID(),
+				nameString,
 				purchaseinvoice.getInvoiceDate(),
 				purchaseinvoice.getTotalAmount()
 			});

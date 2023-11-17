@@ -94,7 +94,7 @@ public class Home extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 780, 514);
 		getContentPane().setLayout(null);
-
+		setResizable(false);
 		panel = new JPanel();
 		panel.setBounds(0, 45, 107, 430);
 		panel.setBackground(new Color(0, 255, 255));
