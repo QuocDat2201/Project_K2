@@ -263,7 +263,7 @@ public class Invoice_model {
 	 public List<ProductTopsaler > findAllTopsalers() {
 		List<ProductTopsaler>	 invoices = new ArrayList<ProductTopsaler>();
 			try {
-				PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT sum(s.Quantity * s.Price) AS total,s.Product_name as name,sum( s.Quantity) as quantity FROM sales s JOIN invoices i on s.Invoice_id=i.InvoiceID WHERE i.InvoiceDate>= CURDATE() - INTERVAL 30 DAY GROUP BY s.ProductID ORDER BY `total` DESC limit 10;");// java.sql
+				PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT sum(s.Quantity * s.Price) AS total,s.Product_name as name,sum( s.Quantity) as quantity FROM sales s JOIN invoices i on s.Invoice_id=i.InvoiceID WHERE i.InvoiceDate>= CURDATE() - INTERVAL 30 DAY GROUP BY s.ProductID ORDER BY `quantity` DESC ;");// java.sql
 				ResultSet resultSet = preparedStatement.executeQuery();// java.sql
 				while (resultSet.next()) {
 					ProductTopsaler productTopsaler=new ProductTopsaler();
@@ -280,5 +280,24 @@ public class Invoice_model {
 			}
 			return invoices;
 		}
-
+	 public List<ProductTopsaler > findAllTopsalersfull() {
+			List<ProductTopsaler>	 invoices = new ArrayList<ProductTopsaler>();
+				try {
+					PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement("SELECT sum(s.Quantity * s.Price) AS total,s.Product_name as name,sum( s.Quantity) as quantity FROM sales s GROUP BY s.ProductID ORDER BY `quantity` DESC ;");// java.sql
+					ResultSet resultSet = preparedStatement.executeQuery();// java.sql
+					while (resultSet.next()) {
+						ProductTopsaler productTopsaler=new ProductTopsaler();
+						productTopsaler.setNameString(resultSet.getString("name"));
+						productTopsaler.setQuantity(resultSet.getInt("quantity"));
+						productTopsaler.setTotalBigDecimal(resultSet.getBigDecimal("total"));
+					invoices.add(productTopsaler);
+					}
+					
+				} catch (Exception e) {
+					invoices = null;
+				} finally {
+					ConnectDB.disconnect();
+				}
+				return invoices;
+			}
 }

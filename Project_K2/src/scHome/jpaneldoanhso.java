@@ -16,6 +16,7 @@ import entites.Invoices;
 import entites.ProductTopsaler;
 import entites.Purchaseinvoices;
 import entites.Sales;
+import models.CustomerModel;
 import models.Invoice_model;
 import models.Product_model;
 import models.Purchaseinvoices_model;
@@ -45,6 +46,8 @@ public class jpaneldoanhso extends JPanel {
 	private JLabel jthu;
 	private JLabel jchi;
 	private JTable table;
+	private JLabel jtextkhachhang;
+	private JLabel jproduct;
 
 	/**
 	 * Create the panel.
@@ -69,6 +72,7 @@ public class jpaneldoanhso extends JPanel {
 		panel.add(Revenue);
 		
 		jthu = new JLabel("New label");
+		jthu.setForeground(new Color(0, 255, 0));
 		jthu.setBorder(new LineBorder(new Color(0, 255, 64), 4));
 		jthu.setFont(new Font("Arial", Font.BOLD, 25));
 		jthu.setHorizontalAlignment(SwingConstants.CENTER);
@@ -76,6 +80,7 @@ public class jpaneldoanhso extends JPanel {
 		panel.add(jthu);
 		
 		jchi = new JLabel("New label");
+		jchi.setForeground(new Color(255, 0, 0));
 		jchi.setBorder(new LineBorder(new Color(255, 0, 0), 4));
 		jchi.setFont(new Font("Arial", Font.BOLD, 25));
 		jchi.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,7 +125,7 @@ public class jpaneldoanhso extends JPanel {
 		lblNewLabel_1.setBounds(85, 29, 54, 44);
 		panel_1.add(lblNewLabel_1);
 		
-		JLabel jtextkhachhang = new JLabel("50000+");
+		jtextkhachhang = new JLabel("50000+");
 		jtextkhachhang.setFont(new Font("Dialog", Font.BOLD, 15));
 		jtextkhachhang.setForeground(new Color(193, 241, 255));
 		jtextkhachhang.setBounds(149, 29, 93, 44);
@@ -144,11 +149,11 @@ public class jpaneldoanhso extends JPanel {
 		lblNewLabel_1_2.setBounds(69, 30, 55, 43);
 		panel_2.add(lblNewLabel_1_2);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("200000+");
-		lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel_1_1_1.setForeground(new Color(193, 241, 255));
-		lblNewLabel_1_1_1.setBounds(152, 30, 90, 43);
-		panel_2.add(lblNewLabel_1_1_1);
+		jproduct = new JLabel("200000+");
+		jproduct.setFont(new Font("Dialog", Font.BOLD, 15));
+		jproduct.setForeground(new Color(193, 241, 255));
+		jproduct.setBounds(152, 30, 90, 43);
+		panel_2.add(jproduct);
 		
 		JLabel lblNewLabel_1_1_2_1 = new JLabel("So san pham da ban");
 		lblNewLabel_1_1_2_1.setFont(new Font("Arial", Font.BOLD, 14));
@@ -173,7 +178,7 @@ public class jpaneldoanhso extends JPanel {
 		JLabel lblNewLabel_2_1 = new JLabel("best saler\r\r\n");
 		lblNewLabel_2_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2_1.setFont(new Font("Arial", Font.BOLD, 14));
-		lblNewLabel_2_1.setBounds(65, 10, 69, 27);
+		lblNewLabel_2_1.setBounds(59, 11, 106, 27);
 		panel1_1.add(lblNewLabel_2_1);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -189,14 +194,28 @@ public class jpaneldoanhso extends JPanel {
 	}
 
 	private void iniJFrame() {
-
+		
+		int countCustomer=0,countProduct=0;
+		CustomerModel customerModel=new CustomerModel();
+		Invoice_model invoice_model=new Invoice_model();
+		for (int i = 0; i <customerModel.findAll().size(); i++) {
+			countCustomer+=1;
+			
+		}
+		jtextkhachhang.setText(String.valueOf(countCustomer) );
+		
+		for (int i = 0; i <invoice_model.findAllTopsalersfull().size() ; i++) {
+			countProduct+= invoice_model.findAllTopsalersfull().get(i).getQuantity();
+			
+		}
+		jproduct.setText(String.valueOf(countProduct));
 		DefaultTableModel model = new DefaultTableModel();
 		Purchaseinvoices_model purchaseinvoices_model=new Purchaseinvoices_model();
 		BigDecimal totalthu = BigDecimal.ZERO;
 		for (Purchaseinvoices purchaseinvoices : purchaseinvoices_model.findAll()) {
 				totalthu= totalthu.add(purchaseinvoices.getTotalAmount());
 		}
-		Invoice_model invoice_model=new Invoice_model();
+		
 		Invoices invoices=new Invoices();
 		BigDecimal total = BigDecimal.ZERO;
 		for (Invoices invoice: invoice_model.findAll()) {
@@ -213,12 +232,14 @@ public class jpaneldoanhso extends JPanel {
 	 private void fillbestsaler(List<ProductTopsaler> sales) {
 		 DefaultTableModel model =new DefaultTableModel();
 		 model.addColumn("Name");
-		 model.addColumn("Total");
-		 for (ProductTopsaler productTopsaler  : sales) {
-			model.addRow(new Object[] {
-					productTopsaler.getNameString(),productTopsaler.getTotalBigDecimal()
-			});
-		 }
+		 model.addColumn("Quantity");
+		 for (int i = 0; i < 10&&i< sales.size(); i++) {
+			 ProductTopsaler productTopsaler  = sales.get(i);
+			 model.addRow(new Object[] {
+						productTopsaler.getNameString(),productTopsaler.getQuantity()
+				});
+		}
+		
 		 table.setModel(model);
 		 
 	 }
