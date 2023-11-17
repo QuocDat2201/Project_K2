@@ -209,9 +209,13 @@ public class JPPurchaseDetails extends JPanel {
 			purchaseinvoicedetails.setProductID(product.getProductID());
 			purchaseinvoicedetails.setQuantity(Integer.parseInt(jtextFieldQuantity.getText()));
 			BigDecimal total = new BigDecimal(jlabelTotalPrice.getText());
-			purchaseinvoicedetails.setUnitPrice(total);
-			
-				fillDataToJTable(purchaseinvoicedetails_model.findInvoice_id());
+			purchaseinvoicedetails.setUnitPrice(total);		
+			if(purchaseinvoicedetails_model.Create(purchaseinvoicedetails)) {
+				JOptionPane.showMessageDialog(null,"Succes");
+			}else {
+				JOptionPane.showMessageDialog(null,"Faild");
+			}
+			fillDataToJTable(purchaseinvoicedetails_model.findInvoice_id());
 
 		} catch (Exception e2) {
 			// TODO: handle exception

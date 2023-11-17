@@ -2,13 +2,19 @@ package scInvoice;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import entites.Products;
 import entites.Recieve;
 import entites.Suppliers;
+import models.Product_model;
 import models.Recieve_model;
 import models.Suppliers_model;
 
@@ -27,8 +33,11 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JTable;
 import java.awt.Font;
+import javax.swing.JComboBox;
 
 public class JPContact extends JPanel {
 	private JTextField jtextFieldCustomerName;
@@ -38,8 +47,8 @@ public class JPContact extends JPanel {
 	private JTextArea jtextAreaReason;
 	private JDateChooser jdateChooser;
 	private JTable jtableRecieve;
-	private JTextField jtextFieldProductName;
 	private JTextField jtextFieldQuantity;
+	private JComboBox jcomboBoxProduct;
 
 	/**
 	 * Create the panel.
@@ -130,11 +139,6 @@ public class JPContact extends JPanel {
 		jdateChooser.setBounds(135, 172, 134, 26);
 		panel_1.add(jdateChooser);
 		
-		jtextFieldProductName = new JTextField();
-		jtextFieldProductName.setColumns(10);
-		jtextFieldProductName.setBounds(388, 100, 139, 26);
-		panel_1.add(jtextFieldProductName);
-		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Product");
 		lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblNewLabel_1_1_1.setBounds(314, 99, 88, 26);
@@ -169,6 +173,10 @@ public class JPContact extends JPanel {
 		lblNewLabel_1_1_2.setBounds(314, 134, 88, 26);
 		panel_1.add(lblNewLabel_1_1_2);
 		
+		jcomboBoxProduct = new JComboBox();
+		jcomboBoxProduct.setBounds(388, 103, 150, 24);
+		panel_1.add(jcomboBoxProduct);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(224, 255, 255));
 		panel_2.setBorder(new TitledBorder(null, "List Recieve", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -186,28 +194,57 @@ public class JPContact extends JPanel {
 	}
 	
 	public void initJFrame() {
+		DefaultComboBoxModel<Products> models = new DefaultComboBoxModel<Products>();
+		Product_model product_model = new Product_model();
+		Products products = new Products();
+		for (Products product : product_model.findAll()) {
+			models.addElement(product);
+		}
+		jcomboBoxProduct.setModel(models);
+		jcomboBoxProduct.setRenderer(new ProductCellRender());
+		
 		Recieve_model recieve_model = new Recieve_model() ; 
 		fillDataToJTable(recieve_model.findAll());
+		
+	}
+	
+	private class ProductCellRender extends DefaultListCellRenderer {
+
+		@Override
+		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
+			Products products = (Products) value;
+			return super.getListCellRendererComponent(list, products.getProductName(), index, isSelected, cellHasFocus);
+		}
+		
 	}
 	
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-		String reason = jtextAreaReason.getText() ;
-		Recieve recieve = new Recieve() ; 
-		Recieve_model recieve_model = new Recieve_model() ;
-		
-		recieve.setAddress(jtextFieldAddress.getText());
-		recieve.setCustomer_recieve(jtextFieldCustomerName.getText());
-		recieve.setDate(jdateChooser.getDate());
-		recieve.setEmail(jtextFieldEmail.getText());
-		recieve.setPhone(jtextFieldPhone.getText());
-		recieve.setReason(jtextAreaReason.getText());
-		recieve.setProduct_name(jtextFieldProductName.getText());
-		recieve.setQuantity(Integer.parseInt(jtextFieldQuantity.getText()));
-		if(recieve_model.Create(recieve)) {
-			JOptionPane.showMessageDialog(null,"Succes");
-			fillDataToJTable(recieve_model.findAll());
-		}else {
-			JOptionPane.showMessageDialog(null,"Faild");
+		try {
+			Object selectedProduct = jcomboBoxProduct.getSelectedItem();
+			Products product = (Products) selectedProduct;
+			String productName = product.getProductName();
+			
+			String reason = jtextAreaReason.getText() ;
+			Recieve recieve = new Recieve() ; 
+			Recieve_model recieve_model = new Recieve_model() ;
+			
+			recieve.setAddress(jtextFieldAddress.getText());
+			recieve.setCustomer_recieve(jtextFieldCustomerName.getText());
+			recieve.setDate(jdateChooser.getDate());
+			recieve.setEmail(jtextFieldEmail.getText());
+			recieve.setPhone(jtextFieldPhone.getText());
+			recieve.setReason(jtextAreaReason.getText());
+			recieve.setProduct_name(productName);
+			recieve.setQuantity(Integer.parseInt(jtextFieldQuantity.getText()));
+			if(recieve_model.Create(recieve)) {
+				JOptionPane.showMessageDialog(null,"Succes");
+				fillDataToJTable(recieve_model.findAll());
+			}else {
+				JOptionPane.showMessageDialog(null,"Faild");
+			}
+		} catch (Exception e2) {
+			// TODO: handle exception
 		}
 		
 	}
@@ -241,6 +278,10 @@ public class JPContact extends JPanel {
 		TableColumnModel columnModel = jtableRecieve.getColumnModel();
 
 		// Lấy ra cột "Customer Name" và thiết lập chiều rộng
+		TableColumn id = columnModel.getColumn(0); // Cột "Customer Name" ở index 2
+		id.setMinWidth(100); // Chiều rộng tối thiểu
+		id.setMaxWidth(200); // Chiều rộng tối đa
+		
 		TableColumn customerNameColumn = columnModel.getColumn(1); // Cột "Customer Name" ở index 2
 		customerNameColumn.setMinWidth(100); // Chiều rộng tối thiểu
 		customerNameColumn.setMaxWidth(200); // Chiều rộng tối đa
