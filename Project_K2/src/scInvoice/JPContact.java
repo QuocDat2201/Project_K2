@@ -83,7 +83,7 @@ public class JPContact extends JPanel {
 		lblReason.setBounds(314, 27, 44, 26);
 		panel_1.add(lblReason);
 		
-		jtextFieldCustomerName = new JTextField();
+		jtextFieldCustomerName = new JTextField();//ad
 		jtextFieldCustomerName.setBounds(135, 29, 122, 24);
 		panel_1.add(jtextFieldCustomerName);
 		jtextFieldCustomerName.setColumns(10);
