@@ -100,7 +100,7 @@ public class jpaneldoanhso extends JPanel {
 		panel2.setBounds(0, 81, 662, 30);
 		add(panel2);
 
-		JLabel lblNewLabel = new JLabel("doanh so 30 ngay gan nhat");
+		JLabel lblNewLabel = new JLabel("Profit last 30 days");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		panel2.add(lblNewLabel);
 		Dimension newDimension = new Dimension(panel1.getPreferredSize().width, 190);
@@ -131,7 +131,7 @@ public class jpaneldoanhso extends JPanel {
 		jtextkhachhang.setBounds(149, 29, 93, 44);
 		panel_1.add(jtextkhachhang);
 		
-		JLabel lblNewLabel_1_1_2 = new JLabel("Khach Hang");
+		JLabel lblNewLabel_1_1_2 = new JLabel("Customer");
 		lblNewLabel_1_1_2.setFont(new Font("Arial", Font.BOLD, 14));
 		lblNewLabel_1_1_2.setForeground(new Color(193, 241, 255));
 		lblNewLabel_1_1_2.setBounds(119, 0, 130, 32);
@@ -155,10 +155,10 @@ public class jpaneldoanhso extends JPanel {
 		jproduct.setBounds(152, 30, 90, 43);
 		panel_2.add(jproduct);
 		
-		JLabel lblNewLabel_1_1_2_1 = new JLabel("So san pham da ban");
+		JLabel lblNewLabel_1_1_2_1 = new JLabel("Sold Product");
 		lblNewLabel_1_1_2_1.setFont(new Font("Arial", Font.BOLD, 14));
 		lblNewLabel_1_1_2_1.setForeground(new Color(193, 241, 255));
-		lblNewLabel_1_1_2_1.setBounds(83, 0, 184, 32);
+		lblNewLabel_1_1_2_1.setBounds(104, 0, 163, 32);
 		panel_2.add(lblNewLabel_1_1_2_1);
 		
 		JPanel panel1_1 = new JPanel();
@@ -219,10 +219,13 @@ public class jpaneldoanhso extends JPanel {
 		Invoices invoices=new Invoices();
 		BigDecimal total = BigDecimal.ZERO;
 		for (Invoices invoice: invoice_model.findAll()) {
-			total = total.add(invoice.getTotal());
+			if (invoice.isStatus()) {
+				total = total.add(invoice.getTotal());
+			}
+			
 		}
-		jchi.setText(String.valueOf(total)+" $");
-		jthu.setText(String.valueOf(totalthu)+" $");
+		jchi.setText(String.valueOf(totalthu)+" $");
+		jthu.setText(String.valueOf(total)+" $");
 		Sales_model sales_model1 = new Sales_model();
 		Invoice_model invoice_model1 = new Invoice_model();
 		//fillDataToJTable(sales_model1.findAll(), invoice_model1.findAll());

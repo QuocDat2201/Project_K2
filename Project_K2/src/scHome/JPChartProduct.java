@@ -43,8 +43,6 @@ import javax.swing.event.AncestorEvent;
 
 public class JPChartProduct extends JPanel {
 	private JPanel jpanel_1;
-	private JTextField textField;
-	private JButton btnNewButton;
 	private JMonthChooser jmonthChooser;
 	private JComboBox comboBox;
 
@@ -68,14 +66,6 @@ public class JPChartProduct extends JPanel {
 			}
 		});
 		panel_2.add(comboBox);
-		
-		textField = new JTextField();
-		panel_2.add(textField);
-		textField.setColumns(10);
-		
-		btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(JPChartProduct.class.getResource("/Icon/4781817_brows_browsing_find_search_seo_icon.png")));
-		panel_2.add(btnNewButton);
 		
 		jmonthChooser = new JMonthChooser();
 		jmonthChooser.addAncestorListener(new AncestorListener() {

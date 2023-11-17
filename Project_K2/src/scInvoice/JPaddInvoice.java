@@ -146,7 +146,7 @@ public class JPaddInvoice extends JPanel {
 		});
 		btnNewButton.setMargin(new Insets(2, 2, 2, 2));
 		btnNewButton.setBounds(192, 116, 62, 25);
-		btnNewButton.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD | Font.ITALIC, 12));
+		btnNewButton.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD | Font.ITALIC, 10));
 		panel_3.add(btnNewButton);
 
 		jtotal = new JTextField();
@@ -177,6 +177,7 @@ public class JPaddInvoice extends JPanel {
 				do_jCustomerName_keyReleased(e);
 			}
 		});
+		((AbstractDocument) jCustomerphone.getDocument()).setDocumentFilter(new NumberDocumentFilter());
 		jCustomerphone.setBounds(95, 50, 159, 22);
 		panel_3.add(jCustomerphone);
 		jCustomerphone.setColumns(10);
@@ -288,18 +289,7 @@ public class JPaddInvoice extends JPanel {
 		Calendar calendar = Calendar.getInstance(); // Lấy ngày tháng năm hiện tại
 		Date currentDate = calendar.getTime(); // Chuyển Calendar sang Date
 		jdateChooser.setDate(currentDate);
-		DefaultComboBoxModel model = new DefaultComboBoxModel();
-		model.addElement(0);
-		model.addElement(1);
 
-		DefaultComboBoxModel<Products> models = new DefaultComboBoxModel<Products>();
-		Product_model product_model = new Product_model();
-		Products products = new Products();
-		for (Products product : product_model.findAll()) {
-			models.addElement(product);
-		}
-		jcomboBoxProductID.setModel(models);
-		jcomboBoxProductID.setRenderer(new ProductCellRender());
 		Sales_model sales_model = new Sales_model();
 		Invoice_model invoice_model = new Invoice_model();
 //		fillDataToJTable(sales_model.findAll(), invoice_model.findAll());
@@ -320,6 +310,18 @@ public class JPaddInvoice extends JPanel {
 	}
 
 	public void fillDataToJTable(List<Invoices> invoicess) {
+		DefaultComboBoxModel modela = new DefaultComboBoxModel();
+		modela.addElement(0);
+		modela.addElement(1);
+
+		DefaultComboBoxModel<Products> modelsa = new DefaultComboBoxModel<Products>();
+		Product_model product_modela = new Product_model();
+		Products productsa = new Products();
+		for (Products product : product_modela.findAll()) {
+			modelsa.addElement(product);
+		}
+		jcomboBoxProductID.setModel(modelsa);
+		jcomboBoxProductID.setRenderer(new ProductCellRender());
 		DefaultTableModel model = new DefaultTableModel() {
 
 			@Override
@@ -493,6 +495,7 @@ public class JPaddInvoice extends JPanel {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+		
 	}
 
 	class NumberDocumentFilter extends DocumentFilter {
@@ -567,74 +570,96 @@ public class JPaddInvoice extends JPanel {
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		if (jCustomerphone.getText().length() == 10) {
 			if (invoiceItemList.size() != 0) {
-				Invoice_model model = new Invoice_model();
-				CustomerModel customerModel = new CustomerModel();
-				Sales_model sales_model = new Sales_model();
-				Sales sales;
-				Customer customerr;
-				Invoices invoice = new Invoices();
-				int flag = 1;
-
-				// tao hoa don
-				if (jNameCustomer.getText().equalsIgnoreCase("")) {
-					invoice.setCustomerName("Khach le");
-				} else {
-					invoice.setCustomerName(jNameCustomer.getText());
-				}
-				invoice.setCustomerPhone(jCustomerphone.getText());
-				invoice.setInvoiceDate(jdateChooser.getDate());
-				invoice.setStatus(true);
-				invoice.setTotal(new BigDecimal(jtotal.getText()));
-				if (model.Create(invoice)) {
-					// tao sale
-					for (int i = 0; i < invoiceItemList.size(); i++) {
-						sales = invoiceItemList.get(i);
-						int idInvoice = model.findAllsort().getInvoiceID();
-						sales.setInvoice_id(idInvoice);
-						if (sales_model.Create(sales)) {
-
-						} else {
-							flag = 0;
+				Product_model product_modell = new Product_model();
+				int quantititi = 0;
+				for (Sales saless : invoiceItemList) {
+					for (Products productss : product_modell.findAll()) {
+						if (saless.getProductID() ==productss.getProductID() &&saless.getQuantity() > productss.getQuantity()) {
+						
+							JOptionPane.showMessageDialog(null, "product is out of stock");
+							quantititi = 1;
 							break;
 						}
 					}
-				} else {
-					flag = 0;
-
 				}
+				if (quantititi == 0) {
+					Invoice_model model = new Invoice_model();
+					CustomerModel customerModel = new CustomerModel();
+					Sales_model sales_model = new Sales_model();
+					Sales sales;
+					Customer customerr;
+					Invoices invoice = new Invoices();
+					int flag = 1;
 
-				// tao customer
-				customer.setPoint(
-						Integer.valueOf((int) (customer.getPoint() + (Double.valueOf(jtotal.getText()) / 10))));
-
-				int flagCreateCustomer = 0;
-				for (Customer customert11 : customerModel.findAll()) {
-					if (customert11.getPhoneString().equalsIgnoreCase(jCustomerphone.getText())) {
-						customer.setNameString(jNameCustomer.getText());
-						customerModel.Update(customer);
-						flagCreateCustomer = 1;
-						break;
+					// tao hoa don
+					if (jNameCustomer.getText().equalsIgnoreCase("")) {
+						invoice.setCustomerName("Khach le");
+					} else {
+						invoice.setCustomerName(jNameCustomer.getText());
 					}
-				}
-				if (flagCreateCustomer == 0) {
-					System.out.println(customer.getNameString() + 2);
-					customerModel.create(customer);
+					invoice.setCustomerPhone(jCustomerphone.getText());
+					invoice.setInvoiceDate(jdateChooser.getDate());
+					invoice.setStatus(true);
+					invoice.setTotal(new BigDecimal(jtotal.getText()));
+					if (model.Create(invoice)) {
+						// tao sale
+						for (int i = 0; i < invoiceItemList.size(); i++) {
+							sales = invoiceItemList.get(i);
+							int idInvoice = model.findAllsort().getInvoiceID();
+							sales.setInvoice_id(idInvoice);
+							if (sales_model.Create(sales)) {
+								Product_model product_model = new Product_model();
+								for (Products product : product_model.findAll()) {
+									if (sales.getProductID() == product.getCategory_id()) {
+										product.setQuantity(product.getQuantity() - sales.getQuantity());
+										product_model.UpdateQuantity(product);
+									}
+
+								}
+							} else {
+								flag = 0;
+								break;
+							}
+						}
+					} else {
+						flag = 0;
+
+					}
+
+					// tao customer
+					customer.setPoint(
+							Integer.valueOf((int) (customer.getPoint() + (Double.valueOf(jtotal.getText()) / 10))));
+
+					int flagCreateCustomer = 0;
+					for (Customer customert11 : customerModel.findAll()) {
+						if (customert11.getPhoneString().equalsIgnoreCase(jCustomerphone.getText())) {
+							customer.setNameString(jNameCustomer.getText());
+							customerModel.Update(customer);
+							flagCreateCustomer = 1;
+							break;
+						}
+					}
+					if (flagCreateCustomer == 0) {
+			
+						customerModel.create(customer);
+					}
+
+					if (flag == 1) {
+						JOptionPane.showMessageDialog(null, "Success");
+					} else {
+						JOptionPane.showMessageDialog(null, "Invalid");
+					}
+					customer = null;
+					invoiceItemList.clear();
+					fillDataToJTable1(invoiceItemList);
+					jNameCustomer.setText("");
+					jCustomerphone.setText("");
+					jcurrentQuantity.setText("");
+					jtextQuantily.setText("");
+					jtotal.setText("");
+					fillDataToJTable(model.findAll());
 				}
 
-				if (flag == 1) {
-					JOptionPane.showMessageDialog(null, "Success");
-				} else {
-					JOptionPane.showMessageDialog(null, "Invalid");
-				}
-				customer = null;
-				invoiceItemList.clear();
-				fillDataToJTable1(invoiceItemList);
-				jNameCustomer.setText("");
-				jCustomerphone.setText("");
-				jcurrentQuantity.setText("");
-				jtextQuantily.setText("");
-				jtotal.setText("");
-				fillDataToJTable(model.findAll());
 			} else {
 				JOptionPane.showMessageDialog(null, "item null");
 			}
@@ -658,25 +683,20 @@ public class JPaddInvoice extends JPanel {
 					double tol = Double.valueOf(jtotal.getText());
 					for (Rank rank : rankModel.findAll()) {
 						if (customer1.getPoint() >= rank.getPoint()) {
-							System.out.println(rank.getDiscount());
+							
 							double tol1 = tol * (((double) rank.getDiscount()) / 100);
 							jtotal.setText(String.valueOf(tol - tol1));
-
 						}
-
 					}
-
 					flag = true;
 					break;
 				} else {
 					BigDecimal total = new BigDecimal(0);
-
 					for (int j = 0; j < invoiceItemList.size(); j++) {
 						total = total.add(invoiceItemList.get(j).getPrice()
 								.multiply(new BigDecimal(invoiceItemList.get(j).getQuantity())));
-
 					}
-					jtotal.setText(paramString().valueOf(total));
+					jtotal.setText(String.valueOf(total));
 
 				}
 			}
@@ -687,19 +707,18 @@ public class JPaddInvoice extends JPanel {
 					customer.setPhoneString(jCustomerphone.getText());
 					customer.setPoint(0);
 					customer.setRank(1);
-					System.out.println("khacle");
-					
+
 				} else {
 					customer = new Customer();
 					customer.setNameString(jNameCustomer.getText());
 					customer.setPhoneString(jCustomerphone.getText());
 					customer.setPoint(0);
 					customer.setRank(1);
-					System.out.println("okokokok");
+
 				}
 
 			}
-		} 
+		}
 
 	}
 
@@ -709,11 +728,10 @@ public class JPaddInvoice extends JPanel {
 		int id = (int) jtableListInvoice.getValueAt(indexrow, 0);
 		List<Sales> listSales = new ArrayList<Sales>();
 		for (Sales sales : sales_model.findAll()) {
-			System.out.println("Name" + sales.getProductName());
-			System.out.println("get" + sales.getInvoice_id());
+	
 			if (sales.getInvoice_id() == id) {
 				listSales.add(sales);
-				System.out.println("ok");
+			
 			}
 		}
 		fillDataToJTable2(listSales);

@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,6 +28,7 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class JPrank extends JPanel {
 	private JTable table;
@@ -113,6 +115,10 @@ public class JPrank extends JPanel {
 		});
 	}
 	private void iniJFrame() {
+		RankModel rankModel = new RankModel();
+filldata(rankModel.findAll());
+	}
+	private void filldata(List<Rank> ranks) {
 		DefaultTableModel model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				// TODO Auto-generated method stub
@@ -123,8 +129,8 @@ public class JPrank extends JPanel {
 		model.addColumn("Point");
 		model.addColumn("RankName");
 		model.addColumn("Discount");
-		RankModel rankModel = new RankModel();try {
-			for (Rank rank : rankModel.findAll()) {
+	try {
+			for (Rank rank :ranks) {
 				model.addRow(new Object[] {rank.getId(),rank.getPoint() ,rank.getRank(),rank.getDiscount()});
 
 			}
@@ -155,5 +161,16 @@ public class JPrank extends JPanel {
 		panel_1.setVisible(true);
 	}
 	protected void do_jdelete_actionPerformed(ActionEvent e) {//delete
+		int index = table.getSelectedRow();
+		int id =(int) table.getValueAt(index,0);
+		RankModel rankModel=new RankModel();
+		if (rankModel.deleteById(id)) {
+			JOptionPane.showMessageDialog(null, "sucess");
+			
+			filldata(rankModel.findAll());
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "faild");
+		}
 	}
 }

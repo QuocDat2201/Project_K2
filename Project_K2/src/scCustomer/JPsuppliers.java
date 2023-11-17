@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -13,6 +14,11 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 
 import entites.Customer;
 import entites.Suppliers;
@@ -68,6 +74,7 @@ public class JPsuppliers extends JPanel {
 		
 		jphone = new JTextField();
 		jphone.setBounds(128, 48, 149, 25);
+		((AbstractDocument) jphone.getDocument()).setDocumentFilter(new NumberDocumentFilter());
 		panel_1.add(jphone);
 		jphone.setColumns(10);
 		
@@ -94,6 +101,11 @@ public class JPsuppliers extends JPanel {
 		panel_1.add(jcontact);
 		
 		JButton btnNewButton = new JButton("Create");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnNewButton_actionPerformed(e);
+			}
+		});
 		btnNewButton.setBackground(new Color(0, 128, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.setForeground(new Color(0, 0, 0));
@@ -137,5 +149,38 @@ public class JPsuppliers extends JPanel {
 		int rowHeight = 25; // Đặt chiều cao hàng tùy ý
 		table.setRowHeight(rowHeight);
 
+	}
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		Suppliers suppliers=new Suppliers();
+		suppliers.setSupplierName(jname.getText());
+		suppliers.setContactName(jcontact.getText());
+		suppliers.setEmail(jemail.getText());
+		suppliers.setPhone(jphone.getText());
+		Suppliers_model suppliers_model=new Suppliers_model();
+		
+		if ( suppliers_model.Create(suppliers)) {
+			JOptionPane.showMessageDialog(null, "Sucess");
+		} else {
+			JOptionPane.showMessageDialog(null, "Faild");
+		}
+	}
+	class NumberDocumentFilter extends DocumentFilter {
+		@Override
+		public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+				throws BadLocationException {
+			// Kiểm tra xem chuỗi được thêm vào có chứa chỉ số hay không
+			if (string.matches("^[0-9]*$")) {
+				super.insertString(fb, offset, string, attr);
+			}
+		}
+
+		@Override
+		public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+				throws BadLocationException {
+			// Kiểm tra xem chuỗi thay thế có chứa chỉ số hay không
+			if (text.matches("^[0-9]*$")) {
+				super.replace(fb, offset, length, text, attrs);
+			}
+		}
 	}
 }

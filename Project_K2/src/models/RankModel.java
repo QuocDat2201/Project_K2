@@ -14,7 +14,24 @@ public class RankModel {
     public RankModel() {
         rankList = new ArrayList<>();
     }
-
+    public boolean deleteById(int rankId) {
+        boolean result = true;
+        try {
+            String query = "DELETE FROM rank WHERE id = ?";
+            
+            try (PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement(query)) {
+                preparedStatement.setInt(1, rankId);
+                
+                result = preparedStatement.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            ConnectDB.disconnect();
+        }
+        return result;
+    }
     // Phương thức để thêm một rank mới vào danh sách
     public boolean create(Rank rank) {
         boolean result = true;
