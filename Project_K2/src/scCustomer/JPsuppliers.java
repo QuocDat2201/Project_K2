@@ -26,6 +26,7 @@ import models.CustomerModel;
 import models.Suppliers_model;
 
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -123,6 +124,10 @@ public class JPsuppliers extends JPanel {
 	}
 
 	private void iniJFrame() {
+		Suppliers_model suppliers_model=new Suppliers_model();
+		filldata(suppliers_model.findAll());
+	}
+	private void filldata(List<Suppliers> sup) {
 		DefaultTableModel model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				// TODO Auto-generated method stub
@@ -133,9 +138,9 @@ public class JPsuppliers extends JPanel {
 		model.addColumn("ContactName");
 		model.addColumn("Email");
 		model.addColumn("Phone");
-		Suppliers_model suppliers_model=new Suppliers_model();
+		
 		try {
-			for (Suppliers suppliers : suppliers_model.findAll()) {
+			for (Suppliers suppliers : sup) {
 				model.addRow(new Object[] { suppliers.getSupplierName(), suppliers.getContactName(), suppliers.getEmail(),
 						suppliers.getPhone()});
 
@@ -149,6 +154,7 @@ public class JPsuppliers extends JPanel {
 		int rowHeight = 25; // Đặt chiều cao hàng tùy ý
 		table.setRowHeight(rowHeight);
 
+
 	}
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 		Suppliers suppliers=new Suppliers();
@@ -159,7 +165,10 @@ public class JPsuppliers extends JPanel {
 		Suppliers_model suppliers_model=new Suppliers_model();
 		
 		if ( suppliers_model.Create(suppliers)) {
-			JOptionPane.showMessageDialog(null, "Sucess");
+			JOptionPane.showMessageDialog(null, "Success");
+			
+			filldata(suppliers_model.findAll());
+			
 		} else {
 			JOptionPane.showMessageDialog(null, "Faild");
 		}

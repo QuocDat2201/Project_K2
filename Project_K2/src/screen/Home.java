@@ -334,9 +334,9 @@ public class Home extends JFrame {
 			jbtaccount_2.setVisible(false);
 		}else if (user.getRoleID() == 3) {
 			jbtaccount_2.setVisible(false);
+			jbcusstomer.setVisible(false);
 		}
 	}
-
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {// Home
 		Users user=(Users) dataMap.get("user");
 		ClearScreen();
