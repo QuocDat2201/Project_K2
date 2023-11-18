@@ -256,7 +256,7 @@ public class JPaddInvoice extends JPanel {
 		});
 		popupMenu.add(mntmNewMenuItem);
 
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Huy");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Cancel");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_mntmNewMenuItem_1_actionPerformed(e);
@@ -402,9 +402,7 @@ public class JPaddInvoice extends JPanel {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		jtable1.getTableHeader().setReorderingAllowed(false);
 		jtable1.setModel(model);
-		 for (int i = 0; i < jtable1.getColumnCount(); i++) {
-             jtable1.getColumnModel().getColumn(i).setCellRenderer(new CustomColorRenderer());
-         }
+		
 		// Lấy ra model của cột từ JTable
 		TableColumnModel columnModel = jtable1.getColumnModel();
 

@@ -29,7 +29,7 @@ public class JPmenuSuppliers extends JPanel {
 		JMenuBar menuBar = new JMenuBar();
 		add(menuBar, BorderLayout.NORTH);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("                                                Supplier");
+		JMenuItem mntmNewMenuItem = new JMenuItem("                                    Supplier");
 		mntmNewMenuItem.setIcon(new ImageIcon(JPmenuSuppliers.class.getResource("/Icon/Profile.png")));
 		mntmNewMenuItem.setHorizontalTextPosition(SwingConstants.CENTER);
 		mntmNewMenuItem.setForeground(new Color(0, 0, 0));

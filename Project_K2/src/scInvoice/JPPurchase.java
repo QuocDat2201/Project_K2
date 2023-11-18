@@ -201,7 +201,7 @@ public class JPPurchase extends JPanel {
 				int id = purchaseinvoices_model.Create(purchaseinvoices);
 				Purchaseinvoicedetails_model purchaseinvoicedetails_model = new Purchaseinvoicedetails_model() ;
 				if(id != -1) {
-					JOptionPane.showMessageDialog(null,"Succes" + id );
+					JOptionPane.showMessageDialog(null,"Success");
 					for(Integer saleID : saleIDs) {
 						Purchaseinvoicedetails purchaseinvoicedetails = new Purchaseinvoicedetails() ; 
 						purchaseinvoicedetails.setDetailID(saleID);
